@@ -1,11 +1,10 @@
 //
 //  main.swift
-//  2I-konishchevIvan
+//  2I_Konishchev Ivan
 //
-//  Created by Ivan Konishchev on 24.01.2022.
+//  Created by Ivan Konishchev on 15.01.2022.
 //
 
 import Foundation
 
-print("Hello, World!")
 
