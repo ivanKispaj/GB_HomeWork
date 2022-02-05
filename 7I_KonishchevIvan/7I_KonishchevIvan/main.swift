@@ -147,7 +147,7 @@ struct ServerRequest {
 class DataUser {
 
     init(){}
-    static var shared = DataUser()
+    static var shared:DataUser? = DataUser()
     var userFind: UserType? = nil
     private var user: [String:UserType] = ["Ivan": .admin, "Igor": .moderator, "Michail": .visitor, "Oleg": .author]
     func findUser(_ name: String) throws -> UserType{
@@ -157,6 +157,9 @@ class DataUser {
         // print(self.userFind!)
         return userFind
         }
+    static func killDataUserProcess(){
+        DataUser.shared = nil
+    }
     deinit {
         self.userFind = nil
         
@@ -174,7 +177,7 @@ class TasksData {
         
     }
     init(with name: String, clousure: @escaping (UserType?, ServerRequest?, Errors?) -> Void ) {
-        self.dataUser = try? DataUser.shared.findUser(name)
+        self.dataUser = try? DataUser.shared?.findUser(name)
         self.clousureHandle = clousure
         var request = ServerRequest.shared
         do {
@@ -185,7 +188,7 @@ class TasksData {
         clousureHandle(self.dataUser, request, errors)
     }
     deinit {
-        DataUser.shared.userFind = nil
+        DataUser.killDataUserProcess()
         print("TaskData delite")
     }
 }
