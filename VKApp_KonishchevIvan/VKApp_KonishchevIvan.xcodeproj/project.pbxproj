@@ -13,6 +13,7 @@
 		804154F627B62FE900160418 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 804154F427B62FE900160418 /* Main.storyboard */; };
 		804154F827B62FEB00160418 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 804154F727B62FEB00160418 /* Assets.xcassets */; };
 		804154FB27B62FEB00160418 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 804154F927B62FEB00160418 /* LaunchScreen.storyboard */; };
+		80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1F9D827B6475200EA4E0C /* Validators.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		804154F727B62FEB00160418 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		804154FA27B62FEB00160418 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		804154FC27B62FEB00160418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80D1F9D827B6475200EA4E0C /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		804154ED27B62FE900160418 /* VKApp_KonishchevIvan */ = {
 			isa = PBXGroup;
 			children = (
+				80D1F9D727B6471900EA4E0C /* TextFieldValidation */,
 				804154EE27B62FE900160418 /* AppDelegate.swift */,
 				804154F027B62FE900160418 /* SceneDelegate.swift */,
 				804154F227B62FE900160418 /* ViewController.swift */,
@@ -65,6 +68,14 @@
 				804154FC27B62FEB00160418 /* Info.plist */,
 			);
 			path = VKApp_KonishchevIvan;
+			sourceTree = "<group>";
+		};
+		80D1F9D727B6471900EA4E0C /* TextFieldValidation */ = {
+			isa = PBXGroup;
+			children = (
+				80D1F9D827B6475200EA4E0C /* Validators.swift */,
+			);
+			path = TextFieldValidation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
 				804154F327B62FE900160418 /* ViewController.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
 				804154F127B62FE900160418 /* SceneDelegate.swift in Sources */,
