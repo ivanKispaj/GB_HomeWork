@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         guard Validators.issimplePass( passwordTextfield.text! ) else {
             self.passwordLabel.backgroundColor = .red
             self.passwordHelper.backgroundColor = .red
-            self.passwordHelper.text = "мин. 8 символов, заглавная буква и цифра!"
+            self.passwordHelper.text = " Мин. 8 символов, заглавная буква и цифра! "
             return
         }
         self.passwordLabel.backgroundColor = .white
