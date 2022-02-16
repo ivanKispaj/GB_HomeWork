@@ -12,6 +12,8 @@
 		804154F627B62FE900160418 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 804154F427B62FE900160418 /* Main.storyboard */; };
 		804154F827B62FEB00160418 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 804154F727B62FEB00160418 /* Assets.xcassets */; };
 		804154FB27B62FEB00160418 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 804154F927B62FEB00160418 /* LaunchScreen.storyboard */; };
+		805E76ED27BC17670033098D /* Extension_LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805E76EC27BC17670033098D /* Extension_LoginController.swift */; };
+		805E76F027BC17EC0033098D /* AllertWrongUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805E76EF27BC17EC0033098D /* AllertWrongUserData.swift */; };
 		80BC96F727BB66DA0038FD77 /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F627BB66DA0038FD77 /* UserDetails.swift */; };
 		80BC96F927BB67160038FD77 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F827BB67160038FD77 /* LoginViewController.swift */; };
 		80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1F9D827B6475200EA4E0C /* Validators.swift */; };
@@ -25,6 +27,8 @@
 		804154F727B62FEB00160418 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		804154FA27B62FEB00160418 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		804154FC27B62FEB00160418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		805E76EC27BC17670033098D /* Extension_LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_LoginController.swift; sourceTree = "<group>"; };
+		805E76EF27BC17EC0033098D /* AllertWrongUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllertWrongUserData.swift; sourceTree = "<group>"; };
 		80BC96F627BB66DA0038FD77 /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDetails.swift; path = TextFieldValidation/UserDetails.swift; sourceTree = "<group>"; };
 		80BC96F827BB67160038FD77 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		80D1F9D827B6475200EA4E0C /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 		804154ED27B62FE900160418 /* VKApp_KonishchevIvan */ = {
 			isa = PBXGroup;
 			children = (
+				805E76EE27BC17B50033098D /* AllertMessage */,
+				805E76EB27BC171D0033098D /* Extension_LoginController */,
 				80D1F9D727B6471900EA4E0C /* TextFieldValidation */,
 				804154EE27B62FE900160418 /* AppDelegate.swift */,
 				80BC96F627BB66DA0038FD77 /* UserDetails.swift */,
@@ -71,6 +77,22 @@
 				804154FC27B62FEB00160418 /* Info.plist */,
 			);
 			path = VKApp_KonishchevIvan;
+			sourceTree = "<group>";
+		};
+		805E76EB27BC171D0033098D /* Extension_LoginController */ = {
+			isa = PBXGroup;
+			children = (
+				805E76EC27BC17670033098D /* Extension_LoginController.swift */,
+			);
+			path = Extension_LoginController;
+			sourceTree = "<group>";
+		};
+		805E76EE27BC17B50033098D /* AllertMessage */ = {
+			isa = PBXGroup;
+			children = (
+				805E76EF27BC17EC0033098D /* AllertWrongUserData.swift */,
+			);
+			path = AllertMessage;
 			sourceTree = "<group>";
 		};
 		80D1F9D727B6471900EA4E0C /* TextFieldValidation */ = {
@@ -153,6 +175,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				80BC96F927BB67160038FD77 /* LoginViewController.swift in Sources */,
+				805E76ED27BC17670033098D /* Extension_LoginController.swift in Sources */,
+				805E76F027BC17EC0033098D /* AllertWrongUserData.swift in Sources */,
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
 				804154F127B62FE900160418 /* SceneDelegate.swift in Sources */,

@@ -9,30 +9,37 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var emailTextfield: UITextField!
-    @IBOutlet weak var passwordLabel: UILabel!
-    @IBOutlet weak var passwordTextfield: UITextField!
-    
-    @IBOutlet weak var passwordHelper: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
    
-    @IBAction func enterButton(_ sender: UIButton) {
-    }
+    @IBOutlet weak var emailLable: UILabel!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordLable: UILabel!
+    @IBOutlet weak var passwordHelper: UILabel!
+    
+    @IBOutlet weak var enterButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        emailTextfield.addTarget(self, action: #selector(emailFieldDidChangeSelection(_:)), for: .editingChanged)
-        passwordTextfield.addTarget(self, action: #selector(passwordFieldDidChsngeSelection(_:)), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(emailFieldDidChangeSelection(_:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(passwordFieldDidChsngeSelection(_:)), for: .editingChanged)
+        
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector( hideKeyboard ))
+        view.addGestureRecognizer( tapScreen )
+        
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector( willShowKayboard ), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector( willHideKeyboard ), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         let user =  UserDetail()
-        let emailInput = self.emailTextfield.text
-        let passwordInput = self.passwordTextfield.text
+        let emailInput = self.emailTextField.text
+        let passwordInput = self.passwordTextField.text
         if user.useremail == emailInput && user.userPassword == passwordInput {
-           
             return true
         }
         let allert = UIAlertController(title: "Error", message: "Введены неверные данные пользователя! Попробуйте снова.", preferredStyle: .alert)
@@ -42,32 +49,9 @@ class LoginViewController: UIViewController {
        return false
     }
 
+        
     
 }
 
 
-// MARK: - Verification textFields
 
-extension LoginViewController {
-    
-    @objc func passwordFieldDidChsngeSelection(_ textfield: UITextField){
-  
-        guard Validators.issimplePass( passwordTextfield.text! ) else {
-            self.passwordLabel.backgroundColor = .red
-            self.passwordHelper.backgroundColor = .red
-            self.passwordHelper.text = " Мин. 8 символов, заглавная буква и цифра! "
-            return
-        }
-        self.passwordLabel.backgroundColor = .white
-        self.passwordHelper.text = ""
-    }
-    
-    @objc private func emailFieldDidChangeSelection(_ textfield: UITextField){
-        guard Validators.isSimpleEmail(emailTextfield.text!) else {
-            self.emailLabel.backgroundColor = .red
-            return
-        }
-        self.emailLabel.backgroundColor = .white
-    }
-    
-}
