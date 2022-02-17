@@ -64,15 +64,15 @@
 		804154ED27B62FE900160418 /* VKApp_KonishchevIvan */ = {
 			isa = PBXGroup;
 			children = (
+				80F829A327BE042600D4FB53 /* Assets */,
 				805E76EE27BC17B50033098D /* AllertMessage */,
 				805E76EB27BC171D0033098D /* Extension_LoginController */,
 				80D1F9D727B6471900EA4E0C /* TextFieldValidation */,
 				804154EE27B62FE900160418 /* AppDelegate.swift */,
+				80F829A227BE03FC00D4FB53 /* ViewControllers */,
 				80BC96F627BB66DA0038FD77 /* UserDetails.swift */,
 				804154F027B62FE900160418 /* SceneDelegate.swift */,
-				80BC96F827BB67160038FD77 /* LoginViewController.swift */,
 				804154F427B62FE900160418 /* Main.storyboard */,
-				804154F727B62FEB00160418 /* Assets.xcassets */,
 				804154F927B62FEB00160418 /* LaunchScreen.storyboard */,
 				804154FC27B62FEB00160418 /* Info.plist */,
 			);
@@ -101,6 +101,22 @@
 				80D1F9D827B6475200EA4E0C /* Validators.swift */,
 			);
 			path = TextFieldValidation;
+			sourceTree = "<group>";
+		};
+		80F829A227BE03FC00D4FB53 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				80BC96F827BB67160038FD77 /* LoginViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		80F829A327BE042600D4FB53 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				804154F727B62FEB00160418 /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

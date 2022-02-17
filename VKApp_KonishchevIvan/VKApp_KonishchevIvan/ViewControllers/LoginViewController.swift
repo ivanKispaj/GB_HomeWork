@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         
         let tapScreen = UITapGestureRecognizer(target: self, action: #selector( hideKeyboard ))
         view.addGestureRecognizer( tapScreen )
-        
+        print("Start")
     }
 
     override func viewWillAppear(_ animated: Bool) {
