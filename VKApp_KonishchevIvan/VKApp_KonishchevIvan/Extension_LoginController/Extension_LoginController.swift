@@ -21,21 +21,18 @@ extension LoginViewController {
     @objc func passwordFieldDidChsngeSelection(_ textfield: UITextField){
   
         guard Validators.issimplePass( passwordTextField.text! ) else {
-            self.passwordLable.backgroundColor = .red
-            self.passwordHelper.backgroundColor = .red
-            self.passwordHelper.text = " Мин. 8 символов, заглавная буква и цифра! "
+            self.passwordTextField.backgroundColor = colorDamage
             return
         }
-        self.passwordLable.backgroundColor = .white
-        self.passwordHelper.text = ""
+        self.passwordTextField.backgroundColor = .white
     }
     
     @objc  func emailFieldDidChangeSelection(_ textfield: UITextField){
         guard Validators.isSimpleEmail(emailTextField.text!) else {
-            self.emailLable.backgroundColor = .red
+            self.emailTextField.backgroundColor = colorDamage
             return
         }
-        self.emailLable.backgroundColor = .white
+        self.emailTextField.backgroundColor = .white
     }
     
     @objc func willShowKayboard(_ notification: Notification) {

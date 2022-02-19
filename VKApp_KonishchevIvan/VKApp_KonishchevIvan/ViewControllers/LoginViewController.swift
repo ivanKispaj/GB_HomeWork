@@ -8,14 +8,14 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    let colorDamage = UIColor(cgColor: CGColor(red: 255, green: 0, blue: 0, alpha: 0.2))
     @IBOutlet weak var scrollView: UIScrollView!
    
-    @IBOutlet weak var emailLable: UILabel!
+ //   @IBOutlet weak var emailLable: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var passwordLable: UILabel!
-    @IBOutlet weak var passwordHelper: UILabel!
+ //   @IBOutlet weak var passwordLable: UILabel!
+ //   @IBOutlet weak var passwordHelper: UILabel!
     
     @IBOutlet weak var enterButton: UIButton!
     
@@ -41,7 +41,13 @@ class LoginViewController: UIViewController {
         if user.useremail == emailInput && user.userPassword == passwordInput {
             return true
         }
-        let allert = AllertWrongUserData.getAllert(title: "Error", message: "Не верные данные пользователя!")
+        if user.useremail != emailInput {
+            let allert = AllertWrongUserData.getAllert(title: "Email", message: "Не верно введен email!")
+            present(allert, animated: true, completion: nil)
+            return false
+
+        }
+        let allert = AllertWrongUserData.getAllert(title: "Password", message: "Не верный пароль!")
         present(allert, animated: true, completion: nil)
        return false
     }

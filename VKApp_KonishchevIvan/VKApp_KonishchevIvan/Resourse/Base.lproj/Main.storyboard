@@ -25,19 +25,13 @@
                                         <rect key="frame" x="122" y="56" width="146" height="300"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="IDb-7S-oLy">
-                                        <rect key="frame" x="114" y="478" width="162" height="276"/>
+                                        <rect key="frame" x="114" y="478" width="162" height="199"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pUF-Hu-OJH">
-                                                <rect key="frame" x="0.0" y="0.0" width="162" height="54.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162" height="34"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter You email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8H-uw-OIK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="162" height="20.333333333333332"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jb0-FF-aky">
-                                                        <rect key="frame" x="0.0" y="20.333333333333314" width="162" height="34"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter you email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jb0-FF-aky">
+                                                        <rect key="frame" x="0.0" y="0.0" width="162" height="34"/>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -46,34 +40,22 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qfb-k2-hQ7">
-                                                <rect key="frame" x="0.0" y="104.33333333333337" width="162" height="90.666666666666686"/>
+                                                <rect key="frame" x="0.0" y="84" width="162" height="34"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter You password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oma-W1-sef">
-                                                        <rect key="frame" x="0.0" y="0.0" width="162" height="20.333333333333332"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dFl-k1-xEa">
-                                                        <rect key="frame" x="0.0" y="28.333333333333258" width="162" height="34"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter you password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dFl-k1-xEa">
+                                                        <rect key="frame" x="0.0" y="0.0" width="162" height="34"/>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                     </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQO-7u-ucD">
-                                                        <rect key="frame" x="0.0" y="70.333333333333258" width="162" height="20.333333333333329"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJX-5a-p8N">
-                                                <rect key="frame" x="0.0" y="245" width="162" height="31"/>
+                                                <rect key="frame" x="0.0" y="168" width="162" height="31"/>
                                                 <color key="backgroundColor" red="0.00102103001" green="0.15863347050000001" blue="0.57442927359999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Войти"/>
                                                 <connections>
                                                     <segue destination="eGU-XY-KQm" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="2Dp-kt-a3L"/>
                                                 </connections>
@@ -106,10 +88,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailLable" destination="Y8H-uw-OIK" id="c39-Ja-19M"/>
                         <outlet property="emailTextField" destination="Jb0-FF-aky" id="ujS-4H-MGD"/>
-                        <outlet property="passwordHelper" destination="TQO-7u-ucD" id="2M8-Fy-HfR"/>
-                        <outlet property="passwordLable" destination="Oma-W1-sef" id="EQu-kV-ake"/>
                         <outlet property="passwordTextField" destination="dFl-k1-xEa" id="HaM-xx-EoJ"/>
                         <outlet property="scrollView" destination="8dP-rM-oyt" id="xXg-1D-hWW"/>
                     </connections>
