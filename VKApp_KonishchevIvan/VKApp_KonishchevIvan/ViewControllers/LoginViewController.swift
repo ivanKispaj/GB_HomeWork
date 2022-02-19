@@ -28,7 +28,6 @@ class LoginViewController: UIViewController {
         
         let tapScreen = UITapGestureRecognizer(target: self, action: #selector( hideKeyboard ))
         view.addGestureRecognizer( tapScreen )
-        print("Start")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,9 +41,7 @@ class LoginViewController: UIViewController {
         if user.useremail == emailInput && user.userPassword == passwordInput {
             return true
         }
-        let allert = UIAlertController(title: "Error", message: "Введены неверные данные пользователя! Попробуйте снова.", preferredStyle: .alert)
-        let allertAction = UIAlertAction(title: "ОК", style: .cancel, handler: nil)
-        allert.addAction(allertAction)
+        let allert = AllertWrongUserData.getAllert(title: "Error", message: "Не верные данные пользователя!")
         present(allert, animated: true, completion: nil)
        return false
     }
