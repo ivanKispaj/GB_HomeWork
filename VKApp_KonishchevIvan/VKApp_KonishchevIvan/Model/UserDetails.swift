@@ -9,6 +9,6 @@ import UIKit
 
 struct UserDetail {
     let username = "Ivan Konishchev"
-    let useremail = "test@test.ru"
-    let userPassword = "qwerty1Test"
+    let useremail = ""
+    let userPassword = ""
 }
