@@ -45,7 +45,7 @@ class FriendsTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as? FriendsTableViewCell else {
             preconditionFailure("FriendsCell cannot")
         }
-        
+        cell.tableCellImage.makeCircle()
         cell.tableCellImage.image = friends[indexPath.row].avatar
         cell.tableCellLable.text = friends[indexPath.row].name
         
