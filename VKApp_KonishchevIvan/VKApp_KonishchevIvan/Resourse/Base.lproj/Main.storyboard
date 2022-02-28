@@ -191,6 +191,20 @@
                                                 <constraint firstAttribute="width" secondItem="Dsh-fG-2jx" secondAttribute="height" multiplier="1:1" priority="999" id="uZu-6p-8TI"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ruz-sL-wec" secondAttribute="bottom" id="yqZ-P3-F1I"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                                    <real key="value" value="7"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="size" keyPath="offset">
+                                                    <size key="value" width="0.0" height="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                    <color key="value" red="0.024959638714790344" green="0.014565062709152699" blue="0.99756449460983276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpaciti">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <outlet property="circleViewImage" destination="Ikl-Bq-pFX" id="mug-Bo-Efs"/>
                                                 <outlet property="shadowViewCell" destination="Ruz-sL-wec" id="rY1-Ks-6wc"/>
