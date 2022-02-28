@@ -17,7 +17,7 @@ class FriendsTableViewController: UITableViewController {
             self.row = row
         }
     }
-    
+    private var indexTitle: [String] = []
     private var friends: [DataSection] = [] // будущий массив по буквам
     
     // Исходный массив друзей
@@ -45,6 +45,7 @@ class FriendsTableViewController: UITableViewController {
    
             if index == nil {
                 friends.append(DataSection(header: String(char), row: [nextArr]))
+                indexTitle.append(String(char))
             }else {
                 friends[index!].row.append(nextArr)
             }
@@ -92,7 +93,11 @@ class FriendsTableViewController: UITableViewController {
             
         }
     }
-
+    
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        tableView.sectionIndexColor = UIColor(named: "AppBW")
+        return indexTitle
+    }
 
 
 }
