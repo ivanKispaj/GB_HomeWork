@@ -10,10 +10,8 @@ import UIKit
 struct Friends {
     let name: String
     let avatar: UIImage?
-    let userDetails: String?
-    init (image: UIImage? = nil, name: String, userDetails: String? = nil) {
+    init (character: String? = nil, image: UIImage? = nil, name: String) {
         self.name = name
         self.avatar = image
-        self.userDetails = userDetails
     }
 }

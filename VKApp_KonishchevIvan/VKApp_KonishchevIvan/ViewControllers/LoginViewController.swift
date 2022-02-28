@@ -8,17 +8,14 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    let colorDamage = UIColor(cgColor: CGColor(red: 255, green: 0, blue: 0, alpha: 0.2))
+    let colorDamage = UIColor(named: "AlarmColor")
+    
     @IBOutlet weak var scrollView: UIScrollView!
    
- //   @IBOutlet weak var emailLable: UILabel!
+
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
- //   @IBOutlet weak var passwordLable: UILabel!
- //   @IBOutlet weak var passwordHelper: UILabel!
-    
-    @IBOutlet weak var enterButton: UIButton!
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

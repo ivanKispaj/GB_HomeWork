@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8006DE3E27CBC73A0014BC5D /* AvatarUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006DE3D27CBC73A0014BC5D /* AvatarUIView.swift */; };
+		8006DE4027CBE9420014BC5D /* LikeControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006DE3F27CBE9420014BC5D /* LikeControll.swift */; };
 		8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */; };
 		8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114627BFF5C9007E87C4 /* NewGroupTableViewController.swift */; };
-		8025114927BFF619007E87C4 /* MyGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114827BFF619007E87C4 /* MyGroups.swift */; };
 		8025114B27BFF63D007E87C4 /* AllUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114A27BFF63D007E87C4 /* AllUserGroups.swift */; };
 		803030E827C0C7AD00A410CE /* AllGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803030E727C0C7AD00A410CE /* AllGroupsTableViewCell.swift */; };
 		803030EA27C0CF4100A410CE /* MyGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803030E927C0CF4100A410CE /* MyGroupsTableViewCell.swift */; };
@@ -32,9 +33,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8006DE3D27CBC73A0014BC5D /* AvatarUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarUIView.swift; sourceTree = "<group>"; };
+		8006DE3F27CBE9420014BC5D /* LikeControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControll.swift; sourceTree = "<group>"; };
 		8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupTableViewController.swift; sourceTree = "<group>"; };
 		8025114627BFF5C9007E87C4 /* NewGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupTableViewController.swift; sourceTree = "<group>"; };
-		8025114827BFF619007E87C4 /* MyGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroups.swift; sourceTree = "<group>"; };
 		8025114A27BFF63D007E87C4 /* AllUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllUserGroups.swift; sourceTree = "<group>"; };
 		803030E727C0C7AD00A410CE /* AllGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		803030E927C0CF4100A410CE /* MyGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsTableViewCell.swift; sourceTree = "<group>"; };
@@ -151,8 +153,9 @@
 			children = (
 				80BC96F627BB66DA0038FD77 /* UserDetails.swift */,
 				808E9D9F27BE98BC0089E4A4 /* Friends.swift */,
-				8025114827BFF619007E87C4 /* MyGroups.swift */,
 				8025114A27BFF63D007E87C4 /* AllUserGroups.swift */,
+				8006DE3D27CBC73A0014BC5D /* AvatarUIView.swift */,
+				8006DE3F27CBE9420014BC5D /* LikeControll.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,14 +286,15 @@
 				8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */,
 				8025114B27BFF63D007E87C4 /* AllUserGroups.swift in Sources */,
 				8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */,
-				8025114927BFF619007E87C4 /* MyGroups.swift in Sources */,
 				805E76F027BC17EC0033098D /* AllertWrongUserData.swift in Sources */,
 				80B95BD027C1207900D7A9E8 /* extension_UIImageView.swift in Sources */,
 				803030EA27C0CF4100A410CE /* MyGroupsTableViewCell.swift in Sources */,
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
+				8006DE4027CBE9420014BC5D /* LikeControll.swift in Sources */,
 				808E9DA327BEB96C0089E4A4 /* DetailsCollectionViewController.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
 				804154F127B62FE900160418 /* SceneDelegate.swift in Sources */,
+				8006DE3E27CBC73A0014BC5D /* AvatarUIView.swift in Sources */,
 				80BC96F727BB66DA0038FD77 /* UserDetails.swift in Sources */,
 				808E9DA627BEBA1F0089E4A4 /* DetailsCollectionViewCell.swift in Sources */,
 			);
