@@ -14,5 +14,6 @@ extension UserGroupTableViewController: UserGroupTableViewDelegate {
         self.myActiveGroup = group
         self.allGroup = allGroup
         tableView.reloadData()
+       
     }
 }

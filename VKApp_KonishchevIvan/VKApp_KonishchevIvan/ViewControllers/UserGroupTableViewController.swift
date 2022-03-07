@@ -40,10 +40,19 @@ class UserGroupTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
+        tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")
+        
     }
 
     // MARK: - Table view data source
 
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        print("Header")
+    }
+    
+    
+    
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
     
         return 1
@@ -56,6 +65,8 @@ class UserGroupTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("Error")
         }
@@ -64,6 +75,7 @@ class UserGroupTableViewController: UITableViewController {
         cell.imageCellAvatar.image = myActiveGroup[indexPath.row].imageGroup
         cell.lableCellXib.text = myActiveGroup[indexPath.row].nameGroup
         return cell
+    
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -94,7 +106,7 @@ class UserGroupTableViewController: UITableViewController {
             tableView.reloadData()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     
 }

@@ -10,7 +10,7 @@
 import UIKit
 
 class FriendsTableViewController: UITableViewController {
-    
+
     @IBAction func exitButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -23,7 +23,10 @@ class FriendsTableViewController: UITableViewController {
             self.row = row
         }
     }
+    
+    let posibleFriends = DataSection(header: "Возможные друзья", row: [Friends(character: nil, image: UIImage.init(named: "AppIcon"), name: "Group VK.com")])
     var indexTitle: [String] = []
+    
     var friends: [DataSection] = [] // будущий массив по буквам
     
     // Исходный массив друзей
@@ -37,13 +40,15 @@ class FriendsTableViewController: UITableViewController {
         Friends(image: UIImage.init(named: "MohandasGandi"), name: "Мохандос Ганди"),
         Friends(image: UIImage.init(named: "Stalin"), name: "Сталин"),
         Friends(image: UIImage.init(named: "WinstonCherchil"), name: "Винстон Черчиль"),
-    
     ]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
+        tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")
         setDataSectionTable()
+        
 
     }
 
@@ -58,7 +63,7 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends[section].row.count
     }
-    
+
 // установка имени секции
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return friends[section].header
@@ -66,12 +71,26 @@ class FriendsTableViewController: UITableViewController {
 
 // Отрисовка ячеек
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let section = friends[indexPath.section].header
+        if section == "Возможные друзья" {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExtendCellXib", for: indexPath) as? ExtendTableUserCell else {
+                preconditionFailure("FriendsCell cannot")
+            }
+            cell.ExtendImageCell.image = friends[indexPath.section].row[indexPath.row].avatar
+            cell.ExtendLabelCity.text = "Moscow"
+            cell.ExtendLabelName.text = friends[indexPath.section].row[indexPath.row].name
+            cell.isSelected = false
+            return cell
+        } else {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("FriendsCell cannot")
         }
         cell.imageCellAvatar.image = friends[indexPath.section].row[indexPath.row].avatar
         cell.lableCellXib.text = friends[indexPath.section].row[indexPath.row].name
-        return cell
+        
+            return cell
+        }
+        
     }
 
 // Действия при выборе ячейки
@@ -91,10 +110,10 @@ class FriendsTableViewController: UITableViewController {
     }
  
 // Установка бокового буквенного поиска
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        tableView.sectionIndexColor = UIColor(named: "AppBW")
-        return indexTitle
-    }
+//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+//        tableView.sectionIndexColor = UIColor(named: "AppBW")
+//        return indexTitle
+//    }
 
 
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */; };
+		8003DA2827D5E1E00048B191 /* ExtendTableUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */; };
 		8006DE3E27CBC73A0014BC5D /* AvatarUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006DE3D27CBC73A0014BC5D /* AvatarUIView.swift */; };
 		8006DE4027CBE9420014BC5D /* LikeControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006DE3F27CBE9420014BC5D /* LikeControll.swift */; };
 		8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendTableUserCell.swift; sourceTree = "<group>"; };
+		8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendTableUserCell.xib; sourceTree = "<group>"; };
 		8006DE3D27CBC73A0014BC5D /* AvatarUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarUIView.swift; sourceTree = "<group>"; };
 		8006DE3F27CBE9420014BC5D /* LikeControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControll.swift; sourceTree = "<group>"; };
 		8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupTableViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +81,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8003DA2327D5E1680048B191 /* SimpleCell */ = {
+			isa = PBXGroup;
+			children = (
+				80DD23A527D3332000F78417 /* TableViewCellXib.swift */,
+				80DD23AA27D334D800F78417 /* ShadowViewXib.swift */,
+				8006DE3D27CBC73A0014BC5D /* AvatarUIView.swift */,
+				80DD23A627D3332000F78417 /* TableViewCellXib.xib */,
+			);
+			path = SimpleCell;
+			sourceTree = "<group>";
+		};
+		8003DA2427D5E19F0048B191 /* ExtendedCell */ = {
+			isa = PBXGroup;
+			children = (
+				8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */,
+				8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */,
+			);
+			path = ExtendedCell;
+			sourceTree = "<group>";
+		};
 		80233AB127BF59580040D702 /* Resourse */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,10 +211,8 @@
 		80DD23A427D332F200F78417 /* XibCellForTable */ = {
 			isa = PBXGroup;
 			children = (
-				80DD23AA27D334D800F78417 /* ShadowViewXib.swift */,
-				80DD23A527D3332000F78417 /* TableViewCellXib.swift */,
-				8006DE3D27CBC73A0014BC5D /* AvatarUIView.swift */,
-				80DD23A627D3332000F78417 /* TableViewCellXib.xib */,
+				8003DA2427D5E19F0048B191 /* ExtendedCell */,
+				8003DA2327D5E1680048B191 /* SimpleCell */,
 			);
 			path = XibCellForTable;
 			sourceTree = "<group>";
@@ -307,6 +329,7 @@
 			files = (
 				804154FB27B62FEB00160418 /* LaunchScreen.storyboard in Resources */,
 				804154F827B62FEB00160418 /* Assets.xcassets in Resources */,
+				8003DA2827D5E1E00048B191 /* ExtendTableUserCell.xib in Resources */,
 				804154F627B62FE900160418 /* Main.storyboard in Resources */,
 				80DD23A827D3332000F78417 /* TableViewCellXib.xib in Resources */,
 			);
@@ -324,6 +347,7 @@
 				80DD23AB27D334D800F78417 /* ShadowViewXib.swift in Sources */,
 				805E76ED27BC17670033098D /* Extension_LoginController.swift in Sources */,
 				808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */,
+				8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */,
 				808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */,
 				8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */,
 				8025114B27BFF63D007E87C4 /* AllUserGroups.swift in Sources */,
