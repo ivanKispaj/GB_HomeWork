@@ -1,20 +1,17 @@
 //
-//  AllGroupsTableViewCell.swift
+//  TableViewCell.swift
 //  VKApp_KonishchevIvan
 //
-//  Created by Ivan Konishchev on 19.02.2022.
+//  Created by Ivan Konishchev on 05.03.2022.
 //
 
 import UIKit
 
-class AllGroupsTableViewCell: UITableViewCell {
+class TableViewCell: UITableViewCell {
 
-    @IBOutlet weak var allGroupLablel: UILabel!
-    @IBOutlet weak var allGroupView: UIImageView!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-       
+        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -22,5 +19,5 @@ class AllGroupsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

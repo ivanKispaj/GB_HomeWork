@@ -7,13 +7,6 @@
 
 import UIKit
 
-// MARK: - hideKeyboard
-extension LoginViewController {
-    @objc func hideKeyboard() {
-        view.endEditing( true )
-    }
-}
-
 // MARK: - Verification textFields
 
 extension LoginViewController {
@@ -47,6 +40,12 @@ extension LoginViewController {
               let keyboardSize = info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
         let keyboardHight = keyboardSize.cgRectValue.size.height
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -keyboardHight, right: 0)
+    }
+
+// MARK: - hideKeyboard
+    
+    @objc func hideKeyboard() {
+        view.endEditing( true )
     }
     
 }

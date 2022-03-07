@@ -11,12 +11,9 @@ class LoginViewController: UIViewController {
     let colorDamage = UIColor(named: "AlarmColor")
     
     @IBOutlet weak var scrollView: UIScrollView!
-   
-
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,9 +45,7 @@ class LoginViewController: UIViewController {
         present(allert, animated: true, completion: nil)
        return false
     }
-
-        
-    
+ 
 }
 
 

@@ -5,9 +5,15 @@
 //  Created by Ivan Konishchev on 17.02.2022.
 //
 
+
+
 import UIKit
 
 class FriendsTableViewController: UITableViewController {
+    
+    @IBAction func exitButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     struct DataSection {
         var header: String = ""
@@ -17,11 +23,11 @@ class FriendsTableViewController: UITableViewController {
             self.row = row
         }
     }
-    private var indexTitle: [String] = []
-    private var friends: [DataSection] = [] // будущий массив по буквам
+    var indexTitle: [String] = []
+    var friends: [DataSection] = [] // будущий массив по буквам
     
     // Исходный массив друзей
-    private var friendsAlphavite = [
+    var friendsAlphavite = [
         Friends(image: UIImage.init(named: "Putin"), name: "Путин"),
         Friends(image: UIImage.init(named: "Bregnev"), name: "Брежнев"),
         Friends(image: UIImage.init(named: "FranclinRuzvelt"), name: "Франклин Рузвельт"),
@@ -36,64 +42,55 @@ class FriendsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Можно снять коментарий чтобы отсортировать друзей по алфавиту!
-       // self.friendsAlphavite = friendsAlphavite.sorted(by: { $0.name < $1.name })
-      
-        for nextArr in friendsAlphavite {
-            let char = nextArr.name.first!
-            let index = friends.firstIndex(where: {$0.header == String(char) })
-   
-            if index == nil {
-                friends.append(DataSection(header: String(char), row: [nextArr]))
-                indexTitle.append(String(char))
-            }else {
-                friends[index!].row.append(nextArr)
-            }
-        }
+        tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
+        setDataSectionTable()
+
     }
 
     // MARK: - Table view data source
-
+    
+// количество секций с одной буквой
     override func numberOfSections(in tableView: UITableView) -> Int {
-       // количество секций с одной буквой
         return friends.count
     }
-
+    
+// количество строк таблици в одной секции
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     // количество строк таблици в одной секции
         return friends[section].row.count
     }
+    
+// установка имени секции
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-      
         return friends[section].header
     }
+
+// Отрисовка ячеек
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as? FriendsTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("FriendsCell cannot")
         }
-       
-        cell.tableCellImage.image = friends[indexPath.section].row[indexPath.row].avatar
-        cell.tableCellLable.text = friends[indexPath.section].row[indexPath.row].name
-        
+        cell.imageCellAvatar.image = friends[indexPath.section].row[indexPath.row].avatar
+        cell.lableCellXib.text = friends[indexPath.section].row[indexPath.row].name
         return cell
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SegueDetailsFirends",
-           let destinationVC = segue.destination as? DetailsCollectionViewController,
-            let indexPath = tableView.indexPathForSelectedRow
-        {
-            let friend = friends[indexPath.section].row[indexPath.row].name
-            let avatar = friends[indexPath.section].row[indexPath.row].avatar
-            destinationVC.title = friend
-            destinationVC.name = friend
-            destinationVC.avatar = avatar
-    
-            
+
+// Действия при выборе ячейки
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let sampleStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let detailVC = sampleStoryboard.instantiateViewController(withIdentifier: "DetailsCollectionViewController") as? DetailsCollectionViewController else {
+            return
         }
+        let friend = friends[indexPath.section].row[indexPath.row].name
+                   let avatar = friends[indexPath.section].row[indexPath.row].avatar
+        detailVC.title = friend
+        detailVC.name = friend
+        detailVC.avatar = avatar
+        self.navigationController?.show(detailVC, sender: nil)
+       
     }
-    
+ 
+// Установка бокового буквенного поиска
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         tableView.sectionIndexColor = UIColor(named: "AppBW")
         return indexTitle
@@ -101,3 +98,5 @@ class FriendsTableViewController: UITableViewController {
 
 
 }
+
+

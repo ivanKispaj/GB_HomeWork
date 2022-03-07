@@ -11,7 +11,6 @@ private let reuseIdentifier = "Cell"
 
 class DetailsCollectionViewController: UICollectionViewController, UITextViewDelegate {
 
-
     var name: String? = nil
     var avatar: UIImage? = nil
     var detailText: String? = nil
@@ -21,8 +20,6 @@ class DetailsCollectionViewController: UICollectionViewController, UITextViewDel
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
     }
-
-
 
     // MARK: UICollectionViewDataSource
 
@@ -42,15 +39,8 @@ class DetailsCollectionViewController: UICollectionViewController, UITextViewDel
             preconditionFailure("Error")
         }
         
-        
-
         cell.detailImage.image = self.avatar
-       // cell.detailNamelable.text = self.name
-    
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
-
-  
 }
