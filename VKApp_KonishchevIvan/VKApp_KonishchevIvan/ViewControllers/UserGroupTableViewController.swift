@@ -15,23 +15,7 @@ class UserGroupTableViewController: UITableViewController {
     @IBAction func exitButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    var allGroup = [
-        AllUserGroups(nameGroup: "Баскетбол", logoGroup: UIImage.init(named: "Basketball")),
-        AllUserGroups(nameGroup: "Стрельба из лука", logoGroup: UIImage.init(named: "BowShooting")),
-        AllUserGroups(nameGroup: "Бальные танцы", logoGroup: UIImage.init(named: "Dances")),
-        AllUserGroups(nameGroup: "Фехтование", logoGroup: UIImage.init(named: "Fencing")),
-        AllUserGroups(nameGroup: "Рыбалка", logoGroup: UIImage.init(named: "Fishing")),
-        AllUserGroups(nameGroup: "Футбол", logoGroup: UIImage.init(named: "Football")),
-        AllUserGroups(nameGroup: "Художественная гимнастика", logoGroup: UIImage.init(named: "gymnastic")),
-        AllUserGroups(nameGroup: "Тяжелая атлетика", logoGroup: UIImage.init(named: "HardAttletic")),
-        AllUserGroups(nameGroup: "Хоккей", logoGroup: UIImage.init(named: "Hockey")),
-        AllUserGroups(nameGroup: "Прыжки в воду", logoGroup: UIImage.init(named: "jumpWather")),
-        AllUserGroups(nameGroup: "Боевые искуства", logoGroup: UIImage.init(named: "karate")),
-        AllUserGroups(nameGroup: "Бег", logoGroup: UIImage.init(named: "Run")),
-        AllUserGroups(nameGroup: "Теннис", logoGroup: UIImage.init(named: "Tennis")),
-        AllUserGroups(nameGroup: "Велогонки", logoGroup: UIImage.init(named: "Velo")),
-        AllUserGroups(nameGroup: "Волейбол", logoGroup: UIImage.init(named: "Volleyball"))
-    ]
+    var allGroup = DataController.shared.getdataGroup()
     
     var myActiveGroup = [
         AllUserGroups(nameGroup: "Рыбалка", logoGroup: UIImage.init(named: "Fishing"))
