@@ -28,6 +28,14 @@
 		80B95BD027C1207900D7A9E8 /* extension_UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B95BCF27C1207900D7A9E8 /* extension_UIImageView.swift */; };
 		80BC96F727BB66DA0038FD77 /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F627BB66DA0038FD77 /* UserDetails.swift */; };
 		80BC96F927BB67160038FD77 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F827BB67160038FD77 /* LoginViewController.swift */; };
+		80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */; };
+		80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19ACB27D76C6E009C34CB /* CouruselTableViewCell.swift */; };
+		80C19ACE27D76C6E009C34CB /* CouruselTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80C19ACC27D76C6E009C34CB /* CouruselTableViewCell.xib */; };
+		80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AD227D76FDE009C34CB /* CouruselCollectionViewCell.swift */; };
+		80C19AD527D76FDE009C34CB /* CouruselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80C19AD327D76FDE009C34CB /* CouruselCollectionViewCell.xib */; };
+		80C19AD727D78AAA009C34CB /* ShadowCouruselAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AD627D78AAA009C34CB /* ShadowCouruselAvatar.swift */; };
+		80C19AD927D78AE8009C34CB /* AvatarCourusel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AD827D78AE8009C34CB /* AvatarCourusel.swift */; };
+		80C19AEA27D7C6BA009C34CB /* ExtensionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AE927D7C6BA009C34CB /* ExtensionDetailViewController.swift */; };
 		80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1F9D827B6475200EA4E0C /* Validators.swift */; };
 		80DD23A727D3332000F78417 /* TableViewCellXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DD23A527D3332000F78417 /* TableViewCellXib.swift */; };
 		80DD23A827D3332000F78417 /* TableViewCellXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80DD23A627D3332000F78417 /* TableViewCellXib.xib */; };
@@ -35,6 +43,7 @@
 		80E3274827D4F4950014C760 /* setDataSectionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E3274727D4F4950014C760 /* setDataSectionTable.swift */; };
 		80E3274A27D4F4BD0014C760 /* issetGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E3274927D4F4BD0014C760 /* issetGroup.swift */; };
 		80E3274D27D4F6A80014C760 /* addNewGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E3274C27D4F6A80014C760 /* addNewGroup.swift */; };
+		80E7D3C027DA7016009402ED /* HisFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E7D3BF27DA7016009402ED /* HisFriends.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +70,14 @@
 		80B95BCF27C1207900D7A9E8 /* extension_UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension_UIImageView.swift; sourceTree = "<group>"; };
 		80BC96F627BB66DA0038FD77 /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
 		80BC96F827BB67160038FD77 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailUserTableViewController.swift; sourceTree = "<group>"; };
+		80C19ACB27D76C6E009C34CB /* CouruselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouruselTableViewCell.swift; sourceTree = "<group>"; };
+		80C19ACC27D76C6E009C34CB /* CouruselTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouruselTableViewCell.xib; sourceTree = "<group>"; };
+		80C19AD227D76FDE009C34CB /* CouruselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouruselCollectionViewCell.swift; sourceTree = "<group>"; };
+		80C19AD327D76FDE009C34CB /* CouruselCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouruselCollectionViewCell.xib; sourceTree = "<group>"; };
+		80C19AD627D78AAA009C34CB /* ShadowCouruselAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCouruselAvatar.swift; sourceTree = "<group>"; };
+		80C19AD827D78AE8009C34CB /* AvatarCourusel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCourusel.swift; sourceTree = "<group>"; };
+		80C19AE927D7C6BA009C34CB /* ExtensionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDetailViewController.swift; sourceTree = "<group>"; };
 		80D1F9D827B6475200EA4E0C /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		80DD23A527D3332000F78417 /* TableViewCellXib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellXib.swift; sourceTree = "<group>"; };
 		80DD23A627D3332000F78417 /* TableViewCellXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellXib.xib; sourceTree = "<group>"; };
@@ -68,6 +85,7 @@
 		80E3274727D4F4950014C760 /* setDataSectionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setDataSectionTable.swift; sourceTree = "<group>"; };
 		80E3274927D4F4BD0014C760 /* issetGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issetGroup.swift; sourceTree = "<group>"; };
 		80E3274C27D4F6A80014C760 /* addNewGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewGroup.swift; sourceTree = "<group>"; };
+		80E7D3BF27DA7016009402ED /* HisFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HisFriends.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				80DD23A527D3332000F78417 /* TableViewCellXib.swift */,
-				80DD23AA27D334D800F78417 /* ShadowViewXib.swift */,
 				8006DE3D27CBC73A0014BC5D /* AvatarUIView.swift */,
+				80DD23AA27D334D800F78417 /* ShadowViewXib.swift */,
 				80DD23A627D3332000F78417 /* TableViewCellXib.xib */,
 			);
 			path = SimpleCell;
@@ -126,9 +144,10 @@
 		803030EB27C0E95F00A410CE /* All_Extension */ = {
 			isa = PBXGroup;
 			children = (
-				80E3274B27D4F68E0014C760 /* ExtensionUGTVController */,
-				80E3274427D4F3D40014C760 /* ExtensionFTVController */,
-				80E3274127D4F2E10014C760 /* ExtensionNGTVController */,
+				80C19AE827D7C62C009C34CB /* ExtensionDetailUTVController */,
+				80E3274B27D4F68E0014C760 /* ExtensionUserGTVController */,
+				80E3274427D4F3D40014C760 /* ExtensionFriendsTVController */,
+				80E3274127D4F2E10014C760 /* ExtensionNewGTVController */,
 				805E76EB27BC171D0033098D /* Extension_LoginController */,
 				80E3273827D4EE0C0014C760 /* ExtensionUIImageViewAll */,
 			);
@@ -188,6 +207,7 @@
 				808E9D9F27BE98BC0089E4A4 /* Friends.swift */,
 				8025114A27BFF63D007E87C4 /* AllUserGroups.swift */,
 				8006DE3F27CBE9420014BC5D /* LikeControll.swift */,
+				80E7D3BF27DA7016009402ED /* HisFriends.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,9 +215,38 @@
 		808E9DA427BEB9F00089E4A4 /* ViewCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
+				80C19ACF27D76FA7009C34CB /* XibCollectionViewCell */,
 				808E9DA527BEBA1F0089E4A4 /* DetailsCollectionViewCell.swift */,
 			);
 			path = ViewCollectionCell;
+			sourceTree = "<group>";
+		};
+		80C19ACA27D76C40009C34CB /* CouruselCell */ = {
+			isa = PBXGroup;
+			children = (
+				80C19ACB27D76C6E009C34CB /* CouruselTableViewCell.swift */,
+				80C19ACC27D76C6E009C34CB /* CouruselTableViewCell.xib */,
+			);
+			path = CouruselCell;
+			sourceTree = "<group>";
+		};
+		80C19ACF27D76FA7009C34CB /* XibCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				80C19AD227D76FDE009C34CB /* CouruselCollectionViewCell.swift */,
+				80C19AD827D78AE8009C34CB /* AvatarCourusel.swift */,
+				80C19AD627D78AAA009C34CB /* ShadowCouruselAvatar.swift */,
+				80C19AD327D76FDE009C34CB /* CouruselCollectionViewCell.xib */,
+			);
+			path = XibCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		80C19AE827D7C62C009C34CB /* ExtensionDetailUTVController */ = {
+			isa = PBXGroup;
+			children = (
+				80C19AE927D7C6BA009C34CB /* ExtensionDetailViewController.swift */,
+			);
+			path = ExtensionDetailUTVController;
 			sourceTree = "<group>";
 		};
 		80D1F9D727B6471900EA4E0C /* TextFieldValidation */ = {
@@ -211,6 +260,7 @@
 		80DD23A427D332F200F78417 /* XibCellForTable */ = {
 			isa = PBXGroup;
 			children = (
+				80C19ACA27D76C40009C34CB /* CouruselCell */,
 				8003DA2427D5E19F0048B191 /* ExtendedCell */,
 				8003DA2327D5E1680048B191 /* SimpleCell */,
 			);
@@ -225,28 +275,28 @@
 			path = ExtensionUIImageViewAll;
 			sourceTree = "<group>";
 		};
-		80E3274127D4F2E10014C760 /* ExtensionNGTVController */ = {
+		80E3274127D4F2E10014C760 /* ExtensionNewGTVController */ = {
 			isa = PBXGroup;
 			children = (
 				80E3274927D4F4BD0014C760 /* issetGroup.swift */,
 			);
-			path = ExtensionNGTVController;
+			path = ExtensionNewGTVController;
 			sourceTree = "<group>";
 		};
-		80E3274427D4F3D40014C760 /* ExtensionFTVController */ = {
+		80E3274427D4F3D40014C760 /* ExtensionFriendsTVController */ = {
 			isa = PBXGroup;
 			children = (
 				80E3274727D4F4950014C760 /* setDataSectionTable.swift */,
 			);
-			path = ExtensionFTVController;
+			path = ExtensionFriendsTVController;
 			sourceTree = "<group>";
 		};
-		80E3274B27D4F68E0014C760 /* ExtensionUGTVController */ = {
+		80E3274B27D4F68E0014C760 /* ExtensionUserGTVController */ = {
 			isa = PBXGroup;
 			children = (
 				80E3274C27D4F6A80014C760 /* addNewGroup.swift */,
 			);
-			path = ExtensionUGTVController;
+			path = ExtensionUserGTVController;
 			sourceTree = "<group>";
 		};
 		80F829A227BE03FC00D4FB53 /* ViewControllers */ = {
@@ -257,6 +307,7 @@
 				808E9DA227BEB96C0089E4A4 /* DetailsCollectionViewController.swift */,
 				8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */,
 				8025114627BFF5C9007E87C4 /* NewGroupTableViewController.swift */,
+				80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -330,8 +381,10 @@
 				804154FB27B62FEB00160418 /* LaunchScreen.storyboard in Resources */,
 				804154F827B62FEB00160418 /* Assets.xcassets in Resources */,
 				8003DA2827D5E1E00048B191 /* ExtendTableUserCell.xib in Resources */,
+				80C19ACE27D76C6E009C34CB /* CouruselTableViewCell.xib in Resources */,
 				804154F627B62FE900160418 /* Main.storyboard in Resources */,
 				80DD23A827D3332000F78417 /* TableViewCellXib.xib in Resources */,
+				80C19AD527D76FDE009C34CB /* CouruselCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +395,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80E7D3C027DA7016009402ED /* HisFriends.swift in Sources */,
+				80C19AD927D78AE8009C34CB /* AvatarCourusel.swift in Sources */,
 				80E3274A27D4F4BD0014C760 /* issetGroup.swift in Sources */,
 				80BC96F927BB67160038FD77 /* LoginViewController.swift in Sources */,
 				80DD23AB27D334D800F78417 /* ShadowViewXib.swift in Sources */,
@@ -349,21 +404,26 @@
 				808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */,
 				8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */,
 				808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */,
+				80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */,
+				80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */,
 				8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */,
 				8025114B27BFF63D007E87C4 /* AllUserGroups.swift in Sources */,
 				8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */,
+				80C19AEA27D7C6BA009C34CB /* ExtensionDetailViewController.swift in Sources */,
 				805E76F027BC17EC0033098D /* AllertWrongUserData.swift in Sources */,
 				80E3274D27D4F6A80014C760 /* addNewGroup.swift in Sources */,
 				80B95BD027C1207900D7A9E8 /* extension_UIImageView.swift in Sources */,
 				80E3274827D4F4950014C760 /* setDataSectionTable.swift in Sources */,
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
 				8006DE4027CBE9420014BC5D /* LikeControll.swift in Sources */,
+				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,
 				808E9DA327BEB96C0089E4A4 /* DetailsCollectionViewController.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
 				804154F127B62FE900160418 /* SceneDelegate.swift in Sources */,
 				8006DE3E27CBC73A0014BC5D /* AvatarUIView.swift in Sources */,
 				80BC96F727BB66DA0038FD77 /* UserDetails.swift in Sources */,
 				808E9DA627BEBA1F0089E4A4 /* DetailsCollectionViewCell.swift in Sources */,
+				80C19AD727D78AAA009C34CB /* ShadowCouruselAvatar.swift in Sources */,
 				80DD23A727D3332000F78417 /* TableViewCellXib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,6 +11,7 @@ class TableViewCellXib: UITableViewCell {
 
     @IBOutlet weak var imageCellAvatar: UIImageView!
     @IBOutlet weak var lableCellXib: UILabel!
+    @IBOutlet weak var labelCityCellXib: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

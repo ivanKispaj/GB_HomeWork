@@ -24,22 +24,96 @@ class FriendsTableViewController: UITableViewController {
         }
     }
     
-    let posibleFriends = DataSection(header: "Возможные друзья", row: [Friends(character: nil, image: UIImage.init(named: "AppIcon"), name: "Group VK.com")])
+   
+    
+    let posibleFriends = DataSection(header: "Возможные друзья", row: [Friends(character: nil, image: UIImage.init(named: "AppIcon"), name: "Group VK.com", hisFriends: [])])
     var indexTitle: [String] = []
     
     var friends: [DataSection] = [] // будущий массив по буквам
     
     // Исходный массив друзей
     var friendsAlphavite = [
-        Friends(image: UIImage.init(named: "Putin"), name: "Путин"),
-        Friends(image: UIImage.init(named: "Bregnev"), name: "Брежнев"),
-        Friends(image: UIImage.init(named: "FranclinRuzvelt"), name: "Франклин Рузвельт"),
-        Friends(image: UIImage.init(named: "MaoCzydun"), name: "Мао Дзядун"),
-        Friends(image: UIImage.init(named: "MargaretTetcher"), name: "Маргарет Тетчер"),
-        Friends(image: UIImage.init(named: "Merkel"), name: "Меркель"),
-        Friends(image: UIImage.init(named: "MohandasGandi"), name: "Мохандос Ганди"),
-        Friends(image: UIImage.init(named: "Stalin"), name: "Сталин"),
-        Friends(image: UIImage.init(named: "WinstonCherchil"), name: "Винстон Черчиль"),
+        Friends(image: UIImage.init(named: "Putin"), name: "Путин Владимир Владимирович", city: "Москва", details: "Президент российской Федерации", hisFriends: [
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Pencil"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "карандаш"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "ручка"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "ктото"),
+            HisFirends(friendsAvatar: UIImage(named: "Bregnev"), friendsName: "Брежнев Леонид Ильич"),
+            HisFirends(friendsAvatar: UIImage(named: "Stalin"), friendsName: "Сталин Иосив Вессарионович")
+        ]),
+        Friends(image: UIImage.init(named: "Bregnev"), name: "Брежнев Леонид Ильич", city: "Москва", details: "Председатель президиума Верховного совета СССР", hisFriends: [
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+        ]),
+        Friends(image: UIImage.init(named: "FranclinRuzvelt"), name: "Франклин Рузвельт", city: "NewYork", details: "32 Президент США", hisFriends: [
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+        ]),
+        Friends(image: UIImage.init(named: "MaoCzydun"), name: "Мао Дзядун", city: "Хуань", hisFriends: [
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+        ]),
+        Friends(image: UIImage.init(named: "MargaretTetcher"), name: "Маргарет Тетчер", city: "London", details: "Премьер министр Великобритании", hisFriends: [
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+        ]),
+        Friends(image: UIImage.init(named: "Merkel"), name: "Ангела Меркель", city: "Германия", details: "Федеральный канцлер Германии",hisFriends: [
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+        ]
+               ),
+        Friends(image: UIImage.init(named: "MohandasGandi"), name: "Мохандос Ганди", city: "Порбандаре", hisFriends: [
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+        ]),
+        Friends(image: UIImage.init(named: "Stalin"), name: "Сталин Иосиф Виссарионович", city: "Москва",hisFriends: [
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+        ]),
+        Friends(image: UIImage.init(named: "WinstonCherchil"), name: "Винстон Черчиль", city: "Великобритания",hisFriends: [
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+            HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+        ]),
     ]
     
     
@@ -85,6 +159,7 @@ class FriendsTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("FriendsCell cannot")
         }
+            cell.labelCityCellXib.text = friends[indexPath.section].row[indexPath.row].city
         cell.imageCellAvatar.image = friends[indexPath.section].row[indexPath.row].avatar
         cell.lableCellXib.text = friends[indexPath.section].row[indexPath.row].name
         
@@ -97,23 +172,40 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let sampleStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let detailVC = sampleStoryboard.instantiateViewController(withIdentifier: "DetailsCollectionViewController") as? DetailsCollectionViewController else {
+            guard let detailVC = sampleStoryboard.instantiateViewController(withIdentifier: "DetailUserTableView") as? DetailUserTableViewController else {
             return
         }
         let friend = friends[indexPath.section].row[indexPath.row].name
-                   let avatar = friends[indexPath.section].row[indexPath.row].avatar
+        let avatar = friends[indexPath.section].row[indexPath.row].avatar
         detailVC.title = friend
-        detailVC.name = friend
-        detailVC.avatar = avatar
+        detailVC.hisFriewnds = friends[indexPath.section].row[indexPath.row].hisFriends
+        detailVC.detailUsername = friend
+        detailVC.detailAvatar = avatar
+        detailVC.detailUserInfo = friends[indexPath.section].row[indexPath.row].details
+        detailVC.detailUserVisitInfo = "Был 1 час назад"
+        
         self.navigationController?.show(detailVC, sender: nil)
        
     }
- 
-// Установка бокового буквенного поиска
-//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-//        tableView.sectionIndexColor = UIColor(named: "AppBW")
-//        return indexTitle
-//    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
+        headerView.backgroundColor = UIColor(named: "sectionColor")
+        let headerLable = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 28))
+        headerLable.textColor = UIColor.black
+        headerLable.text = friends[section].header
+        headerLable.textAlignment = .left
+        headerView.addSubview(headerLable)
+        let button = UIButton(frame: CGRect(x: headerView.frame.maxX - 150, y: 0, width: 150, height: 28))
+        button.layer.cornerRadius = 5
+        button.setTitle("Показать все", for: .normal)
+        button.backgroundColor = UIColor.clear
+        button.setTitleColor(UIColor.blue, for: .normal)
+        // button.addTarget(se, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        headerView.addSubview(button)
+        return headerView
+    }
+
 
 
 }
