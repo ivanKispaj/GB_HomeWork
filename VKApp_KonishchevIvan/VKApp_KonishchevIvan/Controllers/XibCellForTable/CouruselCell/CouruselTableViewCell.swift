@@ -12,6 +12,7 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
 
     @IBOutlet var CouruselCollection: UICollectionView!
     var collectionData: [HisFirends]? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.CouruselCollection.dataSource = self
@@ -33,8 +34,18 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = CouruselCollection.dequeueReusableCell(withReuseIdentifier: "CouruselID1", for: indexPath) as? CouruselCollectionViewCell else { preconditionFailure("Error")
         }
+         // To set the selected cell background color here
+
          cell.imageCouruselCell.image = collectionData![indexPath.row].friendsAvatar
          cell.lableForDetailsCorusel.text = collectionData![indexPath.row].friendsName
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        // Выбранная ячейка коллекции!!
+        print("select: \(self.collectionData![indexPath.row].friendsName)")
+//        let data = self.collectionData![indexPath.row].friendsName
+        
     }
 }

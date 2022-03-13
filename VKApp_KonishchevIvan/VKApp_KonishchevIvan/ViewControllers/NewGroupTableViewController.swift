@@ -25,11 +25,6 @@ class NewGroupTableViewController: UITableViewController {
  
     // MARK: - Table view data source
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//
-//        return 1
-//    }
-//
     // количество секций с одной буквой
         override func numberOfSections(in tableView: UITableView) -> Int {
             return self.allGroupDictionary.keys.count
@@ -118,17 +113,7 @@ extension NewGroupTableViewController {
                 self.shar.append(String(chars))
             }
         }
-//        for groupes in group {
-//            guard let char = groupes.nameGroup.first else { return ["":[]]}
-//            if var issetChar = groupDictionary[String(char)] {
-//                issetChar.append(groupes)
-//                groupDictionary[String(char)] = issetChar
-//
-//            }else {
-//                self.shar.append(String(char))
-//                groupDictionary[String(char)] = [groupes]
-//            }
-//        }
+
         return groupDictionary
     }
 }

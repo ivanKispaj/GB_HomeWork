@@ -21,12 +21,18 @@
 		804154FB27B62FEB00160418 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 804154F927B62FEB00160418 /* LaunchScreen.storyboard */; };
 		805E76ED27BC17670033098D /* Extension_LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805E76EC27BC17670033098D /* Extension_LoginController.swift */; };
 		805E76F027BC17EC0033098D /* AllertWrongUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805E76EF27BC17EC0033098D /* AllertWrongUserData.swift */; };
+		806284C927DDB1A900D37674 /* CastomCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806284C827DDB1A900D37674 /* CastomCollectionLayout.swift */; };
+		806284CE27DDB24F00D37674 /* GallaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806284CC27DDB24F00D37674 /* GallaryCollectionViewCell.swift */; };
+		806284CF27DDB24F00D37674 /* GallaryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 806284CD27DDB24F00D37674 /* GallaryCollectionViewCell.xib */; };
+		806284D127DDB68E00D37674 /* UserDetailsTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806284D027DDB68E00D37674 /* UserDetailsTableData.swift */; };
+		806284D427DDCAFF00D37674 /* GallaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806284D227DDCAFF00D37674 /* GallaryTableViewCell.swift */; };
+		806284D527DDCAFF00D37674 /* GallaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 806284D327DDCAFF00D37674 /* GallaryTableViewCell.xib */; };
+		806284D827DDD04D00D37674 /* GallaryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806284D727DDD04D00D37674 /* GallaryPhoto.swift */; };
 		808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */; };
 		808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9D9F27BE98BC0089E4A4 /* Friends.swift */; };
-		808E9DA327BEB96C0089E4A4 /* DetailsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9DA227BEB96C0089E4A4 /* DetailsCollectionViewController.swift */; };
 		808E9DA627BEBA1F0089E4A4 /* DetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9DA527BEBA1F0089E4A4 /* DetailsCollectionViewCell.swift */; };
 		80B95BD027C1207900D7A9E8 /* extension_UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B95BCF27C1207900D7A9E8 /* extension_UIImageView.swift */; };
-		80BC96F727BB66DA0038FD77 /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F627BB66DA0038FD77 /* UserDetails.swift */; };
+		80BC96F727BB66DA0038FD77 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F627BB66DA0038FD77 /* UserData.swift */; };
 		80BC96F927BB67160038FD77 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F827BB67160038FD77 /* LoginViewController.swift */; };
 		80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */; };
 		80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19ACB27D76C6E009C34CB /* CouruselTableViewCell.swift */; };
@@ -64,12 +70,18 @@
 		804154FC27B62FEB00160418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		805E76EC27BC17670033098D /* Extension_LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_LoginController.swift; sourceTree = "<group>"; };
 		805E76EF27BC17EC0033098D /* AllertWrongUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllertWrongUserData.swift; sourceTree = "<group>"; };
+		806284C827DDB1A900D37674 /* CastomCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomCollectionLayout.swift; sourceTree = "<group>"; };
+		806284CC27DDB24F00D37674 /* GallaryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryCollectionViewCell.swift; sourceTree = "<group>"; };
+		806284CD27DDB24F00D37674 /* GallaryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GallaryCollectionViewCell.xib; sourceTree = "<group>"; };
+		806284D027DDB68E00D37674 /* UserDetailsTableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsTableData.swift; sourceTree = "<group>"; };
+		806284D227DDCAFF00D37674 /* GallaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryTableViewCell.swift; sourceTree = "<group>"; };
+		806284D327DDCAFF00D37674 /* GallaryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GallaryTableViewCell.xib; sourceTree = "<group>"; };
+		806284D727DDD04D00D37674 /* GallaryPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryPhoto.swift; sourceTree = "<group>"; };
 		808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		808E9D9F27BE98BC0089E4A4 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
-		808E9DA227BEB96C0089E4A4 /* DetailsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCollectionViewController.swift; sourceTree = "<group>"; };
 		808E9DA527BEBA1F0089E4A4 /* DetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		80B95BCF27C1207900D7A9E8 /* extension_UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension_UIImageView.swift; sourceTree = "<group>"; };
-		80BC96F627BB66DA0038FD77 /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
+		80BC96F627BB66DA0038FD77 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		80BC96F827BB67160038FD77 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailUserTableViewController.swift; sourceTree = "<group>"; };
 		80C19ACB27D76C6E009C34CB /* CouruselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouruselTableViewCell.swift; sourceTree = "<group>"; };
@@ -137,6 +149,7 @@
 		80233AB227BF5A870040D702 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				806284C727DDB18400D37674 /* CastomCollectionLayout */,
 				80E7D3C127DB0780009402ED /* DataController */,
 				80DD23A427D332F200F78417 /* XibCellForTable */,
 				808E9DA427BEB9F00089E4A4 /* ViewCollectionCell */,
@@ -203,14 +216,42 @@
 			path = AllertMessage;
 			sourceTree = "<group>";
 		};
+		806284C727DDB18400D37674 /* CastomCollectionLayout */ = {
+			isa = PBXGroup;
+			children = (
+				806284C827DDB1A900D37674 /* CastomCollectionLayout.swift */,
+			);
+			path = CastomCollectionLayout;
+			sourceTree = "<group>";
+		};
+		806284CB27DDB23300D37674 /* XibGallaryCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				806284CC27DDB24F00D37674 /* GallaryCollectionViewCell.swift */,
+				806284CD27DDB24F00D37674 /* GallaryCollectionViewCell.xib */,
+			);
+			path = XibGallaryCollectionCell;
+			sourceTree = "<group>";
+		};
+		806284D627DDCB0D00D37674 /* GalaryCell */ = {
+			isa = PBXGroup;
+			children = (
+				806284D227DDCAFF00D37674 /* GallaryTableViewCell.swift */,
+				806284D327DDCAFF00D37674 /* GallaryTableViewCell.xib */,
+			);
+			path = GalaryCell;
+			sourceTree = "<group>";
+		};
 		808E9D9B27BE94EF0089E4A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				80BC96F627BB66DA0038FD77 /* UserDetails.swift */,
+				80BC96F627BB66DA0038FD77 /* UserData.swift */,
 				808E9D9F27BE98BC0089E4A4 /* Friends.swift */,
 				8025114A27BFF63D007E87C4 /* AllUserGroups.swift */,
 				8006DE3F27CBE9420014BC5D /* LikeControll.swift */,
 				80E7D3BF27DA7016009402ED /* HisFriends.swift */,
+				806284D027DDB68E00D37674 /* UserDetailsTableData.swift */,
+				806284D727DDD04D00D37674 /* GallaryPhoto.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -218,6 +259,7 @@
 		808E9DA427BEB9F00089E4A4 /* ViewCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
+				806284CB27DDB23300D37674 /* XibGallaryCollectionCell */,
 				80C19ACF27D76FA7009C34CB /* XibCollectionViewCell */,
 				808E9DA527BEBA1F0089E4A4 /* DetailsCollectionViewCell.swift */,
 			);
@@ -266,6 +308,7 @@
 				80C19ACA27D76C40009C34CB /* CouruselCell */,
 				8003DA2427D5E19F0048B191 /* ExtendedCell */,
 				8003DA2327D5E1680048B191 /* SimpleCell */,
+				806284D627DDCB0D00D37674 /* GalaryCell */,
 			);
 			path = XibCellForTable;
 			sourceTree = "<group>";
@@ -315,7 +358,6 @@
 			children = (
 				80BC96F827BB67160038FD77 /* LoginViewController.swift */,
 				808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */,
-				808E9DA227BEB96C0089E4A4 /* DetailsCollectionViewController.swift */,
 				8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */,
 				8025114627BFF5C9007E87C4 /* NewGroupTableViewController.swift */,
 				80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */,
@@ -390,7 +432,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				804154FB27B62FEB00160418 /* LaunchScreen.storyboard in Resources */,
+				806284CF27DDB24F00D37674 /* GallaryCollectionViewCell.xib in Resources */,
 				804154F827B62FEB00160418 /* Assets.xcassets in Resources */,
+				806284D527DDCAFF00D37674 /* GallaryTableViewCell.xib in Resources */,
 				8003DA2827D5E1E00048B191 /* ExtendTableUserCell.xib in Resources */,
 				80C19ACE27D76C6E009C34CB /* CouruselTableViewCell.xib in Resources */,
 				804154F627B62FE900160418 /* Main.storyboard in Resources */,
@@ -414,6 +458,7 @@
 				805E76ED27BC17670033098D /* Extension_LoginController.swift in Sources */,
 				808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */,
 				8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */,
+				806284C927DDB1A900D37674 /* CastomCollectionLayout.swift in Sources */,
 				808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */,
 				80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */,
 				80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */,
@@ -428,14 +473,17 @@
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
 				8006DE4027CBE9420014BC5D /* LikeControll.swift in Sources */,
 				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,
-				808E9DA327BEB96C0089E4A4 /* DetailsCollectionViewController.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
 				804154F127B62FE900160418 /* SceneDelegate.swift in Sources */,
+				806284D427DDCAFF00D37674 /* GallaryTableViewCell.swift in Sources */,
+				806284CE27DDB24F00D37674 /* GallaryCollectionViewCell.swift in Sources */,
 				80E7D3C527DB0895009402ED /* DataController.swift in Sources */,
 				8006DE3E27CBC73A0014BC5D /* AvatarUIView.swift in Sources */,
-				80BC96F727BB66DA0038FD77 /* UserDetails.swift in Sources */,
+				806284D827DDD04D00D37674 /* GallaryPhoto.swift in Sources */,
+				80BC96F727BB66DA0038FD77 /* UserData.swift in Sources */,
 				808E9DA627BEBA1F0089E4A4 /* DetailsCollectionViewCell.swift in Sources */,
 				80C19AD727D78AAA009C34CB /* ShadowCouruselAvatar.swift in Sources */,
+				806284D127DDB68E00D37674 /* UserDetailsTableData.swift in Sources */,
 				80DD23A727D3332000F78417 /* TableViewCellXib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

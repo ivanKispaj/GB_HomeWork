@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct UserDetail {
+struct UserData {
     let username = "Ivan Konishchev"
     let useremail = ""
     let userPassword = ""

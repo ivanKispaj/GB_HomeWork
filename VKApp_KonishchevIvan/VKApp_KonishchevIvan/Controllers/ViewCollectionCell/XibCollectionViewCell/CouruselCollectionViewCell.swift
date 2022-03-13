@@ -14,14 +14,17 @@ class CouruselCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var avatarCouruselView: UIView!
     @IBOutlet var imageCouruselCell: UIImageView!
     @IBOutlet weak var lableForDetailsCorusel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         contentCollectionCell.layer.backgroundColor = UIColor.systemGray6.cgColor
+        
+
     }
 
     override func layoutSubviews() {
 
     }
+
     
 }

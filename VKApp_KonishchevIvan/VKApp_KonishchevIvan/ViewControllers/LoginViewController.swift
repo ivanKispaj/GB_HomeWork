@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector( willHideKeyboard ), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        let user =  UserDetail()
+        let user =  UserData()
         let emailInput = self.emailTextField.text
         let passwordInput = self.passwordTextField.text
         if user.useremail == emailInput && user.userPassword == passwordInput {

@@ -95,7 +95,7 @@ class FriendsTableViewController: UITableViewController {
         let friend = friends[indexPath.section].row[indexPath.row].name
         let avatar = friends[indexPath.section].row[indexPath.row].avatar
         detailVC.title = friend
-        detailVC.hisFriewnds = friends[indexPath.section].row[indexPath.row].hisFriends
+        detailVC.hisFriends = friends[indexPath.section].row[indexPath.row].hisFriends
         detailVC.detailUsername = friend
         detailVC.detailAvatar = avatar
         detailVC.detailUserInfo = friends[indexPath.section].row[indexPath.row].details
@@ -105,6 +105,7 @@ class FriendsTableViewController: UITableViewController {
        
     }
 
+    //кастомный Header ячеек
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
         headerView.backgroundColor = UIColor(named: "sectionColor")
