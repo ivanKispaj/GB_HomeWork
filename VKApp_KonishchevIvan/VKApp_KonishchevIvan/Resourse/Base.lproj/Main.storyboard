@@ -609,6 +609,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="All Group" id="flI-pI-va9"/>
+                    <connections>
+                        <outlet property="searchBarDelegate" destination="hAC-vJ-7s5" id="BRT-Xt-JoM"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0TO-DP-ex0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,22 +7,49 @@
 
 import UIKit
 
-class NewGroupTableViewController: UITableViewController {
+class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
 
+    @IBOutlet var searchBarDelegate: UITableView!
+    
     var userGroupDelegate: UserGroupTableViewDelegate? = nil
-    var allGroup: [AllUserGroups] = []
+    var allGroups: [AllUserGroups] = []
+    var allGroupSeacrch: [AllUserGroups] = []
     var myActiveGroup: [AllUserGroups] = []
     var shar: [String] = []
     var allGroupDictionary = [String: [AllUserGroups]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.allGroupDictionary = sort(group: allGroup)
+        self.searchBarSetup()
+        self.allGroupSeacrch = self.allGroups
+        self.allGroupDictionary = sort(group: allGroupSeacrch)
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
         
     }
-
- 
+// MARK: - SearchBar
+    
+    func searchBarSetup() {
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
+        searchBar.showsScopeBar = true
+        searchBar.delegate = self
+        self.tableView.tableHeaderView = searchBar
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        self.allGroupSeacrch = self.allGroups
+        if searchText != "" {
+        let newSearch = allGroupSeacrch.filter() {
+            $0.nameGroup.contains(searchText)
+        }
+        self.allGroupSeacrch = newSearch
+       
+        }
+        self.allGroupDictionary = sort(group: self.allGroupSeacrch)
+        tableView.reloadData()
+        
+    }
+     
+    
     // MARK: - Table view data source
 
     // количество секций с одной буквой
@@ -73,12 +100,12 @@ class NewGroupTableViewController: UITableViewController {
        if (issetGroup(group, groupArray: self.myActiveGroup)) == nil {
 
             self.myActiveGroup.append(group)
-            guard let index = issetGroup(group, groupArray: self.allGroup) else { return }
-            self.allGroup.remove(at: index)
+            guard let index = issetGroup(group, groupArray: self.allGroupSeacrch) else { return }
+            self.allGroupSeacrch.remove(at: index)
            
            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.right)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.12) {
-                self.userGroupDelegate?.addNewGroup(self.myActiveGroup, allGroup: self.allGroup)
+                self.userGroupDelegate?.addNewGroup(self.myActiveGroup, allGroup: self.allGroupSeacrch)
                 self.navigationController?.popViewController(animated: true)
             }
 

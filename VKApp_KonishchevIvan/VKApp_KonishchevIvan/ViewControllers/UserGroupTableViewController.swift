@@ -61,7 +61,7 @@ class UserGroupTableViewController: UITableViewController {
         guard let destinationVC = segue.destination as? NewGroupTableViewController else { return
         }
         destinationVC.userGroupDelegate = self
-        destinationVC.allGroup = self.allGroup
+        destinationVC.allGroups = self.allGroup
         destinationVC.myActiveGroup = self.myActiveGroup
     }
    

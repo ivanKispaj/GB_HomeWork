@@ -8,7 +8,7 @@
 import UIKit
 
 struct AllUserGroups:Equatable {
-    let nameGroup: String
+    var nameGroup: String
     let imageGroup: UIImage?
     init(nameGroup: String, logoGroup: UIImage? = nil){
         self.nameGroup = nameGroup
