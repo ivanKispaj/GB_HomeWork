@@ -34,9 +34,6 @@ class UserGroupTableViewController: UITableViewController {
         print("Header")
     }
     
-    
-    
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
     
         return 1
@@ -49,12 +46,10 @@ class UserGroupTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
-        
+               
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("Error")
         }
-
 
         cell.imageCellAvatar.image = myActiveGroup[indexPath.row].imageGroup
         cell.lableCellXib.text = myActiveGroup[indexPath.row].nameGroup
@@ -75,8 +70,6 @@ class UserGroupTableViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-   
-
    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

@@ -35,7 +35,7 @@ class NewGroupTableViewController: UITableViewController {
             let groupCell = allGroupDictionary.keys.sorted()
             let cell = allGroupDictionary[groupCell[section]]?.count ?? 0
             
-            return cell//allGroupDictionary[groupCell[section]]?.count ?? 0
+            return cell
         }
 
   
@@ -62,7 +62,6 @@ class NewGroupTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-       // let newGroup = self.allGroup[indexPath.row]
         let allDictionaryKey = self.allGroupDictionary.keys.sorted()[indexPath.section]
         let row = indexPath.row
         var groupArray = allGroupDictionary[allDictionaryKey]!

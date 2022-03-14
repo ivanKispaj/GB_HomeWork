@@ -15,7 +15,7 @@ extension DetailUserTableViewController {
     self.detailUserAccountLable.text = detailUserVisitInfo
     self.detailButtonMessage.setTitle("Сообщение", for: .normal)
     self.detailButtonMessage.setTitleColor(UIColor.white, for: .normal)
-    self.detailButtonCall.setTitle("Сообщение", for: .normal)
+    self.detailButtonCall.setTitle("Звонок", for: .normal)
     self.detailButtonCall.setTitleColor(UIColor.white, for: .normal)
     }
 }

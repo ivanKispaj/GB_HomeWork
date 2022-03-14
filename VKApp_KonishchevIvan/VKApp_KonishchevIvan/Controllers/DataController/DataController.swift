@@ -117,4 +117,11 @@ class DataController {
         ]
         return dataGroup
     }
+    
+    func getDataNews() -> [NewsData] {
+        let news = [NewsData(cellType: .textWithimage, newsText: "Правительство РФ будет внимательно смотреть за ситуацией с ценами и в текущих условиях не даст пенсионеров в обиду. Об этом 13 марта сообщил министр финансов РФ Антон Силуанов.", newsImage: [UIImage(named: "Siluvanov")]),
+                    NewsData(cellType: .textWithTextView, newsText: "Можно ли считать прекращение поставок продукции Apple действием санкций, приедут ли в Россию мартовские новинки, стоит ли скупать доступные в магазинах продукты и как выглядит худший сценарий развития событий?", newsImage: [UIImage(named: "appleNews")])
+                    ]
+        return news
+    }
 }

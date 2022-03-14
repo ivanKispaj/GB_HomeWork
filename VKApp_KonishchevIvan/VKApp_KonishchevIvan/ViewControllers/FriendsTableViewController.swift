@@ -87,7 +87,7 @@ class FriendsTableViewController: UITableViewController {
 
 // Действия при выборе ячейки
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+       
         let sampleStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             guard let detailVC = sampleStoryboard.instantiateViewController(withIdentifier: "DetailUserTableView") as? DetailUserTableViewController else {
             return
@@ -102,29 +102,21 @@ class FriendsTableViewController: UITableViewController {
         detailVC.detailUserVisitInfo = "Был 1 час назад"
         
         self.navigationController?.show(detailVC, sender: nil)
-       
+        
     }
 
     //кастомный Header ячеек
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
-        headerView.backgroundColor = UIColor(named: "sectionColor")
-        let headerLable = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 28))
-        headerLable.textColor = UIColor.black
-        headerLable.text = friends[section].header
-        headerLable.textAlignment = .left
-        headerView.addSubview(headerLable)
-        let button = UIButton(frame: CGRect(x: headerView.frame.maxX - 150, y: 0, width: 150, height: 28))
-        button.layer.cornerRadius = 5
-        button.setTitle("Показать все", for: .normal)
-        button.backgroundColor = UIColor.clear
-        button.setTitleColor(UIColor.blue, for: .normal)
-        // button.addTarget(se, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
-        headerView.addSubview(button)
-        return headerView
-    }
-
-
+        
+        let sectionsName = friends[section].header
+        if sectionsName == "Возможные друзья" {
+            let headerView = getHeaderView(size: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 35), sectionName: sectionsName, buttonTitle: "Показать все", buttonWidth: 150)
+            return headerView
+        }else {
+            let headerView = getHeaderView(size: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 35), sectionName: sectionsName, buttonTitle: "Списки", buttonWidth: 150)
+            return headerView
+        }
+    } 
 
 }
 

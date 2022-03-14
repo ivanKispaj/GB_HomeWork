@@ -10,6 +10,7 @@ import UIKit
 enum SectionType {
     case Friends
     case Gallary
+    case SingleFoto
 }
 
 struct UserDetailsTableData {

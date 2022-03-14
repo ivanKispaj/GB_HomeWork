@@ -28,18 +28,22 @@ class DetailUserTableViewController: UITableViewController {
     @IBOutlet weak var detailButtonMessage: UIButton!
     @IBOutlet weak var detailButtonCall: UIButton!
     
+    var isLikeStatus: Bool = false
+    var likeCount: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeaderDetailView()
-          
+        
         dataTable.append(UserDetailsTableData(sectionName: "Friends", sectionType: .Friends ))
         dataTable.append(UserDetailsTableData(sectionName: "Gallary", sectionType: .Gallary))
-
+        dataTable.append(UserDetailsTableData(sectionName: "", sectionType: .SingleFoto))
+        
         tableView.register(UINib(nibName: "CouruselTableViewCell", bundle: nil), forCellReuseIdentifier: "CouruselCellForDetails")
         tableView.register(UINib(nibName: "GallaryTableViewCell", bundle: nil), forCellReuseIdentifier: "GallaryTableCell")
-      
+        tableView.register(UINib(nibName: "SinglePhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleTableCellID")
     }
-
+    
+ 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -59,9 +63,6 @@ class DetailUserTableViewController: UITableViewController {
         return dataTable[section].sectionName
 
         }
-
-
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch dataTable[indexPath.section].sectionType {
@@ -77,7 +78,25 @@ class DetailUserTableViewController: UITableViewController {
             }
             cell.gallaryData = photo
             return cell
+        case .SingleFoto:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
+                preconditionFailure("Error")
+            }
+            cell.singleLableUserName.text = detailUsername
+            cell.singleAvatarHeader.image = detailAvatar
+            if self.isLikeStatus {
+                cell.singlePhotoLikeImage.image = UIImage(systemName: "suit.heart.fill")
+                cell.singlePhotoLikeImage.tintColor = UIColor.red
+                cell.singlPhotoLikeLable.text = String(self.likeCount)
+                self.isLikeStatus = cell.isLikeStatus
+            }else {
+                cell.singlePhotoLikeImage.image = UIImage(systemName: "suit.heart")
+                cell.singlePhotoLikeImage.tintColor = UIColor.systemGray2
+                cell.singlPhotoLikeLable.text = String(self.likeCount)
+                self.isLikeStatus = cell.isLikeStatus
+            }
             
+            return cell
         }
     }
 

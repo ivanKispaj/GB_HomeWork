@@ -137,10 +137,10 @@
             </objects>
             <point key="canvasLocation" x="2134" y="462"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Новости-->
         <scene sceneID="PFX-Wm-juv">
             <objects>
-                <tableViewController id="ctY-tt-KYR" sceneMemberID="viewController">
+                <tableViewController id="ctY-tt-KYR" customClass="HomeNewsTableViewController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="phd-7B-yF3">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -150,7 +150,7 @@
                             <outlet property="delegate" destination="ctY-tt-KYR" id="yH3-LG-cqz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="pVf-IO-RnL"/>
+                    <navigationItem key="navigationItem" title="Новости" id="pVf-IO-RnL"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frn-Iy-Py0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -187,47 +187,62 @@
         <scene sceneID="Wx7-gw-cr2">
             <objects>
                 <tableViewController id="r3E-t8-6me" customClass="FriendsTableViewController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="QKo-Le-kxg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" separatorInsetReference="fromAutomaticInsets" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="QKo-Le-kxg">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="sectionColor"/>
-                        <color key="separatorColor" name="sectionColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="separatorColor" systemColor="systemGray2Color"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="uEt-DI-9XU">
                             <rect key="frame" x="0.0" y="0.0" width="390" height="119"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="gwv-Fh-Irm">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="48"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="45.666666666666664"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3k-Bm-OQ9">
-                                    <rect key="frame" x="0.0" y="48" width="390" height="71"/>
+                                    <rect key="frame" x="0.0" y="45.666666666666664" width="390" height="73.333333333333343"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34Q-rR-ge5">
-                                            <rect key="frame" x="20" y="20" width="157" height="31"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="34Q-rR-ge5">
+                                            <rect key="frame" x="20" y="20.000000000000004" width="162" height="33.333333333333343"/>
+                                            <color key="backgroundColor" systemColor="systemGray6Color"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="97d-k1-SL6"/>
                                             </constraints>
+                                            <color key="tintColor" systemColor="tintColor"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="qrcode.viewfinder" catalog="system" title="Сканировать QR">
+                                            <buttonConfiguration key="configuration" style="plain" imagePlacement="leading" title="Сканировать QR" imagePadding="0.0" cornerStyle="large">
+                                                <imageReference key="image" image="qrcode.viewfinder" catalog="system" symbolScale="large"/>
+                                                <backgroundConfiguration key="background" strokeWidth="2">
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="strokeColor" systemColor="systemGray6Color"/>
+                                                </backgroundConfiguration>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="17" scale="default" weight="bold"/>
                                                 <color key="baseForegroundColor" name="AppBW"/>
                                             </buttonConfiguration>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qb2-qV-ZRI">
-                                            <rect key="frame" x="219.66666666666663" y="20" width="150.33333333333337" height="31"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Qb2-qV-ZRI">
+                                            <rect key="frame" x="210" y="20.000000000000004" width="160" height="33.333333333333343"/>
+                                            <color key="backgroundColor" systemColor="systemGray6Color"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="v5u-T0-h16"/>
                                             </constraints>
+                                            <color key="tintColor" systemColor="tintColor"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="person.badge.plus" catalog="system" title="Добавить друга">
+                                            <buttonConfiguration key="configuration" style="plain" imagePlacement="leading" title="Добавить друга" imagePadding="5" cornerStyle="large">
+                                                <imageReference key="image" image="person.badge.plus" catalog="system" symbolScale="large"/>
+                                                <backgroundConfiguration key="background" strokeWidth="2" strokeOutset="0.0">
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="strokeColor" systemColor="systemGray6Color"/>
+                                                </backgroundConfiguration>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="17" scale="default" weight="bold"/>
                                                 <color key="baseForegroundColor" name="AppBW"/>
                                             </buttonConfiguration>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" name="sectionColor"/>
+                                    <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                    <color key="tintColor" systemColor="systemGray6Color"/>
                                     <constraints>
                                         <constraint firstItem="Qb2-qV-ZRI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="34Q-rR-ge5" secondAttribute="trailing" constant="10" id="CXn-QM-48E"/>
                                         <constraint firstItem="34Q-rR-ge5" firstAttribute="top" secondItem="I3k-Bm-OQ9" secondAttribute="top" constant="20" id="SiM-Zl-BeJ"/>
@@ -239,7 +254,8 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" systemColor="systemGray6Color"/>
+                            <color key="tintColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="gwv-Fh-Irm" firstAttribute="leading" secondItem="uEt-DI-9XU" secondAttribute="leading" id="0eW-HE-9XO"/>
                                 <constraint firstItem="I3k-Bm-OQ9" firstAttribute="leading" secondItem="uEt-DI-9XU" secondAttribute="leading" id="74q-QX-t9c"/>
@@ -277,25 +293,37 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="shT-f8-6BJ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="tqd-4w-cfd">
                             <rect key="frame" x="0.0" y="0.0" width="390" height="251"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kih-wu-CRp">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kih-wu-CRp" customClass="ShadowViewRadius" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
                                     <rect key="frame" x="10" y="10" width="100.66666666666667" height="94.333333333333329"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eFy-Zq-Cif">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QUF-WJ-FKh" customClass="CircleView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="100.66666666666667" height="94.333333333333329"/>
-                                        </imageView>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eFy-Zq-Cif">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100.66666666666667" height="94.333333333333329"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="eFy-Zq-Cif" secondAttribute="trailing" id="1XJ-5G-ujZ"/>
+                                                <constraint firstItem="eFy-Zq-Cif" firstAttribute="top" secondItem="QUF-WJ-FKh" secondAttribute="top" id="7wx-4h-5Qo"/>
+                                                <constraint firstAttribute="bottom" secondItem="eFy-Zq-Cif" secondAttribute="bottom" id="KrU-xI-9iB"/>
+                                                <constraint firstItem="eFy-Zq-Cif" firstAttribute="leading" secondItem="QUF-WJ-FKh" secondAttribute="leading" id="hRT-kx-BHW"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="QUF-WJ-FKh" secondAttribute="bottom" id="6KE-GV-o81"/>
                                         <constraint firstAttribute="width" secondItem="kih-wu-CRp" secondAttribute="height" multiplier="97:91" id="DHd-D0-U52"/>
-                                        <constraint firstItem="eFy-Zq-Cif" firstAttribute="top" secondItem="kih-wu-CRp" secondAttribute="top" id="TOa-NF-J67"/>
+                                        <constraint firstItem="QUF-WJ-FKh" firstAttribute="leading" secondItem="kih-wu-CRp" secondAttribute="leading" id="V7C-FK-RA8"/>
+                                        <constraint firstAttribute="trailing" secondItem="QUF-WJ-FKh" secondAttribute="trailing" id="YqF-LK-i2L"/>
                                         <constraint firstAttribute="height" priority="999" constant="70" id="abF-lQ-aK9"/>
-                                        <constraint firstAttribute="bottom" secondItem="eFy-Zq-Cif" secondAttribute="bottom" id="ihB-CJ-wK6"/>
-                                        <constraint firstItem="eFy-Zq-Cif" firstAttribute="leading" secondItem="kih-wu-CRp" secondAttribute="leading" id="ncd-vK-P2C"/>
-                                        <constraint firstAttribute="trailing" secondItem="eFy-Zq-Cif" secondAttribute="trailing" id="xWG-vv-j7e"/>
+                                        <constraint firstItem="QUF-WJ-FKh" firstAttribute="top" secondItem="kih-wu-CRp" secondAttribute="top" id="bDm-eh-F9a"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXq-Um-eVW">
@@ -460,7 +488,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" name="sectionColor"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="zUu-hj-Rt6" firstAttribute="leading" secondItem="tqd-4w-cfd" secondAttribute="leading" constant="10" id="0D1-9b-Jry"/>
                                 <constraint firstItem="4KA-A8-TtW" firstAttribute="leading" secondItem="tqd-4w-cfd" secondAttribute="leading" constant="10" id="7ds-Vo-W7x"/>
@@ -616,6 +644,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

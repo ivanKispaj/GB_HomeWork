@@ -26,21 +26,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="th2-Ng-867">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="th2-Ng-867" customClass="ShadowViewRadius" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
                                 <rect key="frame" x="10" y="10" width="90" height="90"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oRl-ha-MD4">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4mx-Bf-f4d" customClass="CircleView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                                    </imageView>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oRl-ha-MD4">
+                                                <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="oRl-ha-MD4" firstAttribute="leading" secondItem="4mx-Bf-f4d" secondAttribute="leading" id="XW9-2Y-87X"/>
+                                            <constraint firstAttribute="bottom" secondItem="oRl-ha-MD4" secondAttribute="bottom" id="jnQ-L5-X81"/>
+                                            <constraint firstItem="oRl-ha-MD4" firstAttribute="top" secondItem="4mx-Bf-f4d" secondAttribute="top" id="m7g-F6-2HH"/>
+                                            <constraint firstAttribute="trailing" secondItem="oRl-ha-MD4" secondAttribute="trailing" id="qjS-2q-ecs"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="4yG-fu-ABP"/>
-                                    <constraint firstAttribute="trailing" secondItem="oRl-ha-MD4" secondAttribute="trailing" id="9zs-ss-TTL"/>
-                                    <constraint firstItem="oRl-ha-MD4" firstAttribute="top" secondItem="th2-Ng-867" secondAttribute="top" id="BW1-uX-ShM"/>
-                                    <constraint firstItem="oRl-ha-MD4" firstAttribute="leading" secondItem="th2-Ng-867" secondAttribute="leading" id="DcW-ch-av5"/>
+                                    <constraint firstAttribute="trailing" secondItem="4mx-Bf-f4d" secondAttribute="trailing" id="6tJ-sn-og8"/>
                                     <constraint firstAttribute="width" secondItem="th2-Ng-867" secondAttribute="height" multiplier="1:1" priority="999" id="PbS-1a-YDs"/>
-                                    <constraint firstAttribute="bottom" secondItem="oRl-ha-MD4" secondAttribute="bottom" id="sbW-WF-lfE"/>
+                                    <constraint firstItem="4mx-Bf-f4d" firstAttribute="top" secondItem="th2-Ng-867" secondAttribute="top" id="Y4i-yf-ch5"/>
+                                    <constraint firstAttribute="bottom" secondItem="4mx-Bf-f4d" secondAttribute="bottom" id="irZ-Ix-Xzs"/>
+                                    <constraint firstItem="4mx-Bf-f4d" firstAttribute="leading" secondItem="th2-Ng-867" secondAttribute="leading" id="th3-TS-ERf"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0sS-Vg-qVL">
@@ -69,7 +79,7 @@
                                         <buttonConfiguration key="configuration" style="gray" title="Скрыть"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="AF0-tX-lNg" secondAttribute="trailing" constant="10" id="2F6-Ar-hSm"/>
                                     <constraint firstItem="AF0-tX-lNg" firstAttribute="top" secondItem="0sS-Vg-qVL" secondAttribute="top" constant="5" id="7Hc-FJ-Jf6"/>
@@ -88,7 +98,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstItem="xRd-dA-6vc" firstAttribute="leading" secondItem="th2-Ng-867" secondAttribute="trailing" constant="10" id="1eq-bB-hug"/>
                             <constraint firstItem="0sS-Vg-qVL" firstAttribute="leading" secondItem="th2-Ng-867" secondAttribute="trailing" constant="10" id="2FZ-MB-B8H"/>
@@ -132,6 +142,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

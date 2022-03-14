@@ -19,64 +19,60 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PMn-LJ-pOS">
                         <rect key="frame" x="0.0" y="0.0" width="75" height="120"/>
                         <subviews>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asfjsakhfihwakfqwbkgfbwqgk" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzL-Ny-vAo">
-                                <rect key="frame" x="5" y="62" width="65" height="53"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LcV-cH-CsY" customClass="AvatarCourusel" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                <rect key="frame" x="10" y="5" width="55" height="55"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LcV-cH-CsY" customClass="ShadowViewRadius" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
+                                <rect key="frame" x="15" y="5" width="45" height="45"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beY-kV-kcD" customClass="ShadowCouruselAvatar" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beY-kV-kcD" customClass="CircleView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9g1-If-ua3">
-                                                <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="9g1-If-ua3" secondAttribute="bottom" id="Cqb-z0-jqm"/>
-                                            <constraint firstAttribute="trailing" secondItem="9g1-If-ua3" secondAttribute="trailing" id="GYG-Mv-GOJ"/>
-                                            <constraint firstItem="9g1-If-ua3" firstAttribute="top" secondItem="beY-kV-kcD" secondAttribute="top" id="K9T-Ba-m6S"/>
-                                            <constraint firstItem="9g1-If-ua3" firstAttribute="leading" secondItem="beY-kV-kcD" secondAttribute="leading" id="Tiq-Ac-fCv"/>
+                                            <constraint firstAttribute="trailing" secondItem="9g1-If-ua3" secondAttribute="trailing" id="GKm-KW-j9i"/>
+                                            <constraint firstAttribute="bottom" secondItem="9g1-If-ua3" secondAttribute="bottom" id="Inb-oE-86i"/>
+                                            <constraint firstItem="9g1-If-ua3" firstAttribute="top" secondItem="beY-kV-kcD" secondAttribute="top" id="RbW-DA-Z1v"/>
+                                            <constraint firstItem="9g1-If-ua3" firstAttribute="leading" secondItem="beY-kV-kcD" secondAttribute="leading" id="eBa-j8-Dke"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="beY-kV-kcD" secondAttribute="trailing" id="5Sp-Dk-Qg2"/>
-                                    <constraint firstItem="beY-kV-kcD" firstAttribute="top" secondItem="LcV-cH-CsY" secondAttribute="top" id="83U-VA-Uop"/>
-                                    <constraint firstItem="beY-kV-kcD" firstAttribute="leading" secondItem="LcV-cH-CsY" secondAttribute="leading" id="KcM-rh-cnr"/>
-                                    <constraint firstAttribute="width" secondItem="LcV-cH-CsY" secondAttribute="height" multiplier="1:1" id="cbO-V9-PHa"/>
-                                    <constraint firstAttribute="bottom" secondItem="beY-kV-kcD" secondAttribute="bottom" id="dZf-zb-awR"/>
+                                    <constraint firstItem="beY-kV-kcD" firstAttribute="leading" secondItem="LcV-cH-CsY" secondAttribute="leading" id="7Ub-tj-qVS"/>
+                                    <constraint firstItem="beY-kV-kcD" firstAttribute="top" secondItem="LcV-cH-CsY" secondAttribute="top" id="BZE-4w-0l1"/>
+                                    <constraint firstAttribute="height" constant="45" id="WHy-Dz-7o3"/>
+                                    <constraint firstAttribute="bottom" secondItem="beY-kV-kcD" secondAttribute="bottom" id="aHj-QL-bOl"/>
+                                    <constraint firstAttribute="trailing" secondItem="beY-kV-kcD" secondAttribute="trailing" id="hFW-lW-5cA"/>
+                                    <constraint firstAttribute="width" secondItem="LcV-cH-CsY" secondAttribute="height" multiplier="1:1" id="owO-wg-reJ"/>
                                 </constraints>
-                                <connections>
-                                    <outlet property="circleViewImage" destination="9g1-If-ua3" id="U6O-Jj-bzm"/>
-                                </connections>
                             </view>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asfjsakhfihwakfqwbkgfbwqgk" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzL-Ny-vAo">
+                                <rect key="frame" x="2" y="55" width="71" height="63"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="wzL-Ny-vAo" firstAttribute="leading" secondItem="PMn-LJ-pOS" secondAttribute="leading" constant="5" id="736-FM-MZ5"/>
-                            <constraint firstAttribute="bottom" secondItem="wzL-Ny-vAo" secondAttribute="bottom" constant="5" id="D5C-b7-a3I"/>
-                            <constraint firstItem="LcV-cH-CsY" firstAttribute="top" secondItem="PMn-LJ-pOS" secondAttribute="top" constant="5" id="gKM-Bz-bQ9"/>
-                            <constraint firstItem="wzL-Ny-vAo" firstAttribute="top" secondItem="LcV-cH-CsY" secondAttribute="bottom" constant="2" id="rk4-B9-zQ6"/>
-                            <constraint firstAttribute="trailing" secondItem="wzL-Ny-vAo" secondAttribute="trailing" constant="5" id="rkB-IQ-q6u"/>
-                            <constraint firstItem="LcV-cH-CsY" firstAttribute="leading" secondItem="PMn-LJ-pOS" secondAttribute="leading" constant="10" id="wX9-Bl-t4i"/>
-                            <constraint firstAttribute="trailing" secondItem="LcV-cH-CsY" secondAttribute="trailing" constant="10" id="zjz-TV-Yde"/>
+                            <constraint firstItem="wzL-Ny-vAo" firstAttribute="leading" secondItem="PMn-LJ-pOS" secondAttribute="leading" constant="2" id="Hzv-Fr-0Mo"/>
+                            <constraint firstItem="wzL-Ny-vAo" firstAttribute="top" secondItem="LcV-cH-CsY" secondAttribute="bottom" constant="5" id="Qex-yQ-TWg"/>
+                            <constraint firstAttribute="bottom" secondItem="wzL-Ny-vAo" secondAttribute="bottom" constant="2" id="Ryr-Vp-wFM"/>
+                            <constraint firstItem="LcV-cH-CsY" firstAttribute="centerX" secondItem="PMn-LJ-pOS" secondAttribute="centerX" id="Sbk-p5-Pvc"/>
+                            <constraint firstAttribute="trailing" secondItem="wzL-Ny-vAo" secondAttribute="trailing" constant="2" id="Td6-WA-kW9"/>
+                            <constraint firstItem="LcV-cH-CsY" firstAttribute="top" secondItem="PMn-LJ-pOS" secondAttribute="top" constant="5" id="xfA-nx-ZMT"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="PMn-LJ-pOS" secondAttribute="trailing" id="aa3-Cu-0wZ"/>
-                <constraint firstItem="PMn-LJ-pOS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dy0-7q-nwX"/>
-                <constraint firstAttribute="bottom" secondItem="PMn-LJ-pOS" secondAttribute="bottom" id="jbq-b1-uqo"/>
-                <constraint firstItem="PMn-LJ-pOS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wE4-TN-OxU"/>
+                <constraint firstItem="PMn-LJ-pOS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="4gj-Vl-MTT"/>
+                <constraint firstItem="PMn-LJ-pOS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="JaX-1G-7m4"/>
+                <constraint firstAttribute="trailing" secondItem="PMn-LJ-pOS" secondAttribute="trailing" id="Qwm-i2-UGT"/>
+                <constraint firstAttribute="bottom" secondItem="PMn-LJ-pOS" secondAttribute="bottom" id="cnb-i2-eYS"/>
             </constraints>
             <size key="customSize" width="82" height="158"/>
             <connections>
-                <outlet property="ShadowCellCouruselView" destination="beY-kV-kcD" id="ROg-PU-YdS"/>
                 <outlet property="avatarCouruselView" destination="LcV-cH-CsY" id="0t9-4A-24h"/>
                 <outlet property="contentCollectionCell" destination="PMn-LJ-pOS" id="aFN-AJ-uY1"/>
                 <outlet property="imageCouruselCell" destination="9g1-If-ua3" id="3dV-zr-oQc"/>
