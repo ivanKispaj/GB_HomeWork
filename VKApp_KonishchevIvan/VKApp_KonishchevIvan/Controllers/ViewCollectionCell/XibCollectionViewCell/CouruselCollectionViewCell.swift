@@ -10,7 +10,6 @@ import UIKit
 class CouruselCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var contentCollectionCell: UIView!
-    @IBOutlet weak var ShadowCellCouruselView: UIView!
     @IBOutlet weak var avatarCouruselView: UIView!
     @IBOutlet var imageCouruselCell: UIImageView!
     @IBOutlet weak var lableForDetailsCorusel: UILabel!
@@ -18,7 +17,7 @@ class CouruselCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentCollectionCell.layer.backgroundColor = UIColor.systemGray6.cgColor
-        
+        lableForDetailsCorusel.textColor = UIColor(named: "AppBW")
 
     }
 

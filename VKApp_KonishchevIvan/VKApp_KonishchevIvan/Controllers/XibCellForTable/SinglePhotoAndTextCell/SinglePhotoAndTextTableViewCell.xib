@@ -164,7 +164,7 @@
                             <outlet property="delegate" destination="-1" id="4it-fH-uFN"/>
                         </connections>
                     </collectionView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="scrollableAxes" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SCM-Hh-idt">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="scrollableAxes" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SCM-Hh-idt">
                         <rect key="frame" x="16" y="65" width="288" height="156"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>

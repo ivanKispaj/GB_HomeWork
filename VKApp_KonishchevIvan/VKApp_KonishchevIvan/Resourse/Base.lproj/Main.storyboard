@@ -304,7 +304,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QUF-WJ-FKh" customClass="CircleView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="100.66666666666667" height="94.333333333333329"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eFy-Zq-Cif">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eFy-Zq-Cif">
                                                     <rect key="frame" x="0.0" y="0.0" width="100.66666666666667" height="94.333333333333329"/>
                                                 </imageView>
                                             </subviews>
