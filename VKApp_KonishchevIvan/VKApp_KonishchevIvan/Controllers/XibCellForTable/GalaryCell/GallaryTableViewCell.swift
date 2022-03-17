@@ -44,10 +44,39 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "FullImageDetailID") as? FullImageDetailViewController else {
+            preconditionFailure("Error view next controller!")
+        }
+        let navigationController = getControllerRoot()
+        nextVC.imageFulls = gallaryData?.photo[indexPath.section]![indexPath.row]
+        nextVC.modalPresentationStyle = .fullScreen
+        navigationController!.show(nextVC, sender: self)
         // Выбранная ячейка коллекции!!
         print("section: \(indexPath.section)\nrow: \(indexPath.row)")
-//        let data = self.collectionData![indexPath.row].friendsName
-        
     }
+    
+    func getControllerRoot() -> UIViewController? {
+        
+        var keyWindow: UIWindow? {
+          return UIApplication.shared.connectedScenes
+            .filter { $0.activationState == .foregroundActive }
+            .first(where: { $0 is UIWindowScene })
+            .flatMap({ $0 as? UIWindowScene })?.windows
+            .first(where: \.isKeyWindow)
+        }
+        if var topController = keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                print(presentedViewController)
+                topController = presentedViewController
+               
+            }
+            print(topController)
+            return topController
+        }else {
+            return nil
+        }
+    }
+
 }

@@ -515,6 +515,7 @@
                             <outlet property="delegate" destination="gdu-l6-Grr" id="pe9-bQ-xNF"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="5en-H2-bCd"/>
                     <connections>
                         <outlet property="detailAvatarHeader" destination="eFy-Zq-Cif" id="qf3-cB-55P"/>
                         <outlet property="detailButtonCall" destination="Px1-4v-3fG" id="92K-Kw-f6v"/>
@@ -527,6 +528,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTu-86-NLN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4130.7692307692305" y="-1142.4170616113743"/>
+        </scene>
+        <!--Full Image Detail View Controller-->
+        <scene sceneID="Q43-xt-fsS">
+            <objects>
+                <viewController storyboardIdentifier="FullImageDetailID" id="Ovw-SG-kiH" customClass="FullImageDetailViewController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qz0-8B-vbs">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="De7-i8-GBK">
+                                <rect key="frame" x="0.0" y="318" width="390" height="208"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="De7-i8-GBK" secondAttribute="height" multiplier="15:8" id="FjD-4y-5yc"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gu5-Jr-RuW">
+                                <rect key="frame" x="162" y="144" width="67" height="31"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.049280446729999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="999" constant="67" id="JZI-bK-MCL"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="exitButton:" destination="Ovw-SG-kiH" eventType="touchUpInside" id="WEP-oc-JHL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eCF-Dj-6lt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gu5-Jr-RuW" firstAttribute="top" secondItem="eCF-Dj-6lt" secondAttribute="top" constant="100" id="1SL-G7-btH"/>
+                            <constraint firstItem="eCF-Dj-6lt" firstAttribute="trailing" secondItem="De7-i8-GBK" secondAttribute="trailing" id="4eR-lt-NgH"/>
+                            <constraint firstItem="De7-i8-GBK" firstAttribute="centerY" secondItem="qz0-8B-vbs" secondAttribute="centerY" id="BCC-ap-ij9"/>
+                            <constraint firstItem="eCF-Dj-6lt" firstAttribute="trailing" secondItem="gu5-Jr-RuW" secondAttribute="trailing" constant="161" id="Hk2-Ia-Gnn"/>
+                            <constraint firstItem="De7-i8-GBK" firstAttribute="leading" secondItem="eCF-Dj-6lt" secondAttribute="leading" id="Qgx-Kz-m3z"/>
+                            <constraint firstItem="gu5-Jr-RuW" firstAttribute="leading" secondItem="eCF-Dj-6lt" secondAttribute="leading" constant="162" id="SAE-lI-lKK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageFull" destination="De7-i8-GBK" id="TQt-cq-hbG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5wD-eN-gqF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5365" y="-1160"/>
         </scene>
         <!--My Group-->
         <scene sceneID="ezl-cj-qy9">
