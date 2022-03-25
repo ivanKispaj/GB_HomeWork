@@ -10,8 +10,9 @@ import UIKit
 class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var gallaryCollection: UICollectionView!
-    
-    var gallaryData: GallaryPhoto? = nil
+    var delegate: TableViewDelegate!
+    var gallaryData: [ImageAndLikeData] = []
+    var countCell: Int = 0
     override func awakeFromNib() {
         super.awakeFromNib()
         self.gallaryCollection.delegate = self
@@ -26,57 +27,31 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
    
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return (gallaryData?.photo.count)!
+        return 2
     }
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (gallaryData?.photo[section]!.count)!
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GallaryCollectionCell", for: indexPath) as? GallaryCollectionViewCell else {
             preconditionFailure("Error")
         }
-        let image = gallaryData?.photo[indexPath.section]![indexPath.row]
+        let image = gallaryData[self.countCell].image
         cell.gallaryImage.image = image
+        self.countCell += 1
         return cell
     }
     
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "FullImageDetailID") as? FullImageDetailViewController else {
-            preconditionFailure("Error view next controller!")
-        }
-        let navigationController = getControllerRoot()
-        nextVC.imageFulls = gallaryData?.photo[indexPath.section]![indexPath.row]
-        nextVC.modalPresentationStyle = .fullScreen
-        navigationController!.show(nextVC, sender: self)
+
+        self.delegate.selectRow(nextViewData: self.gallaryData)
         // Выбранная ячейка коллекции!!
         print("section: \(indexPath.section)\nrow: \(indexPath.row)")
     }
     
-    func getControllerRoot() -> UIViewController? {
-        
-        var keyWindow: UIWindow? {
-          return UIApplication.shared.connectedScenes
-            .filter { $0.activationState == .foregroundActive }
-            .first(where: { $0 is UIWindowScene })
-            .flatMap({ $0 as? UIWindowScene })?.windows
-            .first(where: \.isKeyWindow)
-        }
-        if var topController = keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                print(presentedViewController)
-                topController = presentedViewController
-               
-            }
-            print(topController)
-            return topController
-        }else {
-            return nil
-        }
-    }
 
 }

@@ -5,9 +5,14 @@
 //  Created by Ivan Konishchev on 08.03.2022.
 //
 
+
 import UIKit
 
-class DetailUserTableViewController: UITableViewController {
+class DetailUserTableViewController: UITableViewController, TableViewDelegate {
+   
+    
+    var nextViewData: [ImageAndLikeData] = []
+    
 
     var dataTable: [UserDetailsTableData] = []
     var detailAvatar: UIImage? = nil
@@ -15,11 +20,8 @@ class DetailUserTableViewController: UITableViewController {
     var detailUserInfo: String? = nil
     var detailUserVisitInfo: String? = nil
     var hisFriends: [HisFirends]? = nil
-    let photo = GallaryPhoto(photo: [
-        0: [UIImage(named: "onePhoto")!, UIImage(named: "twoPhoto")!],
-        1: [UIImage(named: "threePhoto")!, UIImage(named: "fourPhoto")!]
-        
-    ])
+    let photo:[ImageAndLikeData] = DataController.shared.getPhoto()
+
     
     @IBOutlet weak var detailAvatarHeader: UIImageView!
     @IBOutlet weak var detailUserNameLable: UILabel!
@@ -71,12 +73,14 @@ class DetailUserTableViewController: UITableViewController {
                 preconditionFailure("Error")
             }
             cell.collectionData = hisFriends
+            cell.delegate = self
             return cell
         case .Gallary:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GallaryTableCell", for: indexPath) as? GallaryTableViewCell else {
                 preconditionFailure("Error")
             }
             cell.gallaryData = photo
+            cell.delegate = self
             return cell
         case .SingleFoto:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
@@ -95,9 +99,21 @@ class DetailUserTableViewController: UITableViewController {
                 cell.singlPhotoLikeLable.text = String(self.likeCount)
                 self.isLikeStatus = cell.isLikeStatus
             }
-            
+            cell.delegate = self
             return cell
         }
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destionationVC = segue.destination as? PhotoGallaryPressetViewController else {
+            preconditionFailure("Error")
+        }
+        destionationVC.dataCollection = self.nextViewData
+    }
 
+    func selectRow(nextViewData: [ImageAndLikeData]) {
+        self.nextViewData = nextViewData
+        performSegue(withIdentifier: "DetailFriendsPreviewID", sender: nil)
+    }
 }
+
+

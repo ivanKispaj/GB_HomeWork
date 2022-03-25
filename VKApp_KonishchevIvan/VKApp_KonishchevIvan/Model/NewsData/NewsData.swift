@@ -14,5 +14,5 @@ enum CellType {
 struct NewsData {
     let cellType: CellType
     let newsText: String?
-    let newsImage: [UIImage?]
+    let newsImage: ImageAndLikeData?
 }

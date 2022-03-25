@@ -13,6 +13,9 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     @IBOutlet var CouruselCollection: UICollectionView!
     var collectionData: [HisFirends]? = nil
     
+    
+    var delegate: TableViewDelegate!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.CouruselCollection.dataSource = self
@@ -42,7 +45,8 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+       
+        //self.delegate.selectRow(nextViewData: "couruselTableCell")
         // Выбранная ячейка коллекции!!
         print("select: \(self.collectionData![indexPath.row].friendsName)")
 //        let data = self.collectionData![indexPath.row].friendsName

@@ -44,7 +44,8 @@ class CastomCollectionLayout: UICollectionViewLayout {
         
         
     }
-
+    
+    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
     return cacheAttributes.values.filter { attributes in return rect.intersects(attributes.frame)
     } }
@@ -54,4 +55,6 @@ class CastomCollectionLayout: UICollectionViewLayout {
     override var collectionViewContentSize: CGSize {
     return CGSize(width: self.collectionView?.frame.width ?? 0, height: self.totalCellsHeight)
     }
+    
+ 
 }

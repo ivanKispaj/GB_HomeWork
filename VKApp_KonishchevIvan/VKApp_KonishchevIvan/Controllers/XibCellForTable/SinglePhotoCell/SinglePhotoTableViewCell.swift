@@ -19,7 +19,8 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
     @IBOutlet weak var singlePhotoLikeImage: UIImageView!
     var isLikeStatus: Bool = false
     var likeCount: Int = 0
-
+    var singlePhoto: [ImageAndLikeData] = DataController.shared.getPhoto()
+    var delegate: TableViewDelegate!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.singlCollection.delegate = self
@@ -43,8 +44,14 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
             preconditionFailure("Error")
         }
         
-        cell.singlePhoto.image = UIImage(named: "threePhoto")
+        cell.singlePhoto.image = self.singlePhoto.last as? UIImage ?? UIImage(named: "WinstonCherchil")
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
+        let photo:[ImageAndLikeData] = [self.singlePhoto.last!]
+        
+        self.delegate.selectRow(nextViewData: photo)
+    }
 }
