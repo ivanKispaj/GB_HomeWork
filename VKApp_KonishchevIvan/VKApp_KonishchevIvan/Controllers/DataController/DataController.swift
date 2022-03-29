@@ -103,7 +103,6 @@ class DataController {
             AllUserGroups(nameGroup: "Стрельба из лука", logoGroup: UIImage.init(named: "BowShooting")),
             AllUserGroups(nameGroup: "Бальные танцы", logoGroup: UIImage.init(named: "Dances")),
             AllUserGroups(nameGroup: "Фехтование", logoGroup: UIImage.init(named: "Fencing")),
-            AllUserGroups(nameGroup: "Рыбалка", logoGroup: UIImage.init(named: "Fishing")),
             AllUserGroups(nameGroup: "Футбол", logoGroup: UIImage.init(named: "Football")),
             AllUserGroups(nameGroup: "Художественная гимнастика", logoGroup: UIImage.init(named: "gymnastic")),
             AllUserGroups(nameGroup: "Тяжелая атлетика", logoGroup: UIImage.init(named: "HardAttletic")),

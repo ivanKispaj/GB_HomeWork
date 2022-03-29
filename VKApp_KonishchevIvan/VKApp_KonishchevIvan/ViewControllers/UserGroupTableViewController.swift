@@ -34,7 +34,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
 //MARK: - SearchBar Method
     // SearchBar FirstResponder
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-    
         self.searchBar.tapTheSearchBar()
         return true
     }
