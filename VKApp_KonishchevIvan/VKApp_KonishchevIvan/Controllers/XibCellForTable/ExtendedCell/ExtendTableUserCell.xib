@@ -21,19 +21,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="565" height="132"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Иван Конищев" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRf-BI-YHW">
-                                <rect key="frame" x="110" y="5" width="116.5" height="21"/>
+                                <rect key="frame" x="90" y="5" width="116.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="th2-Ng-867" customClass="ShadowViewRadius" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                <rect key="frame" x="10" y="10" width="90" height="90"/>
+                                <rect key="frame" x="10" y="10" width="70" height="70"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4mx-Bf-f4d" customClass="CircleView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oRl-ha-MD4">
-                                                <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -45,16 +45,19 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="4yG-fu-ABP"/>
+                                    <constraint firstAttribute="height" constant="70" id="4yG-fu-ABP"/>
                                     <constraint firstAttribute="trailing" secondItem="4mx-Bf-f4d" secondAttribute="trailing" id="6tJ-sn-og8"/>
                                     <constraint firstAttribute="width" secondItem="th2-Ng-867" secondAttribute="height" multiplier="1:1" priority="999" id="PbS-1a-YDs"/>
                                     <constraint firstItem="4mx-Bf-f4d" firstAttribute="top" secondItem="th2-Ng-867" secondAttribute="top" id="Y4i-yf-ch5"/>
                                     <constraint firstAttribute="bottom" secondItem="4mx-Bf-f4d" secondAttribute="bottom" id="irZ-Ix-Xzs"/>
                                     <constraint firstItem="4mx-Bf-f4d" firstAttribute="leading" secondItem="th2-Ng-867" secondAttribute="leading" id="th3-TS-ERf"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="avatarHeaightConstraint" destination="4yG-fu-ABP" id="EWR-v0-4YS"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0sS-Vg-qVL">
-                                <rect key="frame" x="110" y="77" width="208" height="35"/>
+                                <rect key="frame" x="90" y="77" width="208" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coQ-8E-h5T">
                                         <rect key="frame" x="5" y="5" width="88.5" height="25"/>
@@ -91,7 +94,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Москва" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRd-dA-6vc">
-                                <rect key="frame" x="110" y="31" width="44.5" height="15"/>
+                                <rect key="frame" x="90" y="31" width="44.5" height="15"/>
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>

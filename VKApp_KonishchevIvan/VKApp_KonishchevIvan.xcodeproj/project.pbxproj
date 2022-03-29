@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */; };
 		8003DA2827D5E1E00048B191 /* ExtendTableUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */; };
-		8006DE4027CBE9420014BC5D /* LikeControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006DE3F27CBE9420014BC5D /* LikeControll.swift */; };
 		8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */; };
 		8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114627BFF5C9007E87C4 /* NewGroupTableViewController.swift */; };
 		8025114B27BFF63D007E87C4 /* AllUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114A27BFF63D007E87C4 /* AllUserGroups.swift */; };
@@ -42,7 +41,6 @@
 		80850ED727DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80850ED527DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.xib */; };
 		80850EDB27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80850ED927DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.swift */; };
 		80850EDC27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80850EDA27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.xib */; };
-		80850EDE27DE51C10078039E /* NewsControlForLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80850EDD27DE51C10078039E /* NewsControlForLike.swift */; };
 		808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */; };
 		808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9D9F27BE98BC0089E4A4 /* Friends.swift */; };
 		80B95BD027C1207900D7A9E8 /* extension_UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B95BCF27C1207900D7A9E8 /* extension_UIImageView.swift */; };
@@ -59,6 +57,10 @@
 		80CCB6B827E4E55800BC2085 /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCB6B627E4E55800BC2085 /* HorizontalCollectionViewCell.swift */; };
 		80CCB6B927E4E55800BC2085 /* HorizontalCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */; };
 		80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1F9D827B6475200EA4E0C /* Validators.swift */; };
+		80DAF94327EF593000428C67 /* ProtocolLikeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94227EF593000428C67 /* ProtocolLikeDelegate.swift */; };
+		80DAF94527F0692500428C67 /* CustomSearshBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94427F0692500428C67 /* CustomSearshBar.swift */; };
+		80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94827F0B5B200428C67 /* LoadingView.swift */; };
+		80DAF94E27F16F1D00428C67 /* extensionUIViewGetSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */; };
 		80DD23A727D3332000F78417 /* TableViewCellXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DD23A527D3332000F78417 /* TableViewCellXib.swift */; };
 		80DD23A827D3332000F78417 /* TableViewCellXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80DD23A627D3332000F78417 /* TableViewCellXib.xib */; };
 		80E3274827D4F4950014C760 /* setDataSectionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E3274727D4F4950014C760 /* setDataSectionTable.swift */; };
@@ -72,7 +74,6 @@
 /* Begin PBXFileReference section */
 		8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendTableUserCell.swift; sourceTree = "<group>"; };
 		8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendTableUserCell.xib; sourceTree = "<group>"; };
-		8006DE3F27CBE9420014BC5D /* LikeControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControll.swift; sourceTree = "<group>"; };
 		8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupTableViewController.swift; sourceTree = "<group>"; };
 		8025114627BFF5C9007E87C4 /* NewGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupTableViewController.swift; sourceTree = "<group>"; };
 		8025114A27BFF63D007E87C4 /* AllUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllUserGroups.swift; sourceTree = "<group>"; };
@@ -107,7 +108,6 @@
 		80850ED527DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SinglePhotoAndTextTableViewCell.xib; sourceTree = "<group>"; };
 		80850ED927DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPhotoAndTextCollectionViewCell.swift; sourceTree = "<group>"; };
 		80850EDA27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsPhotoAndTextCollectionViewCell.xib; sourceTree = "<group>"; };
-		80850EDD27DE51C10078039E /* NewsControlForLike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsControlForLike.swift; sourceTree = "<group>"; };
 		808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		808E9D9F27BE98BC0089E4A4 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		80B95BCF27C1207900D7A9E8 /* extension_UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension_UIImageView.swift; sourceTree = "<group>"; };
@@ -124,6 +124,10 @@
 		80CCB6B627E4E55800BC2085 /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
 		80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCollectionViewCell.xib; sourceTree = "<group>"; };
 		80D1F9D827B6475200EA4E0C /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
+		80DAF94227EF593000428C67 /* ProtocolLikeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolLikeDelegate.swift; sourceTree = "<group>"; };
+		80DAF94427F0692500428C67 /* CustomSearshBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearshBar.swift; sourceTree = "<group>"; };
+		80DAF94827F0B5B200428C67 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionUIViewGetSubView.swift; sourceTree = "<group>"; };
 		80DD23A527D3332000F78417 /* TableViewCellXib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellXib.swift; sourceTree = "<group>"; };
 		80DD23A627D3332000F78417 /* TableViewCellXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellXib.xib; sourceTree = "<group>"; };
 		80E3274727D4F4950014C760 /* setDataSectionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setDataSectionTable.swift; sourceTree = "<group>"; };
@@ -179,6 +183,9 @@
 		80233AB227BF5A870040D702 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				80DAF94727F0B57400428C67 /* LoadingIndicatorView */,
+				80DAF94627F0AF3F00428C67 /* SearchBarControllers */,
+				80DAF94127EF57AC00428C67 /* UIControlls */,
 				80601F7627DF0A5200490809 /* AvatarShadovCircleController */,
 				806284C727DDB18400D37674 /* CastomCollectionLayout */,
 				80DD23A427D332F200F78417 /* XibCellForTable */,
@@ -191,6 +198,7 @@
 		803030EB27C0E95F00A410CE /* All_Extension */ = {
 			isa = PBXGroup;
 			children = (
+				80DAF94A27F16ECB00428C67 /* ExtensionUIView */,
 				80C19AE827D7C62C009C34CB /* ExtensionDetailUTVController */,
 				80E3274B27D4F68E0014C760 /* ExtensionUserGTVController */,
 				80E3274427D4F3D40014C760 /* ExtensionFriendsTVController */,
@@ -289,7 +297,6 @@
 			children = (
 				80850EC127DE08980078039E /* SinglePhotoTableViewCell.swift */,
 				80850EC227DE08980078039E /* SinglePhotoTableViewCell.xib */,
-				80850ECC27DE20350078039E /* ControlForLike.swift */,
 			);
 			path = SinglePhotoCell;
 			sourceTree = "<group>";
@@ -325,7 +332,6 @@
 			children = (
 				80850ED927DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.swift */,
 				80850EDA27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.xib */,
-				80850EDD27DE51C10078039E /* NewsControlForLike.swift */,
 			);
 			path = XibSinglePhotoAndTextCell;
 			sourceTree = "<group>";
@@ -337,10 +343,10 @@
 				80BC96F627BB66DA0038FD77 /* UserData.swift */,
 				808E9D9F27BE98BC0089E4A4 /* Friends.swift */,
 				8025114A27BFF63D007E87C4 /* AllUserGroups.swift */,
-				8006DE3F27CBE9420014BC5D /* LikeControll.swift */,
 				80E7D3BF27DA7016009402ED /* HisFriends.swift */,
 				806284D027DDB68E00D37674 /* UserDetailsTableData.swift */,
 				8025F7F427E7517F0009C488 /* ImageAndLikeData.swift */,
+				80DAF94227EF593000428C67 /* ProtocolLikeDelegate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -407,6 +413,38 @@
 				80D1F9D827B6475200EA4E0C /* Validators.swift */,
 			);
 			path = TextFieldValidation;
+			sourceTree = "<group>";
+		};
+		80DAF94127EF57AC00428C67 /* UIControlls */ = {
+			isa = PBXGroup;
+			children = (
+				80850ECC27DE20350078039E /* ControlForLike.swift */,
+			);
+			path = UIControlls;
+			sourceTree = "<group>";
+		};
+		80DAF94627F0AF3F00428C67 /* SearchBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				80DAF94427F0692500428C67 /* CustomSearshBar.swift */,
+			);
+			path = SearchBarControllers;
+			sourceTree = "<group>";
+		};
+		80DAF94727F0B57400428C67 /* LoadingIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				80DAF94827F0B5B200428C67 /* LoadingView.swift */,
+			);
+			path = LoadingIndicatorView;
+			sourceTree = "<group>";
+		};
+		80DAF94A27F16ECB00428C67 /* ExtensionUIView */ = {
+			isa = PBXGroup;
+			children = (
+				80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */,
+			);
+			path = ExtensionUIView;
 			sourceTree = "<group>";
 		};
 		80DD23A427D332F200F78417 /* XibCellForTable */ = {
@@ -574,18 +612,21 @@
 				80601F7527DF095C00490809 /* ShadowViewRadius.swift in Sources */,
 				805E76ED27BC17670033098D /* Extension_LoginController.swift in Sources */,
 				808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */,
+				80DAF94327EF593000428C67 /* ProtocolLikeDelegate.swift in Sources */,
 				8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */,
 				80601F7A27DF1ECD00490809 /* SetHeaderInSection.swift in Sources */,
 				806284C927DDB1A900D37674 /* CastomCollectionLayout.swift in Sources */,
 				808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */,
 				80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */,
 				80CCB6B227E4B12700BC2085 /* FullImageCell.swift in Sources */,
+				80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */,
 				80850ED627DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.swift in Sources */,
 				80CCB6B427E4E3E700BC2085 /* CastomHorizontalView.swift in Sources */,
 				80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */,
 				8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */,
 				80850ECF27DE37910078039E /* HomeNewsTableViewController.swift in Sources */,
 				80850ECB27DE16B00078039E /* CustomSingleCollectionLayout.swift in Sources */,
+				80DAF94E27F16F1D00428C67 /* extensionUIViewGetSubView.swift in Sources */,
 				8025114B27BFF63D007E87C4 /* AllUserGroups.swift in Sources */,
 				8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */,
 				80C19AEA27D7C6BA009C34CB /* ExtensionDetailViewController.swift in Sources */,
@@ -596,7 +637,6 @@
 				80B95BD027C1207900D7A9E8 /* extension_UIImageView.swift in Sources */,
 				80E3274827D4F4950014C760 /* setDataSectionTable.swift in Sources */,
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
-				8006DE4027CBE9420014BC5D /* LikeControll.swift in Sources */,
 				80850EC827DE12480078039E /* SingleCollectionViewCell.swift in Sources */,
 				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
@@ -609,7 +649,7 @@
 				80BC96F727BB66DA0038FD77 /* UserData.swift in Sources */,
 				80850EC327DE08980078039E /* SinglePhotoTableViewCell.swift in Sources */,
 				80850ECD27DE20350078039E /* ControlForLike.swift in Sources */,
-				80850EDE27DE51C10078039E /* NewsControlForLike.swift in Sources */,
+				80DAF94527F0692500428C67 /* CustomSearshBar.swift in Sources */,
 				80EEE76A27E65C01007E27D0 /* PhotoGallaryPressetViewController.swift in Sources */,
 				806284D127DDB68E00D37674 /* UserDetailsTableData.swift in Sources */,
 				80DD23A727D3332000F78417 /* TableViewCellXib.swift in Sources */,

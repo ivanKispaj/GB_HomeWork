@@ -13,6 +13,9 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     var delegate: TableViewDelegate!
     var gallaryData: [ImageAndLikeData] = []
     var countCell: Int = 0
+    
+  
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.gallaryCollection.delegate = self

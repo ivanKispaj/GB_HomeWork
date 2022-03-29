@@ -9,7 +9,9 @@ import UIKit
 
 class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
 
-    @IBOutlet var searchBarDelegate: UITableView!
+
+    
+    @IBOutlet weak var searchBar: CustomSearshBar!
     
     var userGroupDelegate: UserGroupTableViewDelegate? = nil
     var allGroups: [AllUserGroups] = []
@@ -20,7 +22,7 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.searchBarSetup()
+        searchBar.delegate = self
         self.allGroupSeacrch = self.allGroups
         self.allGroupDictionary = sort(group: allGroupSeacrch)
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
@@ -28,14 +30,14 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     }
 // MARK: - SearchBar
     
-    func searchBarSetup() {
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
-        searchBar.showsScopeBar = true
-        searchBar.delegate = self
-        self.tableView.tableHeaderView = searchBar
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+      
+        self.searchBar.tapTheSearchBar()
+        return true
     }
+
+ // Начало ввода текста
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
         self.allGroupSeacrch = self.allGroups
         if searchText != "" {
         let newSearch = allGroupSeacrch.filter() {
@@ -44,7 +46,9 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
         self.allGroupSeacrch = newSearch
        
         }
+        self.shar = []
         self.allGroupDictionary = sort(group: self.allGroupSeacrch)
+        
         tableView.reloadData()
         
     }

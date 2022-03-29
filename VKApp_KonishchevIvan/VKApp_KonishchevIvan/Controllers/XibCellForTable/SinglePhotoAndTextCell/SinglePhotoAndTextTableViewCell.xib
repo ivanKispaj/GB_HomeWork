@@ -21,13 +21,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oeM-Xs-1l7" customClass="ShadowViewRadius" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                <rect key="frame" x="10" y="10" width="40" height="40"/>
+                                <rect key="frame" x="10" y="10" width="50" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMB-XG-8Mw" customClass="CircleView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pSa-mu-JzR">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -44,17 +44,20 @@
                                     <constraint firstAttribute="trailing" secondItem="VMB-XG-8Mw" secondAttribute="trailing" id="cfT-OJ-64H"/>
                                     <constraint firstAttribute="width" secondItem="oeM-Xs-1l7" secondAttribute="height" multiplier="1:1" id="ivy-KY-SQn"/>
                                     <constraint firstAttribute="bottom" secondItem="VMB-XG-8Mw" secondAttribute="bottom" id="rAp-DW-1ik"/>
-                                    <constraint firstAttribute="height" priority="999" constant="50" id="rP2-Qd-5u5"/>
+                                    <constraint firstAttribute="height" constant="50" id="rP2-Qd-5u5"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="avatarHeaightConstraint" destination="rP2-Qd-5u5" id="XxA-pi-nUB"/>
+                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUc-0m-PzR">
-                                <rect key="frame" x="60" y="10" width="36" height="21"/>
+                                <rect key="frame" x="70" y="10" width="36" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сегодня в 10:20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xf6-OH-MJK">
-                                <rect key="frame" x="60" y="34" width="80.5" height="12"/>
+                                <rect key="frame" x="70" y="34" width="80.5" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -65,7 +68,7 @@
                             <constraint firstItem="oeM-Xs-1l7" firstAttribute="top" secondItem="VnQ-qc-IMa" secondAttribute="top" constant="10" id="GTB-se-1an"/>
                             <constraint firstAttribute="height" constant="60" id="MJe-K2-Mp0"/>
                             <constraint firstItem="pUc-0m-PzR" firstAttribute="leading" secondItem="oeM-Xs-1l7" secondAttribute="trailing" constant="10" id="Sdv-b1-rUX"/>
-                            <constraint firstAttribute="bottom" secondItem="oeM-Xs-1l7" secondAttribute="bottom" constant="10" id="bTy-kv-xTm"/>
+                            <constraint firstAttribute="bottom" secondItem="oeM-Xs-1l7" secondAttribute="bottom" priority="999" constant="10" id="bTy-kv-xTm"/>
                             <constraint firstItem="pUc-0m-PzR" firstAttribute="top" secondItem="VnQ-qc-IMa" secondAttribute="top" constant="10" id="cn5-9P-9fi"/>
                             <constraint firstItem="Xf6-OH-MJK" firstAttribute="leading" secondItem="oeM-Xs-1l7" secondAttribute="trailing" constant="10" id="dBp-s4-M9Q"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pUc-0m-PzR" secondAttribute="trailing" constant="10" id="frl-RU-lxZ"/>
@@ -76,7 +79,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhT-h9-gEB">
                         <rect key="frame" x="0.0" y="526" width="320" height="30"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXP-SQ-wZW" customClass="NewsControlForLike" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXP-SQ-wZW" customClass="ControlForLike" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
                                 <rect key="frame" x="10" y="5" width="50" height="20"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suit.heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="M93-aI-Ngg">
@@ -88,7 +91,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPV-IT-5YP">
-                                        <rect key="frame" x="20" y="2" width="11.5" height="16"/>
+                                        <rect key="frame" x="24" y="2" width="11.5" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -99,15 +102,15 @@
                                     <constraint firstAttribute="bottom" secondItem="TPV-IT-5YP" secondAttribute="bottom" constant="2" id="7ds-gJ-HwR"/>
                                     <constraint firstAttribute="bottom" secondItem="M93-aI-Ngg" secondAttribute="bottom" constant="2" id="Dkc-p4-KHZ"/>
                                     <constraint firstItem="M93-aI-Ngg" firstAttribute="top" secondItem="FXP-SQ-wZW" secondAttribute="top" constant="2" id="Noa-kB-hai"/>
-                                    <constraint firstItem="TPV-IT-5YP" firstAttribute="leading" secondItem="M93-aI-Ngg" secondAttribute="trailing" constant="-1" id="WqE-Su-Cot"/>
+                                    <constraint firstItem="TPV-IT-5YP" firstAttribute="leading" secondItem="M93-aI-Ngg" secondAttribute="trailing" constant="3" id="WqE-Su-Cot"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TPV-IT-5YP" secondAttribute="trailing" id="eov-Ry-bSb"/>
                                     <constraint firstItem="M93-aI-Ngg" firstAttribute="leading" secondItem="FXP-SQ-wZW" secondAttribute="leading" constant="5" id="ndt-by-gEB"/>
                                     <constraint firstItem="TPV-IT-5YP" firstAttribute="top" secondItem="FXP-SQ-wZW" secondAttribute="top" constant="2" id="ubF-Ap-AId"/>
                                     <constraint firstAttribute="width" constant="50" id="v5n-Xy-2Qe"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="likeHeart" destination="M93-aI-Ngg" id="YXt-g7-7RU"/>
-                                    <outlet property="likeLabelNews" destination="TPV-IT-5YP" id="PZC-1T-75L"/>
+                                    <outlet property="likeImage" destination="M93-aI-Ngg" id="kyz-OY-hkI"/>
+                                    <outlet property="likeLable" destination="TPV-IT-5YP" id="7Cn-em-Bt0"/>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E18-gD-J9J">
@@ -194,6 +197,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="likeControll" destination="FXP-SQ-wZW" id="Brr-vb-IZf"/>
                 <outlet property="newsCollection" destination="Hzx-Ua-IFH" id="aN7-Td-bYM"/>
                 <outlet property="newsLikeImage" destination="M93-aI-Ngg" id="ZCt-n6-YRi"/>
                 <outlet property="newsLikeLable" destination="TPV-IT-5YP" id="IQg-HR-f9o"/>

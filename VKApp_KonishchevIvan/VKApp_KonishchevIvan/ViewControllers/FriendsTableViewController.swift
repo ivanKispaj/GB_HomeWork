@@ -13,6 +13,7 @@ class FriendsTableViewController: UITableViewController {
 
     @IBAction func exitButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        
     }
     
     struct DataSection {

@@ -124,6 +124,12 @@ class DataController {
                     ]
         return news
     }
+    
+    func getSinglePhoto () -> ImageAndLikeData {
+        let dataPhoto: ImageAndLikeData = ImageAndLikeData(image: UIImage(named: "appleNews")!, likeStatus: true, likeLabel: 76)
+        return dataPhoto
+    }
+    
     func getPhoto() -> [ImageAndLikeData] {
         var dataPhoto:[ImageAndLikeData] = [ImageAndLikeData(image:
                                                                 UIImage(named: "onePhoto")!

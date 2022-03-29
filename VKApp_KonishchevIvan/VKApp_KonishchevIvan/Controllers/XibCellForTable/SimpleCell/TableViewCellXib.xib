@@ -43,6 +43,9 @@
                             <constraint firstItem="fU4-Hi-hq3" firstAttribute="top" secondItem="i3O-3d-CXN" secondAttribute="top" id="jFk-Ss-J5S"/>
                             <constraint firstAttribute="bottom" secondItem="fU4-Hi-hq3" secondAttribute="bottom" id="vxP-dw-R1G"/>
                         </constraints>
+                        <connections>
+                            <outlet property="avatarHeaightConstraint" destination="cf6-kU-nca" id="8ms-Fe-kKO"/>
+                        </connections>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwI-wo-7sh">
                         <rect key="frame" x="60" y="12" width="41.5" height="20.5"/>

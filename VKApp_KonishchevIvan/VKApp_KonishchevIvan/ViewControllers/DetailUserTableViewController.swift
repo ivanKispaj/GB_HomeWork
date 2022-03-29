@@ -20,8 +20,8 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var detailUserInfo: String? = nil
     var detailUserVisitInfo: String? = nil
     var hisFriends: [HisFirends]? = nil
-    let photo:[ImageAndLikeData] = DataController.shared.getPhoto()
-
+    var photo:[ImageAndLikeData] = DataController.shared.getPhoto()
+    var singlePhoto: ImageAndLikeData = DataController.shared.getSinglePhoto()
     
     @IBOutlet weak var detailAvatarHeader: UIImageView!
     @IBOutlet weak var detailUserNameLable: UILabel!
@@ -35,11 +35,9 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeaderDetailView()
-        
         dataTable.append(UserDetailsTableData(sectionName: "Friends", sectionType: .Friends ))
         dataTable.append(UserDetailsTableData(sectionName: "Gallary", sectionType: .Gallary))
-        dataTable.append(UserDetailsTableData(sectionName: "", sectionType: .SingleFoto))
-        
+        dataTable.append(UserDetailsTableData(sectionName: "Single Photo", sectionType: .SingleFoto))
         tableView.register(UINib(nibName: "CouruselTableViewCell", bundle: nil), forCellReuseIdentifier: "CouruselCellForDetails")
         tableView.register(UINib(nibName: "GallaryTableViewCell", bundle: nil), forCellReuseIdentifier: "GallaryTableCell")
         tableView.register(UINib(nibName: "SinglePhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleTableCellID")
@@ -88,18 +86,21 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             }
             cell.singleLableUserName.text = detailUsername
             cell.singleAvatarHeader.image = detailAvatar
-            if self.isLikeStatus {
+            cell.likeControll.delegate = self
+            cell.likeControll.indexPath = indexPath
+            cell.delegate = self
+       //     self.singlePhoto = self.photo.last
+            cell.singlePhoto = self.singlePhoto
+            let likeCount: String = String(self.singlePhoto.likeLabel)
+            cell.singlPhotoLikeLable.text = likeCount
+            if singlePhoto.likeStatus {
                 cell.singlePhotoLikeImage.image = UIImage(systemName: "suit.heart.fill")
                 cell.singlePhotoLikeImage.tintColor = UIColor.red
-                cell.singlPhotoLikeLable.text = String(self.likeCount)
-                self.isLikeStatus = cell.isLikeStatus
             }else {
                 cell.singlePhotoLikeImage.image = UIImage(systemName: "suit.heart")
                 cell.singlePhotoLikeImage.tintColor = UIColor.systemGray2
-                cell.singlPhotoLikeLable.text = String(self.likeCount)
-                self.isLikeStatus = cell.isLikeStatus
             }
-            cell.delegate = self
+            
             return cell
         }
     }
@@ -117,3 +118,21 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 }
 
 
+extension DetailUserTableViewController: ProtocolLikeDelegate {
+
+    
+    func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
+        let countLike = singlePhoto.likeLabel
+        let likeStatus = singlePhoto.likeStatus
+        return [countLike: likeStatus]
+        
+    }
+    
+    func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
+        self.singlePhoto.likeStatus = likeStatus
+        self.singlePhoto.likeLabel = countLike
+    
+    }
+    
+    
+}

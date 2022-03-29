@@ -9,6 +9,7 @@ import UIKit
 
 class PhotoGallaryPressetViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CastomlayoutDelegate {
 
+    @IBOutlet weak var likeControll: ControlForLike!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var heartLike: UIImageView!
     @IBOutlet weak var labelLike: UILabel!
@@ -17,6 +18,7 @@ class PhotoGallaryPressetViewController: UIViewController, UICollectionViewDeleg
     var dataCollection: [ImageAndLikeData?] = [nil]
     override func viewDidLoad() {
         super.viewDidLoad()
+        likeControll.delegate = self
         if let castomLayout = collectionView?.collectionViewLayout as? CastomHorizontalView {
             castomLayout.delegate = self
            
@@ -36,6 +38,9 @@ class PhotoGallaryPressetViewController: UIViewController, UICollectionViewDeleg
 
         cell.layer.borderWidth = 0.5
         cell.layer.borderColor = UIColor.white.cgColor
+        var indexP = indexPath
+        indexP.row = numberImage
+        self.likeControll.indexPath = indexP
         let likeStatus = dataCollection[numberImage]?.likeStatus
   
       
@@ -52,9 +57,8 @@ class PhotoGallaryPressetViewController: UIViewController, UICollectionViewDeleg
            
            
         }
-        //heartLike.image = dataCollection[indexPath.row].
         let LikeCount = dataCollection[numberImage]?.likeLabel
-       labelLike.text = String(LikeCount!)
+        labelLike.text = String(LikeCount!)
         cell.singlePhoto.image = dataCollection[indexPath.row]?.image
         return cell
     }
@@ -70,5 +74,24 @@ class PhotoGallaryPressetViewController: UIViewController, UICollectionViewDeleg
     func getLikeData(numberImage: Int) -> Int {
         return self.numberImage
     }
+    
+
 }
     
+
+
+extension PhotoGallaryPressetViewController: ProtocolLikeDelegate {
+
+    func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
+        let countLike = dataCollection[indexPath.row]?.likeLabel
+        let likeStatus = dataCollection[indexPath.row]?.likeStatus
+        return [countLike!: likeStatus!]
+    }
+
+
+
+    func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
+        self.dataCollection[indexPath.row]?.likeLabel = countLike
+        self.dataCollection[indexPath.row]?.likeStatus = likeStatus
+    }
+}

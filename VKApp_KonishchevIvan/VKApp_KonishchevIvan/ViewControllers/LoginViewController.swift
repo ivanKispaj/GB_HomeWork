@@ -10,13 +10,14 @@ import UIKit
 class LoginViewController: UIViewController {
     let colorDamage = UIColor(named: "AlarmColor")
     
+    @IBOutlet weak var loadingView: LoadingView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.loadingView.isHidden = false
         emailTextField.addTarget(self, action: #selector(emailFieldDidChangeSelection(_:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(passwordFieldDidChsngeSelection(_:)), for: .editingChanged)
         
@@ -33,6 +34,9 @@ class LoginViewController: UIViewController {
         let emailInput = self.emailTextField.text
         let passwordInput = self.passwordTextField.text
         if user.useremail == emailInput && user.userPassword == passwordInput {
+        
+         
+           
             return true
         }
         if user.useremail != emailInput {
@@ -45,7 +49,6 @@ class LoginViewController: UIViewController {
         present(allert, animated: true, completion: nil)
        return false
     }
- 
 }
 
 
