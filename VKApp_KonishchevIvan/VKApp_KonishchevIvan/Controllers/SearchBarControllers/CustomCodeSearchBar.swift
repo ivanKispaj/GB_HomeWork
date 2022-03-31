@@ -16,7 +16,6 @@ import UIKit
 class CustomCodeSearchBar: UISearchBar {
 
 // Констрейнты для передвижения лупы
-    var viewDelegate: UITableViewController!
     var searchLeadingToCenterConstaint = [NSLayoutConstraint]()
     var searchLeadingToLeftconstraint = [NSLayoutConstraint]()
 // констрейнт добавления ширны кнопки и удаления !
