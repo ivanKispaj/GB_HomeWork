@@ -12,7 +12,7 @@ protocol UserGroupTableViewDelegate {
 
 class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
   
-    @IBOutlet weak var searchBar: CustomSearshBar!
+    @IBOutlet weak var searchBar: CustomCodeSearchBar!
     
     @IBAction func exitButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -34,7 +34,7 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
 //MARK: - SearchBar Method
     // SearchBar FirstResponder
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        self.searchBar.tapTheSearchBar()
+        self.searchBar.tapInSearchBar()
         return true
     }
 

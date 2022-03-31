@@ -9,12 +9,17 @@
 
 import UIKit
 
-class FriendsTableViewController: UITableViewController {
+class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
 
+   @IBOutlet weak var searchBar: CustomCodeSearchBar!
+   // var searchBar: UISearchBar! = CustomCodeSearchBar()
+    
+  //  var searchBar: UISearchBar = CustomSearshBar()
     @IBAction func exitButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        
     }
+    @IBOutlet weak var headerTableView: UIView!
+    @IBOutlet weak var headerSubview: UIView!
     
     struct DataSection {
         var header: String = ""
@@ -37,12 +42,24 @@ class FriendsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.searchBar!.delegate = self
+      
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
         tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")
         setDataSectionTable()
         
 
     }
+    
+    //MARK: - SearchBar Method
+        // SearchBar FirstResponder
+        func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+            self.searchBar.tapInSearchBar()
+            return true
+        }
+    
 
     // MARK: - Table view data source
     

@@ -58,9 +58,9 @@
 		80CCB6B927E4E55800BC2085 /* HorizontalCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */; };
 		80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1F9D827B6475200EA4E0C /* Validators.swift */; };
 		80DAF94327EF593000428C67 /* ProtocolLikeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94227EF593000428C67 /* ProtocolLikeDelegate.swift */; };
-		80DAF94527F0692500428C67 /* CustomSearshBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94427F0692500428C67 /* CustomSearshBar.swift */; };
 		80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94827F0B5B200428C67 /* LoadingView.swift */; };
 		80DAF94E27F16F1D00428C67 /* extensionUIViewGetSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */; };
+		80DAF95027F377AD00428C67 /* CustomCodeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94F27F377AD00428C67 /* CustomCodeSearchBar.swift */; };
 		80DD23A727D3332000F78417 /* TableViewCellXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DD23A527D3332000F78417 /* TableViewCellXib.swift */; };
 		80DD23A827D3332000F78417 /* TableViewCellXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80DD23A627D3332000F78417 /* TableViewCellXib.xib */; };
 		80E3274827D4F4950014C760 /* setDataSectionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E3274727D4F4950014C760 /* setDataSectionTable.swift */; };
@@ -125,9 +125,9 @@
 		80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCollectionViewCell.xib; sourceTree = "<group>"; };
 		80D1F9D827B6475200EA4E0C /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		80DAF94227EF593000428C67 /* ProtocolLikeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolLikeDelegate.swift; sourceTree = "<group>"; };
-		80DAF94427F0692500428C67 /* CustomSearshBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearshBar.swift; sourceTree = "<group>"; };
 		80DAF94827F0B5B200428C67 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionUIViewGetSubView.swift; sourceTree = "<group>"; };
+		80DAF94F27F377AD00428C67 /* CustomCodeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCodeSearchBar.swift; sourceTree = "<group>"; };
 		80DD23A527D3332000F78417 /* TableViewCellXib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellXib.swift; sourceTree = "<group>"; };
 		80DD23A627D3332000F78417 /* TableViewCellXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellXib.xib; sourceTree = "<group>"; };
 		80E3274727D4F4950014C760 /* setDataSectionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setDataSectionTable.swift; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 		80DAF94627F0AF3F00428C67 /* SearchBarControllers */ = {
 			isa = PBXGroup;
 			children = (
-				80DAF94427F0692500428C67 /* CustomSearshBar.swift */,
+				80DAF94F27F377AD00428C67 /* CustomCodeSearchBar.swift */,
 			);
 			path = SearchBarControllers;
 			sourceTree = "<group>";
@@ -644,12 +644,12 @@
 				806284D427DDCAFF00D37674 /* GallaryTableViewCell.swift in Sources */,
 				806284CE27DDB24F00D37674 /* GallaryCollectionViewCell.swift in Sources */,
 				8025F7F527E7517F0009C488 /* ImageAndLikeData.swift in Sources */,
+				80DAF95027F377AD00428C67 /* CustomCodeSearchBar.swift in Sources */,
 				80E7D3C527DB0895009402ED /* DataController.swift in Sources */,
 				80850EDB27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.swift in Sources */,
 				80BC96F727BB66DA0038FD77 /* UserData.swift in Sources */,
 				80850EC327DE08980078039E /* SinglePhotoTableViewCell.swift in Sources */,
 				80850ECD27DE20350078039E /* ControlForLike.swift in Sources */,
-				80DAF94527F0692500428C67 /* CustomSearshBar.swift in Sources */,
 				80EEE76A27E65C01007E27D0 /* PhotoGallaryPressetViewController.swift in Sources */,
 				806284D127DDB68E00D37674 /* UserDetailsTableData.swift in Sources */,
 				80DD23A727D3332000F78417 /* TableViewCellXib.swift in Sources */,

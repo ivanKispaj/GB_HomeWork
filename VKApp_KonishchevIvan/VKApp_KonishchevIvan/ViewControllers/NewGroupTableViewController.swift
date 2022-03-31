@@ -11,7 +11,7 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
 
 
     
-    @IBOutlet weak var searchBar: CustomSearshBar!
+    @IBOutlet weak var searchBar: CustomCodeSearchBar!
     
     var userGroupDelegate: UserGroupTableViewDelegate? = nil
     var allGroups: [AllUserGroups] = []
@@ -22,7 +22,7 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.delegate = self
+        self.searchBar.delegate = self
         self.allGroupSeacrch = self.allGroups
         self.allGroupDictionary = sort(group: allGroupSeacrch)
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
@@ -32,10 +32,16 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
       
-        self.searchBar.tapTheSearchBar()
+        self.searchBar.tapInSearchBar()
         return true
     }
-
+// конец ввода текста по resignFerstResponder
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.shar = []
+        self.allGroupSeacrch = allGroups
+        self.allGroupDictionary = sort(group: self.allGroupSeacrch)
+        tableView.reloadData()
+    }
  // Начало ввода текста
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.allGroupSeacrch = self.allGroups
