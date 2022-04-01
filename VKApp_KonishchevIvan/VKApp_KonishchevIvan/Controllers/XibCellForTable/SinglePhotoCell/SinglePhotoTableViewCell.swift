@@ -44,8 +44,8 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleCollectionID", for: indexPath) as? SingleCollectionViewCell else {
             preconditionFailure("Error")
         }
-       // let photo = self.singlePhoto.last
-        cell.singlePhoto.image = self.singlePhoto.image //as? UIImage ?? UIImage(named: "WinstonCherchil")
+      
+        cell.singlePhoto.image = self.singlePhoto.image 
         
         return cell
     }

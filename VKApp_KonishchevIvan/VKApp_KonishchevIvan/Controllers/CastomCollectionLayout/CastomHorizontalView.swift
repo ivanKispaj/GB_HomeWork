@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol CastomlayoutDelegate: AnyObject {
-    func setLikeData(numberImage: Int)
-    func collectionView(_ collectionView: UICollectionView, heightForCellAt indexPath: IndexPath, withWidth width: CGFloat) -> CGSize
-}
-
 class CastomHorizontalView: UICollectionViewLayout {
     
     weak var delegate: CastomlayoutDelegate!

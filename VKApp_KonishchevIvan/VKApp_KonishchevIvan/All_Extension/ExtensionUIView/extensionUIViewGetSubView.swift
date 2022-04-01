@@ -7,7 +7,15 @@
 
 import UIKit
 
-
+// MARK: - Добавляет в UIView методы для поиска View в subView
+/*
+ Использование:
+ Вернет массив всех кнопок на view
+ 1. let buttonses = view.allSubViewOf(type: UIButton.self)
+ 
+ следующий метод вернет массив всех UIView на view
+ 2.let allView = view.allSubViewOf(type: UIView.self)
+ */
 extension UIView {
     func subViews<T: UIView>(type : T.Type) -> [T] {
         var all = [T]()

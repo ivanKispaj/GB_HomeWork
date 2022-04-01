@@ -8,8 +8,6 @@
 import UIKit
 
 class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
-
-
     
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
     

@@ -6,9 +6,7 @@
 //
 
 import UIKit
-protocol UserGroupTableViewDelegate {
-    func addNewGroup (_ group: [AllUserGroups], allGroup: [AllUserGroups] )
-}
+
 
 class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
   
@@ -42,9 +40,9 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        print("Header")
-    }
+//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        print("Header")
+//    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
     

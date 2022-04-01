@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class ControlForLike: UIControl {
 
     @IBOutlet weak var likeImage: UIImageView!
@@ -21,15 +22,13 @@ class ControlForLike: UIControl {
         super.awakeFromNib()
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(setLike))
-        
         tap.numberOfTapsRequired = 2
-      
         addGestureRecognizer(tap)
     }
     
     @objc func setLike(_ tap: UITapGestureRecognizer) {
   
-// Получаем количество лайков по текущему игдекс патч!
+// Получаем количество лайков по текущему индекс патч!
     
         let like = delegate.getCountLike(for: self.indexPath)
         for (key, value) in like {

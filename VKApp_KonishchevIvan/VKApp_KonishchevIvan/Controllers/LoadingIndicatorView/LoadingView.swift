@@ -26,9 +26,5 @@ class LoadingView: UIView {
             self.threeCircle.alpha = 0
         }
 
-//            UIView.animate(withDuration: 0.4, delay: 0.0, options: [.repeat, .autoreverse], animations: {self.firstCircle.alpha = 0})
-//            UIView.animate(withDuration: 0.4, delay: 0.3, options: [.repeat, .autoreverse], animations: {self.twoCircle.alpha = 0})
-//            UIView.animate(withDuration: 0.4, delay: 0.6, options: [.repeat, .autoreverse], animations: {self.threeCircle.alpha = 0})
-//
     }
 }

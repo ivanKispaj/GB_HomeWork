@@ -8,7 +8,7 @@
 import UIKit
 
 //MARK: - Extension NewGroupTableViewController
-
+// добавляет метод возвращающий индекс найденой группы в списке групп
 extension NewGroupTableViewController {
      func issetGroup(_ groupe: AllUserGroups, groupArray: [AllUserGroups]) -> Int? {
         guard let index = groupArray.firstIndex(of: groupe) else { return nil}

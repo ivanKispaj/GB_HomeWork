@@ -53,7 +53,7 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
 
         self.delegate.selectRow(nextViewData: self.gallaryData)
         // Выбранная ячейка коллекции!!
-        print("section: \(indexPath.section)\nrow: \(indexPath.row)")
+       
     }
     
 

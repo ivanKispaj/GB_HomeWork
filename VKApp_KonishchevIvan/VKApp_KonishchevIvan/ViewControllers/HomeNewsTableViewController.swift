@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol TableViewDelegate {
-    var nextViewData: [ImageAndLikeData] {set get}
-    func selectRow(nextViewData: [ImageAndLikeData])
-}
 
 class HomeNewsTableViewController: UITableViewController{
     
@@ -65,6 +61,7 @@ class HomeNewsTableViewController: UITableViewController{
       
         return cell
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? PhotoGallaryPressetViewController else { return
         }
@@ -78,15 +75,10 @@ class HomeNewsTableViewController: UITableViewController{
             self.performSegue(withIdentifier: "NewsPhotoPreviewID", sender: nil)
         
         }
-          
-            
-        
-        
     }
-
-    
 }
 
+// MARK: - методы для делегата like controll !!
 extension HomeNewsTableViewController: ProtocolLikeDelegate {
 
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {

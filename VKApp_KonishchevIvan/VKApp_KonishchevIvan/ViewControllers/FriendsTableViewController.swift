@@ -12,9 +12,6 @@ import UIKit
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
 
    @IBOutlet weak var searchBar: CustomCodeSearchBar!
-   // var searchBar: UISearchBar! = CustomCodeSearchBar()
-    
-  //  var searchBar: UISearchBar = CustomSearshBar()
     @IBAction func exitButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -31,18 +28,16 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     let posibleFriends = DataSection(header: "Возможные друзья", row: [Friends(character: nil, image: UIImage.init(named: "AppIcon"), name: "Group VK.com", hisFriends: [])])
-    
     var indexTitle: [String] = []
-    
     var friends: [DataSection] = [] // будущий массив по буквам
     
     // Исходный массив друзей
     var friendsAlphavite = DataController.shared.getDataUser()
     
+    var nextViewData: DetailUserTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         self.searchBar!.delegate = self
       
@@ -106,10 +101,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
 // Действия при выборе ячейки
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
-        let sampleStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let detailVC = sampleStoryboard.instantiateViewController(withIdentifier: "DetailUserTableView") as? DetailUserTableViewController else {
-            return
-        }
+        performSegue(withIdentifier: "detailsUserSegueId", sender: nil)
+
+        guard let detailVC = self.nextViewData else { return }
         let friend = friends[indexPath.section].row[indexPath.row].name
         let avatar = friends[indexPath.section].row[indexPath.row].avatar
         detailVC.title = friend
@@ -117,11 +111,10 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         detailVC.detailUsername = friend
         detailVC.detailAvatar = avatar
         detailVC.detailUserInfo = friends[indexPath.section].row[indexPath.row].details
-        detailVC.detailUserVisitInfo = "Был 1 час назад"
-        
-        self.navigationController?.show(detailVC, sender: nil)
-        
+        detailVC.detailUserVisitInfo = " Был 30 минут назад"
+    
     }
+
 
     //кастомный Header ячеек
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -135,6 +128,12 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             return headerView
         }
     } 
+// подготовка сегуе перехода. Срабатывает перед вызовом didSelectRowAt
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let detailVC = segue.destination as? DetailUserTableViewController else { return
+        }
+        self.nextViewData = detailVC
+    }
 
 }
 

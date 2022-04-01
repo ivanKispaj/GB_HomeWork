@@ -401,11 +401,18 @@
                         <color key="separatorColor" systemColor="systemGray2Color"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="uEt-DI-9XU">
-                            <rect key="frame" x="0.0" y="0.0" width="390" height="119"/>
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="125"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ZK-cg-68b" customClass="CustomCodeSearchBar" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="60.666666666666664"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="QKo-Le-kxg" id="TBS-6c-rnT"/>
+                                    </connections>
+                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3k-Bm-OQ9">
-                                    <rect key="frame" x="0.0" y="54.666666666666664" width="390" height="64.333333333333343"/>
+                                    <rect key="frame" x="0.0" y="60.666666666666664" width="390" height="64.333333333333343"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="34Q-rR-ge5">
                                             <rect key="frame" x="20" y="15.000000000000004" width="162" height="34.333333333333343"/>
@@ -456,13 +463,6 @@
                                         <constraint firstAttribute="trailing" secondItem="Qb2-qV-ZRI" secondAttribute="trailing" constant="20" id="tX6-Ll-71L"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0ZK-cg-68b" customClass="CustomCodeSearchBar" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="QKo-Le-kxg" id="TBS-6c-rnT"/>
-                                    </connections>
-                                </view>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemGray6Color"/>
                             <color key="tintColor" systemColor="systemBackgroundColor"/>
@@ -494,7 +494,7 @@
                         <outlet property="headerSubview" destination="I3k-Bm-OQ9" id="Zhf-Hb-MCM"/>
                         <outlet property="headerTableView" destination="uEt-DI-9XU" id="kCQ-9R-ETB"/>
                         <outlet property="searchBar" destination="0ZK-cg-68b" id="M18-6i-WTW"/>
-                        <segue destination="gdu-l6-Grr" kind="show" id="5uF-zO-QrC"/>
+                        <segue destination="gdu-l6-Grr" kind="show" identifier="detailsUserSegueId" id="5uF-zO-QrC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBg-q5-77P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -809,7 +809,7 @@
                         <barButtonItem key="rightBarButtonItem" title="addGroupe" id="L8k-9j-uQj">
                             <imageReference key="image" image="plus.rectangle.on.rectangle" catalog="system" symbolScale="large"/>
                             <connections>
-                                <segue destination="bOg-bZ-oQT" kind="show" id="c6H-Cb-hwS"/>
+                                <segue destination="bOg-bZ-oQT" kind="show" identifier="allGroupSegueId" id="c6H-Cb-hwS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -853,7 +853,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Dsk-jP-utL"/>
+        <segue reference="ERk-d0-9Yd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>

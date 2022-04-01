@@ -10,10 +10,7 @@ import UIKit
 
 class DetailUserTableViewController: UITableViewController, TableViewDelegate {
    
-    
     var nextViewData: [ImageAndLikeData] = []
-    
-
     var dataTable: [UserDetailsTableData] = []
     var detailAvatar: UIImage? = nil
     var detailUsername: String? = nil
@@ -89,7 +86,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.likeControll.delegate = self
             cell.likeControll.indexPath = indexPath
             cell.delegate = self
-       //     self.singlePhoto = self.photo.last
             cell.singlePhoto = self.singlePhoto
             let likeCount: String = String(self.singlePhoto.likeLabel)
             cell.singlPhotoLikeLable.text = likeCount
@@ -117,10 +113,9 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     }
 }
 
-
+// MARK: - методы для делегата like controll !!
 extension DetailUserTableViewController: ProtocolLikeDelegate {
 
-    
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
         let countLike = singlePhoto.likeLabel
         let likeStatus = singlePhoto.likeStatus
@@ -133,6 +128,5 @@ extension DetailUserTableViewController: ProtocolLikeDelegate {
         self.singlePhoto.likeLabel = countLike
     
     }
-    
-    
+
 }

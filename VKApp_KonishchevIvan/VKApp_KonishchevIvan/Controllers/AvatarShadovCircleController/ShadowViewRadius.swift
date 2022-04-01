@@ -14,6 +14,7 @@ class ShadowViewRadius: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         self.layer.shadowColor = shadowColor
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = 5
@@ -29,6 +30,12 @@ class ShadowViewRadius: UIView {
         
     }
 
+
+}
+
+//MARK: - расширение добавляет анимацию при тапе на картинку!
+extension ShadowViewRadius {
+    
     @objc func tapToIconAvatar( _ tap: UITapGestureRecognizer) {
      
             UIView.animate(withDuration: 0.2) {
@@ -43,11 +50,7 @@ class ShadowViewRadius: UIView {
                     self.avatarHeaightConstraint.constant = self.avatarHeaightConstraint.constant + 5
                     self.layoutIfNeeded()
                 }
-
             }
-        
-      
-        
     }
+    
 }
-

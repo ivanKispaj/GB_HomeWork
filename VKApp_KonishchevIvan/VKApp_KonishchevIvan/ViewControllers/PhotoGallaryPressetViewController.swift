@@ -16,6 +16,7 @@ class PhotoGallaryPressetViewController: UIViewController, UICollectionViewDeleg
     
     var numberImage: Int = 0
     var dataCollection: [ImageAndLikeData?] = [nil]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         likeControll.delegate = self
@@ -43,43 +44,36 @@ class PhotoGallaryPressetViewController: UIViewController, UICollectionViewDeleg
         self.likeControll.indexPath = indexP
         let likeStatus = dataCollection[numberImage]?.likeStatus
   
-      
         if likeStatus! {
           
                 heartLike.image = UIImage(systemName: "suit.heart.fill")
                 heartLike.tintColor = UIColor.red
          
-        
         } else {
-          
                 heartLike.image = UIImage(systemName: "suit.heart")
                 heartLike.tintColor = UIColor.systemGray6
-           
-           
         }
+        
         let LikeCount = dataCollection[numberImage]?.likeLabel
         labelLike.text = String(LikeCount!)
         cell.singlePhoto.image = dataCollection[indexPath.row]?.image
         return cell
     }
 
+// MARK: - CastomLayoutDelegate methods
     func collectionView(_ collectionView: UICollectionView, heightForCellAt indexPath: IndexPath, withWidth width: CGFloat) -> CGSize {
         let imageSize: CGSize = (dataCollection[indexPath.row]?.image.size)!
         return imageSize
     }
+    
     func setLikeData(numberImage: Int) {
         self.numberImage = numberImage
         collectionView.reloadData()
     }
-    func getLikeData(numberImage: Int) -> Int {
-        return self.numberImage
-    }
-    
-
 }
-    
+ 
 
-
+// MARK: - методы для делегата like controll !!
 extension PhotoGallaryPressetViewController: ProtocolLikeDelegate {
 
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
@@ -88,10 +82,10 @@ extension PhotoGallaryPressetViewController: ProtocolLikeDelegate {
         return [countLike!: likeStatus!]
     }
 
-
-
     func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
         self.dataCollection[indexPath.row]?.likeLabel = countLike
         self.dataCollection[indexPath.row]?.likeStatus = likeStatus
     }
 }
+
+

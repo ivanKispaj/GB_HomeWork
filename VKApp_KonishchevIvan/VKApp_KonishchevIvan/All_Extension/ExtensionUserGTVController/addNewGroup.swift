@@ -7,7 +7,8 @@
 
 import UIKit
 
-//MARK: - Extension Controllers
+//MARK: - Добавляет метод делегата в UserGroupTableViewController
+
 
 extension UserGroupTableViewController: UserGroupTableViewDelegate {
     func addNewGroup(_ group: [AllUserGroups], allGroup: [AllUserGroups]) {

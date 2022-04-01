@@ -43,7 +43,6 @@
 		80850EDC27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80850EDA27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.xib */; };
 		808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */; };
 		808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9D9F27BE98BC0089E4A4 /* Friends.swift */; };
-		80B95BD027C1207900D7A9E8 /* extension_UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B95BCF27C1207900D7A9E8 /* extension_UIImageView.swift */; };
 		80BC96F727BB66DA0038FD77 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F627BB66DA0038FD77 /* UserData.swift */; };
 		80BC96F927BB67160038FD77 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F827BB67160038FD77 /* LoginViewController.swift */; };
 		80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */; };
@@ -52,12 +51,10 @@
 		80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AD227D76FDE009C34CB /* CouruselCollectionViewCell.swift */; };
 		80C19AD527D76FDE009C34CB /* CouruselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80C19AD327D76FDE009C34CB /* CouruselCollectionViewCell.xib */; };
 		80C19AEA27D7C6BA009C34CB /* ExtensionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AE927D7C6BA009C34CB /* ExtensionDetailViewController.swift */; };
-		80CCB6B227E4B12700BC2085 /* FullImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCB6B127E4B12700BC2085 /* FullImageCell.swift */; };
 		80CCB6B427E4E3E700BC2085 /* CastomHorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCB6B327E4E3E700BC2085 /* CastomHorizontalView.swift */; };
 		80CCB6B827E4E55800BC2085 /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCB6B627E4E55800BC2085 /* HorizontalCollectionViewCell.swift */; };
 		80CCB6B927E4E55800BC2085 /* HorizontalCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */; };
 		80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1F9D827B6475200EA4E0C /* Validators.swift */; };
-		80DAF94327EF593000428C67 /* ProtocolLikeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94227EF593000428C67 /* ProtocolLikeDelegate.swift */; };
 		80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94827F0B5B200428C67 /* LoadingView.swift */; };
 		80DAF94E27F16F1D00428C67 /* extensionUIViewGetSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */; };
 		80DAF95027F377AD00428C67 /* CustomCodeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94F27F377AD00428C67 /* CustomCodeSearchBar.swift */; };
@@ -68,6 +65,10 @@
 		80E3274D27D4F6A80014C760 /* addNewGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E3274C27D4F6A80014C760 /* addNewGroup.swift */; };
 		80E7D3C027DA7016009402ED /* HisFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E7D3BF27DA7016009402ED /* HisFriends.swift */; };
 		80E7D3C527DB0895009402ED /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E7D3C427DB0895009402ED /* DataController.swift */; };
+		80EAC04C27F6D35D006DDB9A /* ProtocolLikeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAC04B27F6D35D006DDB9A /* ProtocolLikeDelegate.swift */; };
+		80EAC04E27F6D3F0006DDB9A /* CastomlayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAC04D27F6D3F0006DDB9A /* CastomlayoutDelegate.swift */; };
+		80EAC05027F6D453006DDB9A /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAC04F27F6D453006DDB9A /* TableViewDelegate.swift */; };
+		80EAC05227F6D64B006DDB9A /* UserGroupTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAC05127F6D64B006DDB9A /* UserGroupTableViewDelegate.swift */; };
 		80EEE76A27E65C01007E27D0 /* PhotoGallaryPressetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EEE76927E65C01007E27D0 /* PhotoGallaryPressetViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -110,7 +111,6 @@
 		80850EDA27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsPhotoAndTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		808E9D9F27BE98BC0089E4A4 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
-		80B95BCF27C1207900D7A9E8 /* extension_UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension_UIImageView.swift; sourceTree = "<group>"; };
 		80BC96F627BB66DA0038FD77 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		80BC96F827BB67160038FD77 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailUserTableViewController.swift; sourceTree = "<group>"; };
@@ -119,12 +119,10 @@
 		80C19AD227D76FDE009C34CB /* CouruselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouruselCollectionViewCell.swift; sourceTree = "<group>"; };
 		80C19AD327D76FDE009C34CB /* CouruselCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouruselCollectionViewCell.xib; sourceTree = "<group>"; };
 		80C19AE927D7C6BA009C34CB /* ExtensionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDetailViewController.swift; sourceTree = "<group>"; };
-		80CCB6B127E4B12700BC2085 /* FullImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageCell.swift; sourceTree = "<group>"; };
 		80CCB6B327E4E3E700BC2085 /* CastomHorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomHorizontalView.swift; sourceTree = "<group>"; };
 		80CCB6B627E4E55800BC2085 /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
 		80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCollectionViewCell.xib; sourceTree = "<group>"; };
 		80D1F9D827B6475200EA4E0C /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
-		80DAF94227EF593000428C67 /* ProtocolLikeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolLikeDelegate.swift; sourceTree = "<group>"; };
 		80DAF94827F0B5B200428C67 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionUIViewGetSubView.swift; sourceTree = "<group>"; };
 		80DAF94F27F377AD00428C67 /* CustomCodeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCodeSearchBar.swift; sourceTree = "<group>"; };
@@ -135,6 +133,10 @@
 		80E3274C27D4F6A80014C760 /* addNewGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewGroup.swift; sourceTree = "<group>"; };
 		80E7D3BF27DA7016009402ED /* HisFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HisFriends.swift; sourceTree = "<group>"; };
 		80E7D3C427DB0895009402ED /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		80EAC04B27F6D35D006DDB9A /* ProtocolLikeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolLikeDelegate.swift; sourceTree = "<group>"; };
+		80EAC04D27F6D3F0006DDB9A /* CastomlayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomlayoutDelegate.swift; sourceTree = "<group>"; };
+		80EAC04F27F6D453006DDB9A /* TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
+		80EAC05127F6D64B006DDB9A /* UserGroupTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupTableViewDelegate.swift; sourceTree = "<group>"; };
 		80EEE76927E65C01007E27D0 /* PhotoGallaryPressetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallaryPressetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,7 +206,6 @@
 				80E3274427D4F3D40014C760 /* ExtensionFriendsTVController */,
 				80E3274127D4F2E10014C760 /* ExtensionNewGTVController */,
 				805E76EB27BC171D0033098D /* Extension_LoginController */,
-				80E3273827D4EE0C0014C760 /* ExtensionUIImageViewAll */,
 			);
 			path = All_Extension;
 			sourceTree = "<group>";
@@ -339,6 +340,7 @@
 		808E9D9B27BE94EF0089E4A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				80EAC04A27F6D326006DDB9A /* AllProtocols */,
 				80850ED027DE37CB0078039E /* NewsData */,
 				80BC96F627BB66DA0038FD77 /* UserData.swift */,
 				808E9D9F27BE98BC0089E4A4 /* Friends.swift */,
@@ -346,7 +348,6 @@
 				80E7D3BF27DA7016009402ED /* HisFriends.swift */,
 				806284D027DDB68E00D37674 /* UserDetailsTableData.swift */,
 				8025F7F427E7517F0009C488 /* ImageAndLikeData.swift */,
-				80DAF94227EF593000428C67 /* ProtocolLikeDelegate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -355,7 +356,6 @@
 			isa = PBXGroup;
 			children = (
 				80CCB6B527E4E51D00BC2085 /* HorizontalCollectionViewCell */,
-				80CCB6B027E4B0FB00BC2085 /* FullImageCell */,
 				80850ED827DE429E0078039E /* XibSinglePhotoAndTextCell */,
 				80850EC527DE122C0078039E /* XibSingleCollectionCell */,
 				806284CB27DDB23300D37674 /* XibGallaryCollectionCell */,
@@ -388,14 +388,6 @@
 				80C19AE927D7C6BA009C34CB /* ExtensionDetailViewController.swift */,
 			);
 			path = ExtensionDetailUTVController;
-			sourceTree = "<group>";
-		};
-		80CCB6B027E4B0FB00BC2085 /* FullImageCell */ = {
-			isa = PBXGroup;
-			children = (
-				80CCB6B127E4B12700BC2085 /* FullImageCell.swift */,
-			);
-			path = FullImageCell;
 			sourceTree = "<group>";
 		};
 		80CCB6B527E4E51D00BC2085 /* HorizontalCollectionViewCell */ = {
@@ -460,14 +452,6 @@
 			path = XibCellForTable;
 			sourceTree = "<group>";
 		};
-		80E3273827D4EE0C0014C760 /* ExtensionUIImageViewAll */ = {
-			isa = PBXGroup;
-			children = (
-				80B95BCF27C1207900D7A9E8 /* extension_UIImageView.swift */,
-			);
-			path = ExtensionUIImageViewAll;
-			sourceTree = "<group>";
-		};
 		80E3274127D4F2E10014C760 /* ExtensionNewGTVController */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +483,17 @@
 				80E7D3C427DB0895009402ED /* DataController.swift */,
 			);
 			path = DataController;
+			sourceTree = "<group>";
+		};
+		80EAC04A27F6D326006DDB9A /* AllProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				80EAC04B27F6D35D006DDB9A /* ProtocolLikeDelegate.swift */,
+				80EAC04D27F6D3F0006DDB9A /* CastomlayoutDelegate.swift */,
+				80EAC04F27F6D453006DDB9A /* TableViewDelegate.swift */,
+				80EAC05127F6D64B006DDB9A /* UserGroupTableViewDelegate.swift */,
+			);
+			path = AllProtocols;
 			sourceTree = "<group>";
 		};
 		80F829A227BE03FC00D4FB53 /* ViewControllers */ = {
@@ -612,13 +607,11 @@
 				80601F7527DF095C00490809 /* ShadowViewRadius.swift in Sources */,
 				805E76ED27BC17670033098D /* Extension_LoginController.swift in Sources */,
 				808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */,
-				80DAF94327EF593000428C67 /* ProtocolLikeDelegate.swift in Sources */,
 				8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */,
 				80601F7A27DF1ECD00490809 /* SetHeaderInSection.swift in Sources */,
 				806284C927DDB1A900D37674 /* CastomCollectionLayout.swift in Sources */,
 				808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */,
 				80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */,
-				80CCB6B227E4B12700BC2085 /* FullImageCell.swift in Sources */,
 				80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */,
 				80850ED627DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.swift in Sources */,
 				80CCB6B427E4E3E700BC2085 /* CastomHorizontalView.swift in Sources */,
@@ -628,19 +621,20 @@
 				80850ECB27DE16B00078039E /* CustomSingleCollectionLayout.swift in Sources */,
 				80DAF94E27F16F1D00428C67 /* extensionUIViewGetSubView.swift in Sources */,
 				8025114B27BFF63D007E87C4 /* AllUserGroups.swift in Sources */,
+				80EAC04E27F6D3F0006DDB9A /* CastomlayoutDelegate.swift in Sources */,
 				8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */,
 				80C19AEA27D7C6BA009C34CB /* ExtensionDetailViewController.swift in Sources */,
 				80CCB6B827E4E55800BC2085 /* HorizontalCollectionViewCell.swift in Sources */,
 				805E76F027BC17EC0033098D /* AllertWrongUserData.swift in Sources */,
 				80E3274D27D4F6A80014C760 /* addNewGroup.swift in Sources */,
 				80850ED227DE37EE0078039E /* NewsData.swift in Sources */,
-				80B95BD027C1207900D7A9E8 /* extension_UIImageView.swift in Sources */,
 				80E3274827D4F4950014C760 /* setDataSectionTable.swift in Sources */,
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
 				80850EC827DE12480078039E /* SingleCollectionViewCell.swift in Sources */,
 				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
 				804154F127B62FE900160418 /* SceneDelegate.swift in Sources */,
+				80EAC05027F6D453006DDB9A /* TableViewDelegate.swift in Sources */,
 				806284D427DDCAFF00D37674 /* GallaryTableViewCell.swift in Sources */,
 				806284CE27DDB24F00D37674 /* GallaryCollectionViewCell.swift in Sources */,
 				8025F7F527E7517F0009C488 /* ImageAndLikeData.swift in Sources */,
@@ -649,9 +643,11 @@
 				80850EDB27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.swift in Sources */,
 				80BC96F727BB66DA0038FD77 /* UserData.swift in Sources */,
 				80850EC327DE08980078039E /* SinglePhotoTableViewCell.swift in Sources */,
+				80EAC04C27F6D35D006DDB9A /* ProtocolLikeDelegate.swift in Sources */,
 				80850ECD27DE20350078039E /* ControlForLike.swift in Sources */,
 				80EEE76A27E65C01007E27D0 /* PhotoGallaryPressetViewController.swift in Sources */,
 				806284D127DDB68E00D37674 /* UserDetailsTableData.swift in Sources */,
+				80EAC05227F6D64B006DDB9A /* UserGroupTableViewDelegate.swift in Sources */,
 				80DD23A727D3332000F78417 /* TableViewCellXib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
