@@ -10,8 +10,8 @@ import UIKit
 struct ImageAndLikeData {
     let image: UIImage!
     var likeStatus: Bool = false
-    var likeLabel: Int? = 0
-    init(image: UIImage, likeStatus: Bool, likeLabel: Int? = 0) {
+    var likeLabel: Int = 0
+    init(image: UIImage, likeStatus: Bool, likeLabel: Int = 0) {
         self.image = image
         self.likeStatus = likeStatus
         self.likeLabel = likeLabel

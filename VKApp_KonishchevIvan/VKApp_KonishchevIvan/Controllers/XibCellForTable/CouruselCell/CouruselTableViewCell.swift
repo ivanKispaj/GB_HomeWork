@@ -45,11 +45,9 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-        //self.delegate.selectRow(nextViewData: "couruselTableCell")
-        // Выбранная ячейка коллекции!!
+ 
         print("select: \(self.collectionData![indexPath.row].friendsName)")
-//        let data = self.collectionData![indexPath.row].friendsName
+
         
     }
 }

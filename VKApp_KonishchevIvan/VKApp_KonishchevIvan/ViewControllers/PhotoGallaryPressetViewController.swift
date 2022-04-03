@@ -9,14 +9,17 @@ import UIKit
 
 class PhotoGallaryPressetViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CastomlayoutDelegate {
 
+    @IBOutlet weak var likeControll: ControlForLike!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var heartLike: UIImageView!
     @IBOutlet weak var labelLike: UILabel!
     
     var numberImage: Int = 0
     var dataCollection: [ImageAndLikeData?] = [nil]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        likeControll.delegate = self
         if let castomLayout = collectionView?.collectionViewLayout as? CastomHorizontalView {
             castomLayout.delegate = self
            
@@ -36,39 +39,53 @@ class PhotoGallaryPressetViewController: UIViewController, UICollectionViewDeleg
 
         cell.layer.borderWidth = 0.5
         cell.layer.borderColor = UIColor.white.cgColor
+        var indexP = indexPath
+        indexP.row = numberImage
+        self.likeControll.indexPath = indexP
         let likeStatus = dataCollection[numberImage]?.likeStatus
-  
-      
+        cell.delegate = self
         if likeStatus! {
           
                 heartLike.image = UIImage(systemName: "suit.heart.fill")
                 heartLike.tintColor = UIColor.red
          
-        
         } else {
-          
                 heartLike.image = UIImage(systemName: "suit.heart")
                 heartLike.tintColor = UIColor.systemGray6
-           
-           
         }
-        //heartLike.image = dataCollection[indexPath.row].
+        
         let LikeCount = dataCollection[numberImage]?.likeLabel
-       labelLike.text = String(LikeCount!)
+        labelLike.text = String(LikeCount!)
         cell.singlePhoto.image = dataCollection[indexPath.row]?.image
         return cell
     }
 
+// MARK: - CastomLayoutDelegate methods
     func collectionView(_ collectionView: UICollectionView, heightForCellAt indexPath: IndexPath, withWidth width: CGFloat) -> CGSize {
         let imageSize: CGSize = (dataCollection[indexPath.row]?.image.size)!
         return imageSize
     }
+    
     func setLikeData(numberImage: Int) {
         self.numberImage = numberImage
         collectionView.reloadData()
     }
-    func getLikeData(numberImage: Int) -> Int {
-        return self.numberImage
+}
+ 
+
+// MARK: - методы для делегата like controll !!
+extension PhotoGallaryPressetViewController: ProtocolLikeDelegate {
+
+    func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
+        let countLike = dataCollection[indexPath.row]?.likeLabel
+        let likeStatus = dataCollection[indexPath.row]?.likeStatus
+        return [countLike!: likeStatus!]
+    }
+
+    func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
+        self.dataCollection[indexPath.row]?.likeLabel = countLike
+        self.dataCollection[indexPath.row]?.likeStatus = likeStatus
     }
 }
-    
+
+

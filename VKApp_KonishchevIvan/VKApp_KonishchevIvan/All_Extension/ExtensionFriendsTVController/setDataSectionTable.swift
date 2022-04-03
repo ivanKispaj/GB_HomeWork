@@ -9,9 +9,8 @@ import UIKit
 
 //MARK: - Extension FriendsTableViewController
 
+// Добавляет в массив friends возможных друзей и тип секции
 extension FriendsTableViewController {
-    
-    
     
     func setDataSectionTable() {
         self.friends.append(posibleFriends)

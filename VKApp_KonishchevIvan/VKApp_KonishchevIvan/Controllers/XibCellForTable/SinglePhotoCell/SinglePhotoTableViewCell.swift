@@ -10,17 +10,18 @@ import UIKit
 class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
 
     
-
+    @IBOutlet weak var likeControll: ControlForLike!
+    
     @IBOutlet weak var singlCollection: UICollectionView!
     @IBOutlet weak var singleLableUserName: UILabel!
     @IBOutlet weak var singleAvatarHeader: UIImageView!
     @IBOutlet weak var singleAdditionalInfo: UILabel!
     @IBOutlet weak var singlPhotoLikeLable: UILabel!
     @IBOutlet weak var singlePhotoLikeImage: UIImageView!
-    var isLikeStatus: Bool = false
-    var likeCount: Int = 0
-    var singlePhoto: [ImageAndLikeData] = DataController.shared.getPhoto()
+
+    var singlePhoto: ImageAndLikeData!
     var delegate: TableViewDelegate!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.singlCollection.delegate = self
@@ -43,14 +44,15 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleCollectionID", for: indexPath) as? SingleCollectionViewCell else {
             preconditionFailure("Error")
         }
+      
+        cell.singlePhoto.image = self.singlePhoto.image 
         
-        cell.singlePhoto.image = self.singlePhoto.last as? UIImage ?? UIImage(named: "WinstonCherchil")
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
-        let photo:[ImageAndLikeData] = [self.singlePhoto.last!]
+        let photo:[ImageAndLikeData] = [self.singlePhoto]
         
         self.delegate.selectRow(nextViewData: photo)
     }

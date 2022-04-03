@@ -7,14 +7,9 @@
 
 import UIKit
 
-protocol TableViewDelegate {
-    var nextViewData: [ImageAndLikeData] {set get}
-    func selectRow(nextViewData: [ImageAndLikeData])
-}
 
-class HomeNewsTableViewController: UITableViewController {
-
-
+class HomeNewsTableViewController: UITableViewController{
+    
 
     var nextViewData: [ImageAndLikeData?] = [nil]
     var newsArray:[NewsData]? = nil
@@ -22,6 +17,8 @@ class HomeNewsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      //  controll.addTarget(self, action: #selector (likeIsTapped), for: .valueChanged)
+        
         self.currentOrientation = UIDevice.current.orientation
         self.newsArray = DataController.shared.getDataNews()
         tableView.register(UINib(nibName: "SinglePhotoAndTextTableViewCell", bundle: nil), forCellReuseIdentifier: "SinglePhotoAndTextCell")
@@ -30,6 +27,9 @@ class HomeNewsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    @objc func likeIsTapped() {
+        
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -49,11 +49,19 @@ class HomeNewsTableViewController: UITableViewController {
         let newsImage = (self.newsArray![indexPath.row].newsImage)
         cell.newsTextView.text = newsText
         cell.controllerNewsImage = newsImage
-        cell.newsLikeLable.text = String(0)
+        
+// передаем контроллер и текущий индекс патч в делегат!!!
+        cell.likeControll.delegate = self
+        cell.likeControll.indexPath = indexPath
+        
         cell.newsUserAvatar.image = UIImage(named: "abramovich")
-       // cell.delegate = self
+        
+        let countlike: String = String(newsArray![indexPath.row].newsImage!.likeLabel)
+        cell.newsLikeLable.text = countlike
+      
         return cell
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? PhotoGallaryPressetViewController else { return
         }
@@ -61,15 +69,26 @@ class HomeNewsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let photo: [ImageAndLikeData?] = [self.newsArray![indexPath.row].newsImage]
-        self.nextViewData = photo
-        performSegue(withIdentifier: "NewsPhotoPreviewID", sender: nil)
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.5) {
+            let photo: [ImageAndLikeData?] = [self.newsArray![indexPath.row].newsImage]
+            self.nextViewData = photo
+            self.performSegue(withIdentifier: "NewsPhotoPreviewID", sender: nil)
+        
+        }
     }
-//    func selectRow(nextViewData: [UIImage?]) {
-//        self.nextViewData = nextViewData
-//    
-//     performSegue(withIdentifier: "NewsPhotoPreviewID", sender: nil)
-//        
-//    }
+}
+
+// MARK: - методы для делегата like controll !!
+extension HomeNewsTableViewController: ProtocolLikeDelegate {
+
+    func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
+        let countLike = newsArray![indexPath.row].newsImage?.likeLabel
+        let likeStatus = newsArray![indexPath.row].newsImage?.likeStatus
+        return [countLike!: likeStatus!]
+    }
     
+    func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
+        self.newsArray![indexPath.row].newsImage?.likeStatus = likeStatus
+        self.newsArray![indexPath.row].newsImage?.likeLabel = countLike
+    }
 }

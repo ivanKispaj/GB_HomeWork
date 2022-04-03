@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - добавляет текст на кнопки в header в DetailUserViewController
 extension DetailUserTableViewController {
     func setHeaderDetailView(){
     self.detailAvatarHeader.image = detailAvatar

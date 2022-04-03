@@ -47,6 +47,7 @@ class CustomSingleCollectionLayout: UICollectionViewLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
     return cacheAttributes.values.filter { attributes in return rect.intersects(attributes.frame)
     } }
+    
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
     return cacheAttributes[indexPath] }
     
