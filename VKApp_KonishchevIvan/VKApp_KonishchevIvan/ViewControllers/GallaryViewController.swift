@@ -48,7 +48,10 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if self.arrayPhoto.count < 2 {
+            self.nextImage = 0
+            self.lastImage = true
+        }
         self.controllForLike.delegate = self
         self.controllForLike.indexPath = IndexPath(row: self.currentImage, section: 0)
         self.setLikeData()
