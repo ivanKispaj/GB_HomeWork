@@ -29,7 +29,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="IDb-7S-oLy">
-                                        <rect key="frame" x="114" y="413" width="162" height="199"/>
+                                        <rect key="frame" x="114" y="376" width="162" height="198"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pUF-Hu-OJH">
                                                 <rect key="frame" x="0.0" y="0.0" width="162" height="34"/>
@@ -56,8 +56,11 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJX-5a-p8N">
-                                                <rect key="frame" x="0.0" y="168" width="162" height="31"/>
+                                                <rect key="frame" x="0.0" y="168" width="162" height="30"/>
                                                 <color key="backgroundColor" name="AppButton"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="d6W-gk-L6x"/>
+                                                </constraints>
                                                 <color key="tintColor" name="ButtonTint"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Войти"/>
@@ -66,71 +69,31 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="vsc-8L-Mzo"/>
+                                        </constraints>
                                     </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAD-I6-sol" customClass="LoadingView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                        <rect key="frame" x="165" y="348" width="60" height="25"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MsJ-eW-hJ9">
-                                                <rect key="frame" x="5" y="5.9999999999999982" width="15" height="13.666666666666666"/>
-                                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="MsJ-eW-hJ9" secondAttribute="height" multiplier="1:1" id="2G1-qb-Qtc"/>
-                                                    <constraint firstAttribute="height" constant="15" id="tVw-09-ZWW"/>
-                                                </constraints>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HEL-s7-Ibl">
-                                                <rect key="frame" x="22.666666666666657" y="5.9999999999999982" width="15" height="13.666666666666666"/>
-                                                <color key="tintColor" red="1" green="0.0" blue="0.049280446729999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="HEL-s7-Ibl" secondAttribute="height" multiplier="1:1" id="66g-aZ-HYn"/>
-                                                    <constraint firstAttribute="height" constant="15" id="6yh-ZV-5DP"/>
-                                                </constraints>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0qG-2e-9Ha">
-                                                <rect key="frame" x="40" y="5.9999999999999982" width="15" height="13.666666666666666"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <color key="tintColor" red="1" green="0.0" blue="0.049280446729999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" priority="999" constant="15" id="oKE-fi-gUc"/>
-                                                </constraints>
-                                            </imageView>
-                                        </subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djG-PL-WLI" customClass="LoadingView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
+                                        <rect key="frame" x="155" y="624" width="80" height="80"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="MsJ-eW-hJ9" secondAttribute="bottom" constant="5" id="5k1-aY-QYO"/>
-                                            <constraint firstAttribute="bottom" secondItem="HEL-s7-Ibl" secondAttribute="bottom" constant="5" id="ISW-aB-SaP"/>
-                                            <constraint firstItem="MsJ-eW-hJ9" firstAttribute="top" secondItem="jAD-I6-sol" secondAttribute="top" constant="5" id="KJK-rx-a8i"/>
-                                            <constraint firstAttribute="width" constant="60" id="MmS-wN-Uz0"/>
-                                            <constraint firstAttribute="trailing" secondItem="0qG-2e-9Ha" secondAttribute="trailing" constant="5" id="NKV-g3-MHd"/>
-                                            <constraint firstItem="0qG-2e-9Ha" firstAttribute="width" secondItem="0qG-2e-9Ha" secondAttribute="height" multiplier="1:1" id="Wpv-eL-MQi"/>
-                                            <constraint firstItem="0qG-2e-9Ha" firstAttribute="top" secondItem="jAD-I6-sol" secondAttribute="top" constant="5" id="X9F-KZ-2oP"/>
-                                            <constraint firstItem="HEL-s7-Ibl" firstAttribute="centerX" secondItem="jAD-I6-sol" secondAttribute="centerX" id="Z9C-4I-LIb"/>
-                                            <constraint firstItem="HEL-s7-Ibl" firstAttribute="top" secondItem="jAD-I6-sol" secondAttribute="top" constant="5" id="gTK-mC-s7P"/>
-                                            <constraint firstItem="MsJ-eW-hJ9" firstAttribute="leading" secondItem="jAD-I6-sol" secondAttribute="leading" constant="5" id="grr-2Y-16N"/>
-                                            <constraint firstAttribute="bottom" secondItem="0qG-2e-9Ha" secondAttribute="bottom" constant="5" id="zCw-1M-bcj"/>
+                                            <constraint firstAttribute="width" secondItem="djG-PL-WLI" secondAttribute="height" multiplier="1:1" id="rSi-gP-rWM"/>
+                                            <constraint firstAttribute="height" constant="80" id="xNk-tF-emZ"/>
                                         </constraints>
-                                        <connections>
-                                            <outlet property="firstCircle" destination="MsJ-eW-hJ9" id="Zg9-OQ-gRN"/>
-                                            <outlet property="threeCircle" destination="0qG-2e-9Ha" id="CK0-9f-Occ"/>
-                                            <outlet property="twoCircle" destination="HEL-s7-Ibl" id="tv7-92-L0a"/>
-                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="fsZ-D0-XN5" firstAttribute="trailing" secondItem="IDb-7S-oLy" secondAttribute="trailing" constant="114" id="0jA-6n-M9H"/>
                                     <constraint firstItem="pG2-qE-sLl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ciD-nu-SBX" secondAttribute="leading" constant="122" id="5Sp-Bk-hja"/>
-                                    <constraint firstItem="IDb-7S-oLy" firstAttribute="top" secondItem="jAD-I6-sol" secondAttribute="bottom" constant="40" id="JjV-KZ-MD1"/>
-                                    <constraint firstItem="fsZ-D0-XN5" firstAttribute="bottom" secondItem="IDb-7S-oLy" secondAttribute="bottom" constant="249" id="Sso-Hs-j92"/>
                                     <constraint firstItem="pG2-qE-sLl" firstAttribute="centerX" secondItem="8dP-rM-oyt" secondAttribute="centerX" id="TC0-1R-1XY"/>
                                     <constraint firstItem="IDb-7S-oLy" firstAttribute="centerX" secondItem="8dP-rM-oyt" secondAttribute="centerX" id="WuY-dL-DbW"/>
+                                    <constraint firstItem="djG-PL-WLI" firstAttribute="centerX" secondItem="IDb-7S-oLy" secondAttribute="centerX" id="aoU-rY-7IA"/>
                                     <constraint firstItem="IDb-7S-oLy" firstAttribute="leading" secondItem="fsZ-D0-XN5" secondAttribute="leading" constant="114" id="ay3-PY-Wzf"/>
                                     <constraint firstItem="pG2-qE-sLl" firstAttribute="top" secondItem="fsZ-D0-XN5" secondAttribute="top" constant="150" id="ez0-iE-mjx"/>
                                     <constraint firstItem="ciD-nu-SBX" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pG2-qE-sLl" secondAttribute="trailing" constant="122" id="fLZ-3Y-fqo"/>
                                     <constraint firstItem="pG2-qE-sLl" firstAttribute="centerY" secondItem="fsZ-D0-XN5" secondAttribute="centerY" constant="-207.5" id="hn5-xt-bDf"/>
-                                    <constraint firstItem="jAD-I6-sol" firstAttribute="centerX" secondItem="8dP-rM-oyt" secondAttribute="centerX" id="jCa-Dx-eiC"/>
-                                    <constraint firstItem="fsZ-D0-XN5" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jAD-I6-sol" secondAttribute="trailing" constant="20" id="tXf-va-gX3"/>
-                                    <constraint firstItem="jAD-I6-sol" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fsZ-D0-XN5" secondAttribute="leading" constant="20" id="vtP-TS-JVW"/>
-                                    <constraint firstItem="jAD-I6-sol" firstAttribute="top" secondItem="pG2-qE-sLl" secondAttribute="bottom" constant="52" id="yqt-nR-prt"/>
+                                    <constraint firstItem="djG-PL-WLI" firstAttribute="top" secondItem="IDb-7S-oLy" secondAttribute="bottom" constant="50" id="kmo-BC-Fh0"/>
+                                    <constraint firstItem="IDb-7S-oLy" firstAttribute="top" secondItem="pG2-qE-sLl" secondAttribute="bottom" constant="80" id="yvX-QT-u2D"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="fsZ-D0-XN5"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="ciD-nu-SBX"/>
@@ -147,7 +110,6 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Jb0-FF-aky" id="ujS-4H-MGD"/>
-                        <outlet property="loadingView" destination="jAD-I6-sol" id="CZs-6X-QCc"/>
                         <outlet property="passwordTextField" destination="dFl-k1-xEa" id="HaM-xx-EoJ"/>
                         <outlet property="scrollView" destination="8dP-rM-oyt" id="xXg-1D-hWW"/>
                     </connections>
@@ -983,7 +945,6 @@
         <image name="arrowshape.turn.up.forward" catalog="system" width="128" height="106"/>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
         <image name="bubble.left" catalog="system" width="128" height="110"/>
-        <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="creditcard.circle.fill" catalog="system" width="128" height="121"/>
         <image name="gift" catalog="system" width="128" height="124"/>
         <image name="homekit" catalog="system" width="128" height="106"/>

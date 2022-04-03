@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadingView.isHidden = false
+       // self.loadingView.isHidden = false
         emailTextField.addTarget(self, action: #selector(emailFieldDidChangeSelection(_:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(passwordFieldDidChsngeSelection(_:)), for: .editingChanged)
         
@@ -51,5 +51,7 @@ class LoginViewController: UIViewController {
     }
 }
 
+extension LoginViewController {
 
+}
 
