@@ -101,15 +101,21 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destionationVC = segue.destination as? PhotoGallaryPressetViewController else {
+      //  guard let destionationVC = segue.destination as? PhotoGallaryPressetViewController else {
+      //    preconditionFailure("Error")
+      //  }
+        guard let destinationVC = segue.destination as? GallaryViewController else {
             preconditionFailure("Error")
         }
-        destionationVC.dataCollection = self.nextViewData
+      //  destionationVC.dataCollection = self.nextViewData
+        destinationVC.arrayPhoto = self.nextViewData
+        destinationVC.title = "Фото галлерея" 
     }
 
     func selectRow(nextViewData: [ImageAndLikeData]) {
         self.nextViewData = nextViewData
-        performSegue(withIdentifier: "DetailFriendsPreviewID", sender: nil)
+       // performSegue(withIdentifier: "DetailFriendsPreviewID", sender: nil)
+        performSegue(withIdentifier: "gallaryViewController", sender: nil)
     }
 }
 

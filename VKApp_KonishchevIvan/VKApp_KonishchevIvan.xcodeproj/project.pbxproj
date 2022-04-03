@@ -51,6 +51,7 @@
 		80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AD227D76FDE009C34CB /* CouruselCollectionViewCell.swift */; };
 		80C19AD527D76FDE009C34CB /* CouruselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80C19AD327D76FDE009C34CB /* CouruselCollectionViewCell.xib */; };
 		80C19AEA27D7C6BA009C34CB /* ExtensionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AE927D7C6BA009C34CB /* ExtensionDetailViewController.swift */; };
+		80C7D08627F8440E00E03A27 /* GallaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7D08527F8440E00E03A27 /* GallaryViewController.swift */; };
 		80CCB6B427E4E3E700BC2085 /* CastomHorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCB6B327E4E3E700BC2085 /* CastomHorizontalView.swift */; };
 		80CCB6B827E4E55800BC2085 /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCB6B627E4E55800BC2085 /* HorizontalCollectionViewCell.swift */; };
 		80CCB6B927E4E55800BC2085 /* HorizontalCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */; };
@@ -119,6 +120,7 @@
 		80C19AD227D76FDE009C34CB /* CouruselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouruselCollectionViewCell.swift; sourceTree = "<group>"; };
 		80C19AD327D76FDE009C34CB /* CouruselCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouruselCollectionViewCell.xib; sourceTree = "<group>"; };
 		80C19AE927D7C6BA009C34CB /* ExtensionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDetailViewController.swift; sourceTree = "<group>"; };
+		80C7D08527F8440E00E03A27 /* GallaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryViewController.swift; sourceTree = "<group>"; };
 		80CCB6B327E4E3E700BC2085 /* CastomHorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomHorizontalView.swift; sourceTree = "<group>"; };
 		80CCB6B627E4E55800BC2085 /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
 		80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 				80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */,
 				80850ECE27DE37910078039E /* HomeNewsTableViewController.swift */,
 				80EEE76927E65C01007E27D0 /* PhotoGallaryPressetViewController.swift */,
+				80C7D08527F8440E00E03A27 /* GallaryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				80DAF95027F377AD00428C67 /* CustomCodeSearchBar.swift in Sources */,
 				80E7D3C527DB0895009402ED /* DataController.swift in Sources */,
 				80850EDB27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.swift in Sources */,
+				80C7D08627F8440E00E03A27 /* GallaryViewController.swift in Sources */,
 				80BC96F727BB66DA0038FD77 /* UserData.swift in Sources */,
 				80850EC327DE08980078039E /* SinglePhotoTableViewCell.swift in Sources */,
 				80EAC04C27F6D35D006DDB9A /* ProtocolLikeDelegate.swift in Sources */,

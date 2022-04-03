@@ -43,7 +43,7 @@ class PhotoGallaryPressetViewController: UIViewController, UICollectionViewDeleg
         indexP.row = numberImage
         self.likeControll.indexPath = indexP
         let likeStatus = dataCollection[numberImage]?.likeStatus
-  
+        cell.delegate = self
         if likeStatus! {
           
                 heartLike.image = UIImage(systemName: "suit.heart.fill")
