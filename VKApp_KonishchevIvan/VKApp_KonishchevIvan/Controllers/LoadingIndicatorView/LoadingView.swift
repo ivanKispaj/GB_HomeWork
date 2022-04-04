@@ -89,8 +89,7 @@ class LoadingView: UIView {
         
         layer.strokeEnd = 1
         layer.strokeStart = 0
-        
-        print(self.frame)
+    
         layer.frame.origin.x = -20
     
         let strokeEndAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeEnd))

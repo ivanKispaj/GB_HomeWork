@@ -12,7 +12,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
     
 // Для определения направления скрола
     enum DirectionImageState {
-        case left, right
+        case left, right, error, uncnown
     }
    
     @IBOutlet weak var controllForLike: ControlForLike!
@@ -45,13 +45,14 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
     var yPos: CGFloat!
     var lastImage: Bool = false
     var frameNextImageForRightSwipe: CGRect!
-    
+    var panGesture: UIPanGestureRecognizer!
     override func viewDidLoad() {
         super.viewDidLoad()
         if self.arrayPhoto.count < 2 {
             self.nextImage = 0
             self.lastImage = true
         }
+        self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(movementImages))
         self.controllForLike.delegate = self
         self.controllForLike.indexPath = IndexPath(row: self.currentImage, section: 0)
         self.setLikeData()
@@ -61,19 +62,28 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
     }
 
     @objc func movementImages(_ position: UIPanGestureRecognizer) {
-//Устанавливаем направление движения!
-        let positionX = position.translation(in: self.currentImageView).x
-// Определяем направление движения!
-        if  positionX < 0 {
-            self.directionOf = .left
-        }else {
-            self.directionOf = .right
-        }
+
+  
         switch position.state {
             
         case .possible:
             print("Possible")
         case .began:
+            //Устанавливаем направление движения!
+            let positionX = position.velocity(in: self.currentImageView).x
+            // Определяем направление движения!
+
+                if  positionX < 0 {
+                    self.directionOf = .left
+                
+                }else if positionX > 0 {
+                    self.directionOf = .right
+                  
+                }else {
+                    self.directionOf = .error
+                    print("direction False")
+                }
+      
             if self.directionOf == .left {
  
                 if self.currentImage != (self.arrayPhoto.count - 1) {
@@ -92,13 +102,10 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
     // устанавливаем начальные фреймы изображений
                             self.setLikeData()
                             self.viewImage.removeFromSuperview()
-                            setViewAndImagesToView()
-                        case .start:
-                           print("start")
-                        case .current:
-                            print("current")
-                        @unknown default:
-                            print("XER")
+                            self.setViewAndImagesToView()
+                        default:
+                            print("default")
+                            
                         }
                     }
                 }else {
@@ -106,23 +113,21 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                     self.animateImage = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut , animations: {
                         self.currentImageView.transform = CGAffineTransform(translationX: self.view.frame.minX - self.view.frame.maxX, y: self.yPos - self.yPos)
                     })
+
                 }
             }else if self.directionOf == .right && self.currentImage != 0 {
     // если направление свайпа вправо и это не первое изображение
                 let x = self.currentImageView.frame.maxX
-                
                 self.setViewAndImagesToView()
+    // устанавливаем нижнее изоюражение по последнему фрейму анимации
                 self.nextImageView.frame = self.frameNextImageForRightSwipe
                 let nextImage = self.currentImage - 1
                 self.nextImageView.image = self.arrayPhoto[nextImage].image
-   // Делаем currentImageViwe поверх nextImageView
+   // Делаем currentImageView поверх nextImageView
                 self.viewImage.bringSubviewToFront(self.currentImageView)
-                self.nextImageView.transform = CGAffineTransform(scaleX: 0, y: 0)
-                
                 self.animateImage = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut , animations: {
                         self.currentImageView.transform = CGAffineTransform(translationX: x, y: self.yPos - self.yPos)
                         })
-                
                 self.nextAnimateImage = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut, animations: {
                     self.nextImageView.transform = CGAffineTransform(scaleX: 10, y: 10)
                  
@@ -130,9 +135,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                 
                 self.nextAnimateImage!.addCompletion { progress in
                     switch progress {
-                        
                     case .end:
-                    
                         self.setLikeData()
                         self.viewImage.removeFromSuperview()
                         self.setViewAndImagesToView()
@@ -140,13 +143,8 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                             self.nextImage = 1
                         }
                         self.setViewAndImagesToView()
-                    case .start:
-
-                        print("start Of rightSwipe")
-                    case .current:
-                        print("current Of rightSwipe")
-                    @unknown default:
-                        print("Error rightSwipe")
+                    default:
+                        print("default")
                     }
                 }
                 
@@ -156,53 +154,25 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                 self.animateImage = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut , animations: {
                     self.currentImageView.transform = CGAffineTransform(translationX: x, y: self.yPos - self.yPos)
                         })
-                
             }
+            
 //   Вычисление коэффициэнта смещения анимации!!
         case .changed:
 
-            var percent = position.translation(in: self.currentImageView).x
-            var toPercent = position.translation(in: self.nextImageView).x
-          // переводим минус в плюс
+            var percent = position.translation(in: self.viewImage).x
             if percent < 0 {
                 percent.negate()
-                toPercent.negate()
             }
-
-            switch self.directionOf {
-                
-            case .left:
-                if self.lastImage {
-                    toPercent  = toPercent / 2000
-                    percent = percent / 200
-                }else {
-                    percent  = percent / 2000
-                    toPercent = toPercent / 200
-                }
-            case .right:
-                if self.currentImage == 0 {
-                    toPercent  = toPercent / 2000
-                    percent = percent / 200
-                }else {
-                   
-                    toPercent = toPercent / 18
-                    percent = percent / 200
-                }
-            case .none:
-                print(".none")
-            }
-        
-            self.animateImage.fractionComplete =  min(1, max(0, percent))
+            percent = percent / 400
+           self.animateImage.fractionComplete =  min(1, max(0, percent))
             if self.nextAnimateImage != nil {
-                self.nextAnimateImage!.fractionComplete = min(1, max(0, toPercent))
+                self.nextAnimateImage!.fractionComplete = min(1, max(0, percent + 0.15))
             }
-           
             
         case .ended:
             
             let allImage = self.arrayPhoto.count - 1
-            
-            if directionOf == .right {
+            if self.directionOf == .right {
 // Если изображение перетаскиваем вправо!
                 if self.animateImage.fractionComplete > 0.5 && self.currentImage != 0 {
 
@@ -296,9 +266,8 @@ extension GallaryViewController {
         self.currentImageView.contentMode = .scaleAspectFit
         self.nextImageView.contentMode = .scaleAspectFit
         setConstraintViewImage()
-       let pangesture = UIPanGestureRecognizer(target: self, action: #selector(movementImages))
+       self.viewImage.addGestureRecognizer(self.panGesture)
        
-       self.viewImage.addGestureRecognizer(pangesture)
     }
     
     private func setConstraintViewImage() {
