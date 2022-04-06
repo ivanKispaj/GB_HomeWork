@@ -174,7 +174,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
             percent = percent / 400
            self.animateImage.fractionComplete =  min(1, max(0, percent))
             if self.nextAnimateImage != nil {
-                self.nextAnimateImage!.fractionComplete = min(1, max(0, percent + 0.15))
+                self.nextAnimateImage!.fractionComplete = min(1, max(0, percent + 0.25))
             }
             
         case .ended:
