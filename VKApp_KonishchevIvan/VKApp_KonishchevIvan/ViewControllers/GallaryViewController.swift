@@ -44,26 +44,26 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
 // Y позиция для изображений центра view
     var yPos: CGFloat!
     var lastImage: Bool = false
-    var frameNextImageForRightSwipe: CGRect!
-    var panGesture: UIPanGestureRecognizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if self.arrayPhoto.count < 2 {
             self.nextImage = 0
             self.lastImage = true
         }
-        self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(movementImages))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(movementImages))
         self.controllForLike.delegate = self
         self.controllForLike.indexPath = IndexPath(row: self.currentImage, section: 0)
         self.setLikeData()
         self.yPos = (self.view.bounds.height / 2)
         setViewAndImagesToView()
+        self.viewImage.addGestureRecognizer(panGesture)
 
     }
 
     @objc func movementImages(_ position: UIPanGestureRecognizer) {
 
-  
+      
         switch position.state {
             
         case .possible:
@@ -83,68 +83,76 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                     self.directionOf = .error
                     print("direction False")
                 }
-      
+
             if self.directionOf == .left {
- 
+                self.setViewImagesFrame()
+// Делаем nextImageView поверх currentImageView
+                self.viewImage.bringSubviewToFront(self.nextImageView)
                 if self.currentImage != (self.arrayPhoto.count - 1) {
 // если направление свайпа влево, и это не последнее фото! То используется эта анимация
-                    self.animateImage = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut , animations: {
+                    self.animateImage = UIViewPropertyAnimator(duration: 0.6, curve: .easeOut , animations: {
                         self.currentImageView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
                     })
-                    self.nextAnimateImage = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn, animations: {
+                    self.nextAnimateImage = UIViewPropertyAnimator(duration: 0.6, curve: .easeIn, animations: {
                         
                         self.nextImageView.transform = CGAffineTransform(translationX: self.view.frame.minX - self.view.frame.maxX, y: self.yPos - self.yPos)
                     })
-                    
+                  
                     animateImage.addCompletion { [self] position in
                         switch position {
                         case .end:
     // устанавливаем начальные фреймы изображений
                             self.setLikeData()
-                            self.viewImage.removeFromSuperview()
-                            self.setViewAndImagesToView()
+    // Отключаем проделанные трансформации
+                            self.turnOffAnumations()
+    // устанавливаем начальные frame изображениям
+                            self.setViewImagesFrame()
                         default:
-                            print("default")
-                            
+                            self.turnOffAnumations()
                         }
                     }
                 }else {
     // если направление свайпа влево и это последнее фото то меняем анимацию
-                    self.animateImage = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut , animations: {
+                    self.animateImage = UIViewPropertyAnimator(duration: 0.7, curve: .easeOut , animations: {
                         self.currentImageView.transform = CGAffineTransform(translationX: self.view.frame.minX - self.view.frame.maxX, y: self.yPos - self.yPos)
                     })
 
                 }
+                
             }else if self.directionOf == .right && self.currentImage != 0 {
     // если направление свайпа вправо и это не первое изображение
                 let x = self.currentImageView.frame.maxX
-                self.setViewAndImagesToView()
-    // устанавливаем нижнее изоюражение по последнему фрейму анимации
-                self.nextImageView.frame = self.frameNextImageForRightSwipe
+    // устанавливаем нижнее изображение по последнему фрейму анимации
                 let nextImage = self.currentImage - 1
-                self.nextImageView.image = self.arrayPhoto[nextImage].image
+                let size = getSizeImage(nextImage)
+    // Вычисляем и устанавливаем frame нижнему изображению при правом свайпе!
+           //     let height = size.height / size.width
+                self.nextImageView.frame = CGRect(x: self.currentImageView.frame.origin.x, y: self.yPos - ( size.height / 2), width: size.width, height: size.height)
    // Делаем currentImageView поверх nextImageView
                 self.viewImage.bringSubviewToFront(self.currentImageView)
-                self.animateImage = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut , animations: {
+                self.nextImageView.transform = CGAffineTransform(scaleX: 0, y: 0)
+                self.nextImageView.image = self.arrayPhoto[nextImage].image
+                self.animateImage = UIViewPropertyAnimator(duration: 0.6, curve: .easeOut , animations: {
                         self.currentImageView.transform = CGAffineTransform(translationX: x, y: self.yPos - self.yPos)
                         })
-                self.nextAnimateImage = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut, animations: {
-                    self.nextImageView.transform = CGAffineTransform(scaleX: 10, y: 10)
+                self.nextAnimateImage = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
+                    self.nextImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
                  
                 })
                 
                 self.nextAnimateImage!.addCompletion { progress in
                     switch progress {
                     case .end:
+                     
                         self.setLikeData()
-                        self.viewImage.removeFromSuperview()
-                        self.setViewAndImagesToView()
+                        self.turnOffAnumations()
+                        self.setViewImagesFrame()
                         if self.currentImage == 0 {
                             self.nextImage = 1
                         }
-                        self.setViewAndImagesToView()
                     default:
-                        print("default")
+                        self.turnOffAnumations()
+                        self.nextImageView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
                     }
                 }
                 
@@ -174,7 +182,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
             let allImage = self.arrayPhoto.count - 1
             if self.directionOf == .right {
 // Если изображение перетаскиваем вправо!
-                if self.animateImage.fractionComplete > 0.5 && self.currentImage != 0 {
+                if self.animateImage.fractionComplete > 0.4 && self.currentImage != 0 {
 
                     if self.lastImage {
                         self.lastImage = false
@@ -188,14 +196,15 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                         self.nextImage -= 1
                     }
                                         
-                }else if animateImage.fractionComplete < 0.5 {
+                }else if animateImage.fractionComplete < 0.4 {
+                    
                     if self.nextAnimateImage != nil {
                         self.nextAnimateImage!.isReversed = true
                         self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
                     }
                         self.animateImage.isReversed = true
                         self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-                    
+                 
                 }else {
                  
                         self.animateImage.isReversed = true
@@ -205,16 +214,14 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
             }else {
                 
 // Если изображение перетаскиваем влево и прогресс больше 50% !
-                if animateImage.fractionComplete > 0.5 && (self.nextImage != allImage) {
+                if animateImage.fractionComplete > 0.4 && (self.nextImage != allImage) {
               
                     self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor:  0)
                     self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-                    self.frameNextImageForRightSwipe = self.currentImageView.frame
                     self.currentImage += 1
                     self.nextImage += 1
-               
-// Если изображение перетаскиваем влево и прогресс меньше 50% !
-                }else if animateImage.fractionComplete < 0.5  {
+
+                }else if animateImage.fractionComplete < 0.4  {
                     if self.nextAnimateImage != nil {
                     self.nextAnimateImage!.isReversed = true
                     self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
@@ -257,8 +264,6 @@ extension GallaryViewController {
         self.viewImage = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.bounds.height))
         self.viewImage.backgroundColor = UIColor.black
         setImageViewFrame()
-        self.currentImageView.image = self.arrayPhoto[self.currentImage].image
-        self.nextImageView.image = self.arrayPhoto[self.nextImage].image
         self.viewImage.addSubview(self.currentImageView)
         self.viewImage.addSubview(self.nextImageView)
         self.view.addSubview(self.viewImage)
@@ -266,7 +271,7 @@ extension GallaryViewController {
         self.currentImageView.contentMode = .scaleAspectFit
         self.nextImageView.contentMode = .scaleAspectFit
         setConstraintViewImage()
-       self.viewImage.addGestureRecognizer(self.panGesture)
+    
        
     }
     
@@ -283,15 +288,25 @@ extension GallaryViewController {
     }
     
     private func setImageViewFrame() {
-        var ratio = self.arrayPhoto[self.currentImage].image.size.width / UIScreen.main.bounds.width
-        var height = self.arrayPhoto[self.currentImage].image.size.height / ratio
-        self.currentImageView = UIImageView(frame: CGRect(x: 0, y: self.yPos - (height / 2), width: UIScreen.main.bounds.maxX, height: height))
-         ratio = self.arrayPhoto[self.nextImage].image.size.width / UIScreen.main.bounds.width
-         height = self.arrayPhoto[self.nextImage].image.size.height / ratio
-        self.nextImageView = UIImageView(frame: CGRect(x: self.viewImage.frame.maxX, y: yPos - (height / 2), width: UIScreen.main.bounds.maxX, height: height))
-        
+        self.currentImageView = UIImageView()
+        self.nextImageView = UIImageView()
+        self.setViewImagesFrame()
+    }
+    private func setViewImagesFrame() {
+        var size = getSizeImage(self.currentImage)
+        self.currentImageView.frame = CGRect(x: 0, y: self.yPos - (size.height / 2), width: size.width, height: size.height)
+        size = getSizeImage(self.nextImage)
+        self.nextImageView.frame = CGRect(x: self.viewImage.frame.maxX, y: yPos - (size.height / 2), width: size.width, height: size.height)
+        self.currentImageView.image = self.arrayPhoto[self.currentImage].image
+        self.nextImageView.image = self.arrayPhoto[self.nextImage].image
     }
 
+    private func getSizeImage(_ numberImage: Int) -> CGSize {
+        let ratio = self.arrayPhoto[numberImage].image.size.width / UIScreen.main.bounds.width
+        let height = self.arrayPhoto[numberImage].image.size.height / ratio
+        return CGSize(width: UIScreen.main.bounds.width, height: height)
+        
+    }
     private func setLikeData() {
         if self.arrayPhoto[self.currentImage].likeStatus {
             self.heartImageView.image = UIImage(systemName: "suit.heart.fill")
@@ -302,6 +317,10 @@ extension GallaryViewController {
         }
         self.labelLikeView.text = String(self.arrayPhoto[self.currentImage].likeLabel)
         self.controllForLike.indexPath = IndexPath(row: self.currentImage, section: 0)
+    }
+    private func turnOffAnumations(){
+        self.nextImageView.transform = CGAffineTransform.identity
+        self.currentImageView.transform = CGAffineTransform.identity
     }
     
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {

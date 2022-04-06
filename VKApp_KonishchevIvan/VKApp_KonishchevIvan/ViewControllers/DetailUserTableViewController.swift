@@ -19,7 +19,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var hisFriends: [HisFirends]? = nil
     var photo:[ImageAndLikeData] = DataController.shared.getPhoto()
     var singlePhoto: ImageAndLikeData = DataController.shared.getSinglePhoto()
-    
+    var currentImageTap: Int!
     @IBOutlet weak var detailAvatarHeader: UIImageView!
     @IBOutlet weak var detailUserNameLable: UILabel!
     @IBOutlet weak var detailUserInfoLable: UILabel!
@@ -109,6 +109,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         }
       //  destionationVC.dataCollection = self.nextViewData
         destinationVC.arrayPhoto = self.nextViewData
+     //   destinationVC.currentImage = 1
         destinationVC.title = "Фото галлерея" 
     }
 
@@ -116,6 +117,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         self.nextViewData = nextViewData
        // performSegue(withIdentifier: "DetailFriendsPreviewID", sender: nil)
         performSegue(withIdentifier: "gallaryViewController", sender: nil)
+        self.tableView.reloadData()
     }
 }
 

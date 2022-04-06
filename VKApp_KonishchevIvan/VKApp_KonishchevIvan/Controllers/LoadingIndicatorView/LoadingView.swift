@@ -83,7 +83,6 @@ class LoadingView: UIView {
         let layer = CAShapeLayer()
         layer.path = cloudBizerPath.cgPath
         layer.lineWidth = 6
-        layer.cornerRadius = 50
         layer.strokeColor = color.cgColor
         layer.fillColor =  color2.cgColor
         
@@ -91,32 +90,38 @@ class LoadingView: UIView {
         layer.strokeStart = 0
     
         layer.frame.origin.x = -20
-    
+        self.layer.addSublayer(layer)
         let strokeEndAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeEnd))
     
         strokeEndAnimation.fromValue = 1
-        strokeEndAnimation.toValue = 0
-       // strokeEndAnimation.beginTime = 0.5
-        strokeEndAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
-        strokeEndAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.98, -0.01, 0, 0.88)
+        strokeEndAnimation.toValue = 0.5
+    //    strokeEndAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        strokeEndAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.98, 0.2, 0, 0.88)
+        
         let strokeStartAnumation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeStart))
-        strokeStartAnumation.fromValue = -0.5
-        strokeStartAnumation.toValue = 1
-        strokeStartAnumation.timingFunction = CAMediaTimingFunction(controlPoints: 0.31,0.85,0.24,-0.01)
+        strokeStartAnumation.fromValue = 0
+        strokeStartAnumation.toValue = 0.2
+        strokeStartAnumation.timingFunction = CAMediaTimingFunction(controlPoints: 0.31,0.95,0.24,0.01)
+        
+        let strokeCurrentAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeEnd))
+        strokeCurrentAnimation.fromValue = 0
+        strokeCurrentAnimation.toValue = 1
+        strokeCurrentAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.1,0.85,0.24,0.01)
         
         let animationGroup = CAAnimationGroup()
         animationGroup.duration = 3
         animationGroup.repeatCount = .infinity
-        animationGroup.animations = [strokeEndAnimation,strokeStartAnumation]
+        animationGroup.animations = [ strokeEndAnimation, strokeStartAnumation, strokeCurrentAnimation]
         layer.add(animationGroup, forKey: nil)
         
         let circleLayer = CAShapeLayer()
-        circleLayer.backgroundColor = color.cgColor
-        circleLayer.bounds = CGRect(x: 0, y: 0, width: 9 , height: 9)
-        circleLayer.cornerRadius = 4.5
+        circleLayer.backgroundColor = color2.cgColor
+        circleLayer.bounds = CGRect(x: 0, y: 0, width: 6 , height: 6)
+        circleLayer.cornerRadius = 3
+       
         self.layer.addSublayer(circleLayer)
-        self.layer.addSublayer(layer)
-        
+       
+
         let followanim = CAKeyframeAnimation(keyPath: #keyPath(CAScrollLayer.position))
         followanim.path = cloudBizerPath.cgPath
         followanim.calculationMode = .paced

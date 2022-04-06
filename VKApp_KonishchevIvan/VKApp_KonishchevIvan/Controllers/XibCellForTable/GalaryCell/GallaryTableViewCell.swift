@@ -50,7 +50,16 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        switch indexPath.section {
+        case 0:
+            let first = self.gallaryData.remove(at: indexPath.row)
+            self.gallaryData.insert(first, at: 0)
+        case 1:
+            let first = self.gallaryData.remove(at: indexPath.row + 2)
+            self.gallaryData.insert(first, at: 0)
+        default:
+            print("IndexOutOfRange")
+        }
         self.delegate.selectRow(nextViewData: self.gallaryData)
         // Выбранная ячейка коллекции!!
        
