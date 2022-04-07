@@ -9,8 +9,13 @@ import UIKit
 
 class LoginViewController: UIViewController {
     let colorDamage = UIColor(named: "AlarmColor")
+    @IBAction func enterButtonNextView(_ sender: Any) {
+        
+        self.verifiUserData()
+        
+    }
     
-    @IBOutlet weak var loadingView: LoadingView!
+ 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -29,29 +34,51 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector( willShowKayboard ), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector( willHideKeyboard ), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        let user =  UserData()
-        let emailInput = self.emailTextField.text
-        let passwordInput = self.passwordTextField.text
-        if user.useremail == emailInput && user.userPassword == passwordInput {
-        
-         
-           
-            return true
-        }
-        if user.useremail != emailInput {
-            let allert = AllertWrongUserData.getAllert(title: "Email", message: "Не верно введен email!")
-            present(allert, animated: true, completion: nil)
-            return false
-
-        }
-        let allert = AllertWrongUserData.getAllert(title: "Password", message: "Не верный пароль!")
-        present(allert, animated: true, completion: nil)
-       return false
-    }
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        let user =  UserData()
+//        let emailInput = self.emailTextField.text
+//        let passwordInput = self.passwordTextField.text
+//        if user.useremail == emailInput && user.userPassword == passwordInput {
+//
+//
+//
+//            return true
+//        }
+//        if user.useremail != emailInput {
+//            let allert = AllertWrongUserData.getAllert(title: "Email", message: "Не верно введен email!")
+//            present(allert, animated: true, completion: nil)
+//            return false
+//
+//        }
+//        let allert = AllertWrongUserData.getAllert(title: "Password", message: "Не верный пароль!")
+//        present(allert, animated: true, completion: nil)
+//       return false
+//    }
 }
-
+//
 extension LoginViewController {
 
+    private func verifiUserData() {
+        let user =  UserData()
+        let emailInput = self.emailTextField.text!
+        let passwordInput = self.passwordTextField.text!
+
+        if user.useremail == emailInput && user.userPassword == passwordInput {
+         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController else { return }
+            nextVC.modalTransitionStyle = .flipHorizontal
+            nextVC.modalPresentationStyle = .fullScreen
+            nextVC.transitioningDelegate = nextVC
+            self.present(nextVC, animated: true)
+        }else if user.useremail != emailInput {
+            let allert = AllertWrongUserData.getAllert(title: "Email", message: "Не верно введен email!")
+            present(allert, animated: true, completion: nil)
+           
+
+        }else {
+        let allert = AllertWrongUserData.getAllert(title: "Password", message: "Не верный пароль!")
+        present(allert, animated: true, completion: nil)
+        }
+    }
 }
 

@@ -29,7 +29,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="IDb-7S-oLy">
-                                        <rect key="frame" x="114" y="376" width="162" height="198"/>
+                                        <rect key="frame" x="114" y="376" width="162" height="208"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pUF-Hu-OJH">
                                                 <rect key="frame" x="0.0" y="0.0" width="162" height="34"/>
@@ -56,16 +56,16 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJX-5a-p8N">
-                                                <rect key="frame" x="0.0" y="168" width="162" height="30"/>
+                                                <rect key="frame" x="0.0" y="168" width="162" height="40"/>
                                                 <color key="backgroundColor" name="AppButton"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="d6W-gk-L6x"/>
+                                                    <constraint firstAttribute="height" constant="40" id="d6W-gk-L6x"/>
                                                 </constraints>
                                                 <color key="tintColor" name="ButtonTint"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Войти"/>
                                                 <connections>
-                                                    <segue destination="eGU-XY-KQm" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="2Dp-kt-a3L"/>
+                                                    <action selector="enterButtonNextView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="azQ-hz-Jdb"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -74,7 +74,7 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djG-PL-WLI" customClass="LoadingView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                        <rect key="frame" x="155" y="624" width="80" height="80"/>
+                                        <rect key="frame" x="155" y="634" width="80" height="80"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="djG-PL-WLI" secondAttribute="height" multiplier="1:1" id="rSi-gP-rWM"/>
@@ -121,7 +121,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="eJD-vV-EC4">
             <objects>
-                <tabBarController id="eGU-XY-KQm" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="eGU-XY-KQm" customClass="TabBarController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="pTA-5Q-Xup"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="88o-cH-anz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -478,7 +478,7 @@
         <!--My Friends-->
         <scene sceneID="Wx7-gw-cr2">
             <objects>
-                <tableViewController id="r3E-t8-6me" customClass="FriendsTableViewController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FriendsTableViewController" id="r3E-t8-6me" customClass="FriendsTableViewController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" separatorInsetReference="fromAutomaticInsets" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="QKo-Le-kxg">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -55,6 +55,9 @@
 		80CCB6B427E4E3E700BC2085 /* CastomHorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCB6B327E4E3E700BC2085 /* CastomHorizontalView.swift */; };
 		80CCB6B827E4E55800BC2085 /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCB6B627E4E55800BC2085 /* HorizontalCollectionViewCell.swift */; };
 		80CCB6B927E4E55800BC2085 /* HorizontalCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */; };
+		80D1315227FDD876009EA04D /* AnimationLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1315127FDD876009EA04D /* AnimationLoginController.swift */; };
+		80D1315627FDE4D2009EA04D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1315527FDE4D2009EA04D /* TabBarController.swift */; };
+		80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1315727FE00BD009EA04D /* ReversAnimateLogin.swift */; };
 		80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1F9D827B6475200EA4E0C /* Validators.swift */; };
 		80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94827F0B5B200428C67 /* LoadingView.swift */; };
 		80DAF94E27F16F1D00428C67 /* extensionUIViewGetSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */; };
@@ -124,6 +127,9 @@
 		80CCB6B327E4E3E700BC2085 /* CastomHorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomHorizontalView.swift; sourceTree = "<group>"; };
 		80CCB6B627E4E55800BC2085 /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
 		80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCollectionViewCell.xib; sourceTree = "<group>"; };
+		80D1315127FDD876009EA04D /* AnimationLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoginController.swift; sourceTree = "<group>"; };
+		80D1315527FDE4D2009EA04D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		80D1315727FE00BD009EA04D /* ReversAnimateLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversAnimateLogin.swift; sourceTree = "<group>"; };
 		80D1F9D827B6475200EA4E0C /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		80DAF94827F0B5B200428C67 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionUIViewGetSubView.swift; sourceTree = "<group>"; };
@@ -342,6 +348,7 @@
 		808E9D9B27BE94EF0089E4A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				80D1314E27FDD773009EA04D /* AnimationsForScreen */,
 				80EAC04A27F6D326006DDB9A /* AllProtocols */,
 				80850ED027DE37CB0078039E /* NewsData */,
 				80BC96F627BB66DA0038FD77 /* UserData.swift */,
@@ -399,6 +406,15 @@
 				80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */,
 			);
 			path = HorizontalCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		80D1314E27FDD773009EA04D /* AnimationsForScreen */ = {
+			isa = PBXGroup;
+			children = (
+				80D1315127FDD876009EA04D /* AnimationLoginController.swift */,
+				80D1315727FE00BD009EA04D /* ReversAnimateLogin.swift */,
+			);
+			path = AnimationsForScreen;
 			sourceTree = "<group>";
 		};
 		80D1F9D727B6471900EA4E0C /* TextFieldValidation */ = {
@@ -509,6 +525,7 @@
 				80850ECE27DE37910078039E /* HomeNewsTableViewController.swift */,
 				80EEE76927E65C01007E27D0 /* PhotoGallaryPressetViewController.swift */,
 				80C7D08527F8440E00E03A27 /* GallaryViewController.swift */,
+				80D1315527FDE4D2009EA04D /* TabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -604,6 +621,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80601F7127DEF62100490809 /* CircleView.swift in Sources */,
+				80D1315627FDE4D2009EA04D /* TabBarController.swift in Sources */,
 				80E7D3C027DA7016009402ED /* HisFriends.swift in Sources */,
 				80E3274A27D4F4BD0014C760 /* issetGroup.swift in Sources */,
 				80BC96F927BB67160038FD77 /* LoginViewController.swift in Sources */,
@@ -624,6 +642,7 @@
 				80850ECB27DE16B00078039E /* CustomSingleCollectionLayout.swift in Sources */,
 				80DAF94E27F16F1D00428C67 /* extensionUIViewGetSubView.swift in Sources */,
 				8025114B27BFF63D007E87C4 /* AllUserGroups.swift in Sources */,
+				80D1315227FDD876009EA04D /* AnimationLoginController.swift in Sources */,
 				80EAC04E27F6D3F0006DDB9A /* CastomlayoutDelegate.swift in Sources */,
 				8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */,
 				80C19AEA27D7C6BA009C34CB /* ExtensionDetailViewController.swift in Sources */,
@@ -634,6 +653,7 @@
 				80E3274827D4F4950014C760 /* setDataSectionTable.swift in Sources */,
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
 				80850EC827DE12480078039E /* SingleCollectionViewCell.swift in Sources */,
+				80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */,
 				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
 				804154F127B62FE900160418 /* SceneDelegate.swift in Sources */,
