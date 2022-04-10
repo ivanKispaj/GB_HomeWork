@@ -11,6 +11,7 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
 
     @IBOutlet weak var gallaryCollection: UICollectionView!
     var delegate: TableViewDelegate!
+    var delegateFrameImages: SetFrameImages!
     var gallaryData: [ImageAndLikeData] = []
     var countCell: Int = 0
     
@@ -50,16 +51,27 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var frameArray: [CGRect] = []
+        let currentFrame: CGRect = collectionView.cellForItem(at: indexPath)!.frame
+        let visibleCells = collectionView.visibleCells
+        for images in visibleCells {
+            frameArray.append(images.frame)
+        }
         switch indexPath.section {
         case 0:
             let first = self.gallaryData.remove(at: indexPath.row)
+          
             self.gallaryData.insert(first, at: 0)
         case 1:
             let first = self.gallaryData.remove(at: indexPath.row + 2)
+            print("cell")
+
             self.gallaryData.insert(first, at: 0)
         default:
             print("IndexOutOfRange")
         }
+      //  print(self)
+        self.delegateFrameImages.setFrameImages(frameArray, currentFrame: currentFrame) //,  collectionView: UICollectionView, indexPath: IndexPath)
         self.delegate.selectRow(nextViewData: self.gallaryData)
         // Выбранная ячейка коллекции!!
        

@@ -9,7 +9,13 @@
 import UIKit
 
 class DetailUserTableViewController: UITableViewController, TableViewDelegate {
-   
+ 
+
+    
+    var frameImages: [CGRect]?
+    var currentFrameImages: CGRect?
+    var collectionFrame: CGRect?
+    
     var nextViewData: [ImageAndLikeData] = []
     var dataTable: [UserDetailsTableData] = []
     var detailAvatar: UIImage? = nil
@@ -32,6 +38,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeaderDetailView()
+    
         dataTable.append(UserDetailsTableData(sectionName: "Friends", sectionType: .Friends ))
         dataTable.append(UserDetailsTableData(sectionName: "Gallary", sectionType: .Gallary))
         dataTable.append(UserDetailsTableData(sectionName: "Single Photo", sectionType: .SingleFoto))
@@ -76,6 +83,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             }
             cell.gallaryData = photo
             cell.delegate = self
+            cell.delegateFrameImages = self
             return cell
         case .SingleFoto:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
@@ -100,6 +108,9 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             return cell
         }
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       //  guard let destionationVC = segue.destination as? PhotoGallaryPressetViewController else {
       //    preconditionFailure("Error")
@@ -107,17 +118,44 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         guard let destinationVC = segue.destination as? GallaryViewController else {
             preconditionFailure("Error")
         }
-      //  destionationVC.dataCollection = self.nextViewData
+     
         destinationVC.arrayPhoto = self.nextViewData
-     //   destinationVC.currentImage = 1
-        destinationVC.title = "Фото галлерея" 
+ 
+        destinationVC.title = "Фото галлерея"
+        destinationVC.currentFrame = self.currentFrameImages
+        destinationVC.frameArray = self.frameImages
+        destinationVC.collectionViewFrame = collectionFrame
     }
 
+//MARK: - TableViewDelegate method
     func selectRow(nextViewData: [ImageAndLikeData]) {
         self.nextViewData = nextViewData
-       // performSegue(withIdentifier: "DetailFriendsPreviewID", sender: nil)
-        performSegue(withIdentifier: "gallaryViewController", sender: nil)
+
+        let indexPath = IndexPath(row: 0, section: 1)
+        
+        var cellRect = self.tableView.rectForRow(at: indexPath) //Получаем область нужной ячейки
+        let contentOffset = tableView.contentOffset //смещение контента таблицы относительно начального нулевого положения
+        let y_coordinate = cellRect.origin.y - contentOffset.y //чистая y координата ячейки относительно экранных координат
+        let cell = tableView.cellForRow(at: indexPath) as! GallaryTableViewCell //Достаём нужную ячейку
+        cellRect.origin.y = y_coordinate
+        
+        self.collectionFrame = cellRect
+       // performSegue(withIdentifier: "gallaryViewController", sender: nil)
         self.tableView.reloadData()
+        
+ //MARK: - Custom push imageGallary
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+           guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "GallaryVievController") as? GallaryViewController else { return }
+       //    nextVC.modalTransitionStyle = .flipHorizontal
+           nextVC.modalPresentationStyle = .fullScreen
+           nextVC.transitioningDelegate = nextVC
+        nextVC.collectionViewFrame = self.collectionFrame
+        nextVC.currentFrame = self.currentFrameImages
+        nextVC.frameArray = self.frameImages
+        nextVC.arrayPhoto = nextViewData
+        nextVC.title = "Фото галлерея"
+        
+           self.present(nextVC, animated: true)
     }
 }
 
@@ -136,5 +174,18 @@ extension DetailUserTableViewController: ProtocolLikeDelegate {
         self.singlePhoto.likeLabel = countLike
     
     }
+    
+
+}
+
+//MARK: - delegate SetFrameImages
+extension DetailUserTableViewController: SetFrameImages {
+    func setFrameImages(_ frame: [CGRect], currentFrame: CGRect) // ,  collectionView: UICollectionView, indexPath: IndexPath)
+    {
+        self.frameImages = frame
+        self.currentFrameImages = currentFrame
+
+    }
+
 
 }

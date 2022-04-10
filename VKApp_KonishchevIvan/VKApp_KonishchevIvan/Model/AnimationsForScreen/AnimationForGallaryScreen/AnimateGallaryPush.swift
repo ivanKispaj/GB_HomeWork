@@ -1,13 +1,13 @@
 //
-//  AnimationLoginController.swift
+//  AnimateGallaryPush.swift
 //  VKApp_KonishchevIvan
 //
-//  Created by Ivan Konishchev on 06.04.2022.
+//  Created by Ivan Konishchev on 10.04.2022.
 //
 
 import UIKit
 
-class AnimationLoginController: NSObject, UIViewControllerAnimatedTransitioning {
+class AnimateGallaryPush: NSObject, UIViewControllerAnimatedTransitioning {
     
     private let animationDuration: TimeInterval = 2
     
@@ -25,23 +25,37 @@ class AnimationLoginController: NSObject, UIViewControllerAnimatedTransitioning 
         
         
         // задаем итоговое местоположение для обоих view каждого из контроллеров, оно совпадает с экраном телефона
-        source.view.layer.anchorPoint = CGPoint(x: 0, y: 0)
-        destination.view.layer.anchorPoint = CGPoint(x: 0, y: 0)
+
         source.view.frame = transitionContext.containerView.frame
         destination.view.frame = transitionContext.containerView.frame
-        // трансформируем положение экрана на который нужно перейти
-        source.view.transform = CGAffineTransform(rotationAngle: 0)
-        destination.view.transform = CGAffineTransform(rotationAngle: 180)
-        // запускаем анимированное возвращение экрана в итоговое положение
-        UIView.animate( withDuration: 1 ) {
-            source.view.transform = CGAffineTransform(rotationAngle: 90)
-            destination.view.transform = CGAffineTransform(rotationAngle: 0)
-         
         
-        } completion: { completion in
-            transitionContext.completeTransition(completion)
+        // трансформируем положение экрана на который нужно перейти
+      
+        destination.view.layer.opacity = 0
+
+        // запускаем анимированное возвращение экрана в итоговое положение
+
+        UIView.animateKeyframes(withDuration: animationDuration, delay: 0, options: .calculationModePaced, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.15, animations: {
+                source.view.layer.opacity = 0
+                
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1, animations: {
+                destination.view.layer.opacity = 1
+            })
+
+            UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.4, animations: {
+                destination.view.transform = .identity
+            })
+        }) { finished in
+            if finished && !transitionContext.transitionWasCancelled {
+            
+                source.view.transform = .identity
+            }
+            transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
         }
-//        source.view.transform = CGAffineTransform.identity
-//        destination.view.transform = CGAffineTransform.identity
+
     }
 }
+
+

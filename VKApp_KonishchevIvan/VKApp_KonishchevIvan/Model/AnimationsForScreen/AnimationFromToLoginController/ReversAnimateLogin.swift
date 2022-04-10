@@ -26,9 +26,12 @@ class ReversAnimateLogin: NSObject, UIViewControllerAnimatedTransitioning {
         
 //         задаем итоговое местоположение для обоих view каждого из контроллеров, оно совпадает с экраном телефона
         source.view.layer.anchorPoint = CGPoint(x: 0, y: 0)
+        source.view.transform = CGAffineTransform.identity
+        destination.view.transform = CGAffineTransform.identity
         source.view.frame = transitionContext.containerView.frame
+        destination.view.frame = source.view.frame
      //    трансформируем положение экрана на который нужно перейти
-        source.view.transform = CGAffineTransform(rotationAngle: 0)
+ 
         destination.view.transform = CGAffineTransform(rotationAngle: 360)
    //      запускаем анимированное возвращение экрана в итоговое положение
         UIView.animate( withDuration: 1) {

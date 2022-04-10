@@ -279,7 +279,7 @@
         <!--Gallary View Controller-->
         <scene sceneID="Ze9-wW-EdZ">
             <objects>
-                <viewController id="cXd-IT-8hq" customClass="GallaryViewController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GallaryVievController" id="cXd-IT-8hq" customClass="GallaryViewController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xcV-MZ-pT1">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -377,7 +377,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HZt-2Q-BkT"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="XYz-jq-Z4F" firstAttribute="bottom" secondItem="HZt-2Q-BkT" secondAttribute="bottom" id="IC9-gJ-w9f"/>
                             <constraint firstItem="XYz-jq-Z4F" firstAttribute="leading" secondItem="HZt-2Q-BkT" secondAttribute="leading" id="RZB-Jf-377"/>
@@ -451,7 +451,7 @@
         <!--My Friends-->
         <scene sceneID="MEA-QI-6hs">
             <objects>
-                <navigationController id="lRV-zo-xOK" sceneMemberID="viewController">
+                <navigationController id="lRV-zo-xOK" customClass="CustomNavigationController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Friends" image="rectangle.inset.filled.and.person.filled" catalog="system" id="f0L-Ej-T7I"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gKb-jT-QOC">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>

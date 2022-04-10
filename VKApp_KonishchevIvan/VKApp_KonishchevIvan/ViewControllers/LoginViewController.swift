@@ -66,7 +66,6 @@ extension LoginViewController {
         if user.useremail == emailInput && user.userPassword == passwordInput {
          let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController else { return }
-            nextVC.modalTransitionStyle = .flipHorizontal
             nextVC.modalPresentationStyle = .fullScreen
             nextVC.transitioningDelegate = nextVC
             self.present(nextVC, animated: true)

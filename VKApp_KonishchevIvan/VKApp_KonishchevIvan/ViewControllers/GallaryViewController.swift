@@ -9,10 +9,13 @@ import UIKit
 
 class GallaryViewController: UIViewController, ProtocolLikeDelegate {
 
-    
+    var frameArray: [CGRect]?
+    var currentFrame: CGRect?
+    var collectionViewFrame: CGRect?
+    var currentImageFrameSize: CGRect?
 // Для определения направления скрола
     enum DirectionImageState {
-        case left, right, error, uncnown
+        case left, right, error, uncnown, top, bottom
     }
    
     @IBOutlet weak var controllForLike: ControlForLike!
@@ -47,6 +50,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         if self.arrayPhoto.count < 2 {
             self.nextImage = 0
             self.lastImage = true
@@ -57,10 +61,59 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
         self.setLikeData()
         self.yPos = (self.view.bounds.height / 2)
         setViewAndImagesToView()
+        
+        self.currentImageFrameSize = self.currentImageView.frame
+
+        let x = self.collectionViewFrame!.origin.x + (self.currentFrame?.origin.x)!
+        var y = self.collectionViewFrame!.origin.y + (self.currentFrame?.origin.y)!
+        y = y - (currentImageFrameSize?.origin.y)!
+        let xScale = (self.currentFrame?.width)! / (self.currentImageFrameSize?.width)!
+        let yScale = (self.currentFrame?.height)! / (self.currentImageFrameSize?.height)!
+  
+        let transition = CGAffineTransform(translationX: x - ( y / 2), y: y)
+ 
+        let scale = CGAffineTransform(scaleX: xScale, y: yScale)
+        self.currentImageView.transform =  scale.concatenating(transition)
         self.viewImage.addGestureRecognizer(panGesture)
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
+        UIImageView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModePaced, animations: {
+            UIImageView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 2, animations: {
+                let transition = CGAffineTransform(translationX: 0, y: 0)
+                let scale = CGAffineTransform(scaleX: 1, y: 1)
+                self.currentImageView.transform = scale.concatenating(transition)
+            })
+        }) { finish in
+            
+        }
+     
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+      
+        super.viewWillDisappear(animated)
+        
+        let x = self.collectionViewFrame!.origin.x + (self.currentFrame?.origin.x)!
+        var y = self.collectionViewFrame!.origin.y + (self.currentFrame?.origin.y)!
+        y = y - (currentImageFrameSize?.origin.y)!
+        let xScale = (self.currentFrame?.width)! / (self.currentImageFrameSize?.width)!
+        let yScale = (self.currentFrame?.height)! / (self.currentImageFrameSize?.height)!
+       
+        UIImageView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModePaced, animations: {
+            UIImageView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 2, animations: {
+                let transition = CGAffineTransform(translationX: x - ( y / 2), y: y)
+         
+                let scale = CGAffineTransform(scaleX: xScale, y: yScale)
+                self.currentImageView.transform =  scale.concatenating(transition)
+            })
+        }) { finish in
+            
+        }
+    }
     @objc func movementImages(_ position: UIPanGestureRecognizer) {
 
       
@@ -72,18 +125,30 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
             //Устанавливаем направление движения!
             let positionX = position.velocity(in: self.currentImageView).x
             // Определяем направление движения!
-
+            let positionY = position.velocity(in: self.currentImageView).y
+            
                 if  positionX < 0 {
                     self.directionOf = .left
-                
+                  
                 }else if positionX > 0 {
                     self.directionOf = .right
                   
                 }else {
-                    self.directionOf = .error
-                    print("direction False")
+                    if positionY < 0 && positionX == 0 {
+                        self.directionOf = .top
+                    }else if positionY > 0 && positionX == 0{
+                        self.directionOf = .bottom
+                    }
                 }
-
+            if self.directionOf == .top {
+                
+                print("top")
+            }else if self.directionOf == .bottom {
+              
+                self.dismiss(animated: true, completion: nil)
+                
+                
+            }else {
             if self.directionOf == .left {
                 self.setViewImagesFrame()
 // Делаем nextImageView поверх currentImageView
@@ -126,7 +191,6 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                 let nextImage = self.currentImage - 1
                 let size = getSizeImage(nextImage)
     // Вычисляем и устанавливаем frame нижнему изображению при правом свайпе!
-           //     let height = size.height / size.width
                 self.nextImageView.frame = CGRect(x: self.currentImageView.frame.origin.x, y: self.yPos - ( size.height / 2), width: size.width, height: size.height)
    // Делаем currentImageView поверх nextImageView
                 self.viewImage.bringSubviewToFront(self.currentImageView)
@@ -163,7 +227,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                     self.currentImageView.transform = CGAffineTransform(translationX: x, y: self.yPos - self.yPos)
                         })
             }
-            
+            }
 //   Вычисление коэффициэнта смещения анимации!!
         case .changed:
 
@@ -245,6 +309,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                     }
                 }
             }
+            
         case .cancelled:
             print("cnaceled")
         case .failed:
@@ -252,9 +317,10 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
         @unknown default:
             print("Uncnow State")
         }
-}
+        }
+    }
+    
 
-}
 
 //MARK: - Добавляем на экран View на которую добавляем два ImageView
 extension GallaryViewController {
@@ -292,6 +358,7 @@ extension GallaryViewController {
         self.nextImageView = UIImageView()
         self.setViewImagesFrame()
     }
+    
     private func setViewImagesFrame() {
         var size = getSizeImage(self.currentImage)
         self.currentImageView.frame = CGRect(x: 0, y: self.yPos - (size.height / 2), width: size.width, height: size.height)
@@ -322,6 +389,8 @@ extension GallaryViewController {
         self.nextImageView.transform = CGAffineTransform.identity
         self.currentImageView.transform = CGAffineTransform.identity
     }
+ 
+//MARK: - ProtocolLikeDelegate methods
     
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
         let like = [self.arrayPhoto[indexPath.row].likeLabel : self.arrayPhoto[indexPath.row].likeStatus]
@@ -335,3 +404,15 @@ extension GallaryViewController {
     }
 }
 
+//MARK: - Animation delegate
+extension GallaryViewController : UIViewControllerTransitioningDelegate {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return AnimateGallaryPop()
+    
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+      
+        return AnimateGallaryPush()
+    }
+}

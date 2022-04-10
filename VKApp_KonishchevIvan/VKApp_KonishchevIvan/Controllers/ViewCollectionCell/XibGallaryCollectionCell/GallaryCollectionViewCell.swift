@@ -16,4 +16,6 @@ class GallaryCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
 
+    
+
 }

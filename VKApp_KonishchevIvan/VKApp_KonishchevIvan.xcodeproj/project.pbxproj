@@ -58,6 +58,7 @@
 		80D1315227FDD876009EA04D /* AnimationLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1315127FDD876009EA04D /* AnimationLoginController.swift */; };
 		80D1315627FDE4D2009EA04D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1315527FDE4D2009EA04D /* TabBarController.swift */; };
 		80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1315727FE00BD009EA04D /* ReversAnimateLogin.swift */; };
+		80D1315C27FEA85E009EA04D /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1315B27FEA85E009EA04D /* CustomNavigationController.swift */; };
 		80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1F9D827B6475200EA4E0C /* Validators.swift */; };
 		80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94827F0B5B200428C67 /* LoadingView.swift */; };
 		80DAF94E27F16F1D00428C67 /* extensionUIViewGetSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */; };
@@ -74,6 +75,11 @@
 		80EAC05027F6D453006DDB9A /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAC04F27F6D453006DDB9A /* TableViewDelegate.swift */; };
 		80EAC05227F6D64B006DDB9A /* UserGroupTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAC05127F6D64B006DDB9A /* UserGroupTableViewDelegate.swift */; };
 		80EEE76A27E65C01007E27D0 /* PhotoGallaryPressetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EEE76927E65C01007E27D0 /* PhotoGallaryPressetViewController.swift */; };
+		80F4BCC327FFEBCE008E07B0 /* AnimationPushNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F4BCC227FFEBCE008E07B0 /* AnimationPushNavigationController.swift */; };
+		80F4BCC527FFEC1F008E07B0 /* AnimationPopNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F4BCC427FFEC1F008E07B0 /* AnimationPopNavigationController.swift */; };
+		80F4BCC92802E0A2008E07B0 /* SetFrameImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F4BCC82802E0A2008E07B0 /* SetFrameImages.swift */; };
+		80F4BCCC28031BD5008E07B0 /* AnimateGallaryPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F4BCCB28031BD5008E07B0 /* AnimateGallaryPush.swift */; };
+		80F4BCCE28031BF6008E07B0 /* AnimateGallaryPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F4BCCD28031BF6008E07B0 /* AnimateGallaryPop.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +136,7 @@
 		80D1315127FDD876009EA04D /* AnimationLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoginController.swift; sourceTree = "<group>"; };
 		80D1315527FDE4D2009EA04D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		80D1315727FE00BD009EA04D /* ReversAnimateLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversAnimateLogin.swift; sourceTree = "<group>"; };
+		80D1315B27FEA85E009EA04D /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		80D1F9D827B6475200EA4E0C /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		80DAF94827F0B5B200428C67 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		80DAF94D27F16F1D00428C67 /* extensionUIViewGetSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionUIViewGetSubView.swift; sourceTree = "<group>"; };
@@ -146,6 +153,11 @@
 		80EAC04F27F6D453006DDB9A /* TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
 		80EAC05127F6D64B006DDB9A /* UserGroupTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupTableViewDelegate.swift; sourceTree = "<group>"; };
 		80EEE76927E65C01007E27D0 /* PhotoGallaryPressetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallaryPressetViewController.swift; sourceTree = "<group>"; };
+		80F4BCC227FFEBCE008E07B0 /* AnimationPushNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationPushNavigationController.swift; sourceTree = "<group>"; };
+		80F4BCC427FFEC1F008E07B0 /* AnimationPopNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationPopNavigationController.swift; sourceTree = "<group>"; };
+		80F4BCC82802E0A2008E07B0 /* SetFrameImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFrameImages.swift; sourceTree = "<group>"; };
+		80F4BCCB28031BD5008E07B0 /* AnimateGallaryPush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateGallaryPush.swift; sourceTree = "<group>"; };
+		80F4BCCD28031BF6008E07B0 /* AnimateGallaryPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateGallaryPop.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +205,8 @@
 		80233AB227BF5A870040D702 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				80D1315A27FEA804009EA04D /* CustomTabBarControllers */,
+				80D1315927FEA7F4009EA04D /* CustomNavigationControllers */,
 				80DAF94727F0B57400428C67 /* LoadingIndicatorView */,
 				80DAF94627F0AF3F00428C67 /* SearchBarControllers */,
 				80DAF94127EF57AC00428C67 /* UIControlls */,
@@ -411,10 +425,27 @@
 		80D1314E27FDD773009EA04D /* AnimationsForScreen */ = {
 			isa = PBXGroup;
 			children = (
-				80D1315127FDD876009EA04D /* AnimationLoginController.swift */,
-				80D1315727FE00BD009EA04D /* ReversAnimateLogin.swift */,
+				80F4BCCA28031B97008E07B0 /* AnimationForGallaryScreen */,
+				80F4BCC127FFEB62008E07B0 /* AnimationFriendsNavigationController */,
+				80F4BCC027FFEB3B008E07B0 /* AnimationFromToLoginController */,
 			);
 			path = AnimationsForScreen;
+			sourceTree = "<group>";
+		};
+		80D1315927FEA7F4009EA04D /* CustomNavigationControllers */ = {
+			isa = PBXGroup;
+			children = (
+				80D1315B27FEA85E009EA04D /* CustomNavigationController.swift */,
+			);
+			path = CustomNavigationControllers;
+			sourceTree = "<group>";
+		};
+		80D1315A27FEA804009EA04D /* CustomTabBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				80D1315527FDE4D2009EA04D /* TabBarController.swift */,
+			);
+			path = CustomTabBarControllers;
 			sourceTree = "<group>";
 		};
 		80D1F9D727B6471900EA4E0C /* TextFieldValidation */ = {
@@ -510,8 +541,36 @@
 				80EAC04D27F6D3F0006DDB9A /* CastomlayoutDelegate.swift */,
 				80EAC04F27F6D453006DDB9A /* TableViewDelegate.swift */,
 				80EAC05127F6D64B006DDB9A /* UserGroupTableViewDelegate.swift */,
+				80F4BCC82802E0A2008E07B0 /* SetFrameImages.swift */,
 			);
 			path = AllProtocols;
+			sourceTree = "<group>";
+		};
+		80F4BCC027FFEB3B008E07B0 /* AnimationFromToLoginController */ = {
+			isa = PBXGroup;
+			children = (
+				80D1315127FDD876009EA04D /* AnimationLoginController.swift */,
+				80D1315727FE00BD009EA04D /* ReversAnimateLogin.swift */,
+			);
+			path = AnimationFromToLoginController;
+			sourceTree = "<group>";
+		};
+		80F4BCC127FFEB62008E07B0 /* AnimationFriendsNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				80F4BCC227FFEBCE008E07B0 /* AnimationPushNavigationController.swift */,
+				80F4BCC427FFEC1F008E07B0 /* AnimationPopNavigationController.swift */,
+			);
+			path = AnimationFriendsNavigationController;
+			sourceTree = "<group>";
+		};
+		80F4BCCA28031B97008E07B0 /* AnimationForGallaryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				80F4BCCB28031BD5008E07B0 /* AnimateGallaryPush.swift */,
+				80F4BCCD28031BF6008E07B0 /* AnimateGallaryPop.swift */,
+			);
+			path = AnimationForGallaryScreen;
 			sourceTree = "<group>";
 		};
 		80F829A227BE03FC00D4FB53 /* ViewControllers */ = {
@@ -525,7 +584,6 @@
 				80850ECE27DE37910078039E /* HomeNewsTableViewController.swift */,
 				80EEE76927E65C01007E27D0 /* PhotoGallaryPressetViewController.swift */,
 				80C7D08527F8440E00E03A27 /* GallaryViewController.swift */,
-				80D1315527FDE4D2009EA04D /* TabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -624,6 +682,7 @@
 				80D1315627FDE4D2009EA04D /* TabBarController.swift in Sources */,
 				80E7D3C027DA7016009402ED /* HisFriends.swift in Sources */,
 				80E3274A27D4F4BD0014C760 /* issetGroup.swift in Sources */,
+				80F4BCCC28031BD5008E07B0 /* AnimateGallaryPush.swift in Sources */,
 				80BC96F927BB67160038FD77 /* LoginViewController.swift in Sources */,
 				80601F7527DF095C00490809 /* ShadowViewRadius.swift in Sources */,
 				805E76ED27BC17670033098D /* Extension_LoginController.swift in Sources */,
@@ -632,7 +691,9 @@
 				80601F7A27DF1ECD00490809 /* SetHeaderInSection.swift in Sources */,
 				806284C927DDB1A900D37674 /* CastomCollectionLayout.swift in Sources */,
 				808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */,
+				80D1315C27FEA85E009EA04D /* CustomNavigationController.swift in Sources */,
 				80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */,
+				80F4BCCE28031BF6008E07B0 /* AnimateGallaryPop.swift in Sources */,
 				80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */,
 				80850ED627DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.swift in Sources */,
 				80CCB6B427E4E3E700BC2085 /* CastomHorizontalView.swift in Sources */,
@@ -654,6 +715,7 @@
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
 				80850EC827DE12480078039E /* SingleCollectionViewCell.swift in Sources */,
 				80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */,
+				80F4BCC527FFEC1F008E07B0 /* AnimationPopNavigationController.swift in Sources */,
 				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
 				804154F127B62FE900160418 /* SceneDelegate.swift in Sources */,
@@ -667,11 +729,13 @@
 				80C7D08627F8440E00E03A27 /* GallaryViewController.swift in Sources */,
 				80BC96F727BB66DA0038FD77 /* UserData.swift in Sources */,
 				80850EC327DE08980078039E /* SinglePhotoTableViewCell.swift in Sources */,
+				80F4BCC327FFEBCE008E07B0 /* AnimationPushNavigationController.swift in Sources */,
 				80EAC04C27F6D35D006DDB9A /* ProtocolLikeDelegate.swift in Sources */,
 				80850ECD27DE20350078039E /* ControlForLike.swift in Sources */,
 				80EEE76A27E65C01007E27D0 /* PhotoGallaryPressetViewController.swift in Sources */,
 				806284D127DDB68E00D37674 /* UserDetailsTableData.swift in Sources */,
 				80EAC05227F6D64B006DDB9A /* UserGroupTableViewDelegate.swift in Sources */,
+				80F4BCC92802E0A2008E07B0 /* SetFrameImages.swift in Sources */,
 				80DD23A727D3332000F78417 /* TableViewCellXib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
