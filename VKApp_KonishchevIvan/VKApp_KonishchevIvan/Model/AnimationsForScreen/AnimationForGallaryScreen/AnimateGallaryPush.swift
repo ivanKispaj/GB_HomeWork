@@ -22,8 +22,7 @@ class AnimateGallaryPush: NSObject, UIViewControllerAnimatedTransitioning {
         
         // Добавляем destination в контейнер
         transitionContext.containerView.addSubview(destination.view)
-        
-        
+ 
         // задаем итоговое местоположение для обоих view каждого из контроллеров, оно совпадает с экраном телефона
 
         source.view.frame = transitionContext.containerView.frame
@@ -36,15 +35,15 @@ class AnimateGallaryPush: NSObject, UIViewControllerAnimatedTransitioning {
         // запускаем анимированное возвращение экрана в итоговое положение
 
         UIView.animateKeyframes(withDuration: animationDuration, delay: 0, options: .calculationModePaced, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.15, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1, animations: {
                 source.view.layer.opacity = 0
                 
             })
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.1, animations: {
                 destination.view.layer.opacity = 1
             })
 
-            UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.4, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.1, animations: {
                 destination.view.transform = .identity
             })
         }) { finished in

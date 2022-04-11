@@ -39,18 +39,18 @@ class AnimationPushNavigationController: NSObject, UIViewControllerAnimatedTrans
         // запускаем анимированное возвращение экрана в итоговое положение
 
         UIView.animateKeyframes(withDuration: animationDuration, delay: 0, options: .calculationModePaced, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.75, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.3, animations: {
                 let translation = CGAffineTransform(translationX: -4500, y: -150)
                 let scale = CGAffineTransform(scaleX: 0.1, y: 0.1)
                 source.view.transform = translation.concatenating(scale)
             })
-            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.4, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.3, animations: {
                 let translation = CGAffineTransform(translationX: UIScreen.main.bounds.width / 2,
                                                     y: -150)
                 let rotate = CGAffineTransform(rotationAngle: 25)
                 destination.view.transform = translation.concatenating(rotate)
             })
-            UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.4, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.3, animations: {
                 let translation = CGAffineTransform(translationX: 0, y: 0)
                 let rotate = CGAffineTransform(rotationAngle: 0)
                 destination.view.transform = translation.concatenating(rotate)

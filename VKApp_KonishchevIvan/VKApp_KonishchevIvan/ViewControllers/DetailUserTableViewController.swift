@@ -39,7 +39,8 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeaderDetailView()
-    
+     
+   
         dataTable.append(UserDetailsTableData(sectionName: "Friends", sectionType: .Friends ))
         dataTable.append(UserDetailsTableData(sectionName: "Gallary", sectionType: .Gallary))
         dataTable.append(UserDetailsTableData(sectionName: "Single Photo", sectionType: .SingleFoto))
@@ -48,7 +49,10 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         tableView.register(UINib(nibName: "SinglePhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleTableCellID")
     }
     
- 
+    override func transition(from fromViewController: UIViewController, to toViewController: UIViewController, duration: TimeInterval, options: UIView.AnimationOptions = [], animations: (() -> Void)?, completion: ((Bool) -> Void)? = nil) {
+        fromViewController.view.alpha = 0
+        toViewController.view.alpha = 1
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -191,3 +195,4 @@ extension DetailUserTableViewController: SetFrameImages {
     }
 
 }
+

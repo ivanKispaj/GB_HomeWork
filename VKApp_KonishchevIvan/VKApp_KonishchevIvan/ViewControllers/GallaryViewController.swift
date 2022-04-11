@@ -63,6 +63,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
         self.setLikeData()
         self.yPos = (self.view.bounds.height / 2)
         setViewAndImagesToView()
+      
         
         self.currentImageFrameSize = self.currentImageView.frame
 
@@ -71,51 +72,68 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
         y = y - (currentImageFrameSize?.origin.y)!
         let xScale = (self.currentFrame?.width)! / (self.currentImageFrameSize?.width)!
         let yScale = (self.currentFrame?.height)! / (self.currentImageFrameSize?.height)!
-  
-        let transition = CGAffineTransform(translationX: x - ( y / 2), y: y)
- 
-        let scale = CGAffineTransform(scaleX: xScale, y: yScale)
-        self.currentImageView.transform =  scale.concatenating(transition)
+        
+        self.currentImageView.transform = CGAffineTransform(scaleX: xScale, y: yScale)
+        var nx: CGFloat = 0
+        var ny: CGFloat = 0
+            nx = x - self.currentImageView.frame.origin.x
+            ny = self.currentImageView.frame.origin.y - (self.currentImageFrameSize?.origin.y)!
+        self.currentImageView.transform = self.currentImageView.transform.concatenating(CGAffineTransform(translationX: nx, y: y - ny))
         self.viewImage.addGestureRecognizer(panGesture)
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        UIImageView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModePaced, animations: {
-            UIImageView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 2, animations: {
+ 
+        UIImageView.animateKeyframes(withDuration: 1.5, delay: 0.5, options: .calculationModePaced, animations: {
+            UIImageView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 1, animations: {
                 let transition = CGAffineTransform(translationX: 0, y: 0)
+                
                 let scale = CGAffineTransform(scaleX: 1, y: 1)
-                self.currentImageView.transform = scale.concatenating(transition)
+                self.currentImageView.transform = transition.concatenating(scale)
             })
         }) { finish in
-            
+           // self.currentImageView.transform = CGAffineTransform.identity
         }
-     
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-      
         super.viewWillDisappear(animated)
+        let indexIsset = self.frameArray?.indices.contains(self.currentImage)
+        if indexIsset! {
+            self.currentFrame = self.frameArray![self.currentImage]
+        } else {
+            var x = self.view.frame.maxX / 2
+            let width = self.currentFrame?.width
+            let height = self.currentFrame?.height
+            x = x - (width! / 2)
         
+            self.currentFrame = CGRect(x: x, y: 800, width: width!, height: height!)
+        }
+        self.currentImageFrameSize = self.currentImageView.frame
         let x = self.collectionViewFrame!.origin.x + (self.currentFrame?.origin.x)!
         var y = self.collectionViewFrame!.origin.y + (self.currentFrame?.origin.y)!
         y = y - (currentImageFrameSize?.origin.y)!
         let xScale = (self.currentFrame?.width)! / (self.currentImageFrameSize?.width)!
         let yScale = (self.currentFrame?.height)! / (self.currentImageFrameSize?.height)!
-       
-        UIImageView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModePaced, animations: {
-            UIImageView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 2, animations: {
-                let transition = CGAffineTransform(translationX: x - ( y / 2), y: y)
-         
-                let scale = CGAffineTransform(scaleX: xScale, y: yScale)
-                self.currentImageView.transform =  scale.concatenating(transition)
+
+        var nx: CGFloat = 0
+        var ny: CGFloat = 0
+        UIImageView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModePaced, animations: {
+            UIImageView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1, animations: {
+                self.currentImageView.transform = CGAffineTransform(scaleX: xScale, y: yScale)
+                nx = x - self.currentImageView.frame.origin.x
+                ny = self.currentImageView.frame.origin.y - (self.currentImageFrameSize?.origin.y)!
+                self.currentImageView.transform = self.currentImageView.transform.concatenating(CGAffineTransform(translationX: nx, y: y - ny))
+
             })
+      
         }) { finish in
-            
+            self.currentImageView.removeFromSuperview()
         }
     }
+    
     @objc func movementImages(_ position: UIPanGestureRecognizer) {
 
       

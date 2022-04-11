@@ -50,7 +50,7 @@ class AnimationPopNavigationController: NSObject, UIViewControllerAnimatedTransi
                 let rotate = CGAffineTransform(rotationAngle: 0)
                 source.view.transform = translation.concatenating(rotate)
             })
-            UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.3, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.3, animations: {
                 let scale = CGAffineTransform(scaleX: 1, y: 1)
                 let transition = CGAffineTransform(translationX: 0, y: 0)
                 destination.view.transform = transition.concatenating(scale)
