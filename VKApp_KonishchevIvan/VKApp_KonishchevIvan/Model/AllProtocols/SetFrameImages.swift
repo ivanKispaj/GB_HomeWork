@@ -12,5 +12,6 @@ protocol SetFrameImages {
     var currentFrameImages: CGRect? {get set}
     var collectionFrame: CGRect? {get set}
     func setFrameImages(_ frame: [CGRect], currentFrame: CGRect)
+    func setCurrentImage(_ currentImage: Int)
 }
 

@@ -50,7 +50,9 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if self.currentImage != 0 && self.currentImage != (self.arrayPhoto.count - 1) {
+            self.nextImage = self.currentImage + 1
+        }
         if self.arrayPhoto.count < 2 {
             self.nextImage = 0
             self.lastImage = true

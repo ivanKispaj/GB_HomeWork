@@ -15,6 +15,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var frameImages: [CGRect]?
     var currentFrameImages: CGRect?
     var collectionFrame: CGRect?
+    var currentImage: Int?
     
     var nextViewData: [ImageAndLikeData] = []
     var dataTable: [UserDetailsTableData] = []
@@ -136,7 +137,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         var cellRect = self.tableView.rectForRow(at: indexPath) //Получаем область нужной ячейки
         let contentOffset = tableView.contentOffset //смещение контента таблицы относительно начального нулевого положения
         let y_coordinate = cellRect.origin.y - contentOffset.y //чистая y координата ячейки относительно экранных координат
-        let cell = tableView.cellForRow(at: indexPath) as! GallaryTableViewCell //Достаём нужную ячейку
         cellRect.origin.y = y_coordinate
         
         self.collectionFrame = cellRect
@@ -154,7 +154,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         nextVC.frameArray = self.frameImages
         nextVC.arrayPhoto = nextViewData
         nextVC.title = "Фото галлерея"
-        
+        nextVC.currentImage = self.currentImage!
            self.present(nextVC, animated: true)
     }
 }
@@ -180,12 +180,14 @@ extension DetailUserTableViewController: ProtocolLikeDelegate {
 
 //MARK: - delegate SetFrameImages
 extension DetailUserTableViewController: SetFrameImages {
-    func setFrameImages(_ frame: [CGRect], currentFrame: CGRect) // ,  collectionView: UICollectionView, indexPath: IndexPath)
-    {
+    func setFrameImages(_ frame: [CGRect], currentFrame: CGRect) {
         self.frameImages = frame
         self.currentFrameImages = currentFrame
 
     }
 
+    func setCurrentImage(_ currentImage: Int) {
+        self.currentImage = currentImage
+    }
 
 }

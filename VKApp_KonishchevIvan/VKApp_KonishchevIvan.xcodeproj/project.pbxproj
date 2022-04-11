@@ -80,6 +80,7 @@
 		80F4BCC92802E0A2008E07B0 /* SetFrameImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F4BCC82802E0A2008E07B0 /* SetFrameImages.swift */; };
 		80F4BCCC28031BD5008E07B0 /* AnimateGallaryPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F4BCCB28031BD5008E07B0 /* AnimateGallaryPush.swift */; };
 		80F4BCCE28031BF6008E07B0 /* AnimateGallaryPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F4BCCD28031BF6008E07B0 /* AnimateGallaryPop.swift */; };
+		80F4BCD12803E34E008E07B0 /* NetworkSessionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F4BCD02803E34E008E07B0 /* NetworkSessionData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +159,7 @@
 		80F4BCC82802E0A2008E07B0 /* SetFrameImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFrameImages.swift; sourceTree = "<group>"; };
 		80F4BCCB28031BD5008E07B0 /* AnimateGallaryPush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateGallaryPush.swift; sourceTree = "<group>"; };
 		80F4BCCD28031BF6008E07B0 /* AnimateGallaryPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateGallaryPop.swift; sourceTree = "<group>"; };
+		80F4BCD02803E34E008E07B0 /* NetworkSessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 		80233AB127BF59580040D702 /* Resourse */ = {
 			isa = PBXGroup;
 			children = (
+				80F4BCCF2803E328008E07B0 /* InternetConnections */,
 				80D1F9D727B6471900EA4E0C /* TextFieldValidation */,
 				804154F427B62FE900160418 /* Main.storyboard */,
 				804154F927B62FEB00160418 /* LaunchScreen.storyboard */,
@@ -573,6 +576,14 @@
 			path = AnimationForGallaryScreen;
 			sourceTree = "<group>";
 		};
+		80F4BCCF2803E328008E07B0 /* InternetConnections */ = {
+			isa = PBXGroup;
+			children = (
+				80F4BCD02803E34E008E07B0 /* NetworkSessionData.swift */,
+			);
+			path = InternetConnections;
+			sourceTree = "<group>";
+		};
 		80F829A227BE03FC00D4FB53 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -688,6 +699,7 @@
 				805E76ED27BC17670033098D /* Extension_LoginController.swift in Sources */,
 				808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */,
 				8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */,
+				80F4BCD12803E34E008E07B0 /* NetworkSessionData.swift in Sources */,
 				80601F7A27DF1ECD00490809 /* SetHeaderInSection.swift in Sources */,
 				806284C927DDB1A900D37674 /* CastomCollectionLayout.swift in Sources */,
 				808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */,

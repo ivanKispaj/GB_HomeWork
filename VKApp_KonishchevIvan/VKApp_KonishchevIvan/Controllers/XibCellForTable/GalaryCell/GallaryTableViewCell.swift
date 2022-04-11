@@ -57,20 +57,18 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         for images in visibleCells {
             frameArray.append(images.frame)
         }
+        var currentImage = 0
         switch indexPath.section {
+         
         case 0:
-            let first = self.gallaryData.remove(at: indexPath.row)
-          
-            self.gallaryData.insert(first, at: 0)
+            currentImage = indexPath.row
         case 1:
-            let first = self.gallaryData.remove(at: indexPath.row + 2)
-            print("cell")
-
-            self.gallaryData.insert(first, at: 0)
+            currentImage = indexPath.row + 2
         default:
             print("IndexOutOfRange")
         }
-      //  print(self)
+      
+        self.delegateFrameImages.setCurrentImage(currentImage)
         self.delegateFrameImages.setFrameImages(frameArray, currentFrame: currentFrame) //,  collectionView: UICollectionView, indexPath: IndexPath)
         self.delegate.selectRow(nextViewData: self.gallaryData)
         // Выбранная ячейка коллекции!!
