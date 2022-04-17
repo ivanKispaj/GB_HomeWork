@@ -10,7 +10,7 @@ import Foundation
 class NetworkSessionData {
     
     static var shared = NetworkSessionData()
-    var tokenL: String?
+    var token: String?
     var userId: Int?
     
     private init(){}
