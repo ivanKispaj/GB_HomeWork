@@ -12,6 +12,8 @@
 		639B425B280C19190097D53F /* getPhotoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425A280C19190097D53F /* getPhotoUser.swift */; };
 		639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425C280C1BE90097D53F /* getUserGroups.swift */; };
 		639B425F280C252F0097D53F /* getGroupsByRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425E280C252F0097D53F /* getGroupsByRequest.swift */; };
+		639B4262280D2D200097D53F /* unixTimeConvertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4261280D2D200097D53F /* unixTimeConvertion.swift */; };
+		639B4264280D36430097D53F /* chekingValidityUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4263280D36430097D53F /* chekingValidityUrl.swift */; };
 		8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */; };
 		8003DA2827D5E1E00048B191 /* ExtendTableUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */; };
 		8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */; };
@@ -49,7 +51,6 @@
 		808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */; };
 		808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9D9F27BE98BC0089E4A4 /* Friends.swift */; };
 		80BC96F727BB66DA0038FD77 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F627BB66DA0038FD77 /* UserData.swift */; };
-		80BC96F927BB67160038FD77 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC96F827BB67160038FD77 /* LoginViewController.swift */; };
 		80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */; };
 		80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C19ACB27D76C6E009C34CB /* CouruselTableViewCell.swift */; };
 		80C19ACE27D76C6E009C34CB /* CouruselTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80C19ACC27D76C6E009C34CB /* CouruselTableViewCell.xib */; };
@@ -95,6 +96,8 @@
 		639B425A280C19190097D53F /* getPhotoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getPhotoUser.swift; sourceTree = "<group>"; };
 		639B425C280C1BE90097D53F /* getUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserGroups.swift; sourceTree = "<group>"; };
 		639B425E280C252F0097D53F /* getGroupsByRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getGroupsByRequest.swift; sourceTree = "<group>"; };
+		639B4261280D2D200097D53F /* unixTimeConvertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unixTimeConvertion.swift; sourceTree = "<group>"; };
+		639B4263280D36430097D53F /* chekingValidityUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chekingValidityUrl.swift; sourceTree = "<group>"; };
 		8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendTableUserCell.swift; sourceTree = "<group>"; };
 		8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendTableUserCell.xib; sourceTree = "<group>"; };
 		8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupTableViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +137,6 @@
 		808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		808E9D9F27BE98BC0089E4A4 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		80BC96F627BB66DA0038FD77 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		80BC96F827BB67160038FD77 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailUserTableViewController.swift; sourceTree = "<group>"; };
 		80C19ACB27D76C6E009C34CB /* CouruselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouruselTableViewCell.swift; sourceTree = "<group>"; };
 		80C19ACC27D76C6E009C34CB /* CouruselTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouruselTableViewCell.xib; sourceTree = "<group>"; };
@@ -188,7 +190,6 @@
 		639B4255280C0A100097D53F /* VKRequests */ = {
 			isa = PBXGroup;
 			children = (
-				639B4256280C0A5C0097D53F /* getListOfFriends.swift */,
 				639B425A280C19190097D53F /* getPhotoUser.swift */,
 				639B425C280C1BE90097D53F /* getUserGroups.swift */,
 				639B425E280C252F0097D53F /* getGroupsByRequest.swift */,
@@ -196,13 +197,117 @@
 			path = VKRequests;
 			sourceTree = "<group>";
 		};
-		8003DA2327D5E1680048B191 /* SimpleCell */ = {
+		639B4260280D2D030097D53F /* Hellpers */ = {
+			isa = PBXGroup;
+			children = (
+				639B4261280D2D200097D53F /* unixTimeConvertion.swift */,
+				639B4263280D36430097D53F /* chekingValidityUrl.swift */,
+			);
+			path = Hellpers;
+			sourceTree = "<group>";
+		};
+		639B4265280D394A0097D53F /* FriendScene */ = {
+			isa = PBXGroup;
+			children = (
+				639B4269280D3E4A0097D53F /* extensionFriendsController */,
+				639B4268280D3D470097D53F /* FriendsView */,
+				639B4266280D39760097D53F /* Model */,
+				639B4267280D3CF30097D53F /* FriendsService */,
+			);
+			path = FriendScene;
+			sourceTree = "<group>";
+		};
+		639B4266280D39760097D53F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				808E9D9F27BE98BC0089E4A4 /* Friends.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		639B4267280D3CF30097D53F /* FriendsService */ = {
+			isa = PBXGroup;
+			children = (
+				639B4256280C0A5C0097D53F /* getListOfFriends.swift */,
+			);
+			path = FriendsService;
+			sourceTree = "<group>";
+		};
+		639B4268280D3D470097D53F /* FriendsView */ = {
+			isa = PBXGroup;
+			children = (
+				808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */,
+			);
+			path = FriendsView;
+			sourceTree = "<group>";
+		};
+		639B4269280D3E4A0097D53F /* extensionFriendsController */ = {
+			isa = PBXGroup;
+			children = (
+				80601F7927DF1ECD00490809 /* SetHeaderInSection.swift */,
+				80E3274727D4F4950014C760 /* setDataSectionTable.swift */,
+			);
+			path = extensionFriendsController;
+			sourceTree = "<group>";
+		};
+		639B426B280D3EF30097D53F /* DetailFriendScene */ = {
+			isa = PBXGroup;
+			children = (
+				639B426F280D3F4F0097D53F /* ExtensionDetailController */,
+				639B426E280D3F430097D53F /* DetailService */,
+				639B426D280D3F360097D53F /* Model */,
+				639B426C280D3F0C0097D53F /* DetailFriendView */,
+			);
+			path = DetailFriendScene;
+			sourceTree = "<group>";
+		};
+		639B426C280D3F0C0097D53F /* DetailFriendView */ = {
+			isa = PBXGroup;
+			children = (
+				80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */,
+			);
+			path = DetailFriendView;
+			sourceTree = "<group>";
+		};
+		639B426D280D3F360097D53F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		639B426E280D3F430097D53F /* DetailService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DetailService;
+			sourceTree = "<group>";
+		};
+		639B426F280D3F4F0097D53F /* ExtensionDetailController */ = {
+			isa = PBXGroup;
+			children = (
+				80C19AE927D7C6BA009C34CB /* ExtensionDetailViewController.swift */,
+			);
+			path = ExtensionDetailController;
+			sourceTree = "<group>";
+		};
+		639B4270280D3FAC0097D53F /* AllAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				80F4BCC027FFEB3B008E07B0 /* AnimationFromToLoginController */,
+				80F4BCC127FFEB62008E07B0 /* AnimationFriendsNavigationController */,
+				80F4BCCA28031B97008E07B0 /* AnimationForGallaryScreen */,
+			);
+			path = AllAnimation;
+			sourceTree = "<group>";
+		};
+		8003DA2327D5E1680048B191 /* SimpleFriendTableCell */ = {
 			isa = PBXGroup;
 			children = (
 				80DD23A527D3332000F78417 /* TableViewCellXib.swift */,
 				80DD23A627D3332000F78417 /* TableViewCellXib.xib */,
 			);
-			path = SimpleCell;
+			path = SimpleFriendTableCell;
 			sourceTree = "<group>";
 		};
 		8003DA2427D5E19F0048B191 /* ExtendedCell */ = {
@@ -231,6 +336,7 @@
 		80233AB227BF5A870040D702 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8003DA2327D5E1680048B191 /* SimpleFriendTableCell */,
 				80D1315A27FEA804009EA04D /* CustomTabBarControllers */,
 				80D1315927FEA7F4009EA04D /* CustomNavigationControllers */,
 				80DAF94727F0B57400428C67 /* LoadingIndicatorView */,
@@ -249,9 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				80DAF94A27F16ECB00428C67 /* ExtensionUIView */,
-				80C19AE827D7C62C009C34CB /* ExtensionDetailUTVController */,
 				80E3274B27D4F68E0014C760 /* ExtensionUserGTVController */,
-				80E3274427D4F3D40014C760 /* ExtensionFriendsTVController */,
 				80E3274127D4F2E10014C760 /* ExtensionNewGTVController */,
 				805E76EB27BC171D0033098D /* Extension_LoginController */,
 			);
@@ -277,8 +381,13 @@
 		804154ED27B62FE900160418 /* VKApp_KonishchevIvan */ = {
 			isa = PBXGroup;
 			children = (
-				803030EB27C0E95F00A410CE /* All_Extension */,
 				80233AB127BF59580040D702 /* Resourse */,
+				639B4260280D2D030097D53F /* Hellpers */,
+				80EAC04A27F6D326006DDB9A /* AllProtocols */,
+				639B4270280D3FAC0097D53F /* AllAnimation */,
+				639B426B280D3EF30097D53F /* DetailFriendScene */,
+				639B4265280D394A0097D53F /* FriendScene */,
+				803030EB27C0E95F00A410CE /* All_Extension */,
 				808E9D9B27BE94EF0089E4A4 /* Model */,
 				80F829A227BE03FC00D4FB53 /* ViewControllers */,
 				80233AB227BF5A870040D702 /* Controllers */,
@@ -388,11 +497,8 @@
 		808E9D9B27BE94EF0089E4A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				80D1314E27FDD773009EA04D /* AnimationsForScreen */,
-				80EAC04A27F6D326006DDB9A /* AllProtocols */,
 				80850ED027DE37CB0078039E /* NewsData */,
 				80BC96F627BB66DA0038FD77 /* UserData.swift */,
-				808E9D9F27BE98BC0089E4A4 /* Friends.swift */,
 				8025114A27BFF63D007E87C4 /* AllUserGroups.swift */,
 				80E7D3BF27DA7016009402ED /* HisFriends.swift */,
 				806284D027DDB68E00D37674 /* UserDetailsTableData.swift */,
@@ -431,14 +537,6 @@
 			path = XibCollectionViewCell;
 			sourceTree = "<group>";
 		};
-		80C19AE827D7C62C009C34CB /* ExtensionDetailUTVController */ = {
-			isa = PBXGroup;
-			children = (
-				80C19AE927D7C6BA009C34CB /* ExtensionDetailViewController.swift */,
-			);
-			path = ExtensionDetailUTVController;
-			sourceTree = "<group>";
-		};
 		80CCB6B527E4E51D00BC2085 /* HorizontalCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,16 +544,6 @@
 				80CCB6B727E4E55800BC2085 /* HorizontalCollectionViewCell.xib */,
 			);
 			path = HorizontalCollectionViewCell;
-			sourceTree = "<group>";
-		};
-		80D1314E27FDD773009EA04D /* AnimationsForScreen */ = {
-			isa = PBXGroup;
-			children = (
-				80F4BCCA28031B97008E07B0 /* AnimationForGallaryScreen */,
-				80F4BCC127FFEB62008E07B0 /* AnimationFriendsNavigationController */,
-				80F4BCC027FFEB3B008E07B0 /* AnimationFromToLoginController */,
-			);
-			path = AnimationsForScreen;
 			sourceTree = "<group>";
 		};
 		80D1315927FEA7F4009EA04D /* CustomNavigationControllers */ = {
@@ -521,7 +609,6 @@
 				80850EC027DE08650078039E /* SinglePhotoCell */,
 				80C19ACA27D76C40009C34CB /* CouruselCell */,
 				8003DA2427D5E19F0048B191 /* ExtendedCell */,
-				8003DA2327D5E1680048B191 /* SimpleCell */,
 				806284D627DDCB0D00D37674 /* GalaryCell */,
 			);
 			path = XibCellForTable;
@@ -533,15 +620,6 @@
 				80E3274927D4F4BD0014C760 /* issetGroup.swift */,
 			);
 			path = ExtensionNewGTVController;
-			sourceTree = "<group>";
-		};
-		80E3274427D4F3D40014C760 /* ExtensionFriendsTVController */ = {
-			isa = PBXGroup;
-			children = (
-				80E3274727D4F4950014C760 /* setDataSectionTable.swift */,
-				80601F7927DF1ECD00490809 /* SetHeaderInSection.swift */,
-			);
-			path = ExtensionFriendsTVController;
 			sourceTree = "<group>";
 		};
 		80E3274B27D4F68E0014C760 /* ExtensionUserGTVController */ = {
@@ -612,15 +690,12 @@
 		80F829A227BE03FC00D4FB53 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				80BC96F827BB67160038FD77 /* LoginViewController.swift */,
-				808E9D9927BE94C00089E4A4 /* FriendsTableViewController.swift */,
+				80F4BCD628052F2D008E07B0 /* VKLoginViewController.swift */,
 				8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */,
 				8025114627BFF5C9007E87C4 /* NewGroupTableViewController.swift */,
-				80C19AC027D761DC009C34CB /* DetailUserTableViewController.swift */,
 				80850ECE27DE37910078039E /* HomeNewsTableViewController.swift */,
 				80EEE76927E65C01007E27D0 /* PhotoGallaryPressetViewController.swift */,
 				80C7D08527F8440E00E03A27 /* GallaryViewController.swift */,
-				80F4BCD628052F2D008E07B0 /* VKLoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -721,7 +796,6 @@
 				80E3274A27D4F4BD0014C760 /* issetGroup.swift in Sources */,
 				80F4BCD728052F2D008E07B0 /* VKLoginViewController.swift in Sources */,
 				80F4BCCC28031BD5008E07B0 /* AnimateGallaryPush.swift in Sources */,
-				80BC96F927BB67160038FD77 /* LoginViewController.swift in Sources */,
 				80601F7527DF095C00490809 /* ShadowViewRadius.swift in Sources */,
 				805E76ED27BC17670033098D /* Extension_LoginController.swift in Sources */,
 				808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */,
@@ -756,6 +830,8 @@
 				80E3274827D4F4950014C760 /* setDataSectionTable.swift in Sources */,
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
 				80850EC827DE12480078039E /* SingleCollectionViewCell.swift in Sources */,
+				639B4264280D36430097D53F /* chekingValidityUrl.swift in Sources */,
+				639B4262280D2D200097D53F /* unixTimeConvertion.swift in Sources */,
 				80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */,
 				80F4BCC527FFEC1F008E07B0 /* AnimationPopNavigationController.swift in Sources */,
 				639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */,

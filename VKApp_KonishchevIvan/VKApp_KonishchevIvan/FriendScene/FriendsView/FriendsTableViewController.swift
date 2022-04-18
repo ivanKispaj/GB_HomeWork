@@ -20,30 +20,46 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     struct DataSection {
         var header: String = ""
-        var row: [Friends] = []
-        init(header: String, row: [Friends]){
+        var row: [FriendsItems] = []
+        init(header: String, row: [FriendsItems]){
             self.header = header
             self.row = row
         }
     }
     
-    let posibleFriends = DataSection(header: "Возможные друзья", row: [Friends(character: nil, image: UIImage.init(named: "AppIcon"), name: "Group VK.com", hisFriends: [])])
-    var indexTitle: [String] = []
+    let posibleFriends = DataSection(header: "Возможные друзья", row: [FriendsItems(photo50: "asd", city: City(id: 1, title: "Москва"), fName: "VKGroup", lName: "VKGroup", id: 100, online: 1,lastSeen: LastSeen(platform: 1, time: 1648837799))])
+    
     var friends: [DataSection] = [] // будущий массив по буквам
     
     // Исходный массив друзей
-    var friendsAlphavite = DataController.shared.getDataUser()
-    
+    var friendsAlphavite: [FriendsItems]!
     var nextViewData: DetailUserTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        InternetConnections(host: "api.vk.com", path: "/method/friends.get").getListOfFirends(for: "72287677") { [weak self] response in
+            
+      //  InternetConnections.share.getListOfFirends(for: "72287677") { [weak self ] response in
+            switch response {
+                
+            case .success(let result):
+                DispatchQueue.main.async {
+                    self?.friendsAlphavite = result.response.items
+                    print(result.response.items)
+                    self!.setDataSectionTable()
+                    self!.tableView.reloadData()
+                }
+            case .failure(_):
+                print("ErrorLoadDataVK")
+            }
+        }
+        
+        
         self.searchBar!.delegate = self
-      
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
         tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")
-        setDataSectionTable()
+        
         
 
     }
@@ -80,18 +96,39 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExtendCellXib", for: indexPath) as? ExtendTableUserCell else {
                 preconditionFailure("FriendsCell cannot")
             }
-            cell.ExtendImageCell.image = friends[indexPath.section].row[indexPath.row].avatar
-            cell.ExtendLabelCity.text = "Moscow"
-            cell.ExtendLabelName.text = friends[indexPath.section].row[indexPath.row].name
+            let imgUrl = self.friends[indexPath.section].row[indexPath.row].photo50
+           
+
+            if checkingValidityUrl( imgUrl) {
+                let url = URL(string: imgUrl)
+                DispatchQueue.main.async {
+                       let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                       cell.ExtendImageCell.image  = UIImage(data: data!)
+                }
+            }else {
+                cell.ExtendImageCell.image = UIImage(named: "noFoto")
+            }
+
+            cell.ExtendLabelCity.text = friends[indexPath.section].row[indexPath.row].city?.title
+            cell.ExtendLabelName.text = "\(friends[indexPath.section].row[indexPath.row].fName) \(friends[indexPath.section].row[indexPath.row].lName) "
             cell.isSelected = false
             return cell
         } else {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("FriendsCell cannot")
         }
-            cell.labelCityCellXib.text = friends[indexPath.section].row[indexPath.row].city
-        cell.imageCellAvatar.image = friends[indexPath.section].row[indexPath.row].avatar
-        cell.lableCellXib.text = friends[indexPath.section].row[indexPath.row].name
+            let imgUrl = self.friends[indexPath.section].row[indexPath.row].photo50
+            if checkingValidityUrl(imgUrl) {
+                let url = URL(string: imgUrl)
+                DispatchQueue.main.async {
+                       let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                       cell.imageCellAvatar.image  = UIImage(data: data!)
+                }
+            }else {
+                cell.imageCellAvatar.image = UIImage(named: "noFoto")
+            }
+            cell.labelCityCellXib.text = friends[indexPath.section].row[indexPath.row].city?.title
+            cell.lableCellXib.text = "\(friends[indexPath.section].row[indexPath.row].fName) \(friends[indexPath.section].row[indexPath.row].lName) "
         
             return cell
         }
@@ -104,14 +141,16 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         performSegue(withIdentifier: "detailsUserSegueId", sender: nil)
 
         guard let detailVC = self.nextViewData else { return }
-        let friend = friends[indexPath.section].row[indexPath.row].name
-        let avatar = friends[indexPath.section].row[indexPath.row].avatar
+        let friend = "\(friends[indexPath.section].row[indexPath.row].fName) \(friends[indexPath.section].row[indexPath.row].lName)"
         detailVC.title = friend
-        detailVC.hisFriends = friends[indexPath.section].row[indexPath.row].hisFriends
-        detailVC.detailUsername = friend
-        detailVC.detailAvatar = avatar
-        detailVC.detailUserInfo = friends[indexPath.section].row[indexPath.row].details
-        detailVC.detailUserVisitInfo = " Был 30 минут назад"
+        detailVC.friendsSelectedd = friends[indexPath.section].row[indexPath.row]
+//        let avatar = friends[indexPath.section].row[indexPath.row].avatar
+//        detailVC.title = friend
+//        detailVC.hisFriends = friends[indexPath.section].row[indexPath.row].hisFriends
+//        detailVC.detailUsername = friend
+//        detailVC.detailAvatar = avatar
+//        detailVC.detailUserInfo = friends[indexPath.section].row[indexPath.row].details
+//        detailVC.detailUserVisitInfo = " Был 30 минут назад"
     
     }
 
@@ -134,6 +173,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         }
         self.nextViewData = detailVC
     }
+    
+
 
 }
 

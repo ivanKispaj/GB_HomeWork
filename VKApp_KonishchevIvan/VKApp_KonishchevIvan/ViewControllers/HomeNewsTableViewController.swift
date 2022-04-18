@@ -133,13 +133,13 @@ class HomeNewsTableViewController: UITableViewController{
 //MARK: - Internet request VK api
 
         // получение друзей по id пользователя
-        InternetConnections.share.getListOfFirends(for: "72287677")
+
         // получение фото пользователя по id пользователя
-        InternetConnections.share.getPhotoUser(for: "72287677")
+     //   InternetConnections.share.getPhotoUser(for: "72287677")
         //получение групп пользователя по id пользователя
-        InternetConnections.share.getUserGroups(for: "281353802")
+     //   InternetConnections.share.getUserGroups(for: "281353802")
         //Получение групп по запросу и типу группы
-        InternetConnections.share.getGroupsByRequest(textRequset: "auto", typeCommunity: .group)
+     //   InternetConnections.share.getGroupsByRequest(textRequset: "auto", typeCommunity: .group)
       //  controll.addTarget(self, action: #selector (likeIsTapped), for: .valueChanged)
         
         self.currentOrientation = UIDevice.current.orientation

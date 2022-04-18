@@ -10,92 +10,92 @@ import UIKit
 class DataController {
     static var shared = DataController()
     
-    func getDataUser() -> [Friends] {
-        let dataUser = [
-            Friends(image: UIImage.init(named: "Putin"), name: "Путин Владимир Владимирович", city: "Москва", details: "Президент российской Федерации", hisFriends: [
-                HisFirends(friendsAvatar: UIImage(named: "Bregnev"), friendsName: "Брежнев Леонид Ильич"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "карандаш"),
-                HisFirends(friendsAvatar: UIImage(named: "Stalin"), friendsName: "Сталин Иосив Вессарионович"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "ктото"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
-            ]),
-            Friends(image: UIImage.init(named: "Bregnev"), name: "Брежнев Леонид Ильич", city: "Москва", details: "Председатель президиума Верховного совета СССР", hisFriends: [
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
-            ]),
-            Friends(image: UIImage.init(named: "FranclinRuzvelt"), name: "Франклин Рузвельт", city: "NewYork", details: "32 Президент США", hisFriends: [
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
-            ]),
-            Friends(image: UIImage.init(named: "MaoCzydun"), name: "Мао Дзядун", city: "Хуань", hisFriends: [
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
-            ]),
-            Friends(image: UIImage.init(named: "MargaretTetcher"), name: "Маргарет Тетчер", city: "London", details: "Премьер министр Великобритании", hisFriends: [
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
-            ]),
-            Friends(image: UIImage.init(named: "Merkel"), name: "Ангела Меркель", city: "Германия", details: "Федеральный канцлер Германии",hisFriends: [
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
-            ]
-                   ),
-            Friends(image: UIImage.init(named: "MohandasGandi"), name: "Мохандос Ганди", city: "Порбандаре", hisFriends: [
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
-            ]),
-            Friends(image: UIImage.init(named: "Stalin"), name: "Сталин Иосиф Виссарионович", city: "Москва",hisFriends: [
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
-            ]),
-            Friends(image: UIImage.init(named: "WinstonCherchil"), name: "Винстон Черчиль", city: "Великобритания",hisFriends: [
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
-                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
-            ]),
-        ]
-        return dataUser
-    }
+//    func getDataUser() -> [Friends] {
+//        let dataUser = [
+//            Friends(image: UIImage.init(named: "Putin"), name: "Путин Владимир Владимирович", city: "Москва", details: "Президент российской Федерации", hisFriends: [
+//                HisFirends(friendsAvatar: UIImage(named: "Bregnev"), friendsName: "Брежнев Леонид Ильич"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "карандаш"),
+//                HisFirends(friendsAvatar: UIImage(named: "Stalin"), friendsName: "Сталин Иосив Вессарионович"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "ктото"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+//            ]),
+//            Friends(image: UIImage.init(named: "Bregnev"), name: "Брежнев Леонид Ильич", city: "Москва", details: "Председатель президиума Верховного совета СССР", hisFriends: [
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+//            ]),
+//            Friends(image: UIImage.init(named: "FranclinRuzvelt"), name: "Франклин Рузвельт", city: "NewYork", details: "32 Президент США", hisFriends: [
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+//            ]),
+//            Friends(image: UIImage.init(named: "MaoCzydun"), name: "Мао Дзядун", city: "Хуань", hisFriends: [
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+//            ]),
+//            Friends(image: UIImage.init(named: "MargaretTetcher"), name: "Маргарет Тетчер", city: "London", details: "Премьер министр Великобритании", hisFriends: [
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+//            ]),
+//            Friends(image: UIImage.init(named: "Merkel"), name: "Ангела Меркель", city: "Германия", details: "Федеральный канцлер Германии",hisFriends: [
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+//            ]
+//                   ),
+//            Friends(image: UIImage.init(named: "MohandasGandi"), name: "Мохандос Ганди", city: "Порбандаре", hisFriends: [
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+//            ]),
+//            Friends(image: UIImage.init(named: "Stalin"), name: "Сталин Иосиф Виссарионович", city: "Москва",hisFriends: [
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+//            ]),
+//            Friends(image: UIImage.init(named: "WinstonCherchil"), name: "Винстон Черчиль", city: "Великобритания",hisFriends: [
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг"),
+//                HisFirends(friendsAvatar: UIImage(named: "noFoto"), friendsName: "Какойто друг")
+//            ]),
+//        ]
+//        return dataUser
+//    }
     
      func getdataGroup() -> [AllUserGroups] {
         let dataGroup = [

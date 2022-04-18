@@ -10,7 +10,7 @@ import UIKit
 
 class DetailUserTableViewController: UITableViewController, TableViewDelegate {
  
-
+    var friendsSelectedd: FriendsItems!
     
     var frameImages: [CGRect]?
     var currentFrameImages: CGRect?

@@ -84,10 +84,10 @@ private extension VKLoginViewController {
         urlComponents.host = "oauth.vk.com"
         urlComponents.path = "/authorize"
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: "8134649"),
+            URLQueryItem(name: "client_id", value: "8140649"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "display", value: "mobile"),
-            URLQueryItem(name: "scope", value: "offline, friends, photos, groups"),
+            URLQueryItem(name: "scope", value: "offline, friends, photo_50, groups"),
             URLQueryItem(name: "response_type", value: "token"),
             URLQueryItem(name: "revoke", value: "0")
         ]
