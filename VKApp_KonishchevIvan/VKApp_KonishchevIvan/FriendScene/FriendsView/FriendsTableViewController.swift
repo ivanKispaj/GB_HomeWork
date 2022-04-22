@@ -11,10 +11,7 @@ import UIKit
 
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
 
-   @IBOutlet weak var searchBar: CustomCodeSearchBar!
-    @IBAction func exitButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
+    @IBOutlet weak var searchBar: CustomCodeSearchBar!
     @IBOutlet weak var headerTableView: UIView!
     @IBOutlet weak var headerSubview: UIView!
     
@@ -27,7 +24,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    let posibleFriends = DataSection(header: "Возможные друзья", row: [FriendsItems(photo50: "asd", city: City(id: 1, title: "Москва"), fName: "VKGroup", lName: "VKGroup", id: 100, online: 1,lastSeen: LastSeen(platform: 1, time: 1648837799))])
+    let posibleFriends = DataSection(header: "Возможные друзья", row: [FriendsItems(photo50: "asd", city: City(id: 1, title: "Москва"), fName: "VKGroup", lName: "VKGroup", id: 100, online: 1,lastSeen: LastSeen(platform: 1, time: 1648837799), isClosedProfile: false, banned: "")])
     
     var friends: [DataSection] = [] // будущий массив по буквам
     
@@ -38,15 +35,13 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+  //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
         InternetConnections(host: "api.vk.com", path: "/method/friends.get").getListOfFirends(for: "72287677") { [weak self] response in
-            
-      //  InternetConnections.share.getListOfFirends(for: "72287677") { [weak self ] response in
             switch response {
-                
-            case .success(let result):
+  // обработка ответа
+            case .success(let result):               
                 DispatchQueue.main.async {
                     self?.friendsAlphavite = result.response.items
-                    print(result.response.items)
                     self!.setDataSectionTable()
                     self!.tableView.reloadData()
                 }
@@ -97,9 +92,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
                 preconditionFailure("FriendsCell cannot")
             }
             let imgUrl = self.friends[indexPath.section].row[indexPath.row].photo50
-           
-
-            if checkingValidityUrl( imgUrl) {
+            if imgUrl.isUrlString() {
                 let url = URL(string: imgUrl)
                 DispatchQueue.main.async {
                        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
@@ -118,7 +111,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             preconditionFailure("FriendsCell cannot")
         }
             let imgUrl = self.friends[indexPath.section].row[indexPath.row].photo50
-            if checkingValidityUrl(imgUrl) {
+            if imgUrl.isUrlString() {
                 let url = URL(string: imgUrl)
                 DispatchQueue.main.async {
                        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
@@ -137,23 +130,24 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
 
 // Действия при выборе ячейки
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        performSegue(withIdentifier: "detailsUserSegueId", sender: nil)
+        let friendSelected = friends[indexPath.section].row[indexPath.row]
 
-        guard let detailVC = self.nextViewData else { return }
-        let friend = "\(friends[indexPath.section].row[indexPath.row].fName) \(friends[indexPath.section].row[indexPath.row].lName)"
-        detailVC.title = friend
-        detailVC.friendsSelectedd = friends[indexPath.section].row[indexPath.row]
-//        let avatar = friends[indexPath.section].row[indexPath.row].avatar
-//        detailVC.title = friend
-//        detailVC.hisFriends = friends[indexPath.section].row[indexPath.row].hisFriends
-//        detailVC.detailUsername = friend
-//        detailVC.detailAvatar = avatar
-//        detailVC.detailUserInfo = friends[indexPath.section].row[indexPath.row].details
-//        detailVC.detailUserVisitInfo = " Был 30 минут назад"
-    
+        
+        if  friendSelected.banned != nil {
+            let allert = AllertWrongUserData().getAllert(title: "Сообщение", message: "Пользователь забанен")
+            present(allert, animated: true)
+        }else if friendSelected.isClosedProfile! {
+            let allert = AllertWrongUserData().getAllert(title: "Сообщение", message: "Профиль пользователя скрыт!")
+            present(allert, animated: true)
+        }else {
+            performSegue(withIdentifier: "detailsUserSegueId", sender: nil)
+            guard let detailVC = self.nextViewData else { return }
+            let friend = "\(friends[indexPath.section].row[indexPath.row].fName) \(friends[indexPath.section].row[indexPath.row].lName)"
+            detailVC.title = friend
+            
+            detailVC.friendsSelectedd = friendSelected
+        }
     }
-
 
     //кастомный Header ячеек
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -167,7 +161,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             return headerView
         }
     } 
-// подготовка сегуе перехода. Срабатывает перед вызовом didSelectRowAt
+ //подготовка сегуе перехода. Срабатывает перед вызовом didSelectRowAt
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let detailVC = segue.destination as? DetailUserTableViewController else { return
         }

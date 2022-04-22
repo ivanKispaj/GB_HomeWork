@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+// MARK: - Класс для доступа в интернет по умолчанию протокол(схема) hhtps, host и path надо передавать при создании соединения
 class InternetConnections {
     var urlComponents: URLComponents!
     init (scheme: String = "https", host: String, path: String) {

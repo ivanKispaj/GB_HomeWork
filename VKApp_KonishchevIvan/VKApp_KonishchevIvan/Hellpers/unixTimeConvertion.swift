@@ -12,7 +12,7 @@ func unixTimeConvertion(unixTime: Double) -> String {
     let dateFormatter = DateFormatter()
     //dateFormatter.timeZone = NSTimeZone(name: timeZoneInfo)
     dateFormatter.locale = NSLocale(localeIdentifier: NSLocale.system.identifier) as Locale?
-    dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+    dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
     let dateAsString = dateFormatter.string(from: time as Date)
 
     return dateAsString

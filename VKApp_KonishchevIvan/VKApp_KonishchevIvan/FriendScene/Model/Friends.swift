@@ -7,11 +7,11 @@
 
 import UIKit
 
-struct Friendss: Decodable {
-    let response: Response
+struct Friends: Decodable {
+    let response: FriendsResponse
 }
 
-struct Response: Decodable {
+struct FriendsResponse: Decodable {
     let items: [FriendsItems]
 }
 
@@ -24,6 +24,8 @@ struct FriendsItems: Decodable {
       case id
       case online
       case lastSeen = "last_seen"
+      case isClosedProfile = "is_closed"
+      case banned = "deactivated"
     }
     let photo50: String
     let city: City?
@@ -32,6 +34,8 @@ struct FriendsItems: Decodable {
     let id: Int
     let online: Int
     let lastSeen: LastSeen?
+    let isClosedProfile: Bool?
+    let banned: String?
 }
 
 struct City: Decodable {
@@ -51,4 +55,3 @@ struct LastSeen: Decodable {
     let platform: Int
     let time: Double
 }
-

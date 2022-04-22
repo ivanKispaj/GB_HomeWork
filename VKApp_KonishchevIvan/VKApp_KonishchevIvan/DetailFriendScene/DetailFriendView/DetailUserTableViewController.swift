@@ -23,9 +23,9 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var detailUsername: String? = nil
     var detailUserInfo: String? = nil
     var detailUserVisitInfo: String? = nil
-    var hisFriends: [HisFirends]? = nil
-    var photo:[ImageAndLikeData] = DataController.shared.getPhoto()
-    var singlePhoto: ImageAndLikeData = DataController.shared.getSinglePhoto()
+    var hisFriends: [FriendsItems]? = nil
+    var photo:[ImageAndLikeData]?
+    var singlePhoto: ImageAndLikeData?
     var currentImageTap: Int!
     @IBOutlet weak var detailAvatarHeader: UIImageView!
     @IBOutlet weak var detailUserNameLable: UILabel!
@@ -38,9 +38,49 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var likeCount: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        setHeaderDetailView()
-     
-   
+        
+// MARK: - Подгружаем друзей друга и сохраняем результат в hisFriends
+        DispatchQueue.main.async {
+            InternetConnections(host: "api.vk.com", path: "/method/friends.get").getListOfFirends(for: String(self.friendsSelectedd.id)) { request in
+      
+                switch request {
+                case .success(let result):
+                    self.hisFriends = result.response.items
+                case .failure(_):
+                    print("Error request friends")
+                }
+            }
+        }
+//MARK: - Подгружаем фото выбранного друга
+        DispatchQueue.main.async {
+            InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").getPhotoUser(for: String(self.friendsSelectedd.id)) { request in
+                switch request {
+                
+                case .success(let result):
+              
+                        var imageArray = [ImageAndLikeData]()
+                        for photoArray in result.response.items {
+                            var imageArr = ImageAndLikeData(image: "", likeStatus: false, likeLabel: 0)
+                            imageArr.likeStatus = false
+                            imageArr.likeLabel = photoArray.likes.count
+                            for photo in photoArray.photo {
+                                if photo.type == "y" {
+                                    imageArr.image = photo.url
+                                    imageArray.append(imageArr)
+                                    break
+                                }
+                            }
+                        }
+                
+                    self.photo = imageArray
+                    self.setHeaderDetailView()
+                    self.tableView.reloadData()
+            case .failure(_):
+                print("Error request Photo")
+            }
+            }
+        }
+            
         dataTable.append(UserDetailsTableData(sectionName: "Friends", sectionType: .Friends ))
         dataTable.append(UserDetailsTableData(sectionName: "Gallary", sectionType: .Gallary))
         dataTable.append(UserDetailsTableData(sectionName: "Single Photo", sectionType: .SingleFoto))
@@ -48,7 +88,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         tableView.register(UINib(nibName: "GallaryTableViewCell", bundle: nil), forCellReuseIdentifier: "GallaryTableCell")
         tableView.register(UINib(nibName: "SinglePhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleTableCellID")
     }
-    
+
 
     // MARK: - Table view data source
 
@@ -76,14 +116,20 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CouruselCellForDetails", for: indexPath) as? CouruselTableViewCell else {
                 preconditionFailure("Error")
             }
-            cell.collectionData = hisFriends
+            cell.collectionData = self.hisFriends
             cell.delegate = self
             return cell
         case .Gallary:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GallaryTableCell", for: indexPath) as? GallaryTableViewCell else {
                 preconditionFailure("Error")
             }
-            cell.gallaryData = photo
+
+        
+                if self.photo != nil {
+                    cell.gallaryData = self.photo!
+                }
+            
+
             cell.delegate = self
             cell.delegateFrameImages = self
             return cell
@@ -97,16 +143,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.likeControll.indexPath = indexPath
             cell.delegate = self
             cell.singlePhoto = self.singlePhoto
-            let likeCount: String = String(self.singlePhoto.likeLabel)
-            cell.singlPhotoLikeLable.text = likeCount
-            if singlePhoto.likeStatus {
-                cell.singlePhotoLikeImage.image = UIImage(systemName: "suit.heart.fill")
-                cell.singlePhotoLikeImage.tintColor = UIColor.red
-            }else {
-                cell.singlePhotoLikeImage.image = UIImage(systemName: "suit.heart")
-                cell.singlePhotoLikeImage.tintColor = UIColor.systemGray2
-            }
-            
             return cell
         }
     }
@@ -114,9 +150,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      //  guard let destionationVC = segue.destination as? PhotoGallaryPressetViewController else {
-      //    preconditionFailure("Error")
-      //  }
+
         guard let destinationVC = segue.destination as? GallaryViewController else {
             preconditionFailure("Error")
         }
@@ -132,30 +166,24 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 //MARK: - TableViewDelegate method
     func selectRow(nextViewData: [ImageAndLikeData]) {
         self.nextViewData = nextViewData
-
         let indexPath = IndexPath(row: 0, section: 1)
-        
         var cellRect = self.tableView.rectForRow(at: indexPath) //Получаем область нужной ячейки
         let contentOffset = tableView.contentOffset //смещение контента таблицы относительно начального нулевого положения
         let y_coordinate = cellRect.origin.y - contentOffset.y //чистая y координата ячейки относительно экранных координат
         cellRect.origin.y = y_coordinate
-        
         self.collectionFrame = cellRect
-       // performSegue(withIdentifier: "gallaryViewController", sender: nil)
-        self.tableView.reloadData()
         
  //MARK: - Custom push imageGallary
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
            guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "GallaryVievController") as? GallaryViewController else { return }
-       //    nextVC.modalTransitionStyle = .flipHorizontal
-           nextVC.modalPresentationStyle = .fullScreen
-           nextVC.transitioningDelegate = nextVC
-        nextVC.collectionViewFrame = self.collectionFrame
-        nextVC.currentFrame = self.currentFrameImages
-        nextVC.frameArray = self.frameImages
-        nextVC.arrayPhoto = nextViewData
-        nextVC.title = "Фото галлерея"
-        nextVC.currentImage = self.currentImage!
+            nextVC.modalPresentationStyle = .fullScreen
+            nextVC.transitioningDelegate = nextVC
+            nextVC.collectionViewFrame = self.collectionFrame
+            nextVC.currentFrame = self.currentFrameImages
+            nextVC.frameArray = self.frameImages
+            nextVC.arrayPhoto = nextViewData
+            nextVC.title = "Фото галлерея"
+            nextVC.currentImage = self.currentImage!
            self.present(nextVC, animated: true)
     }
 }
@@ -164,15 +192,15 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 extension DetailUserTableViewController: ProtocolLikeDelegate {
 
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
-        let countLike = singlePhoto.likeLabel
-        let likeStatus = singlePhoto.likeStatus
-        return [countLike: likeStatus]
+     //   let countLike = singlePhoto.likeLabel
+       // let likeStatus = singlePhoto.likeStatus
+        return  [ 0: false]//[countLike: likeStatus]
         
     }
     
     func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
-        self.singlePhoto.likeStatus = likeStatus
-        self.singlePhoto.likeLabel = countLike
+     //   self.singlePhoto.likeStatus = likeStatus
+      //  self.singlePhoto.likeLabel = countLike
     
     }
     
