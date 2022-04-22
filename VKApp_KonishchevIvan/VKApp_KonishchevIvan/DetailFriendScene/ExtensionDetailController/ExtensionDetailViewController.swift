@@ -18,11 +18,12 @@ extension DetailUserTableViewController {
             DispatchQueue.main.async {
                    let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
                    self.detailAvatarHeader.image  = UIImage(data: data!)
+                self.detailUserNameLable.text = "\(self.friendsSelectedd.fName) \(self.friendsSelectedd.lName)"
             }
         }else {
             self.detailAvatarHeader.image = UIImage(named: "noFoto")
         }
-        self.detailUserNameLable.text = "\(self.friendsSelectedd.fName) \(self.friendsSelectedd.lName)"
+       
     self.detailUserInfoLable.text = detailUserInfo
     let time = unixTimeConvertion(unixTime: self.friendsSelectedd.lastSeen!.time)
         if self.friendsSelectedd.online == 1 {

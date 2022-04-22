@@ -15,34 +15,11 @@ class LoadingView: UIView {
     @IBOutlet weak var threeCircle: UIImageView!
     
 //MARK: - Bizzer start
-    
-//    //// General Declarations
-//    let context = UIGraphicsGetCurrentContext()!
-//
-    //// Color Declarations
+
+    // Color Declarations
     let color = UIColor(red: 0.315, green: 0.684, blue: 0.764, alpha: 1.000)
     let color2 = UIColor(red: 0.730, green: 0.902, blue: 0.950, alpha: 1.000)
     let shadowColor = UIColor(red: 0.000, green: 0.458, blue: 1.000, alpha: 1.000)
-//
-//    //// Shadow Declarations
-//    let shadow = NSShadow()
-//
-//    shadow.shadowColor = shadowColor.withAlphaComponent(0.45 * shadowColor.cgColor.alpha)
-//    shadow.shadowOffset = CGSize(width: 2, height: 27.5)
-//    shadow.shadowBlurRadius = 11.5
-//
-//    //// Image Declarations
-//    let mediumObl = UIImage(named: "mediumObl.png")!
-//
-//    //// Picture Drawing
-//    let picturePath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 1176, height: 800))
-//    context.saveGState()
-//    picturePath.addClip()
-//    context.translateBy(x: 0, y: 0)
-//    context.scaleBy(x: 1, y: -1)
-//    context.translateBy(x: 0, y: -mediumObl.size.height)
-//    context.draw(mediumObl.cgImage!, in: CGRect(x: 0, y: 0, width: mediumObl.size.width, height: mediumObl.size.height))
-//    context.restoreGState()
 
 
     //// Bezier Drawing
@@ -95,7 +72,6 @@ class LoadingView: UIView {
     
         strokeEndAnimation.fromValue = 1
         strokeEndAnimation.toValue = 0.5
-    //    strokeEndAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         strokeEndAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.98, 0.2, 0, 0.88)
         
         let strokeStartAnumation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeStart))

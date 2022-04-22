@@ -29,32 +29,7 @@ class DataController {
         ]
         return dataGroup
     }
-    
-//    func getDataNews() -> [NewsData] {
-//        let news = [NewsData(cellType: .textWithimage, newsText: "Правительство РФ будет внимательно смотреть за ситуацией с ценами и в текущих условиях не даст пенсионеров в обиду. Об этом 13 марта сообщил министр финансов РФ Антон Силуанов.", newsImage: ImageAndLikeData(image: UIImage(named: "Siluvanov")!, likeStatus: false, likeLabel: 19)),
-//                    NewsData(cellType: .textWithTextView, newsText: "Можно ли считать прекращение поставок продукции Apple действием санкций, приедут ли в Россию мартовские новинки, стоит ли скупать доступные в магазинах продукты и как выглядит худший сценарий развития событий?", newsImage: ImageAndLikeData(image: UIImage(named: "appleNews")!, likeStatus: true, likeLabel: 64))
-//                    ]
-//        return news
-//    }
-//    
-//    func getSinglePhoto () -> ImageAndLikeData {
-//        let dataPhoto: ImageAndLikeData = ImageAndLikeData(image: UIImage(named: "appleNews")!, likeStatus: true, likeLabel: 76)
-//        return dataPhoto
-//    }
-//    
-//    func getPhoto() -> [ImageAndLikeData] {
-//        var dataPhoto:[ImageAndLikeData] = [ImageAndLikeData(image:
-//                                                                UIImage(named: "onePhoto")!
-//        , likeStatus: false, likeLabel: 12),
-//       
-//        ]
-//        
-//        dataPhoto.append(ImageAndLikeData(image: UIImage(named: "twoPhoto")!, likeStatus: false, likeLabel: 54))
-//        dataPhoto.append(ImageAndLikeData(image: UIImage(named: "threePhoto")!, likeStatus: true, likeLabel: 14))
-//        dataPhoto.append(ImageAndLikeData(image: UIImage(named: "fourPhoto")!, likeStatus: false, likeLabel: 31))
-//        dataPhoto.append(ImageAndLikeData(image: UIImage(named: "appleNews")!, likeStatus: false, likeLabel: 45))
-//        return dataPhoto
-//    }
+
 }
 
 
