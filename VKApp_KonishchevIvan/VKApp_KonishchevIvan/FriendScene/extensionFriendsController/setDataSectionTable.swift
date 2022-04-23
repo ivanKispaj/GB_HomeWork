@@ -14,7 +14,8 @@ extension FriendsTableViewController {
     
     func setDataSectionTable() {
         self.friends.append(posibleFriends)
-        self.friends.append(DataSection(header: "Мои друзья", row: friendsAlphavite))
+      //  self.friends.append(DataSection(header: "Мои друзья", row: friendsAlphavite))
+        self.friends.append(DataSection(header: "Мои друзья", row: self.friendsArray))
     }
 }
 

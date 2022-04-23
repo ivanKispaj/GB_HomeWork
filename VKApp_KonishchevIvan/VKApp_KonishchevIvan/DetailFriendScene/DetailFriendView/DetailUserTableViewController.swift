@@ -10,7 +10,8 @@ import UIKit
 
 class DetailUserTableViewController: UITableViewController, TableViewDelegate {
  
-    var friendsSelectedd: FriendsItems!
+// Данные пользователя которого выбрали на предыдущем контроллере (FriendsTableViewController)
+    var friendsSelectedd: FriendArray!
     
     var frameImages: [CGRect]?
     var currentFrameImages: CGRect?
@@ -19,12 +20,19 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     
     var nextViewData: [ImageAndLikeData] = []
     var dataTable: [UserDetailsTableData] = []
-    var detailAvatar: UIImage? = nil
-    var detailUsername: String? = nil
-    var detailUserInfo: String? = nil
-    var detailUserVisitInfo: String? = nil
-    var hisFriends: [FriendsItems]? = nil
-    var photo:[ImageAndLikeData]?
+   // var detailAvatar: UIImage? = nil
+  //  var detailUsername: String? = nil
+  //  var detailUserInfo: String? = nil
+ //   var detailUserVisitInfo: String? = nil
+    var hisFriends: [FriendArray]? = nil
+    var photo:[ImageAndLikeData]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.setHeaderDetailView()
+                self.tableView.reloadData()
+            }
+        }
+    }
     var singlePhoto: ImageAndLikeData?
     var currentImageTap: Int!
     @IBOutlet weak var detailAvatarHeader: UIImageView!
@@ -39,48 +47,10 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-// MARK: - Подгружаем друзей друга и сохраняем результат в hisFriends
-        DispatchQueue.main.async {
-            InternetConnections(host: "api.vk.com", path: "/method/friends.get").getListOfFirends(for: String(self.friendsSelectedd.id)) { request in
-      
-                switch request {
-                case .success(let result):
-                    self.hisFriends = result.response.items
-                case .failure(_):
-                    print("Error request friends")
-                }
-            }
-        }
-//MARK: - Подгружаем фото выбранного друга
-        DispatchQueue.main.async {
-            InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").getPhotoUser(for: String(self.friendsSelectedd.id)) { request in
-                switch request {
-                
-                case .success(let result):
-              
-                        var imageArray = [ImageAndLikeData]()
-                        for photoArray in result.response.items {
-                            var imageArr = ImageAndLikeData(image: "", likeStatus: false, likeLabel: 0)
-                            imageArr.likeStatus = false
-                            imageArr.likeLabel = photoArray.likes.count
-                            for photo in photoArray.photo {
-                                if photo.type == "y" {
-                                    imageArr.image = photo.url
-                                    imageArray.append(imageArr)
-                                    break
-                                }
-                            }
-                        }
-                
-                    self.photo = imageArray
-                    self.setHeaderDetailView()
-                    self.tableView.reloadData()
-            case .failure(_):
-                print("Error request Photo")
-            }
-            }
-        }
-            
+        loadFriendsSelectedUser()
+        loadPhotoAlbumSelctedUser()
+        setHeaderDetailView()
+        
         dataTable.append(UserDetailsTableData(sectionName: "Friends", sectionType: .Friends ))
         dataTable.append(UserDetailsTableData(sectionName: "Gallary", sectionType: .Gallary))
         dataTable.append(UserDetailsTableData(sectionName: "Single Photo", sectionType: .SingleFoto))
@@ -93,22 +63,17 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        
         return dataTable.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 1
     }
 
     // установка имени секции
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-     
         return dataTable[section].sectionName
-
-        }
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch dataTable[indexPath.section].sectionType {
@@ -123,13 +88,9 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GallaryTableCell", for: indexPath) as? GallaryTableViewCell else {
                 preconditionFailure("Error")
             }
-
-        
-                if self.photo != nil {
+            if self.photo != nil{
                     cell.gallaryData = self.photo!
-                }
-            
-
+            }
             cell.delegate = self
             cell.delegateFrameImages = self
             return cell
@@ -137,12 +98,13 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
                 preconditionFailure("Error")
             }
-            cell.singleLableUserName.text = detailUsername
-            cell.singleAvatarHeader.image = detailAvatar
+            cell.singleLableUserName.text = self.friendsSelectedd.userName
+            cell.singleAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
             cell.likeControll.delegate = self
+            
             cell.likeControll.indexPath = indexPath
             cell.delegate = self
-            cell.singlePhoto = self.singlePhoto
+            cell.singlePhoto = self.photo?.first
             return cell
         }
     }
@@ -220,4 +182,5 @@ extension DetailUserTableViewController: SetFrameImages {
     }
 
 }
+
 

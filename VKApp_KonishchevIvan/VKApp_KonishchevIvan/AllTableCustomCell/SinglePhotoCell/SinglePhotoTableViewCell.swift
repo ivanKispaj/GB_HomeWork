@@ -19,7 +19,11 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
     @IBOutlet weak var singlPhotoLikeLable: UILabel!
     @IBOutlet weak var singlePhotoLikeImage: UIImageView!
 
-    var singlePhoto: ImageAndLikeData!
+    var singlePhoto: ImageAndLikeData! {
+        didSet {
+            self.singlCollection.reloadData()
+        }
+    }
     var delegate: TableViewDelegate!
     
     override func awakeFromNib() {
@@ -36,17 +40,19 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         // Configure the view for the selected state
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 1
+        if singlePhoto != nil {
+            return 1
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleCollectionID", for: indexPath) as? SingleCollectionViewCell else {
             preconditionFailure("Error")
         }
-      
-     //   cell.singlePhoto.image = self.singlePhoto.image 
-        
+        cell.singlePhoto.contentMode = .scaleAspectFill
+        cell.singlePhoto.loadImageFromUrlString(singlePhoto.image)
+        self.singlPhotoLikeLable.text = String(singlePhoto.likeLabel)
         return cell
     }
 

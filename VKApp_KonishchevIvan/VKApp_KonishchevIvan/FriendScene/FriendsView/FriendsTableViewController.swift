@@ -17,45 +17,41 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     struct DataSection {
         var header: String = ""
-        var row: [FriendsItems] = []
-        init(header: String, row: [FriendsItems]){
+        var row: [FriendArray] = []
+        init(header: String, row: [FriendArray]){
             self.header = header
             self.row = row
         }
     }
-    
-    let posibleFriends = DataSection(header: "Возможные друзья", row: [FriendsItems(photo50: "asd", city: City(id: 1, title: "Москва"), fName: "VKGroup", lName: "VKGroup", id: 100, online: 1,lastSeen: LastSeen(platform: 1, time: 1648837799), isClosedProfile: false, banned: "")])
-    
+    var posibleFriends: DataSection!
     var friends: [DataSection] = [] // будущий массив по буквам
     
     // Исходный массив друзей
-    var friendsAlphavite: [FriendsItems]!
+
+    var friendsArray: [FriendArray] = []{
+        didSet {
+                self.setDataSectionTable()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+////////////////////////
     var nextViewData: DetailUserTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+            self.loadMyFriends()
         
-  //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
-        InternetConnections(host: "api.vk.com", path: "/method/friends.get").getListOfFirends(for: "72287677") { [weak self] response in
-            switch response {
-  // обработка ответа
-            case .success(let result):               
-                DispatchQueue.main.async {
-                    self?.friendsAlphavite = result.response.items
-                    self!.setDataSectionTable()
-                    self!.tableView.reloadData()
-                }
-            case .failure(_):
-                print("ErrorLoadDataVK")
-            }
-        }
-        
-        
+            let dataVKPhoto =  "https://avatars.mds.yandex.net/get-zen_doc/1535103/pub_5f2dbed8c1a7b87558486d42_5f2dc071d1ab9668ff0d0ad8/scale_1200"
+            self.posibleFriends = DataSection(header: "Возможные друзья", row: [FriendArray(userName: "VKGroup", photo: dataVKPhoto , id: 1, city: "Moscow", lastSeenDate: 12746822, isClosedProfile: false, isBanned: false, online: true)])
+  
         self.searchBar!.delegate = self
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
         tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")
         
-        
+        print(self.friends)
 
     }
     
@@ -91,38 +87,20 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExtendCellXib", for: indexPath) as? ExtendTableUserCell else {
                 preconditionFailure("FriendsCell cannot")
             }
-            let imgUrl = self.friends[indexPath.section].row[indexPath.row].photo50
-            if imgUrl.isUrlString() {
-                let url = URL(string: imgUrl)
-                DispatchQueue.main.async {
-                       let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-                       cell.ExtendImageCell.image  = UIImage(data: data!)
-                }
-            }else {
-                cell.ExtendImageCell.image = UIImage(named: "noFoto")
-            }
-
-            cell.ExtendLabelCity.text = friends[indexPath.section].row[indexPath.row].city?.title
-            cell.ExtendLabelName.text = "\(friends[indexPath.section].row[indexPath.row].fName) \(friends[indexPath.section].row[indexPath.row].lName) "
+            cell.ExtendImageCell.loadImageFromUrlString(self.friends[indexPath.section].row[indexPath.row].photo)
+            cell.ExtendLabelCity.text = self.friends[indexPath.section].row[indexPath.row].city
+            cell.ExtendLabelName.text = self.friends[indexPath.section].row[indexPath.row].userName
             cell.isSelected = false
             return cell
+
         } else {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("FriendsCell cannot")
         }
-            let imgUrl = self.friends[indexPath.section].row[indexPath.row].photo50
-            if imgUrl.isUrlString() {
-                let url = URL(string: imgUrl)
-                DispatchQueue.main.async {
-                       let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-                       cell.imageCellAvatar.image  = UIImage(data: data!)
-                }
-            }else {
-                cell.imageCellAvatar.image = UIImage(named: "noFoto")
-            }
-            cell.labelCityCellXib.text = friends[indexPath.section].row[indexPath.row].city?.title
-            cell.lableCellXib.text = "\(friends[indexPath.section].row[indexPath.row].fName) \(friends[indexPath.section].row[indexPath.row].lName) "
-        
+            cell.imageCellAvatar.loadImageFromUrlString(self.friends[indexPath.section].row[indexPath.row].photo)
+            cell.labelCityCellXib.text = friends[indexPath.section].row[indexPath.row].city
+            cell.lableCellXib.text = friends[indexPath.section].row[indexPath.row].userName
+
             return cell
         }
         
@@ -131,20 +109,20 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
 // Действия при выборе ячейки
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let friendSelected = friends[indexPath.section].row[indexPath.row]
-
         
-        if  friendSelected.banned != nil {
+
+        if  friendSelected.isBanned  {
             let allert = AllertWrongUserData().getAllert(title: "Сообщение", message: "Пользователь забанен")
             present(allert, animated: true)
-        }else if friendSelected.isClosedProfile! {
+        }else if friendSelected.isClosedProfile {
             let allert = AllertWrongUserData().getAllert(title: "Сообщение", message: "Профиль пользователя скрыт!")
             present(allert, animated: true)
         }else {
             performSegue(withIdentifier: "detailsUserSegueId", sender: nil)
             guard let detailVC = self.nextViewData else { return }
-            let friend = "\(friends[indexPath.section].row[indexPath.row].fName) \(friends[indexPath.section].row[indexPath.row].lName)"
-            detailVC.title = friend
-            
+
+            detailVC.title = friendSelected.userName
+
             detailVC.friendsSelectedd = friendSelected
         }
     }
@@ -169,6 +147,18 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
 
+    private func loadImageFromData(_ url: String, cellUIImageView: UIImageView) -> () {
+        let url = URL(string: url)!
+      
+        DispatchQueue.global(qos: .userInitiated).async {
+            let content = try? Data(contentsOf: url)
+            DispatchQueue.main.async {
+                if let imageData = content {
+                    cellUIImageView.image = UIImage(data: imageData)
+                }
+            }
+        }
+    }
 
 }
 

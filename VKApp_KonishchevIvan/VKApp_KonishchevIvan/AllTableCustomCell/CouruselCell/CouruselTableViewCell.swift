@@ -11,7 +11,7 @@ import UIKit
 class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet var CouruselCollection: UICollectionView!
-    var collectionData: [FriendsItems]! {
+    var collectionData: [FriendArray]! {
         willSet {
             CouruselCollection.reloadData()
         }
@@ -43,19 +43,9 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = CouruselCollection.dequeueReusableCell(withReuseIdentifier: "CouruselID1", for: indexPath) as? CouruselCollectionViewCell else { preconditionFailure("Error")
         }
-       
-         let imgUrl = self.collectionData![indexPath.row].photo50
-         if imgUrl.isUrlString(){
-             let url = URL(string: imgUrl)
-             DispatchQueue.main.async {
-                    let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-                    cell.imageCouruselCell.image  = UIImage(data: data!)
-             }
-         }else {
-             cell.imageCouruselCell.image = UIImage(named: "noFoto")
-         }
 
-         cell.lableForDetailsCorusel.text = ("\(self.collectionData![indexPath.row].fName) \(self.collectionData![indexPath.row].lName)")
+         cell.imageCouruselCell.loadImageFromUrlString(self.collectionData![indexPath.row].photo)
+         cell.lableForDetailsCorusel.text = self.collectionData![indexPath.row].userName
         return cell
     }
 

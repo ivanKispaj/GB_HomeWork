@@ -7,6 +7,17 @@
 
 import UIKit
 
+struct FriendArray {
+    let userName: String
+    let photo: String
+    let id: Int
+    let city: String
+    let lastSeenDate: Double
+    let isClosedProfile: Bool
+    let isBanned: Bool
+    let online: Bool
+    
+}
 struct Friends: Decodable {
     let response: FriendsResponse
 }

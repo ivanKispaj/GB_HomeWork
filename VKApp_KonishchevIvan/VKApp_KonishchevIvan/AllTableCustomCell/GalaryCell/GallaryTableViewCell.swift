@@ -13,7 +13,7 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     var delegate: TableViewDelegate!
     var delegateFrameImages: SetFrameImages!
     var gallaryData: [ImageAndLikeData]! {
-        willSet {
+        didSet {
             self.gallaryCollection.reloadData()
         }
     }
@@ -35,12 +35,22 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
    
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        if self.gallaryData != nil && self.gallaryData.count >= 3 {
+            return 2
+        }
+        return 1
     }
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        if self.gallaryData != nil {
+            if  gallaryData.count > 4 {
+            return 2
+            }
+        }else {
+            return 0
+        }
+        return gallaryData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -49,17 +59,10 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         }
         guard self.gallaryData != nil else { return cell}
         cell.gallaryImage.contentMode = .scaleAspectFill
+            cell.gallaryImage.loadImageFromUrlString(self.gallaryData[self.countCell].image)
+      
+      
 
-            let imgUrl = self.gallaryData[self.countCell].image
-        if imgUrl.isUrlString() {
-            let url = URL(string: imgUrl)
-            DispatchQueue.main.async {
-                   let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-                   cell.gallaryImage.image  = UIImage(data: data!)
-            }
-        }else {
-            cell.gallaryImage.image = UIImage(named: "noFoto")
-        }
             self.countCell += 1
         
 

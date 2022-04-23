@@ -351,8 +351,6 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
         }
     }
     
-
-
 //MARK: - Добавляем на экран View на которую добавляем два ImageView
 extension GallaryViewController {
 
@@ -395,35 +393,31 @@ extension GallaryViewController {
         self.currentImageView.frame = CGRect(x: 0, y: self.yPos - (size.height / 2), width: size.width, height: size.height)
         size = getSizeImage(self.nextImage)
         self.nextImageView.frame = CGRect(x: self.viewImage.frame.maxX, y: yPos - (size.height / 2), width: size.width, height: size.height)
+        
         let imgUrl = self.arrayPhoto[self.currentImage].image
         let nextImageUrl = self.arrayPhoto[self.nextImage].image
-        if imgUrl.isUrlString() {
-            let url = URL(string: imgUrl)
-            let nextUrl = URL(string: nextImageUrl)
-                   let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-                    let dataNext = try? Data(contentsOf: nextUrl!)
-                    self.currentImageView.image = UIImage(data: data!)
-                self.nextImageView.image = UIImage(data: dataNext!)
-        }
+        self.nextImageView.loadImageFromUrlString(nextImageUrl)
+        self.currentImageView.loadImageFromUrlString(imgUrl)
+     
+        
 
     }
-
+//MARK: - Метод для получения размеров изображения
     private func getSizeImage(_ numberImage: Int) -> CGSize {
-        let url = self.arrayPhoto[numberImage].image
-   
-        self.getImagFromUrl(url)
-        while true {
-            if self.dataImage != nil {
-                break
-            }
-        }
-        let image = UIImage(data: self.dataImage!)
-        
-        let ratio = (image?.size.width)! / UIScreen.main.bounds.width
-        let height = (image?.size.height)! / ratio
+        let urlString = self.arrayPhoto[numberImage].image
+        let url = URL(string: urlString)
+        var image: UIImage?
+            let content = try? Data(contentsOf: url!)
+                if let imageData = content {
+                    image = UIImage(data: imageData)
+                }else {
+                    image = UIImage(named: "noFoto")
+                }
+        let ratio = (image!.size.width) / UIScreen.main.bounds.width
+        let height = (image!.size.height) / ratio
         return CGSize(width: UIScreen.main.bounds.width, height: height)
-        
     }
+//MARK: - Метод для выставления лайков
     private func setLikeData() {
         if self.arrayPhoto[self.currentImage].likeStatus {
             self.heartImageView.image = UIImage(systemName: "suit.heart.fill")
@@ -435,6 +429,8 @@ extension GallaryViewController {
         self.labelLikeView.text = String(self.arrayPhoto[self.currentImage].likeLabel)
         self.controllForLike.indexPath = IndexPath(row: self.currentImage, section: 0)
     }
+
+//MARK: - Сброс анимации
     private func turnOffAnumations(){
         self.nextImageView.transform = CGAffineTransform.identity
         self.currentImageView.transform = CGAffineTransform.identity
@@ -443,18 +439,4 @@ extension GallaryViewController {
 
 }
 
-
-extension GallaryViewController {
-    func getImagFromUrl(_ urlString: String) -> () {
-       
-        if urlString.isUrlString() {
-            let url = URL(string: urlString)
-          
-                let data = try? Data(contentsOf: url!)
-                self.dataImage = data
-                
-            
-        }
-    }
-}
 
