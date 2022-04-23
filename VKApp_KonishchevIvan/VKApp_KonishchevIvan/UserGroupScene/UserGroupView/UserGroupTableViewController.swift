@@ -12,15 +12,20 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
   
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
 
-    var allGroup = DataController.shared.getdataGroup()
-    var myActiveGroup = [
-        AllUserGroups(nameGroup: "Рыбалка", logoGroup: UIImage.init(named: "Fishing"))
-    ]
+  //  var allGroup = DataController.shared.getdataGroup()
+    var myActiveGroup: [AllUserGroups] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+    
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-    
+        loadUserGroupFromVK()
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
         tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")
         
@@ -58,7 +63,7 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
             preconditionFailure("Error")
         }
 
-        cell.imageCellAvatar.image = myActiveGroup[indexPath.row].imageGroup
+        cell.imageCellAvatar.loadImageFromUrlString(myActiveGroup[indexPath.row].imageGroup)
         cell.lableCellXib.text = myActiveGroup[indexPath.row].nameGroup
         return cell
     
@@ -67,9 +72,9 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? NewGroupTableViewController else { return
         }
-        destinationVC.userGroupDelegate = self
-        destinationVC.allGroups = self.allGroup
-        destinationVC.myActiveGroup = self.myActiveGroup
+//        destinationVC.userGroupDelegate = self
+//        destinationVC.allGroups = self.allGroup
+//        destinationVC.myActiveGroup = self.myActiveGroup
     }
    
     // Override to support conditional editing of the table view.
@@ -84,9 +89,9 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
             let deliteRow = self.myActiveGroup[indexPath.row]
             let index = self.myActiveGroup.firstIndex(of: (deliteRow))
             self.myActiveGroup.remove(at: index!)
-                if self.allGroup.firstIndex(of: deliteRow) == nil {
-                    self.allGroup.append(deliteRow)
-                }
+//                if self.allGroup.firstIndex(of: deliteRow) == nil {
+//                    self.allGroup.append(deliteRow)
+//                }
             tableView.reloadData()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

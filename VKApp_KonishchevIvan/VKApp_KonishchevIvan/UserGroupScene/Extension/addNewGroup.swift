@@ -13,7 +13,7 @@ import UIKit
 extension UserGroupTableViewController: UserGroupTableViewDelegate {
     func addNewGroup(_ group: [AllUserGroups], allGroup: [AllUserGroups]) {
         self.myActiveGroup = group
-        self.allGroup = allGroup
+      //  self.allGroup = allGroup
         tableView.reloadData()
     }
 }

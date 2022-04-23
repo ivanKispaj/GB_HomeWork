@@ -20,6 +20,9 @@
 		638E99D42813CCB000367F44 /* DetailUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99D32813CCB000367F44 /* DetailUserModel.swift */; };
 		638E99D62813EB3500367F44 /* ActivityIndicatorLoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99D52813EB3500367F44 /* ActivityIndicatorLoadData.swift */; };
 		638E99D82813EDC200367F44 /* activityIndicatorLoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99D72813EDC200367F44 /* activityIndicatorLoadData.swift */; };
+		638E99DA2814020800367F44 /* getUserGroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99D92814020800367F44 /* getUserGroupList.swift */; };
+		638E99DC2814024100367F44 /* UserGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99DB2814024100367F44 /* UserGroupModel.swift */; };
+		638E99DE2814048500367F44 /* LoadUserGroupFromVK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99DD2814048500367F44 /* LoadUserGroupFromVK.swift */; };
 		639B4257280C0A5C0097D53F /* getListOfFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4256280C0A5C0097D53F /* getListOfFriends.swift */; };
 		639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4258280C0AFE0097D53F /* InternetConnections.swift */; };
 		639B425B280C19190097D53F /* getPhotoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425A280C19190097D53F /* getPhotoUser.swift */; };
@@ -109,6 +112,9 @@
 		638E99D32813CCB000367F44 /* DetailUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailUserModel.swift; sourceTree = "<group>"; };
 		638E99D52813EB3500367F44 /* ActivityIndicatorLoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorLoadData.swift; sourceTree = "<group>"; };
 		638E99D72813EDC200367F44 /* activityIndicatorLoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = activityIndicatorLoadData.swift; sourceTree = "<group>"; };
+		638E99D92814020800367F44 /* getUserGroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserGroupList.swift; sourceTree = "<group>"; };
+		638E99DB2814024100367F44 /* UserGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupModel.swift; sourceTree = "<group>"; };
+		638E99DD2814048500367F44 /* LoadUserGroupFromVK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserGroupFromVK.swift; sourceTree = "<group>"; };
 		639B4256280C0A5C0097D53F /* getListOfFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getListOfFriends.swift; sourceTree = "<group>"; };
 		639B4258280C0AFE0097D53F /* InternetConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnections.swift; sourceTree = "<group>"; };
 		639B425A280C19190097D53F /* getPhotoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getPhotoUser.swift; sourceTree = "<group>"; };
@@ -278,6 +284,7 @@
 		6385D220280DDCB9007F6142 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				638E99DB2814024100367F44 /* UserGroupModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -285,6 +292,7 @@
 		6385D221280DDCC6007F6142 /* UserGroupService */ = {
 			isa = PBXGroup;
 			children = (
+				638E99D92814020800367F44 /* getUserGroupList.swift */,
 			);
 			path = UserGroupService;
 			sourceTree = "<group>";
@@ -293,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				80E3274C27D4F6A80014C760 /* addNewGroup.swift */,
+				638E99DD2814048500367F44 /* LoadUserGroupFromVK.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -977,6 +986,7 @@
 				80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */,
 				80850ED627DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.swift in Sources */,
 				639B425B280C19190097D53F /* getPhotoUser.swift in Sources */,
+				638E99DE2814048500367F44 /* LoadUserGroupFromVK.swift in Sources */,
 				80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */,
 				8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */,
 				80850ECF27DE37910078039E /* HomeNewsTableViewController.swift in Sources */,
@@ -1003,6 +1013,7 @@
 				80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */,
 				80F4BCC527FFEC1F008E07B0 /* AnimationPopNavigationController.swift in Sources */,
 				638E99C3281267B200367F44 /* CustomCollectionLayout.swift in Sources */,
+				638E99DA2814020800367F44 /* getUserGroupList.swift in Sources */,
 				639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */,
 				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,
 				638E99B128125D9D00367F44 /* VKNAavigationDelegate.swift in Sources */,
@@ -1012,6 +1023,7 @@
 				638E99BC2812616D00367F44 /* LikeProtocolMethods.swift in Sources */,
 				80EAC05027F6D453006DDB9A /* TableViewDelegate.swift in Sources */,
 				806284D427DDCAFF00D37674 /* GallaryTableViewCell.swift in Sources */,
+				638E99DC2814024100367F44 /* UserGroupModel.swift in Sources */,
 				639B425F280C252F0097D53F /* getGroupsByRequest.swift in Sources */,
 				638E99CB28131D8E00367F44 /* LoadMyFriends.swift in Sources */,
 				806284CE27DDB24F00D37674 /* GallaryCollectionViewCell.swift in Sources */,
