@@ -23,8 +23,7 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell,UICollectionViewDelegate,
     @IBOutlet weak var newsLikeImage: UIImageView!
     @IBOutlet weak var newsLikeLable: UILabel!
   
-
-    var controllerNewsImage: ImageAndLikeData? = nil
+    var newsData: NewsData!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,7 +35,6 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell,UICollectionViewDelegate,
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -47,7 +45,10 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell,UICollectionViewDelegate,
         guard let cell = newsCollection.dequeueReusableCell(withReuseIdentifier: "NewsPhotoAndTextID", for: indexPath) as? NewsPhotoAndTextCollectionViewCell else {
             preconditionFailure("Error")
         }
-     //   cell.newsImage.image = self.controllerNewsImage?.image
+        
+        let url = newsData.newsImage
+        cell.newsImage.loadImageFromUrlString(url)
+        
         
         return cell
     }

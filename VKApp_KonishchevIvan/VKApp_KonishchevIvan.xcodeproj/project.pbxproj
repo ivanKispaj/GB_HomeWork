@@ -26,6 +26,8 @@
 		638E99E1281433DC00367F44 /* NewGroupSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E0281433DC00367F44 /* NewGroupSearchModel.swift */; };
 		638E99E32814345400367F44 /* getNewGroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E22814345400367F44 /* getNewGroupList.swift */; };
 		638E99E5281434F400367F44 /* loadNewGroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E4281434F400367F44 /* loadNewGroupList.swift */; };
+		638E99E728144A4500367F44 /* getUserNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E628144A4500367F44 /* getUserNews.swift */; };
+		638E99E928144B3200367F44 /* LoadNewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E828144B3200367F44 /* LoadNewsData.swift */; };
 		639B4257280C0A5C0097D53F /* getListOfFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4256280C0A5C0097D53F /* getListOfFriends.swift */; };
 		639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4258280C0AFE0097D53F /* InternetConnections.swift */; };
 		639B425B280C19190097D53F /* getPhotoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425A280C19190097D53F /* getPhotoUser.swift */; };
@@ -120,6 +122,8 @@
 		638E99E0281433DC00367F44 /* NewGroupSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupSearchModel.swift; sourceTree = "<group>"; };
 		638E99E22814345400367F44 /* getNewGroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getNewGroupList.swift; sourceTree = "<group>"; };
 		638E99E4281434F400367F44 /* loadNewGroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadNewGroupList.swift; sourceTree = "<group>"; };
+		638E99E628144A4500367F44 /* getUserNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserNews.swift; sourceTree = "<group>"; };
+		638E99E828144B3200367F44 /* LoadNewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNewsData.swift; sourceTree = "<group>"; };
 		639B4256280C0A5C0097D53F /* getListOfFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getListOfFriends.swift; sourceTree = "<group>"; };
 		639B4258280C0AFE0097D53F /* InternetConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnections.swift; sourceTree = "<group>"; };
 		639B425A280C19190097D53F /* getPhotoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getPhotoUser.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 		6385D219280DCCED007F6142 /* HomeNewsService */ = {
 			isa = PBXGroup;
 			children = (
+				638E99E628144A4500367F44 /* getUserNews.swift */,
 			);
 			path = HomeNewsService;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				638E99AA28125CF600367F44 /* DelegateLikeExtension.swift */,
+				638E99E828144B3200367F44 /* LoadNewsData.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -986,6 +992,7 @@
 				80850ED627DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.swift in Sources */,
 				639B425B280C19190097D53F /* getPhotoUser.swift in Sources */,
 				638E99DE2814048500367F44 /* loadUserGroupFromVK.swift in Sources */,
+				638E99E728144A4500367F44 /* getUserNews.swift in Sources */,
 				80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */,
 				8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */,
 				80850ECF27DE37910078039E /* HomeNewsTableViewController.swift in Sources */,
@@ -1008,6 +1015,7 @@
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
 				80850EC827DE12480078039E /* SingleCollectionViewCell.swift in Sources */,
 				639B4264280D36430097D53F /* isUrlString.swift in Sources */,
+				638E99E928144B3200367F44 /* LoadNewsData.swift in Sources */,
 				639B4262280D2D200097D53F /* unixTimeConvertion.swift in Sources */,
 				80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */,
 				80F4BCC527FFEC1F008E07B0 /* AnimationPopNavigationController.swift in Sources */,

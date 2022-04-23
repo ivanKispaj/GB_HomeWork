@@ -11,11 +11,19 @@ class HomeNewsTableViewController: UITableViewController{
     
 
     var nextViewData: [ImageAndLikeData?] = [nil]
-    var newsArray:[NewsData]? = nil
+    var newsArray:[NewsData]! {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+           
+        }
+    }
     var currentOrientation: UIDeviceOrientation? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadNewsData()
         
         self.currentOrientation = UIDevice.current.orientation
    //     self.newsArray = DataController.shared.getDataNews()
@@ -35,7 +43,11 @@ class HomeNewsTableViewController: UITableViewController{
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 0 //self.newsArray!.count
+        if self.newsArray == nil {
+            return 0
+        }else {
+        return self.newsArray!.count
+        }
     }
 
     
@@ -43,18 +55,20 @@ class HomeNewsTableViewController: UITableViewController{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SinglePhotoAndTextCell", for: indexPath) as? SinglePhotoAndTextTableViewCell else {
             preconditionFailure("Error")
         }
-        let newsText = (self.newsArray![indexPath.row].newsText)!
-        let newsImage = (self.newsArray![indexPath.row].newsImage)
-        cell.newsTextView.text = newsText
-        cell.controllerNewsImage = newsImage
+    
+        cell.newsData = newsArray[indexPath.row]
         
 // передаем контроллер и текущий индекс патч в делегат!!!
         cell.likeControll.delegate = self
         cell.likeControll.indexPath = indexPath
-        
-        cell.newsUserAvatar.image = UIImage(named: "abramovich")
-        
-        let countlike: String = String(newsArray![indexPath.row].newsImage!.likeLabel)
+        let url = self.newsArray[indexPath.row].newsUser.photo
+        cell.newsUserAvatar.loadImageFromUrlString(url)
+        cell.newsTextView.text = self.newsArray[indexPath.row].description
+        let userName = self.newsArray[indexPath.row].newsUser.fName + " " + self.newsArray[indexPath.row].newsUser.lName
+        cell.newsUserName.text = userName
+        cell.newsLikeLable.text = String(self.newsArray[indexPath.row].newsLike.count)
+        cell.newsUserApdateTime.text = unixTimeConvertion(unixTime: Double(self.newsArray[indexPath.row].newsSeen))
+        let countlike: String = String(newsArray[indexPath.row].newsLike.count)
         cell.newsLikeLable.text = countlike
       
         return cell

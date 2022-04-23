@@ -26,8 +26,6 @@ extension InternetConnections {
             guard let data = data else { return }
             let decode = JSONDecoder()
             do {
-                let pop = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                print(pop)
             let result = try decode.decode(NewGroupSearchModel.self, from: data)
                 completion(.success(result))
             }catch {
