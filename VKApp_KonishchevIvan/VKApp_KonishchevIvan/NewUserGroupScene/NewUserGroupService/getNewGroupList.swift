@@ -1,22 +1,22 @@
 //
-//  getUserGroupList.swift
+//  NewGroupService.swift
 //  VKApp_KonishchevIvan
 //
 //  Created by Ivan Konishchev on 23.04.2022.
 //
 
 import UIKit
-//MARK: - метод для запроса групп пользователя
+
 extension InternetConnections {
-    func getUserGroupList(for user_id: String, completion: @escaping(Result<UserGroupModel,Error>) -> ()) {
+    func getNewGroupList(for searchText: String, completion: @escaping(Result<NewGroupSearchModel,Error>) -> ()) {
         guard let access_token = NetworkSessionData.shared.token else { return }
         self.urlComponents.queryItems = [
-            URLQueryItem(name: "user_id", value: user_id),
+            URLQueryItem(name: "q", value: searchText),
             URLQueryItem(name: "access_token", value: access_token),
-            URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "fields", value: "activity, city, description, links, site, status "),
+            URLQueryItem(name: "sort", value: "6"),
+            URLQueryItem(name: "type", value: "group"),
             URLQueryItem(name: "v", value: "5.131"),
-           // URLQueryItem(name: "count", value: "3")
+           URLQueryItem(name: "count", value: "1000")
         ]
         guard let url = self.urlComponents.url else { return }
         let request = URLRequest(url: url)
@@ -28,7 +28,7 @@ extension InternetConnections {
             do {
                 let pop = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                 print(pop)
-            let result = try decode.decode(UserGroupModel.self, from: data)
+            let result = try decode.decode(NewGroupSearchModel.self, from: data)
                 completion(.success(result))
             }catch {
                 completion(.failure(error))

@@ -679,7 +679,13 @@
                             <outlet property="delegate" destination="bOg-bZ-oQT" id="vQe-iZ-KJc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Group" id="flI-pI-va9"/>
+                    <navigationItem key="navigationItem" title="All Group" id="flI-pI-va9">
+                        <barButtonItem key="rightBarButtonItem" title="Новый поиск" id="AKU-ae-wS7">
+                            <connections>
+                                <action selector="NewSearchGroup:" destination="bOg-bZ-oQT" id="EcE-rY-ruv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="NMy-aR-Rrh" id="hhx-Y0-LJ7"/>
                     </connections>

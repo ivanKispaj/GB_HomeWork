@@ -65,6 +65,7 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
 
         cell.imageCellAvatar.loadImageFromUrlString(myActiveGroup[indexPath.row].imageGroup)
         cell.lableCellXib.text = myActiveGroup[indexPath.row].nameGroup
+        cell.labelCityCellXib.text = myActiveGroup[indexPath.row].activity
         return cell
     
     }
@@ -72,14 +73,11 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? NewGroupTableViewController else { return
         }
-//        destinationVC.userGroupDelegate = self
-//        destinationVC.allGroups = self.allGroup
-//        destinationVC.myActiveGroup = self.myActiveGroup
+       destinationVC.userGroupDelegate = self
     }
    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
    

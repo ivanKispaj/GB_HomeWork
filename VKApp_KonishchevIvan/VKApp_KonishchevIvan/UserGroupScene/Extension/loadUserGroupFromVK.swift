@@ -16,8 +16,14 @@ extension UserGroupTableViewController {
             case .success(let result):
                 var group: [AllUserGroups] = []
                 for items in result.response.items {
-                    let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup)
-                    group.append(res)
+                    if let activity = items.activity {
+                    let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup, activity: activity)
+                        group.append(res)
+                    }else {
+                        let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup, activity: "")
+                            group.append(res)
+                    }
+                    
                 }
                 self?.myActiveGroup = group
             case .failure(_):
