@@ -9,8 +9,10 @@ import UIKit
 
 // MARK: - Подгружаем друзей друга и сохраняем результат в hisFriends
 extension DetailUserTableViewController {
-    
+  
     func loadFriendsSelectedUser() {
+  
+        
         InternetConnections(host: "api.vk.com", path: "/method/friends.get").getListOfFirends(for: String(self.friendsSelectedd.id)) { request in
             switch request {
                 case .success(let result):
@@ -43,8 +45,7 @@ extension DetailUserTableViewController {
                     
                 }
                 self.hisFriends = friends
-                
-                    //self.hisFriends = result.response.items
+ 
                 case .failure(_):
                     print("Error request friends")
             }

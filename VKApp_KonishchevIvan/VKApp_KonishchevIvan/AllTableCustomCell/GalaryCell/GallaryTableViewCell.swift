@@ -44,7 +44,7 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if self.gallaryData != nil {
-            if  gallaryData.count > 4 {
+            if  gallaryData.count >= 4 {
             return 2
             }
         }else {

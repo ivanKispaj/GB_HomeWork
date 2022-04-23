@@ -10,6 +10,8 @@ import UIKit
 extension FriendsTableViewController {
   
     func loadMyFriends() {
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
 //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
       InternetConnections(host: "api.vk.com", path: "/method/friends.get").getListOfFirends(for: "72287677") { [weak self] response in
           switch response {
@@ -41,7 +43,11 @@ extension FriendsTableViewController {
                   let name = (arrayFriends.fName) + " " + (arrayFriends.lName)
                   let friend = FriendArray(userName: name, photo: arrayFriends.photo50, id: arrayFriends.id, city: cityName, lastSeenDate: lastSeenData, isClosedProfile: arrayFriends.isClosedProfile ?? false, isBanned: isBanned!, online: online!)
                   friends.append(friend)
-                  
+                  DispatchQueue.main.async {
+                      self!.activityIndicator.isHidden = true
+                      self!.activityIndicator.stopAnimating()
+                  }
+          
               }
               self?.friendsArray = friends
           case .failure(_):

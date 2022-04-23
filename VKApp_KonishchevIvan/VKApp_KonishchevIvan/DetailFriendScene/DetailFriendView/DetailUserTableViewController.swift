@@ -12,6 +12,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
  
 // Данные пользователя которого выбрали на предыдущем контроллере (FriendsTableViewController)
     var friendsSelectedd: FriendArray!
+    var activityIndicator: UIActivityIndicatorView!
     
     var frameImages: [CGRect]?
     var currentFrameImages: CGRect?
@@ -20,10 +21,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     
     var nextViewData: [ImageAndLikeData] = []
     var dataTable: [UserDetailsTableData] = []
-   // var detailAvatar: UIImage? = nil
-  //  var detailUsername: String? = nil
-  //  var detailUserInfo: String? = nil
- //   var detailUserVisitInfo: String? = nil
     var hisFriends: [FriendArray]? = nil
     var photo:[ImageAndLikeData]? {
         didSet {
@@ -46,6 +43,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var likeCount: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        getActivityIndicatorLoadData()
         
         loadFriendsSelectedUser()
         loadPhotoAlbumSelctedUser()

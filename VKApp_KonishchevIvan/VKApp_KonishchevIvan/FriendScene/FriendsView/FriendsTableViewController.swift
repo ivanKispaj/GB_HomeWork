@@ -14,7 +14,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
     @IBOutlet weak var headerTableView: UIView!
     @IBOutlet weak var headerSubview: UIView!
-    
+    var activityIndicator: UIActivityIndicatorView!
     struct DataSection {
         var header: String = ""
         var row: [FriendArray] = []
@@ -41,7 +41,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getActivityIndicatorLoadData()
+       
             self.loadMyFriends()
         
             let dataVKPhoto =  "https://avatars.mds.yandex.net/get-zen_doc/1535103/pub_5f2dbed8c1a7b87558486d42_5f2dc071d1ab9668ff0d0ad8/scale_1200"

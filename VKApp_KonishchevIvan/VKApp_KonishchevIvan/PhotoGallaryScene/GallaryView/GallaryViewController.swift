@@ -155,9 +155,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
             }else if positionX > 0 && positionY > 0 {
                yDirection = positionY
             }
-            print(positionX)
-            print(positionY)
-            print(yDirection)
+
                 if  positionX < 0 && positionX < yDirection{
                     self.directionOf = .left
                   
@@ -172,8 +170,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                     }
                 }
             if self.directionOf == .top {
-                
-                print("top")
+            
             }else if self.directionOf == .bottom {
               
                 self.dismiss(animated: true, completion: nil)
@@ -181,7 +178,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                 
             }else {
             if self.directionOf == .left {
-                self.setViewImagesFrame()
+                self.setViewImagesFrame(false)
 // Делаем nextImageView поверх currentImageView
                 self.viewImage.bringSubviewToFront(self.nextImageView)
                 if self.currentImage != (self.arrayPhoto.count - 1) {
@@ -202,7 +199,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
     // Отключаем проделанные трансформации
                             self.turnOffAnumations()
     // устанавливаем начальные frame изображениям
-                            self.setViewImagesFrame()
+                            self.setViewImagesFrame(true)
                         default:
                             self.turnOffAnumations()
                         }
@@ -216,17 +213,19 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                 }
                 
             }else if self.directionOf == .right && self.currentImage != 0 {
+                
     // если направление свайпа вправо и это не первое изображение
                 let x = self.currentImageView.frame.maxX
     // устанавливаем нижнее изображение по последнему фрейму анимации
                 let nextImage = self.currentImage - 1
+                self.nextImage = nextImage
+                self.setViewImagesFrame(false)
                 let size = getSizeImage(nextImage)
     // Вычисляем и устанавливаем frame нижнему изображению при правом свайпе!
                 self.nextImageView.frame = CGRect(x: self.currentImageView.frame.origin.x, y: self.yPos - ( size.height / 2), width: size.width, height: size.height)
    // Делаем currentImageView поверх nextImageView
                 self.viewImage.bringSubviewToFront(self.currentImageView)
                 self.nextImageView.transform = CGAffineTransform(scaleX: 0, y: 0)
-           //     self.nextImageView.image = self.arrayPhoto[nextImage].image
                 self.animateImage = UIViewPropertyAnimator(duration: 0.6, curve: .easeOut , animations: {
                         self.currentImageView.transform = CGAffineTransform(translationX: x, y: self.yPos - self.yPos)
                         })
@@ -241,7 +240,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                      
                         self.setLikeData()
                         self.turnOffAnumations()
-                        self.setViewImagesFrame()
+                        self.setViewImagesFrame(true)
                         if self.currentImage == 0 {
                             self.nextImage = 1
                         }
@@ -284,6 +283,11 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                         self.currentImage -= 1
                         self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor:  0)
                         self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+                    }else if self.nextImage == 0 {
+                        self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor:  0)
+                        self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+                        self.currentImage -= 1
+                        self.nextImage = 1
                     }else {
                         self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor:  0)
                         self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
@@ -352,7 +356,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
     }
     
 //MARK: - Добавляем на экран View на которую добавляем два ImageView
-extension GallaryViewController {
+private extension GallaryViewController {
 
    private func setViewAndImagesToView() {
 
@@ -369,6 +373,8 @@ extension GallaryViewController {
     
        
     }
+
+        
     
     private func setConstraintViewImage() {
         self.viewImage.translatesAutoresizingMaskIntoConstraints = false
@@ -385,10 +391,10 @@ extension GallaryViewController {
     private func setImageViewFrame() {
         self.currentImageView = UIImageView()
         self.nextImageView = UIImageView()
-        self.setViewImagesFrame()
+        self.setViewImagesFrame(false)
     }
     
-    private func setViewImagesFrame() {
+    private func setViewImagesFrame(_ endAnimation: Bool) {
         var size = getSizeImage(self.currentImage)
         self.currentImageView.frame = CGRect(x: 0, y: self.yPos - (size.height / 2), width: size.width, height: size.height)
         size = getSizeImage(self.nextImage)
@@ -396,25 +402,20 @@ extension GallaryViewController {
         
         let imgUrl = self.arrayPhoto[self.currentImage].image
         let nextImageUrl = self.arrayPhoto[self.nextImage].image
-        self.nextImageView.loadImageFromUrlString(nextImageUrl)
-        self.currentImageView.loadImageFromUrlString(imgUrl)
-     
+        if  endAnimation {
+            self.currentImageView.image = self.nextImageView.image
+        }else {
+            self.currentImageView.loadImageFromUrlString(imgUrl)
+            
+        }
         
+        self.nextImageView.loadImageFromUrlString(nextImageUrl)
 
     }
 //MARK: - Метод для получения размеров изображения
     private func getSizeImage(_ numberImage: Int) -> CGSize {
-        let urlString = self.arrayPhoto[numberImage].image
-        let url = URL(string: urlString)
-        var image: UIImage?
-            let content = try? Data(contentsOf: url!)
-                if let imageData = content {
-                    image = UIImage(data: imageData)
-                }else {
-                    image = UIImage(named: "noFoto")
-                }
-        let ratio = (image!.size.width) / UIScreen.main.bounds.width
-        let height = (image!.size.height) / ratio
+        let ratio = (self.arrayPhoto[numberImage].width) / UIScreen.main.bounds.width
+        let height = (self.arrayPhoto[numberImage].height) / ratio
         return CGSize(width: UIScreen.main.bounds.width, height: height)
     }
 //MARK: - Метод для выставления лайков
@@ -438,5 +439,6 @@ extension GallaryViewController {
  
 
 }
+
 
 
