@@ -16,6 +16,7 @@ struct FriendArray {
     let isClosedProfile: Bool
     let isBanned: Bool
     let online: Bool
+    let status: String
     
 }
 struct Friends: Decodable {
@@ -28,15 +29,16 @@ struct FriendsResponse: Decodable {
 
 struct FriendsItems: Decodable {
     enum CodingKeys: String, CodingKey {
-      case city
-      case fName = "first_name"
-      case lName = "last_name"
-      case photo50 = "photo_50"
-      case id
-      case online
-      case lastSeen = "last_seen"
-      case isClosedProfile = "is_closed"
-      case banned = "deactivated"
+        case city
+        case fName = "first_name"
+        case lName = "last_name"
+        case photo50 = "photo_50"
+        case id
+        case online
+        case lastSeen = "last_seen"
+        case isClosedProfile = "is_closed"
+        case banned = "deactivated"
+        case status
     }
     let photo50: String
     let city: City?
@@ -47,6 +49,7 @@ struct FriendsItems: Decodable {
     let lastSeen: LastSeen?
     let isClosedProfile: Bool?
     let banned: String?
+    let status: String?
 }
 
 struct City: Decodable {

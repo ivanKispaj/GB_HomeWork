@@ -11,7 +11,7 @@ class CouruselCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var contentCollectionCell: UIView!
     @IBOutlet weak var avatarCouruselView: UIView!
-    @IBOutlet var imageCouruselCell: UIImageView!
+    @IBOutlet weak var imageCouruselCell: UIImageView!
     @IBOutlet weak var lableForDetailsCorusel: UILabel!
 
     override func awakeFromNib() {

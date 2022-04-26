@@ -22,8 +22,15 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell,UICollectionViewDelegate,
     @IBOutlet weak var newsUserApdateTime: UILabel!
     @IBOutlet weak var newsLikeImage: UIImageView!
     @IBOutlet weak var newsLikeLable: UILabel!
-  
-    var newsData: NewsData!
+    @IBOutlet weak var seenViewLable: UILabel!
+    
+    var newsData: NewsCellData! {
+        didSet {
+            DispatchQueue.main.async {
+                self.newsCollection.reloadData()
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,9 +54,8 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell,UICollectionViewDelegate,
         }
         
         let url = newsData.newsImage
+        print(url)
         cell.newsImage.loadImageFromUrlString(url)
-        
-        
         return cell
     }
 

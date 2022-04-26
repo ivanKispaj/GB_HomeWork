@@ -13,23 +13,44 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 // Данные пользователя которого выбрали на предыдущем контроллере (FriendsTableViewController)
     var friendsSelectedd: FriendArray!
     var activityIndicator: UIActivityIndicatorView!
+   // var detailsControllerData: DetailsControllerData!
+    
     
     var frameImages: [CGRect]?
     var currentFrameImages: CGRect?
     var collectionFrame: CGRect?
     var currentImage: Int?
-    
+  
+    // переменная для следующего контроллера
     var nextViewData: [ImageAndLikeData] = []
+    // данные для отображения секций таблицы
     var dataTable: [UserDetailsTableData] = []
-    var hisFriends: [FriendArray]? = nil
-    var photo:[ImageAndLikeData]? {
+    // обновляет таблицу если и hisFriends и photo установленны!
+    var dataUpdate: Bool = false {
         didSet {
+            self.setTableSection()
             DispatchQueue.main.async {
-                self.setHeaderDetailView()
                 self.tableView.reloadData()
             }
         }
     }
+   // массив с друзьями друга
+    var hisFriends: [FriendArray]? {
+        didSet {
+            if self.photo != nil {
+                self.dataUpdate = true
+            }
+        }
+    }
+    //массив с фото друга
+    var photo:[ImageAndLikeData]? {
+        didSet {
+            if self.hisFriends != nil {
+                self.dataUpdate = true
+            }
+        }
+    }
+    // одиночное изображение с лайками
     var singlePhoto: ImageAndLikeData?
     var currentImageTap: Int!
     @IBOutlet weak var detailAvatarHeader: UIImageView!
@@ -43,15 +64,17 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var likeCount: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.LoadUserWall()
         getActivityIndicatorLoadData()
-        
-        loadFriendsSelectedUser()
-        loadPhotoAlbumSelctedUser()
+        self.loadFriendsSelectedUser()
+        self.loadPhotoAlbumSelctedUser()
         setHeaderDetailView()
+      
+
         
-        dataTable.append(UserDetailsTableData(sectionName: "Friends", sectionType: .Friends ))
-        dataTable.append(UserDetailsTableData(sectionName: "Gallary", sectionType: .Gallary))
-        dataTable.append(UserDetailsTableData(sectionName: "Single Photo", sectionType: .SingleFoto))
+        
+      
         tableView.register(UINib(nibName: "CouruselTableViewCell", bundle: nil), forCellReuseIdentifier: "CouruselCellForDetails")
         tableView.register(UINib(nibName: "GallaryTableViewCell", bundle: nil), forCellReuseIdentifier: "GallaryTableCell")
         tableView.register(UINib(nibName: "SinglePhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleTableCellID")
@@ -99,10 +122,10 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.singleLableUserName.text = self.friendsSelectedd.userName
             cell.singleAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
             cell.likeControll.delegate = self
-            
             cell.likeControll.indexPath = indexPath
             cell.delegate = self
             cell.singlePhoto = self.photo?.first
+            self.singlePhoto = self.photo?.first
             return cell
         }
     }
@@ -121,6 +144,17 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         destinationVC.currentFrame = self.currentFrameImages
         destinationVC.frameArray = self.frameImages
         destinationVC.collectionViewFrame = collectionFrame
+    }
+    private func setTableSection() {
+        if let friends = self.hisFriends?.count, friends > 0 {
+            dataTable.append(UserDetailsTableData(sectionName: "Friends", sectionType: .Friends ))
+        }
+        if let photo = self.photo?.count, photo > 1 {
+            dataTable.append(UserDetailsTableData(sectionName: "Gallary", sectionType: .Gallary))
+            dataTable.append(UserDetailsTableData(sectionName: "Single Photo", sectionType: .SingleFoto))
+        }else {
+            dataTable.append(UserDetailsTableData(sectionName: "Single Photo", sectionType: .SingleFoto))
+        }
     }
 
 //MARK: - TableViewDelegate method
@@ -152,15 +186,15 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 extension DetailUserTableViewController: ProtocolLikeDelegate {
 
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
-     //   let countLike = singlePhoto.likeLabel
-       // let likeStatus = singlePhoto.likeStatus
-        return  [ 0: false]//[countLike: likeStatus]
+        let countLike = singlePhoto?.likeLabel
+        let likeStatus = singlePhoto?.likeStatus
+        return  [ countLike!: likeStatus!]//[countLike: likeStatus]
         
     }
     
     func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
-     //   self.singlePhoto.likeStatus = likeStatus
-      //  self.singlePhoto.likeLabel = countLike
+        self.singlePhoto?.likeStatus = likeStatus
+        self.singlePhoto?.likeLabel = countLike
     
     }
     

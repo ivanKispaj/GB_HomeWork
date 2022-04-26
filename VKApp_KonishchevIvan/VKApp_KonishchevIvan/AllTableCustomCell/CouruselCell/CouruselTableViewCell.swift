@@ -12,7 +12,7 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
 
     @IBOutlet var CouruselCollection: UICollectionView!
     var collectionData: [FriendArray]! {
-        willSet {
+        didSet {
             CouruselCollection.reloadData()
         }
     }

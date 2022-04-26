@@ -35,7 +35,9 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
    
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if self.gallaryData != nil && self.gallaryData.count >= 3 {
+        if self.gallaryData != nil && self.gallaryData.count == 0 {
+            return 0
+        }else if self.gallaryData != nil && self.gallaryData.count >= 4 {
             return 2
         }
         return 1
@@ -43,14 +45,13 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.gallaryData != nil {
-            if  gallaryData.count >= 4 {
-            return 2
-            }
-        }else {
-            return 0
+        if self.gallaryData == nil {
+        return 0
+        }else if self.gallaryData.count < 4 {
+            return 1
         }
-        return gallaryData.count
+        return 2
+   
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -60,13 +61,7 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         guard self.gallaryData != nil else { return cell}
         cell.gallaryImage.contentMode = .scaleAspectFill
             cell.gallaryImage.loadImageFromUrlString(self.gallaryData[self.countCell].image)
-      
-      
-
             self.countCell += 1
-        
-
-        
         return cell
     }
     

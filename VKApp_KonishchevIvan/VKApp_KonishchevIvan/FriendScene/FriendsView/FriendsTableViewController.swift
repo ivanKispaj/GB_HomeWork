@@ -36,7 +36,6 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
     }
-////////////////////////
     var nextViewData: DetailUserTableViewController!
     
     override func viewDidLoad() {
@@ -46,7 +45,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             self.loadMyFriends()
         
             let dataVKPhoto =  "https://avatars.mds.yandex.net/get-zen_doc/1535103/pub_5f2dbed8c1a7b87558486d42_5f2dc071d1ab9668ff0d0ad8/scale_1200"
-            self.posibleFriends = DataSection(header: "Возможные друзья", row: [FriendArray(userName: "VKGroup", photo: dataVKPhoto , id: 1, city: "Moscow", lastSeenDate: 12746822, isClosedProfile: false, isBanned: false, online: true)])
+            self.posibleFriends = DataSection(header: "Возможные друзья", row: [FriendArray(userName: "VKGroup", photo: dataVKPhoto , id: 1, city: "Moscow", lastSeenDate: 12746822, isClosedProfile: false, isBanned: false, online: true, status: "Официальная группа VK")])
   
         self.searchBar!.delegate = self
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")

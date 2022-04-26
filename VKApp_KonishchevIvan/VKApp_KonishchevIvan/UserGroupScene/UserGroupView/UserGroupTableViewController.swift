@@ -38,13 +38,7 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
         return true
     }
 
-    
-    
-    // MARK: - Table view data source
 
-//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        print("Header")
-//    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
     
@@ -87,9 +81,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
             let deliteRow = self.myActiveGroup[indexPath.row]
             let index = self.myActiveGroup.firstIndex(of: (deliteRow))
             self.myActiveGroup.remove(at: index!)
-//                if self.allGroup.firstIndex(of: deliteRow) == nil {
-//                    self.allGroup.append(deliteRow)
-//                }
             tableView.reloadData()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

@@ -14,9 +14,8 @@ extension DetailUserTableViewController {
     func setHeaderDetailView(){
         DispatchQueue.main.async {
             self.detailUserNameLable.text = self.friendsSelectedd.userName
+            self.detailUserInfoLable.text = self.friendsSelectedd.status
         }
-        
-         //    self.detailUserInfoLable.text = self.detailUserInfo
         self.detailAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
        
         let time = unixTimeConvertion(unixTime: self.friendsSelectedd.lastSeenDate)
@@ -31,20 +30,12 @@ extension DetailUserTableViewController {
             }
            
         }
-        DispatchQueue.main.async {
+
             self.detailButtonMessage.setTitle("Сообщение", for: .normal)
             self.detailButtonMessage.setTitleColor(UIColor.white, for: .normal)
             self.detailButtonCall.setTitle("Звонок", for: .normal)
             self.detailButtonCall.setTitleColor(UIColor.white, for: .normal)
-        }
   
     }
-    func verifyUrl (urlString: String?) -> Bool {
-        if let urlString = urlString {
-            if let url = NSURL(string: urlString) {
-                return UIApplication.shared.canOpenURL(url as URL)
-            }
-        }
-        return false
-    }
+
 }

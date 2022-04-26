@@ -14,7 +14,7 @@ extension InternetConnections {
             URLQueryItem(name: "user_id", value: user_id),
             URLQueryItem(name: "access_token", value: access_token),
             URLQueryItem(name: "order", value: "random"),
-            URLQueryItem(name: "fields", value: "photo_50, city, last_seen, online "),
+            URLQueryItem(name: "fields", value: "photo_50, city, last_seen, online, status "),
             URLQueryItem(name: "v", value: "5.131"),
             URLQueryItem(name: "count", value: "20")
         ]

@@ -8,8 +8,9 @@
 import UIKit
 
 extension UIImageView {
-         func loadImageFromUrlString(_ url: String) -> () {
-            let url = URL(string: url)!
+         func loadImageFromUrlString(_ url: String?) -> () {
+             guard let urlImage = url, urlImage != "" else { return }
+            let url = URL(string: urlImage)!
             DispatchQueue.global(qos: .userInitiated).async {
                 let content = try? Data(contentsOf: url)
                 DispatchQueue.main.async {

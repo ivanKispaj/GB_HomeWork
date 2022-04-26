@@ -4,7 +4,7 @@
 //
 //  Created by Ivan Konishchev on 22.04.2022.
 //
-
+// 387485849
 import UIKit
 
 extension FriendsTableViewController {
@@ -39,9 +39,15 @@ extension FriendsTableViewController {
                   if arrayFriends.lastSeen != nil {
                       lastSeenData = arrayFriends.lastSeen!.time
                   }
+                  var statusText: String!
+                  if arrayFriends.status != nil {
+                      statusText = arrayFriends.status
+                  }else {
+                      statusText = " "
+                  }
 
                   let name = (arrayFriends.fName) + " " + (arrayFriends.lName)
-                  let friend = FriendArray(userName: name, photo: arrayFriends.photo50, id: arrayFriends.id, city: cityName, lastSeenDate: lastSeenData, isClosedProfile: arrayFriends.isClosedProfile ?? false, isBanned: isBanned!, online: online!)
+                  let friend = FriendArray(userName: name, photo: arrayFriends.photo50, id: arrayFriends.id, city: cityName, lastSeenDate: lastSeenData, isClosedProfile: arrayFriends.isClosedProfile ?? false, isBanned: isBanned!, online: online!, status: statusText)
                   friends.append(friend)
                   DispatchQueue.main.async {
                       self!.activityIndicator.isHidden = true

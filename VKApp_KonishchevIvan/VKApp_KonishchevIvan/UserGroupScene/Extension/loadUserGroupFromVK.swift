@@ -3,14 +3,14 @@
 //  VKApp_KonishchevIvan
 //
 //  Created by Ivan Konishchev on 23.04.2022.
-//
+//72287677
 
 import UIKit
 
 extension UserGroupTableViewController {
     
     func loadUserGroupFromVK() {
-        InternetConnections(host: "api.vk.com", path: "/method/groups.get").getUserGroupList(for: "72287677") { [weak self] response in
+        InternetConnections(host: "api.vk.com", path: "/method/groups.get").getUserGroupList(for: String(NetworkSessionData.shared.userId!)) { [weak self] response in
             switch response {
                 
             case .success(let result):

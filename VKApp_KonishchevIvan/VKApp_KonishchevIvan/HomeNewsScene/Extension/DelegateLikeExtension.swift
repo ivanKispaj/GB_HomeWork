@@ -11,13 +11,24 @@ import UIKit
 extension HomeNewsTableViewController: ProtocolLikeDelegate {
 
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
-        let countLike = newsArray![indexPath.row].newsLike.count
-        let likeStatus = false
-        return [countLike: likeStatus]
+        let data = self.newsArray?[indexPath.section].first?.value[indexPath.row]
+        let countLike =  data?.newsLike.count
+        var likeStatus = false
+        if data?.newsLike.likeStatus != 0 {
+            likeStatus = true
+        }
+        return [countLike!: likeStatus]
     }
     
     func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
-        //self.newsArray![indexPath.row].newsLike.count = likeStatus
-       // self.newsArray![indexPath.row].newsLike.count = countLike
+        var data = self.newsArray?[indexPath.section].first?.value[indexPath.row]
+        data?.newsLike.count = countLike
+        var likeStat = 0
+        if likeStatus {
+            likeStat = 1
+        }else {
+            likeStat = 0
+        }
+        data?.newsLike.likeStatus = likeStat
     }
 }

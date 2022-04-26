@@ -7,26 +7,24 @@
 
 import UIKit
 
-class HomeNewsTableViewController: UITableViewController{
+class HomeNewsTableViewController: UITableViewController {
     
 
     var nextViewData: [ImageAndLikeData?] = [nil]
-    var newsArray:[NewsData]! {
+    var newsArray: [[CellType : [NewsCellData]]]! {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-           
+                          self.tableView.reloadData()
+                      }
         }
     }
+
     var currentOrientation: UIDeviceOrientation? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadNewsData()
-        
         self.currentOrientation = UIDevice.current.orientation
-   //     self.newsArray = DataController.shared.getDataNews()
         tableView.register(UINib(nibName: "SinglePhotoAndTextTableViewCell", bundle: nil), forCellReuseIdentifier: "SinglePhotoAndTextCell")
     }
 
@@ -38,39 +36,39 @@ class HomeNewsTableViewController: UITableViewController{
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
  
-        return 1
+        if self.newsArray == nil {
+            return 0
+        }else {
+        return newsArray.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        if self.newsArray == nil {
-            return 0
-        }else {
-        return self.newsArray!.count
-        }
+
+        let dat = self.newsArray[section]
+        let count = dat.first?.value.count
+        return count ?? 0
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SinglePhotoAndTextCell", for: indexPath) as? SinglePhotoAndTextTableViewCell else {
             preconditionFailure("Error")
         }
-    
-        cell.newsData = newsArray[indexPath.row]
-        
-// передаем контроллер и текущий индекс патч в делегат!!!
+        let array = newsArray?[indexPath.section].first
+        let data = array?.value[indexPath.row]
+        cell.newsData = data
+// передаем контроллер и текущий индекс патч в делегат likecontroll!!!
         cell.likeControll.delegate = self
         cell.likeControll.indexPath = indexPath
-        let url = self.newsArray[indexPath.row].newsUser.photo
-        cell.newsUserAvatar.loadImageFromUrlString(url)
-        cell.newsTextView.text = self.newsArray[indexPath.row].description
-        let userName = self.newsArray[indexPath.row].newsUser.fName + " " + self.newsArray[indexPath.row].newsUser.lName
-        cell.newsUserName.text = userName
-        cell.newsLikeLable.text = String(self.newsArray[indexPath.row].newsLike.count)
-        cell.newsUserApdateTime.text = unixTimeConvertion(unixTime: Double(self.newsArray[indexPath.row].newsSeen))
-        let countlike: String = String(newsArray[indexPath.row].newsLike.count)
-        cell.newsLikeLable.text = countlike
-      
+// устанавливаем данные для отображения
+        cell.newsUserAvatar.loadImageFromUrlString(data?.newsUserLogo)
+        cell.newsTextView.text = data?.newsDescription
+        cell.newsUserName.text = data?.newsUserName
+        let counLike: String = String((data?.newsLike.count)!)
+        cell.newsLikeLable.text = counLike
+        cell.newsUserApdateTime.text = unixTimeConvertion(unixTime: Double(data!.date))
+        cell.seenViewLable.text = String(data!.newsSeenCount)
         return cell
     }
     
@@ -84,5 +82,7 @@ class HomeNewsTableViewController: UITableViewController{
         
     
 }
+
+
 
 
