@@ -13,12 +13,14 @@ struct ImageAndLikeData {
     var likeLabel: Int = 0
     var height: CGFloat
     var width: CGFloat
-    init(image: String, likeStatus: Bool, likeLabel: Int = 0, height: CGFloat, width: CGFloat) {
+    var seenCount: Int
+    init(image: String, likeStatus: Bool, likeLabel: Int = 0, height: CGFloat, width: CGFloat, seenCount: Int) {
         self.image = image
         self.likeStatus = likeStatus
         self.likeLabel = likeLabel
         self.height = height
         self.width = width
+        self.seenCount = seenCount
     }
 }
 

@@ -24,34 +24,15 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     // переменная для следующего контроллера
     var nextViewData: [ImageAndLikeData] = []
     // данные для отображения секций таблицы
-    var dataTable: [UserDetailsTableData] = []
-    // обновляет таблицу если и hisFriends и photo установленны!
-    var dataUpdate: Bool = false {
+    var dataTable: [UserDetailsTableData]! {
         didSet {
-            self.setTableSection()
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+    // перезагружаем таблицу после получения данных
+                         self.tableView.reloadData()
             }
         }
     }
-   // массив с друзьями друга
-    var hisFriends: [FriendArray]? {
-        didSet {
-            if self.photo != nil {
-                self.dataUpdate = true
-            }
-        }
-    }
-    //массив с фото друга
-    var photo:[ImageAndLikeData]? {
-        didSet {
-            if self.hisFriends != nil {
-                self.dataUpdate = true
-            }
-        }
-    }
-    // одиночное изображение с лайками
-    var singlePhoto: ImageAndLikeData?
+
     var currentImageTap: Int!
     @IBOutlet weak var detailAvatarHeader: UIImageView!
     @IBOutlet weak var detailUserNameLable: UILabel!
@@ -64,27 +45,24 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var likeCount: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.LoadUserWall()
-        getActivityIndicatorLoadData()
-        self.loadFriendsSelectedUser()
-        self.loadPhotoAlbumSelctedUser()
+ //  подгружаем данные пользователя
+        self.loadDataTable()
         setHeaderDetailView()
-      
-
-        
-        
-      
         tableView.register(UINib(nibName: "CouruselTableViewCell", bundle: nil), forCellReuseIdentifier: "CouruselCellForDetails")
         tableView.register(UINib(nibName: "GallaryTableViewCell", bundle: nil), forCellReuseIdentifier: "GallaryTableCell")
         tableView.register(UINib(nibName: "SinglePhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleTableCellID")
+        tableView.register(UINib(nibName: "LinkTableViewCell", bundle: nil), forCellReuseIdentifier: "LinkTableViewCell")
     }
 
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return dataTable.count
+        if let data = self.dataTable {
+            return data.count
+            
+        }
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,7 +71,14 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 
     // установка имени секции
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dataTable[section].sectionName
+        switch section {
+        case 0:
+            return "Друзья"
+        case 1:
+            return "Фотографии"
+       
+        default: return nil
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,15 +87,19 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CouruselCellForDetails", for: indexPath) as? CouruselTableViewCell else {
                 preconditionFailure("Error")
             }
-            cell.collectionData = self.hisFriends
+            let data = dataTable![indexPath.section].sectionData
+            cell.collectionData = data.friends
+         //   cell.collectionData = self.hisFriends
             cell.delegate = self
             return cell
         case .Gallary:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GallaryTableCell", for: indexPath) as? GallaryTableViewCell else {
                 preconditionFailure("Error")
             }
-            if self.photo != nil{
-                    cell.gallaryData = self.photo!
+            let data = dataTable![indexPath.section].sectionData
+            if let photo = data.photo {
+                    cell.gallaryData = photo
+                cell.countCell = 0
             }
             cell.delegate = self
             cell.delegateFrameImages = self
@@ -119,16 +108,46 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
                 preconditionFailure("Error")
             }
+           
+            let data = dataTable[indexPath.section].sectionData
             cell.singleLableUserName.text = self.friendsSelectedd.userName
             cell.singleAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
             cell.likeControll.delegate = self
             cell.likeControll.indexPath = indexPath
+            let seen: String = String((data.views?.count)!)
+            cell.singlePhotoSeenCount.text = seen
             cell.delegate = self
-            cell.singlePhoto = self.photo?.first
-            self.singlePhoto = self.photo?.first
+            cell.singlePhoto = data.photo![indexPath.row]
+            cell.singlPhotoLikeLable.text = String(data.likes.count)
+            cell.singlePhotoSeenCount.text = String(data.views!.count)
             return cell
+//        case .newsText:
+//            print(" Текст новость со стены")
+//        case .video:
+//            print( "Video news from wall")
+        case .link:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LinkTableViewCell", for: indexPath) as? LinkTableViewCell else {
+                preconditionFailure("Error")
+            }
+            let data = dataTable[indexPath.section].sectionData
+            cell.linkCaption.text = data.captionNews
+            cell.linkDate.text = unixTimeConvertion(unixTime: Double(data.date))
+            cell.linkLink.setTitle(data.linkUrl, for: .normal)
+            cell.linkLikeCount.text = String(data.likes.count)
+            cell.linkUserLogo.loadImageFromUrlString(self.friendsSelectedd.photo)
+            cell.linkUserName.text = self.friendsSelectedd.userName
+            cell.linkText.text = data.titleNews
+            cell.linkSeenCount.text = String(data.views!.count)
+            return cell
+            
+         default:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
+                preconditionFailure("Error")
+            }
+        return cell
         }
     }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
     }
@@ -145,17 +164,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         destinationVC.frameArray = self.frameImages
         destinationVC.collectionViewFrame = collectionFrame
     }
-    private func setTableSection() {
-        if let friends = self.hisFriends?.count, friends > 0 {
-            dataTable.append(UserDetailsTableData(sectionName: "Friends", sectionType: .Friends ))
-        }
-        if let photo = self.photo?.count, photo > 1 {
-            dataTable.append(UserDetailsTableData(sectionName: "Gallary", sectionType: .Gallary))
-            dataTable.append(UserDetailsTableData(sectionName: "Single Photo", sectionType: .SingleFoto))
-        }else {
-            dataTable.append(UserDetailsTableData(sectionName: "Single Photo", sectionType: .SingleFoto))
-        }
-    }
+
 
 //MARK: - TableViewDelegate method
     func selectRow(nextViewData: [ImageAndLikeData]) {
@@ -186,15 +195,23 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 extension DetailUserTableViewController: ProtocolLikeDelegate {
 
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
-        let countLike = singlePhoto?.likeLabel
-        let likeStatus = singlePhoto?.likeStatus
-        return  [ countLike!: likeStatus!]//[countLike: likeStatus]
+        let data = self.dataTable![indexPath.section].sectionData
+        var likeStatus: Bool = false
+        let countLike = data.likes.count
+        if data.likes.userLike == 1 {
+           likeStatus = true
+        }
+        return  [ countLike: likeStatus]
         
     }
     
     func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
-        self.singlePhoto?.likeStatus = likeStatus
-        self.singlePhoto?.likeLabel = countLike
+        self.dataTable![indexPath.section].sectionData.likes.count = countLike
+        if likeStatus {
+            self.dataTable![indexPath.section].sectionData.likes.userLike = 1
+        }else {
+            self.dataTable![indexPath.section].sectionData.likes.userLike = 0
+        }
     
     }
     

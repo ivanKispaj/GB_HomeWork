@@ -41,9 +41,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         getActivityIndicatorLoadData()
-       
             self.loadMyFriends()
-        
             let dataVKPhoto =  "https://avatars.mds.yandex.net/get-zen_doc/1535103/pub_5f2dbed8c1a7b87558486d42_5f2dc071d1ab9668ff0d0ad8/scale_1200"
             self.posibleFriends = DataSection(header: "Возможные друзья", row: [FriendArray(userName: "VKGroup", photo: dataVKPhoto , id: 1, city: "Moscow", lastSeenDate: 12746822, isClosedProfile: false, isBanned: false, online: true, status: "Официальная группа VK")])
   
@@ -82,6 +80,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
 
 // Отрисовка ячеек
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let section = friends[indexPath.section].header
         if section == "Возможные друзья" {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExtendCellXib", for: indexPath) as? ExtendTableUserCell else {
@@ -94,23 +93,31 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             return cell
 
         } else {
+            
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("FriendsCell cannot")
         }
             cell.imageCellAvatar.loadImageFromUrlString(self.friends[indexPath.section].row[indexPath.row].photo)
             cell.labelCityCellXib.text = friends[indexPath.section].row[indexPath.row].city
             cell.lableCellXib.text = friends[indexPath.section].row[indexPath.row].userName
-
+            let friend = friends[indexPath.section].row[indexPath.row]
+            cell.profileStatus.text = ""
+            if friend.isBanned {
+                cell.profileStatus.text = "Banned!"
+                cell.profileStatus.tintColor = UIColor.red
+            }
+            if friend.isClosedProfile {
+                cell.profileStatus.text = "Private"
+                cell.profileStatus.tintColor = UIColor.blue
+            }
             return cell
         }
-        
     }
 
 // Действия при выборе ячейки
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let friendSelected = friends[indexPath.section].row[indexPath.row]
         
-
+        let friendSelected = friends[indexPath.section].row[indexPath.row]
         if  friendSelected.isBanned  {
             let allert = AllertWrongUserData().getAllert(title: "Сообщение", message: "Пользователь забанен")
             present(allert, animated: true)
@@ -120,9 +127,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         }else {
             performSegue(withIdentifier: "detailsUserSegueId", sender: nil)
             guard let detailVC = self.nextViewData else { return }
-
             detailVC.title = friendSelected.userName
-
             detailVC.friendsSelectedd = friendSelected
         }
     }

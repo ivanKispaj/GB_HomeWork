@@ -12,6 +12,11 @@ extension DetailUserTableViewController {
   
     func loadFriendsSelectedUser() {
   
+        var hisFriends: [FriendArray]!{
+            didSet {
+                self.loadPhotoAlbumSelctedUser( hisFriends )
+            }
+        }
         
         InternetConnections(host: "api.vk.com", path: "/method/friends.get").getListOfFirends(for: String(self.friendsSelectedd.id)) { request in
             switch request {
@@ -50,11 +55,12 @@ extension DetailUserTableViewController {
                     friends.append(friend)
                     
                 }
-                self.hisFriends = friends
+                hisFriends = friends
  
                 case .failure(_):
                     print("Error request friends")
             }
         }
+        
     }
 }

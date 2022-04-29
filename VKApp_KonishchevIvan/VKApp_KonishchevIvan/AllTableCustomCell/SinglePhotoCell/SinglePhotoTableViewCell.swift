@@ -18,7 +18,8 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
     @IBOutlet weak var singleAdditionalInfo: UILabel!
     @IBOutlet weak var singlPhotoLikeLable: UILabel!
     @IBOutlet weak var singlePhotoLikeImage: UIImageView!
-
+    @IBOutlet weak var singlePhotoSeenCount: UILabel!
+    
     var singlePhoto: ImageAndLikeData! {
         didSet {
             self.singlCollection.reloadData()
@@ -36,9 +37,8 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if singlePhoto != nil {
             return 1
@@ -50,9 +50,9 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleCollectionID", for: indexPath) as? SingleCollectionViewCell else {
             preconditionFailure("Error")
         }
-        cell.singlePhoto.contentMode = .scaleAspectFill
+
         cell.singlePhoto.loadImageFromUrlString(singlePhoto.image)
-        self.singlPhotoLikeLable.text = String(singlePhoto.likeLabel)
+
         return cell
     }
 

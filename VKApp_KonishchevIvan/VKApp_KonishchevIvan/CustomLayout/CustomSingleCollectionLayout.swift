@@ -12,7 +12,7 @@ class CustomSingleCollectionLayout: UICollectionViewLayout {
     var cacheAttributes = [IndexPath: UICollectionViewLayoutAttributes]()
     // Хранит атрибуты для заданных индексов
     var columnsCount = 1 // Количество столбцов
-    var cellHeight: CGFloat? = nil // Высота ячейки
+    var cellHeight: CGFloat? = 800 // Высота ячейки
     private var totalCellsHeight: CGFloat = 0 // Хранит суммарную высоту всех ячеек
     
     override func prepare() {

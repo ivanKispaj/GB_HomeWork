@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVKit
+//import AVFoundation
 
 class HomeNewsTableViewController: UITableViewController {
     
@@ -23,6 +25,7 @@ class HomeNewsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.loadNewsData()
         self.currentOrientation = UIDevice.current.orientation
         tableView.register(UINib(nibName: "SinglePhotoAndTextTableViewCell", bundle: nil), forCellReuseIdentifier: "SinglePhotoAndTextCell")

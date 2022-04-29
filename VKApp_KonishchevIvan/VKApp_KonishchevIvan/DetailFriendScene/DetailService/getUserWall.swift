@@ -10,14 +10,12 @@ import UIKit
 extension InternetConnections {
     func getUserWall(for owner_id: String, completion: @escaping(Result<UserWallModel,Error>) -> ()) {
         guard let access_token = NetworkSessionData.shared.token else { return }
+        print(owner_id)
         self.urlComponents.queryItems = [
             URLQueryItem(name: "access_token", value: access_token),
-            URLQueryItem(name: "owner_id", value: "387485849"),
-            URLQueryItem(name: "filter", value: "all"),
-            URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "count", value: "10"),
-            URLQueryItem(name: "v", value: "5.131"),
-            URLQueryItem(name: "fields", value: "photo_50, city, last_seen, online, status"),
+            URLQueryItem(name: "owner_id", value: owner_id),
+            URLQueryItem(name: "filter", value: "owner"),
+            URLQueryItem(name: "v", value: "5.131")
         ]
         guard let url = self.urlComponents.url else { return }
         let request = URLRequest(url: url)

@@ -428,6 +428,7 @@ private extension GallaryViewController {
             self.heartImageView.tintColor = UIColor.systemGray2
         }
         self.labelLikeView.text = String(self.arrayPhoto[self.currentImage].likeLabel)
+        
         self.controllForLike.indexPath = IndexPath(row: self.currentImage, section: 0)
     }
 

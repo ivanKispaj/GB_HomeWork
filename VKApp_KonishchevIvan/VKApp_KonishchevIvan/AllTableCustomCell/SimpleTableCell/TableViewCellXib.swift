@@ -9,6 +9,7 @@ import UIKit
 // Макет ячейки с переменными для установки
 class TableViewCellXib: UITableViewCell {
 
+    @IBOutlet weak var profileStatus: UILabel!
     @IBOutlet weak var imageCellAvatar: UIImageView!
     @IBOutlet weak var lableCellXib: UILabel!
     @IBOutlet weak var labelCityCellXib: UILabel!

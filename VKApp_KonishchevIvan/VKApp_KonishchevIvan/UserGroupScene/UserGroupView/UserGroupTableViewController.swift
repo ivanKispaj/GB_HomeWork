@@ -38,8 +38,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
         return true
     }
 
-
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
     
         return 1
@@ -50,7 +48,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
         return myActiveGroup.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
@@ -60,6 +57,7 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
         cell.imageCellAvatar.loadImageFromUrlString(myActiveGroup[indexPath.row].imageGroup)
         cell.lableCellXib.text = myActiveGroup[indexPath.row].nameGroup
         cell.labelCityCellXib.text = myActiveGroup[indexPath.row].activity
+        cell.profileStatus.text = ""
         return cell
     
     }

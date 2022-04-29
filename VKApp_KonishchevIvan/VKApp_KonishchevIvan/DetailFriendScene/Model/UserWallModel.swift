@@ -7,14 +7,17 @@
 
 import Foundation
 
+struct WallDatasArray {
+    
+}
+
+
 struct UserWallModel: Decodable {
     let response: UserWallResponse
 }
 
 struct UserWallResponse: Decodable {
     let items: [UserWallItems]
-    let profiles: [UserWallProfiles]
-    let groups: [UserWallGroups]
 }
 
 struct UserWallItems: Decodable {
@@ -22,30 +25,44 @@ struct UserWallItems: Decodable {
         case id
         case ownerId = "owner_id"
         case date
-        case postType = "post_type"
         case text
         case attachments
         case likes
         case views
-    
+        case copyHystory = "copy_history"
         
     }
     let id: Int
     let ownerId: Int
     let date: Int
-    let postType: String
     let text: String
-    let attachments: [WallAttachments]
-    let likes: WallLikes
-    let views: WallViews
+    let attachments: [WallAttachments]?
+    let copyHystory: [WallCopyHistory]?
+    let likes: WallLikes?
+    let views: WallViews?
     
 }
 
+struct WallCopyHistory:  Decodable {
+    let attachments: [WallAttachments]?
+}
 struct WallAttachments: Decodable {
     let type: String
-    let photo: WallPhoto
+    let photo: WallPhoto?
+    let link: WallLink?
+   // let video: WallVideo?
+    
+    
 }
-
+struct WallVideo: Decodable {
+    let description: String
+}
+struct WallLink: Decodable {
+    let url: String
+    let title: String
+    let caption: String?
+    let photo: WallPhoto?
+}
 struct WallPhoto: Decodable {
     enum CodingKeys: String, CodingKey {
         case albumId = "album_id"
@@ -54,7 +71,7 @@ struct WallPhoto: Decodable {
         case ownerId = "owner_id"
         case sizes
     }
-    let albumId: Int
+    let albumId: Int?
     let date: Int
     let photoId: Int
     let ownerId: Int
@@ -64,15 +81,15 @@ struct WallSizes: Decodable {
     let height: Int
     let width: Int
     let url: String
-    let type: String
+    let type: String?
 }
 struct WallLikes: Decodable {
     enum CodingKeys: String, CodingKey {
         case count
         case userLike = "user_likes"
     }
-    let count: Int
-    let userLike: Int
+    var count: Int
+    var userLike: Int
 }
 
 struct WallViews: Decodable {
@@ -86,6 +103,7 @@ struct UserWallProfiles: Decodable {
         case lastName = "last_name"
         case isClosedProfile = "is_closed"
         case profilePhoto = "photo_50"
+        case profilePhotoAlt = "photo"
         case online
         case status
         case lastSeen = "last_seen"
@@ -94,7 +112,8 @@ struct UserWallProfiles: Decodable {
     let firstName: String
     let lastName: String
     let isClosedProfile: Bool
-    let profilePhoto:String
+    let profilePhoto:String?
+    let profilePhotoAlt: String
     let online: Int
     let status: String
     let lastSeen: WallLastSeen
