@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D2517253E5C8F47C10B6E68 /* Pods_VKApp_KonishchevIvan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A42EA5E976612657B4D3FDA /* Pods_VKApp_KonishchevIvan.framework */; };
 		630471D6281B9E5400B3359B /* loadDataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630471D5281B9E5400B3359B /* loadDataTable.swift */; };
 		637CA727281A593100058708 /* LinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637CA725281A593100058708 /* LinkTableViewCell.swift */; };
 		637CA728281A593100058708 /* LinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637CA726281A593100058708 /* LinkTableViewCell.xib */; };
@@ -108,6 +109,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		264B86B2F5EC30BA07EBE4AF /* Pods-VKApp_KonishchevIvan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp_KonishchevIvan.debug.xcconfig"; path = "Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan.debug.xcconfig"; sourceTree = "<group>"; };
 		630471D5281B9E5400B3359B /* loadDataTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadDataTable.swift; sourceTree = "<group>"; };
 		637CA725281A593100058708 /* LinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTableViewCell.swift; sourceTree = "<group>"; };
 		637CA726281A593100058708 /* LinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkTableViewCell.xib; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		639B425E280C252F0097D53F /* getGroupsByRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getGroupsByRequest.swift; sourceTree = "<group>"; };
 		639B4261280D2D200097D53F /* unixTimeConvertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unixTimeConvertion.swift; sourceTree = "<group>"; };
 		639B4263280D36430097D53F /* isUrlString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isUrlString.swift; sourceTree = "<group>"; };
+		796DC62054F81A4D3A7CB7BA /* Pods-VKApp_KonishchevIvan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp_KonishchevIvan.release.xcconfig"; path = "Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan.release.xcconfig"; sourceTree = "<group>"; };
 		8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendTableUserCell.swift; sourceTree = "<group>"; };
 		8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendTableUserCell.xib; sourceTree = "<group>"; };
 		8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupTableViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +211,7 @@
 		80F4BCCD28031BF6008E07B0 /* AnimateGallaryPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateGallaryPop.swift; sourceTree = "<group>"; };
 		80F4BCD02803E34E008E07B0 /* NetworkSessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionData.swift; sourceTree = "<group>"; };
 		80F4BCD628052F2D008E07B0 /* VKLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginViewController.swift; sourceTree = "<group>"; };
+		9A42EA5E976612657B4D3FDA /* Pods_VKApp_KonishchevIvan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKApp_KonishchevIvan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +219,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D2517253E5C8F47C10B6E68 /* Pods_VKApp_KonishchevIvan.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +653,16 @@
 			path = AllAnimation;
 			sourceTree = "<group>";
 		};
+		7CFE21C9457B13484B5FD2C5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				264B86B2F5EC30BA07EBE4AF /* Pods-VKApp_KonishchevIvan.debug.xcconfig */,
+				796DC62054F81A4D3A7CB7BA /* Pods-VKApp_KonishchevIvan.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8003DA2327D5E1680048B191 /* SimpleTableCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -695,6 +710,8 @@
 			children = (
 				804154ED27B62FE900160418 /* VKApp_KonishchevIvan */,
 				804154EC27B62FE900160418 /* Products */,
+				7CFE21C9457B13484B5FD2C5 /* Pods */,
+				BD2AAF2E8FD4F9DAC48FDAA0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -911,6 +928,14 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		BD2AAF2E8FD4F9DAC48FDAA0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A42EA5E976612657B4D3FDA /* Pods_VKApp_KonishchevIvan.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -918,9 +943,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 804154FF27B62FEB00160418 /* Build configuration list for PBXNativeTarget "VKApp_KonishchevIvan" */;
 			buildPhases = (
+				54C642730CE61D7FB1598E4C /* [CP] Check Pods Manifest.lock */,
 				804154E727B62FE900160418 /* Sources */,
 				804154E827B62FE900160418 /* Frameworks */,
 				804154E927B62FE900160418 /* Resources */,
+				6304FD03F1D4407F21B88494 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -988,6 +1015,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		54C642730CE61D7FB1598E4C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VKApp_KonishchevIvan-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6304FD03F1D4407F21B88494 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		804154E727B62FE900160418 /* Sources */ = {
@@ -1220,6 +1289,7 @@
 		};
 		8041550027B62FEB00160418 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 264B86B2F5EC30BA07EBE4AF /* Pods-VKApp_KonishchevIvan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1250,6 +1320,7 @@
 		};
 		8041550127B62FEB00160418 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 796DC62054F81A4D3A7CB7BA /* Pods-VKApp_KonishchevIvan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
