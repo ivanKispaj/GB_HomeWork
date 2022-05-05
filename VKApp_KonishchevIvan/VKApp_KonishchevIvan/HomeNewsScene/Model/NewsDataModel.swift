@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RealmSwift
+
 enum CellType {
     case photo
     case link
@@ -13,22 +15,21 @@ enum CellType {
     case histroy
 }
 //MARK: - Model для отображения страницы новостей
-struct NewsCellData {
-    var ovnerId: Int
-    var date: Int
-    var newsLike: NewsLikes
-    var newsSeenCount: Int
-    var newsDescription: String
-    var newsUserLogo: String
-    var newsUserName: String
-    var online: Bool
-    var newsText: String
-    var albumId: Int
-    var newsImage: String
-    var newsTitle: String
+final class NewsCellData: Object {
+    @objc dynamic var ownerId: Int = 0
+    @objc dynamic var date: Int = 0
+    @objc dynamic var newsLikeCount: Int = 0
+    @objc dynamic var newsLikeStatus: Bool = false
+    @objc dynamic var newsSeenCount: Int = 0
+    @objc dynamic var newsDescription: String = ""
+    @objc dynamic var newsUserLogo: String = ""
+    @objc dynamic var newsUserName: String = ""
+    @objc dynamic var online: Bool = false
+    @objc dynamic var newsText: String = ""
+    @objc dynamic var albumId: Int = 0
+    @objc dynamic var newsImage: String = ""
+    @objc dynamic var newsTitle: String = ""
     
-  
- 
 }
 
 //MARK: -  Модель для парсинга новостей!!!!
@@ -180,13 +181,13 @@ struct ImageArray: Decodable {
     let type: String
 }
 
-struct NewsLikes: Decodable {
+final class NewsLikes: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case count
         case likeStatus = "user_likes"
     }
-    var count: Int
-    var likeStatus: Int
+    @objc dynamic var count: Int
+    @objc dynamic var likeStatus: Int
 }
 
 struct NewsProfiles: Decodable {

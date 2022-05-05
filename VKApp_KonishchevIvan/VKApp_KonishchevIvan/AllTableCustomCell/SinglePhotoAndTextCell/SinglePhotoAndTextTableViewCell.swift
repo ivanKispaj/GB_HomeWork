@@ -54,7 +54,6 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell,UICollectionViewDelegate,
         }
         
         let url = newsData.newsImage
-        print(url)
         cell.newsImage.loadImageFromUrlString(url)
         return cell
     }

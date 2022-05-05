@@ -68,7 +68,7 @@ class HomeNewsTableViewController: UITableViewController {
         cell.newsUserAvatar.loadImageFromUrlString(data?.newsUserLogo)
         cell.newsTextView.text = data?.newsDescription
         cell.newsUserName.text = data?.newsUserName
-        let counLike: String = String((data?.newsLike.count)!)
+        let counLike: String = String((data?.newsLikeCount)!)
         cell.newsLikeLable.text = counLike
         cell.newsUserApdateTime.text = unixTimeConvertion(unixTime: Double(data!.date))
         cell.seenViewLable.text = String(data!.newsSeenCount)

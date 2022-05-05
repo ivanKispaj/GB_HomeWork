@@ -6,7 +6,8 @@
 //
 
 import UIKit
- 
+import RealmSwift
+
 extension HomeNewsTableViewController {
     func loadNewsData() {
 //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
@@ -14,7 +15,7 @@ extension HomeNewsTableViewController {
           switch response {
 // обработка ответа
           case .success(let result):
-             
+            
               var newsDatasPhoto: [CellType: [NewsCellData]] = [.photo: []] // конечный массив с данными
               var newsDatasLink: [CellType: [NewsCellData]] = [.link: []] // конечный массив с данными
               var newsDatasWall: [CellType: [NewsCellData]] = [.wall : []] // конечный массив с данными
@@ -24,88 +25,87 @@ extension HomeNewsTableViewController {
               let groups = result.response.groups // данные о группах которые запостили новость
   // Перебираем массив items
               for item in items {
-
-                  let ovnerId = item.sourceId
-                  let date = item.date
-                  let newsLike: NewsLikes?
-                  let newsSeenCount: Int?
-                  var newsDescription: String?
+                  let newsCellData = NewsCellData()
+                  newsCellData.ownerId = item.sourceId
+                  newsCellData.date = item.date
                   if let wall = item.wallPhotos {
-                      newsLike = wall.items[0].likes
-                      newsSeenCount = 0
-                  }else {
-                      newsLike = item.likes
-                      newsSeenCount = item.views?.count
-                  }
-                  
-                  if let text = item.text {
-                      newsDescription = text
-                  }else {
-                      newsDescription = " "
-                  }
-                  
-                  var newsUserLogo: String = ""
-                  var newsUserName: String = ""
-                  var online: Bool = false
-                  var cellType: CellType = .photo
-                  var newsText: String = ""
-                  var albumId: Int = 0
-                  var newsImage: String = ""
-                  var newsTitle: String = ""
-// получаем пользователя по id
-                  if let user = getUserDataFromId(ovnerId, profiles: profiles) {
-                       newsUserLogo = user.photo
-                       newsUserName = user.fName + " " + user.lName
-                      if user.online == 0 {
-                           online = false
-                      }else {
-                           online = true
+                      newsCellData.newsLikeCount = wall.items[0].likes.count
+                      if wall.items[0].likes.likeStatus == 1 {
+                          newsCellData.newsLikeStatus = true
                       }
-                  }else if let user = getGroupFromId(ovnerId, groups: groups) {
-                       newsUserLogo = user.photo
-                       newsUserName = user.name
-                       online = false
-                      
+                      newsCellData.newsSeenCount = 0
+                     
+                  }else {
+                      newsCellData.newsLikeCount = item.likes!.count
+                      newsCellData.newsSeenCount = item.views!.count
+                      if item.likes!.likeStatus == 1 {
+                          newsCellData.newsLikeStatus = true
+                      }
                   }
-    // Усли новость с фото массивом
+
+                  if let text = item.text {
+                      newsCellData.newsDescription = text
+                  }else {
+                      newsCellData.newsDescription = " "
+                  }
+                  var cellType: CellType = .photo
+                
+// получаем пользователя по id
+                  if let user = getUserDataFromId(newsCellData.ownerId, profiles: profiles) {
+                      newsCellData.newsUserLogo = user.photo
+                      newsCellData.newsUserName = user.fName + " " + user.lName
+                      if user.online == 1 {
+                          newsCellData.online = true
+                      }
+                  }else if let user = getGroupFromId(newsCellData.ownerId, groups: groups) {
+                      newsCellData.newsUserLogo = user.photo
+                      newsCellData.newsUserName = user.name
+                      newsCellData.online = false
+
+                  }
+    // Если новость с фото массивом
                   if let atachments = item.attachments {
-                    
+
                       if let photoData = atachments[0].photoData {
                           cellType = .photo
-                          newsText = photoData.text!
-                          albumId = photoData.albumId
-                          newsImage = getNewsPhoto(photoData.photoArray)
-                          newsTitle = " "
+                          newsCellData.newsText = photoData.text!
+                          newsCellData.albumId = photoData.albumId
+                          newsCellData.newsImage = getNewsPhoto(photoData.photoArray)
+                          newsCellData.newsTitle = " "
     // если новость с ссылочным массивом ( игры )
                       }else if let link = atachments[0].link {
                           cellType = .link
-                          newsText = link.title
-                          newsDescription = link.description
-                          albumId = link.photo.albumId
-                          newsImage = getNewsPhoto(link.photo.photoArray)
+                          newsCellData.newsText = link.title
+                          newsCellData.newsDescription = link.description
+                          newsCellData.albumId = link.photo.albumId
+                          newsCellData.newsImage = getNewsPhoto(link.photo.photoArray)
                      } else if let video = atachments[0].video {
-                          cellType = .photo
-                          newsText = item.text!
-                          newsTitle = video.title!
-                         newsImage = getPhotoNewsHistory(video.image)
+                         cellType = .photo
+                         newsCellData.newsText = item.text!
+                         newsCellData.newsTitle = video.title!
+                         newsCellData.newsImage = getPhotoNewsHistory(video.image)
                       }
     // если новость со стены
                   }else if let wallPhoto = item.wallPhotos {
                       cellType = .wall
-                      newsText = " "
-                      newsDescription = wallPhoto.items[0].text
-                      newsTitle = " "
-                      newsImage = getNewsPhoto(wallPhoto.items[0].photo)
+                      newsCellData.newsText = " "
+                      newsCellData.newsDescription = wallPhoto.items[0].text
+                      newsCellData.newsTitle = " "
+                      newsCellData.newsImage = getNewsPhoto(wallPhoto.items[0].photo)
     // если новость с истории
                   }else if let copyHistory = item.copyHistory{
                       cellType = .histroy
-                      newsText = copyHistory[0].attachments[0].video.title
-                      newsDescription = copyHistory[0].attachments[0].video.description
-                      albumId = 0
-                      newsImage = getPhotoNewsHistory(copyHistory[0].attachments[0].video.newsImage)
+                      newsCellData.newsText = copyHistory[0].attachments[0].video.title
+                      newsCellData.newsDescription = copyHistory[0].attachments[0].video.description
+                      newsCellData.albumId = 0
+                      newsCellData.newsImage = getPhotoNewsHistory(copyHistory[0].attachments[0].video.newsImage)
                   }
-                  let newsCellData = NewsCellData(ovnerId: ovnerId, date: date, newsLike: newsLike!, newsSeenCount: newsSeenCount!, newsDescription: newsDescription!, newsUserLogo: newsUserLogo, newsUserName: newsUserName, online: online, newsText: newsText, albumId: albumId, newsImage: newsImage, newsTitle: newsTitle)
-                  switch cellType {
+    //MARK: - Сохраняем в Realm
+                  DispatchQueue.main.async {
+                      self!.saveNewsData(newsData: newsCellData)
+                  }
+                 
+                switch cellType {
                   case .photo:
                       var arr = newsDatasPhoto[.photo]
                       arr?.append(newsCellData)
@@ -128,8 +128,8 @@ extension HomeNewsTableViewController {
               arrayNewsData.append(newsDatasLink)
               arrayNewsData.append(newsDatasWall)
               arrayNewsData.append(newsDatasHistory)
-              
-              
+
+
               self?.newsArray = arrayNewsData
           case .failure(_):
               print("ErrorLoadDataVK")
@@ -163,3 +163,21 @@ extension HomeNewsTableViewController {
         }
     }
 }
+
+
+// MARK: - Private
+private extension HomeNewsTableViewController {
+    func saveNewsData(newsData: NewsCellData)  {
+         let realmDB = try!  Realm()
+      //  print(realmDB.configuration.fileURL!)
+            do {
+                    realmDB.beginWrite()
+                    realmDB.add(newsData)
+               try  realmDB.commitWrite()
+                
+            } catch let error as NSError {
+                print("Something went wrong: \(error.localizedDescription)")
+            }
+    }
+}
+
