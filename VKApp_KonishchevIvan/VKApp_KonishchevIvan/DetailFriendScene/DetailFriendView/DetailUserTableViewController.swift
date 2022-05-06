@@ -11,7 +11,7 @@ import UIKit
 class DetailUserTableViewController: UITableViewController, TableViewDelegate {
  
 // Данные пользователя которого выбрали на предыдущем контроллере (FriendsTableViewController)
-    var friendsSelectedd: FriendArray!
+    var friendsSelectedd: Friend!
     var activityIndicator: UIActivityIndicatorView!
    // var detailsControllerData: DetailsControllerData!
     

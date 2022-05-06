@@ -11,7 +11,7 @@ import UIKit
 
 extension DetailUserTableViewController {
 
-    func loadPhotoAlbumSelctedUser (_ friends: [FriendArray]) {
+    func loadPhotoAlbumSelctedUser (_ friends: [Friend]) {
         var friendsPhoto: [ImageAndLikeData]! {
             didSet {
                 LoadUserWall( friends, photos: friendsPhoto)

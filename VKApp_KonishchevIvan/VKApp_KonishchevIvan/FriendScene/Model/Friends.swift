@@ -6,17 +6,21 @@
 //
 
 import UIKit
+import RealmSwift
 
-struct FriendArray {
-    let userName: String
-    let photo: String
-    let id: Int
-    let city: String
-    let lastSeenDate: Double
-    let isClosedProfile: Bool
-    let isBanned: Bool
-    let online: Bool
-    let status: String
+final class FriendArray: Object {
+    var friendArray = List<Friend>()
+}
+final class Friend: Object {
+    @objc dynamic var userName: String = ""
+    @objc dynamic var photo: String = ""
+    @objc dynamic var id: Int = 0
+    @objc dynamic var city: String = ""
+    @objc dynamic var lastSeenDate: Double = 0
+    @objc dynamic var isClosedProfile: Bool = false
+    @objc dynamic var isBanned: Bool = false
+    @objc dynamic var online: Bool = false
+    @objc dynamic var status: String = " "
     
 }
 struct Friends: Decodable {

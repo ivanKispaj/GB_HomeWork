@@ -17,8 +17,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     var activityIndicator: UIActivityIndicatorView!
     struct DataSection {
         var header: String = ""
-        var row: [FriendArray] = []
-        init(header: String, row: [FriendArray]){
+        var row: [Friend] = []
+        init(header: String, row: [Friend]){
             self.header = header
             self.row = row
         }
@@ -28,7 +28,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // Исходный массив друзей
 
-    var friendsArray: [FriendArray] = []{
+    var friendsArray: [Friend] = []{
         didSet {
                 self.setDataSectionTable()
             DispatchQueue.main.async {
@@ -43,7 +43,18 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         getActivityIndicatorLoadData()
             self.loadMyFriends()
             let dataVKPhoto =  "https://avatars.mds.yandex.net/get-zen_doc/1535103/pub_5f2dbed8c1a7b87558486d42_5f2dc071d1ab9668ff0d0ad8/scale_1200"
-            self.posibleFriends = DataSection(header: "Возможные друзья", row: [FriendArray(userName: "VKGroup", photo: dataVKPhoto , id: 1, city: "Moscow", lastSeenDate: 12746822, isClosedProfile: false, isBanned: false, online: true, status: "Официальная группа VK")])
+            let friendVK = Friend()
+        
+        friendVK.userName = "VKGroup"
+        friendVK.photo = dataVKPhoto
+        friendVK.id = 1
+        friendVK.city = "unknown"
+        friendVK.lastSeenDate = 5212321
+        friendVK.online = true
+        friendVK.status = "Оффициальная группа VK"
+        
+        self.posibleFriends = DataSection(header: "Возможные друзья", row: [friendVK])
+        //   self.posibleFriends = DataSection(header: "Возможные друзья", row: [Friend(userName: "VKGroup", photo: dataVKPhoto , id: 1, city: "Moscow", lastSeenDate: 12746822, isClosedProfile: false, isBanned: false, online: true, status: "Официальная группа VK")])
   
         self.searchBar!.delegate = self
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")

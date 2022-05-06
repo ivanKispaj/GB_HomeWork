@@ -6,6 +6,7 @@
 //
 // 387485849
 import UIKit
+import RealmSwift
 
 extension FriendsTableViewController {
   
@@ -17,48 +18,70 @@ extension FriendsTableViewController {
           switch response {
 // обработка ответа
           case .success(let result):
-              var friends: [FriendArray] = []
+              
+              let friendArray = FriendArray()
+              var arrays = [Friend]()
               for arrayFriends in result.response.items {
-                  var online: Bool?
-                  var isBanned: Bool?
-                  if arrayFriends.online == 0 {
-                      online = false
-                  }else {
-                      online = true
+                  let friends = Friend()
+                
+                  if arrayFriends.online == 1 {
+                      friends.online = true
                   }
                   if arrayFriends.banned != nil {
-                      isBanned = true
-                  }else {
-                      isBanned = false
+                      friends.isBanned = true
                   }
-                  var cityName: String = "unknown"
+                  
                   if arrayFriends.city != nil {
-                      cityName = arrayFriends.city!.title
-                  }
-                  var lastSeenData: Double = 0
-                  if arrayFriends.lastSeen != nil {
-                      lastSeenData = arrayFriends.lastSeen!.time
-                  }
-                  var statusText: String!
-                  if arrayFriends.status != nil {
-                      statusText = arrayFriends.status
+                      friends.city = arrayFriends.city!.title
                   }else {
-                      statusText = " "
+                      friends.city = "unknown"
+                  }
+                  
+                  if arrayFriends.lastSeen != nil {
+                      friends.lastSeenDate = arrayFriends.lastSeen!.time
+                  }
+                 
+                  if  let status = arrayFriends.status {
+                      friends.status = status
                   }
 
                   let name = (arrayFriends.fName) + " " + (arrayFriends.lName)
-                  let friend = FriendArray(userName: name, photo: arrayFriends.photo50, id: arrayFriends.id, city: cityName, lastSeenDate: lastSeenData, isClosedProfile: arrayFriends.isClosedProfile ?? false, isBanned: isBanned!, online: online!, status: statusText)
-                  friends.append(friend)
+                  friends.userName = name
+                  friends.id = arrayFriends.id
+                  friends.photo = arrayFriends.photo50
+                  friends.isClosedProfile = arrayFriends.isClosedProfile ?? false
+
                   DispatchQueue.main.async {
+                      self?.saveFriendsData(newsData: friendArray)
                       self!.activityIndicator.isHidden = true
                       self!.activityIndicator.stopAnimating()
                   }
+                  friendArray.friendArray.append(friends)
           
+                  arrays.append(friends)
               }
-              self?.friendsArray = friends
+              
+               self?.friendsArray = arrays
           case .failure(_):
               print("ErrorLoadDataVK")
           }
       }
+    }
+}
+
+
+// MARK: - Private
+private extension FriendsTableViewController {
+    func saveFriendsData(newsData: FriendArray)  {
+         let realmDB = try!  Realm()
+      //  print(realmDB.configuration.fileURL!)
+            do {
+                    realmDB.beginWrite()
+                    realmDB.add(newsData)
+               try  realmDB.commitWrite()
+                
+            } catch let error as NSError {
+                print("Something went wrong: \(error.localizedDescription)")
+            }
     }
 }

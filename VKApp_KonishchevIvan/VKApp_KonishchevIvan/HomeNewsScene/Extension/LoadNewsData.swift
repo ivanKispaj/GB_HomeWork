@@ -176,7 +176,7 @@ extension HomeNewsTableViewController {
 private extension HomeNewsTableViewController {
     func saveNewsData(newsData: NewsData)  {
          let realmDB = try!  Realm()
-        print(realmDB.configuration.fileURL!)
+    //    print(realmDB.configuration.fileURL!)
             do {
                     realmDB.beginWrite()
                     realmDB.add(newsData)

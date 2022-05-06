@@ -34,11 +34,11 @@ struct DetailsSectionData {
     let urlNewsImage: [String]?
     let titleNews: String?
     let captionNews: String?
-    let friends: [FriendArray]?
+    let friends: [Friend]?
     let photo: [ImageAndLikeData]?
     let linkUrl:  String?
 
-    init( id: Int, ownerId: Int, date: Int, textNews: String, likes: WallLikes, views: WallViews?, urlNewsImage: [String]?, titleNews: String?, captionNews: String?, link: String,friends: [FriendArray]? = nil, photo: [ImageAndLikeData] ) {
+    init( id: Int, ownerId: Int, date: Int, textNews: String, likes: WallLikes, views: WallViews?, urlNewsImage: [String]?, titleNews: String?, captionNews: String?, link: String,friends: [Friend]? = nil, photo: [ImageAndLikeData] ) {
         self.id = id
         self.ownerId = ownerId
         self.date = date
@@ -52,7 +52,7 @@ struct DetailsSectionData {
         self.friends = friends
         self.photo = photo
     }
-    init( id: Int = 0, ownerId: Int = 0, date: Int = 0, textNews: String = "", likes: WallLikes = WallLikes(count: 0, userLike: 0), views: WallViews? = nil ,urlNewsImage: [String]? = [], titleNews: String? = "", captionNews: String? = "", link: String? = "",friends: [FriendArray] , photo: [ImageAndLikeData]? = nil) {
+    init( id: Int = 0, ownerId: Int = 0, date: Int = 0, textNews: String = "", likes: WallLikes = WallLikes(count: 0, userLike: 0), views: WallViews? = nil ,urlNewsImage: [String]? = [], titleNews: String? = "", captionNews: String? = "", link: String? = "",friends: [Friend] , photo: [ImageAndLikeData]? = nil) {
         self.id = id
         self.ownerId = ownerId
         self.date = date
@@ -66,7 +66,7 @@ struct DetailsSectionData {
         self.friends = friends
         self.photo = photo
     }
-    init( id: Int = 0, ownerId: Int = 0, date: Int = 0, textNews: String = "", likes: WallLikes = WallLikes(count: 0, userLike: 0), views: WallViews? = nil ,urlNewsImage: [String]? = [], titleNews: String? = "", captionNews: String? = "", link: String? = "",friends: [FriendArray]? = nil , photo: [ImageAndLikeData]) {
+    init( id: Int = 0, ownerId: Int = 0, date: Int = 0, textNews: String = "", likes: WallLikes = WallLikes(count: 0, userLike: 0), views: WallViews? = nil ,urlNewsImage: [String]? = [], titleNews: String? = "", captionNews: String? = "", link: String? = "",friends: [Friend]? = nil , photo: [ImageAndLikeData]) {
         self.id = id
         self.ownerId = ownerId
         self.date = date

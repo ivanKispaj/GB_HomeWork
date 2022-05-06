@@ -9,7 +9,7 @@ import UIKit
 
 extension DetailUserTableViewController {
 
-    func LoadUserWall (_ friends: [FriendArray], photos: [ImageAndLikeData]) {
+    func LoadUserWall (_ friends: [Friend], photos: [ImageAndLikeData]) {
 
         var userDetailsTableData: [UserDetailsTableData]! {
             didSet {
@@ -124,7 +124,7 @@ extension DetailUserTableViewController {
         }
     }
     
-    private func finishLoadData( friends: [FriendArray], photos: [ImageAndLikeData], wall: [UserDetailsTableData]) {
+    private func finishLoadData( friends: [Friend], photos: [ImageAndLikeData], wall: [UserDetailsTableData]) {
               var details = wall
                     details.insert(UserDetailsTableData(sectionType: .Gallary, sectionData: DetailsSectionData(photo: photos)), at: 0)
                     details.insert(UserDetailsTableData(sectionType: .Friends, sectionData: DetailsSectionData(friends: friends)), at: 0)
