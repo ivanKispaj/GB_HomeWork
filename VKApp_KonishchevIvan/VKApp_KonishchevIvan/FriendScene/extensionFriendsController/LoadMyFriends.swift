@@ -6,7 +6,6 @@
 //
 // 387485849
 import UIKit
-import RealmSwift
 
 extension FriendsTableViewController {
   
@@ -19,7 +18,7 @@ extension FriendsTableViewController {
 // обработка ответа
           case .success(let result):
               
-              let friendArray = FriendArray()
+            //  let friendArray = FriendArray()
               var arrays = [Friend]()
               for arrayFriends in result.response.items {
                   let friends = Friend()
@@ -38,7 +37,7 @@ extension FriendsTableViewController {
                   }
                   
                   if arrayFriends.lastSeen != nil {
-                      friends.lastSeenDate = arrayFriends.lastSeen!.time
+                    //  friends.lastSeenDate = arrayFriends.lastSeen!.time
                   }
                  
                   if  let status = arrayFriends.status {
@@ -52,11 +51,10 @@ extension FriendsTableViewController {
                   friends.isClosedProfile = arrayFriends.isClosedProfile ?? false
 
                   DispatchQueue.main.async {
-                      self?.saveFriendsData(newsData: friendArray)
                       self!.activityIndicator.isHidden = true
                       self!.activityIndicator.stopAnimating()
                   }
-                  friendArray.friendArray.append(friends)
+                //  friendArray.friendArray.append(friends)
           
                   arrays.append(friends)
               }
@@ -69,19 +67,3 @@ extension FriendsTableViewController {
     }
 }
 
-
-// MARK: - Private
-private extension FriendsTableViewController {
-    func saveFriendsData(newsData: FriendArray)  {
-         let realmDB = try!  Realm()
-      //  print(realmDB.configuration.fileURL!)
-            do {
-                    realmDB.beginWrite()
-                    realmDB.add(newsData)
-               try  realmDB.commitWrite()
-                
-            } catch let error as NSError {
-                print("Something went wrong: \(error.localizedDescription)")
-            }
-    }
-}

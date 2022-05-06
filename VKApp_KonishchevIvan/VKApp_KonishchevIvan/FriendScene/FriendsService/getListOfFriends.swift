@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RealmSwift
+
 //MARK: - метод для запроса друзей
 extension InternetConnections {
     func getListOfFirends(for user_id: String, completion: @escaping(Result<Friends,Error>) -> ()) {
@@ -27,6 +29,7 @@ extension InternetConnections {
             let decode = JSONDecoder()
             do {
             let result = try decode.decode(Friends.self, from: data)
+                self.saveFriends(result)
                 completion(.success(result))
             }catch {
                 completion(.failure(error))
@@ -35,6 +38,24 @@ extension InternetConnections {
     }
 }
 
-
+private extension InternetConnections {
+    func saveFriends(_ friends: Friends) {
+        let resalt = friends.response.items
+        
+                DispatchQueue.main.async {
+                    let realmDB = try!  Realm()
+                   print(realmDB.configuration.fileURL!)
+                       do {
+                           try realmDB.write{
+                               realmDB.add(resalt, update: .modified)
+                           }
+                              
+                           
+                       } catch let error as NSError {
+                           print("Something went wrong: \(error.localizedDescription)")
+                       }
+                }
+    }
+}
 
 
