@@ -15,7 +15,7 @@ extension HomeNewsTableViewController {
           switch response {
 // обработка ответа
           case .success(let result):
-            
+              let newsData = NewsData()
               var newsDatasPhoto: [CellType: [NewsCellData]] = [.photo: []] // конечный массив с данными
               var newsDatasLink: [CellType: [NewsCellData]] = [.link: []] // конечный массив с данными
               var newsDatasWall: [CellType: [NewsCellData]] = [.wall : []] // конечный массив с данными
@@ -100,36 +100,43 @@ extension HomeNewsTableViewController {
                       newsCellData.albumId = 0
                       newsCellData.newsImage = getPhotoNewsHistory(copyHistory[0].attachments[0].video.newsImage)
                   }
-    //MARK: - Сохраняем в Realm
-                  DispatchQueue.main.async {
-                      self!.saveNewsData(newsData: newsCellData)
-                  }
-                 
-                switch cellType {
-                  case .photo:
-                      var arr = newsDatasPhoto[.photo]
-                      arr?.append(newsCellData)
-                      newsDatasPhoto[.photo] = arr
-                  case .link:
-                      var arr = newsDatasLink[.link]
-                      arr?.append(newsCellData)
-                      newsDatasLink[.link] = arr
-                  case .wall:
-                      var arr = newsDatasWall[.wall]
-                      arr?.append(newsCellData)
-                      newsDatasWall[.wall] = arr
-                  case .histroy:
-                      var arr = newsDatasHistory[.histroy]
-                      arr?.append(newsCellData)
-                      newsDatasHistory[.histroy] = arr
-                  }
+                  
+                  
+
+                  switch cellType {
+                    case .photo:
+                      newsData.photo.append(newsCellData)
+                        var arr = newsDatasPhoto[.photo]
+                        arr?.append(newsCellData)
+                        newsDatasPhoto[.photo] = arr
+                    case .link:
+                      newsData.link.append(newsCellData)
+                        var arr = newsDatasLink[.link]
+                        arr?.append(newsCellData)
+                        newsDatasLink[.link] = arr
+                    case .wall:
+                      newsData.wall.append(newsCellData)
+                        var arr = newsDatasWall[.wall]
+                        arr?.append(newsCellData)
+                        newsDatasWall[.wall] = arr
+                    case .histroy:
+                      newsData.histroy.append(newsCellData)
+                        var arr = newsDatasHistory[.histroy]
+                        arr?.append(newsCellData)
+                        newsDatasHistory[.histroy] = arr
+                    }
              }
               var arrayNewsData = [newsDatasPhoto]
               arrayNewsData.append(newsDatasLink)
               arrayNewsData.append(newsDatasWall)
               arrayNewsData.append(newsDatasHistory)
 
-
+              
+              //MARK: - Сохраняем в Realm
+              DispatchQueue.main.async {
+                  self!.saveNewsData(newsData: newsData)
+              }
+              
               self?.newsArray = arrayNewsData
           case .failure(_):
               print("ErrorLoadDataVK")
@@ -167,9 +174,9 @@ extension HomeNewsTableViewController {
 
 // MARK: - Private
 private extension HomeNewsTableViewController {
-    func saveNewsData(newsData: NewsCellData)  {
+    func saveNewsData(newsData: NewsData)  {
          let realmDB = try!  Realm()
-      //  print(realmDB.configuration.fileURL!)
+        print(realmDB.configuration.fileURL!)
             do {
                     realmDB.beginWrite()
                     realmDB.add(newsData)

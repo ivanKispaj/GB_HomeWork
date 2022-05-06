@@ -8,12 +8,21 @@
 import UIKit
 import RealmSwift
 
-enum CellType {
-    case photo
-    case link
-    case wall
-    case histroy
+enum CellType: String {
+    case photo = "photo"
+    case link = "link"
+    case wall = "wall"
+    case histroy = "histroy"
 }
+
+final class NewsData: Object {
+     dynamic var photo = List<NewsCellData>()
+     dynamic var link = List<NewsCellData>()
+     dynamic var wall = List<NewsCellData>()
+     dynamic var histroy = List<NewsCellData>()
+}
+
+
 //MARK: - Model для отображения страницы новостей
 final class NewsCellData: Object {
     @objc dynamic var ownerId: Int = 0
@@ -181,15 +190,16 @@ struct ImageArray: Decodable {
     let type: String
 }
 
-final class NewsLikes: Object, Decodable {
+struct NewsLikes: Decodable {
     enum CodingKeys: String, CodingKey {
         case count
         case likeStatus = "user_likes"
     }
-    @objc dynamic var count: Int
-    @objc dynamic var likeStatus: Int
+    let count: Int
+    let likeStatus: Int
 }
 
+//MARK: - profiles профили пользователей оставивших новость!
 struct NewsProfiles: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
@@ -222,7 +232,7 @@ struct NewsOnlineInfo: Decodable {
     let lastSeen: Int?
 }
 
-
+//MARK: - groups группы оставившие новость!
 struct NewsGroups: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
