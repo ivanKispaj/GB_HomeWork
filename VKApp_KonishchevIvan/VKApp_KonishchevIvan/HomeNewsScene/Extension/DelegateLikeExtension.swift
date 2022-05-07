@@ -18,8 +18,8 @@ extension HomeNewsTableViewController: ProtocolLikeDelegate {
     
     func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
         if let data = self.newsArray?[indexPath.section].first?.value[indexPath.row] {
-            data.newsLikeCount = countLike
-            data.newsLikeStatus = likeStatus
+       //     data.newsLikeCount = countLike
+       //     data.newsLikeStatus = likeStatus
         }
     }
 }
