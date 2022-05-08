@@ -6,6 +6,7 @@
 //72287677
 
 import UIKit
+import RealmSwift
 
 extension UserGroupTableViewController {
     
@@ -14,6 +15,8 @@ extension UserGroupTableViewController {
             switch response {
                 
             case .success(let result):
+                
+                self?.saveUserGroups(result.response)
                 var group: [AllUserGroups] = []
                 for items in result.response.items {
                     if let activity = items.activity {
@@ -23,12 +26,28 @@ extension UserGroupTableViewController {
                         let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup, activity: "")
                             group.append(res)
                     }
-                    
                 }
                 self?.myActiveGroup = group
             case .failure(_):
                 print("ErrorLoadUserGroupFromVK")
             }
         }
+    }
+}
+
+
+private extension UserGroupTableViewController {
+    func saveUserGroups (_ groups: GroupResponse) {
+        DispatchQueue.main.async {
+                    let realmDB = try!  Realm()
+          //         print(realmDB.configuration.fileURL!)
+                       do {
+                           try realmDB.write{
+                               realmDB.add(groups.items, update: .modified)
+                           }
+                       } catch let error as NSError {
+                           print("Something went wrong: \(error.localizedDescription)")
+                       }
+                }
     }
 }

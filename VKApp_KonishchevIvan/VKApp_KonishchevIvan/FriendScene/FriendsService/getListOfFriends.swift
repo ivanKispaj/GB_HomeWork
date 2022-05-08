@@ -26,10 +26,10 @@ extension InternetConnections {
         URLSession.shared.dataTask(with: request) { data, request, error in
             guard error == nil else { return }
             guard let data = data else { return }
-            let decode = JSONDecoder()
             do {
-            let result = try decode.decode(Friends.self, from: data)
-                self.saveFriends(result)
+                
+                let decode = JSONDecoder()
+                let result = try decode.decode(Friends.self, from: data)
                 completion(.success(result))
             }catch {
                 completion(.failure(error))
@@ -38,24 +38,6 @@ extension InternetConnections {
     }
 }
 
-private extension InternetConnections {
-    func saveFriends(_ friends: Friends) {
-        let resalt = friends.response.items
-        
-                DispatchQueue.main.async {
-                    let realmDB = try!  Realm()
-                   print(realmDB.configuration.fileURL!)
-                       do {
-                           try realmDB.write{
-                               realmDB.add(resalt, update: .modified)
-                           }
-                              
-                           
-                       } catch let error as NSError {
-                           print("Something went wrong: \(error.localizedDescription)")
-                       }
-                }
-    }
-}
+
 
 

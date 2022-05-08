@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension InternetConnections {
     func getPhotoUser(for owner_id: String, completion: @escaping(Result<PhotoUser,Error>) -> ()) {
@@ -37,6 +38,7 @@ extension InternetConnections {
         
     }
 }
+
 
 
 

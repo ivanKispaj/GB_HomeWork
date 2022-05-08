@@ -28,7 +28,6 @@ extension InternetConnections {
 
                 let decode = JSONDecoder()
                 let result = try decode.decode(NewsDataModel.self, from: data)
-                self.seveNewsData(result.response)
                 completion(.success(result))
             }catch {
                 completion(.failure(error))
@@ -38,20 +37,4 @@ extension InternetConnections {
 }
 
 
-private extension InternetConnections {
-    func seveNewsData(_  news: NewsResponse) {
-           DispatchQueue.main.async {
-                let realmDB = try!  Realm()
-                //   print(realmDB.configuration.fileURL!)
-                    do {
-                        realmDB.beginWrite()
-                        realmDB.add(news)
-                        try realmDB.commitWrite()
-                              
-                           
-                    }catch let error as NSError {
-                        print("Something went wrong: \(error.localizedDescription)")
-                    }
-            }
-    }
-}
+

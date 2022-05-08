@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension DetailUserTableViewController {
 
@@ -21,101 +22,24 @@ extension DetailUserTableViewController {
             switch request {
            
                 case .success(let result):
+                
+                self!.saveUserWall(result.response)
+                
                 var detailsTableData: [UserDetailsTableData] = []
-
-                var typeSection: SectionType?
+                
                 let items = result.response.items
+                
                 for item in items {
-                    var id = 0
-                    var linkUrl: String?
-                    var ownerId = 0
-                    var date = 0
-                    var textNews = ""
-                    var likes = WallLikes(count: 0, userLike: 0)
-                    var views: WallViews? = nil
-                    var urlNewsImage: [String]? = []
-                    var titleNews: String? = nil
-                    var caption: String? = nil
-                    var photos: [ImageAndLikeData] = []
-                    id = item.id
-                    ownerId = item.ownerId
-                    date = item.date
-                    textNews = item.text
-                    likes = item.likes!
-                    if let itemViews = item.views {
-                        views = itemViews
-                    } else {
-                        views = WallViews(count: 0)
+                    var typeSection: SectionType?
+                    
+                    if let attachments = item.attachments.first{
+                        
+                        
+                    }else if let copyHistory = item.wallcopyHystory.first {
+                        
+                        
                     }
-                    if let attachment = item.attachments {
-                      
-                            if let photo = attachment[0].photo {
-                                typeSection = .SingleFoto
-                                let photoData = self!.getPhotoUrl(photo.sizes)
-                                urlNewsImage?.append(photoData.url)
-                                var likeStatus = false
-                                if likes.userLike == 1 {
-                                    likeStatus = true
-                                }
-                                let imageAndLikeData = ImageAndLikeData(image: photoData.url, likeStatus: likeStatus, height: CGFloat(photoData.height), width: CGFloat(photoData.width), seenCount: likes.count)
-                                photos.append(imageAndLikeData)
-                            }else if let link = attachment[0].link {
-                                typeSection = .link
-                                linkUrl = link.url
-                                if let photo = link.photo  {
-                                    let photoData = self!.getPhotoUrl(photo.sizes)
-                                    urlNewsImage?.append(photoData.url)
-                                    var likeStatus = false
-                                    if likes.userLike == 1 {
-                                        likeStatus = true
-                                    }
-                                    let imageAndLikeData = ImageAndLikeData(image: photoData.url, likeStatus: likeStatus, height: CGFloat(photoData.height), width: CGFloat(photoData.width), seenCount: likes.count)
-                                    photos.append(imageAndLikeData)
-                                }
-                                caption = link.caption
-                                titleNews = link.title
-                                
-                            }else {
-                                typeSection = nil
-                            }
-                    } else if let copyHis = item.copyHystory, let attachments = copyHis[0].attachments {
-                        if let photo = attachments[0].photo {
-                            typeSection = .SingleFoto
-                            let photoData = self!.getPhotoUrl(photo.sizes)
-                            urlNewsImage?.append(photoData.url)
-                            var likeStatus = false
-                            if likes.userLike == 1 {
-                                likeStatus = true
-                            }
-                            let imageAndLikeData = ImageAndLikeData(image: photoData.url, likeStatus: likeStatus, height: CGFloat(photoData.height), width: CGFloat(photoData.width), seenCount: likes.count)
-                            photos.append(imageAndLikeData)
-                        }else if let link = attachments[0].link {
-                            typeSection = .link
-                            linkUrl = link.url
-                            if let photo = link.photo  {
-                                let photoData = self!.getPhotoUrl(photo.sizes)
-                                urlNewsImage?.append(photoData.url)
-                                var likeStatus = false
-                                if likes.userLike == 1 {
-                                    likeStatus = true
-                                }
-                                let imageAndLikeData = ImageAndLikeData(image: photoData.url, likeStatus: likeStatus, height: CGFloat(photoData.height), width: CGFloat(photoData.width), seenCount: likes.count)
-                                photos.append(imageAndLikeData)
-                            }else {
-                                typeSection = nil
-                            }
-                            caption = link.caption
-                            titleNews = link.title
-                            
-                        }
-                    }
-                    if let type = typeSection {
-                        let detailsSectionData = DetailsSectionData(id: id, ownerId: ownerId, date: date, textNews: textNews, likes: likes, views: views, urlNewsImage: urlNewsImage, titleNews: titleNews, captionNews: caption, link: linkUrl, photo: photos)
-                        let data  = UserDetailsTableData( sectionType: type, sectionData: detailsSectionData)
-                        detailsTableData.append(data)
-                    }
-                    typeSection = nil
-                  
+                    
                 }
                 userDetailsTableData = detailsTableData
                     case .failure(_):
@@ -156,4 +80,22 @@ extension DetailUserTableViewController {
         return url ?? " "
     }
     
+}
+
+
+private extension DetailUserTableViewController {
+    func saveUserWall(_ userWall: UserWallResponse) {
+        
+                DispatchQueue.main.async {
+                    let realmDB = try!  Realm()
+        //           print(realmDB.configuration.fileURL!)
+                       do {
+                           try realmDB.write{
+                               realmDB.add(userWall.items, update: .modified)
+                           }
+                       } catch let error as NSError {
+                           print("Something went wrong: \(error.localizedDescription)")
+                       }
+                }
+    }
 }

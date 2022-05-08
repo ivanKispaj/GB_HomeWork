@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension InternetConnections {
     func getUserWall(for owner_id: String, completion: @escaping(Result<UserWallModel,Error>) -> ()) {
@@ -35,5 +36,6 @@ extension InternetConnections {
         
     }
 }
+
 
 

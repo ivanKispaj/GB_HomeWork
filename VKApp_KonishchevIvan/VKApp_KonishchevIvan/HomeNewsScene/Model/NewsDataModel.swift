@@ -46,24 +46,24 @@ struct NewsDataModel:Decodable {
     let response: NewsResponse // response
 }
 
-final class NewsResponse: Object, Decodable {
-    enum CodingKeys: String, CodingKey {
-        case items
-        case groups
-        case profiles
-    }
+struct NewsResponse: Decodable {
+//    enum CodingKeys: String, CodingKey {
+//        case items
+//        case groups
+//        case profiles
+//    }
    
-    dynamic var items = List<NewsItems>() // items
-    dynamic var profiles = List<NewsProfiles>()  //profiles
-    dynamic var  groups = List<NewsGroups>()  //groups
-    
-    convenience init(from decoder: Decoder) throws {
-        self.init()
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        items = try container.decode(List<NewsItems>.self, forKey: .items)
-        groups = try container.decode(List<NewsGroups>.self, forKey: .groups )
-        profiles = try container.decode(List<NewsProfiles>.self, forKey: .profiles)
-    }
+    let items: [NewsItems] // items
+    let profiles: [NewsProfiles] //profiles
+    let  groups: [NewsGroups]  //groups
+//
+//    convenience init(from decoder: Decoder) throws {
+//        self.init()
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        items = try container.decode(List<NewsItems>.self, forKey: .items)
+//        groups = try container.decode(List<NewsGroups>.self, forKey: .groups )
+//        profiles = try container.decode(List<NewsProfiles>.self, forKey: .profiles)
+//    }
 }
 
 //MARK: -  items data model
@@ -108,6 +108,10 @@ final class NewsItems: Object, Decodable{
     }
     
 
+    override class func primaryKey() -> String? {
+        return "sourceId"
+    }
+    
 }
     //MARK: -  NewsAttachments ( attachments )
     final class NewsAttachments: Object, Decodable {
@@ -127,6 +131,8 @@ final class NewsItems: Object, Decodable{
             let container = try decoder.container(keyedBy: CodingKeys.self)
             type = try container.decode(String.self, forKey: .type)
             photoData = try? container.decode(NewsPhotosData.self, forKey: .photoData)
+            link = try? container.decode(NewsLink.self, forKey: .link)
+            video = try? container.decode(NewsVideo.self, forKey: .video)
         }
 
     }
@@ -373,6 +379,10 @@ final class NewsProfiles: Object, Decodable {
         onlineInfo = try? container.decodeIfPresent(NewsOnlineInfo.self, forKey: .onlineInfo) ?? NewsOnlineInfo()
         banned = try? container.decodeIfPresent(String.self, forKey: .banned)
     }
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 final class NewsOnlineInfo: Object, Decodable {
@@ -404,6 +414,10 @@ final class NewsGroups: Object, Decodable {
     @objc dynamic var id: Int
     @objc dynamic var name: String
     @objc dynamic var photo: String
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 

@@ -15,6 +15,7 @@ extension HomeNewsTableViewController {
           switch response {
 // обработка ответа
           case .success(let result):
+              self!.seveNewsData(result.response)
               let newsData = NewsData()
 //              var newsDatasPhoto: [CellType: [NewsCellData]] = [.photo: []] // конечный массив с данными
 //              var newsDatasLink: [CellType: [NewsCellData]] = [.link: []] // конечный массив с данными
@@ -169,19 +170,22 @@ extension HomeNewsTableViewController {
 }
 
 
-//// MARK: - Private
-//private extension HomeNewsTableViewController {
-//    func saveNewsData(newsData: NewsData)  {
-//         let realmDB = try!  Realm()
-//    //    print(realmDB.configuration.fileURL!)
-//            do {
-//                    realmDB.beginWrite()
-//                    realmDB.add(newsData)
-//               try  realmDB.commitWrite()
-//                
-//            } catch let error as NSError {
-//                print("Something went wrong: \(error.localizedDescription)")
-//            }
-//    }
-//}
+// MARK: - Private
+private extension HomeNewsTableViewController {
+    func seveNewsData(_  news: NewsResponse) {
+           DispatchQueue.main.async {
+                let realmDB = try!  Realm()
+       //            print(realmDB.configuration.fileURL!)
+                    do {
+                        try realmDB.write{
+                            realmDB.add(news.items, update: .modified)
+                            realmDB.add(news.profiles, update: .modified)
+                            realmDB.add(news.groups, update: .modified)
+                        }
+                    }catch let error as NSError {
+                        print("Something went wrong: \(error.localizedDescription)")
+                    }
+            }
+    }
+}
 

@@ -6,6 +6,7 @@
 //
 // 387485849
 import UIKit
+import RealmSwift
 
 extension FriendsTableViewController {
   
@@ -17,8 +18,9 @@ extension FriendsTableViewController {
           switch response {
 // обработка ответа
           case .success(let result):
-              
-            //  let friendArray = FriendArray()
+              // Записываем в Realm
+              self!.saveFriends(result)
+        
               var arrays = [Friend]()
               for arrayFriends in result.response.items {
                   let friends = Friend()
@@ -37,7 +39,7 @@ extension FriendsTableViewController {
                   }
                   
                   if arrayFriends.lastSeen != nil {
-                    //  friends.lastSeenDate = arrayFriends.lastSeen!.time
+                      friends.lastSeenDate = arrayFriends.lastSeen!.time
                   }
                  
                   if  let status = arrayFriends.status {
@@ -54,7 +56,6 @@ extension FriendsTableViewController {
                       self!.activityIndicator.isHidden = true
                       self!.activityIndicator.stopAnimating()
                   }
-                //  friendArray.friendArray.append(friends)
           
                   arrays.append(friends)
               }
@@ -67,3 +68,19 @@ extension FriendsTableViewController {
     }
 }
 
+private extension FriendsTableViewController {
+    func saveFriends(_ friends: Friends) {
+        let resalt = friends.response.items
+        DispatchQueue.main.async {
+                    let realmDB = try!  Realm()
+          //         print(realmDB.configuration.fileURL!)
+                       do {
+                           try realmDB.write{
+                               realmDB.add(resalt, update: .modified)
+                           }
+                       } catch let error as NSError {
+                           print("Something went wrong: \(error.localizedDescription)")
+                       }
+                }
+    }
+}

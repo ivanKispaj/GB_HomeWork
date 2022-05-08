@@ -11,4 +11,5 @@ extension DetailUserTableViewController {
     func loadDataTable() {
          self.loadFriendsSelectedUser()        
     }
+    
 }
