@@ -25,7 +25,14 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        loadUserGroupFromVK()
+        
+        Task(priority: .userInitiated) {
+            await self.loadUserGroupFromVK()
+           
+        }
+        
+        
+        
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
         tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")
         

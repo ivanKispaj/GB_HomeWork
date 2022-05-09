@@ -147,7 +147,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.linkUserLogo.loadImageFromUrlString(self.friendsSelectedd.photo)
             cell.linkUserName.text = self.friendsSelectedd.userName
             cell.linkText.text = data.titleNews
-            cell.linkSeenCount.text = String(data.views!.count)
+            cell.linkSeenCount.text = String(data.views?.count ?? 0)
             return cell
         
         case .unknown:
