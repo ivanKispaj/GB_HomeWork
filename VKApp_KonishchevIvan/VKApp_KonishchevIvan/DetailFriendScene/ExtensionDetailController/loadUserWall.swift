@@ -51,7 +51,7 @@ extension DetailUserTableViewController {
                             }
                             
                             let size = getPhotoUrl(photo.sizes)
-                            let photos = ImageAndLikeData(image: size.url, likeStatus: likeStatus, height:CGFloat(size.height), width: CGFloat(size.width), seenCount: sectionData.views!.count)
+                            let photos = ImageAndLikeData(image: size.url, likeStatus: likeStatus, height:CGFloat(size.height), width: CGFloat(size.width), seenCount: sectionData.views?.count ?? 0)
                             sectionData.photo = [photos]
                             sectionData.urlNewsImage = size.url
                           

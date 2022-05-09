@@ -128,7 +128,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.delegate = self
             cell.singlePhoto = data.photo![indexPath.row]
             cell.singlPhotoLikeLable.text = String(data.likes.count)
-            cell.singlePhotoSeenCount.text = String(data.views!.count)
+            cell.singlePhotoSeenCount.text = String(data.views?.count ?? 0)
             return cell
 // Закомментированное в процессе разработки! Чтоб не забыть что такое есть и можно вывести!
 //        case .newsText:
