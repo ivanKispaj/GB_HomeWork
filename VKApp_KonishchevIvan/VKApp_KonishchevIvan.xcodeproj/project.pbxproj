@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D2517253E5C8F47C10B6E68 /* Pods_VKApp_KonishchevIvan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A42EA5E976612657B4D3FDA /* Pods_VKApp_KonishchevIvan.framework */; };
 		630471D6281B9E5400B3359B /* loadDataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630471D5281B9E5400B3359B /* loadDataTable.swift */; };
 		637CA727281A593100058708 /* LinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637CA725281A593100058708 /* LinkTableViewCell.swift */; };
 		637CA728281A593100058708 /* LinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637CA726281A593100058708 /* LinkTableViewCell.xib */; };
@@ -27,19 +28,18 @@
 		638E99E1281433DC00367F44 /* NewGroupSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E0281433DC00367F44 /* NewGroupSearchModel.swift */; };
 		638E99E32814345400367F44 /* getNewGroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E22814345400367F44 /* getNewGroupList.swift */; };
 		638E99E5281434F400367F44 /* loadNewGroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E4281434F400367F44 /* loadNewGroupList.swift */; };
-		638E99E728144A4500367F44 /* getUserNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E628144A4500367F44 /* getUserNews.swift */; };
 		638E99E928144B3200367F44 /* LoadNewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E828144B3200367F44 /* LoadNewsData.swift */; };
-		638E99EB2815543E00367F44 /* getUserWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99EA2815543E00367F44 /* getUserWall.swift */; };
 		638E99ED2815548300367F44 /* UserWallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99EC2815548300367F44 /* UserWallModel.swift */; };
 		638E99EF281554A100367F44 /* loadUserWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99EE281554A100367F44 /* loadUserWall.swift */; };
-		638E99F12815AB1000367F44 /* DetailsControllerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99F02815AB1000367F44 /* DetailsControllerData.swift */; };
-		639B4257280C0A5C0097D53F /* getListOfFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4256280C0A5C0097D53F /* getListOfFriends.swift */; };
 		639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4258280C0AFE0097D53F /* InternetConnections.swift */; };
-		639B425B280C19190097D53F /* getPhotoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425A280C19190097D53F /* getPhotoUser.swift */; };
 		639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425C280C1BE90097D53F /* getUserGroups.swift */; };
 		639B425F280C252F0097D53F /* getGroupsByRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425E280C252F0097D53F /* getGroupsByRequest.swift */; };
 		639B4262280D2D200097D53F /* unixTimeConvertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4261280D2D200097D53F /* unixTimeConvertion.swift */; };
 		639B4264280D36430097D53F /* isUrlString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4263280D36430097D53F /* isUrlString.swift */; };
+		63B47767282915CB0072CE24 /* LoadAndSaveFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B47766282915CB0072CE24 /* LoadAndSaveFriends.swift */; };
+		63B477692829160E0072CE24 /* LoadAndSavePhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B477682829160E0072CE24 /* LoadAndSavePhotoData.swift */; };
+		63B4776B2829181F0072CE24 /* LoadAndSaveUserWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4776A2829181F0072CE24 /* LoadAndSaveUserWall.swift */; };
+		63B4776D28295A420072CE24 /* LoadAndSaveNewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4776C28295A420072CE24 /* LoadAndSaveNewsData.swift */; };
 		8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */; };
 		8003DA2827D5E1E00048B191 /* ExtendTableUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */; };
 		8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */; };
@@ -108,6 +108,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		264B86B2F5EC30BA07EBE4AF /* Pods-VKApp_KonishchevIvan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp_KonishchevIvan.debug.xcconfig"; path = "Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan.debug.xcconfig"; sourceTree = "<group>"; };
 		630471D5281B9E5400B3359B /* loadDataTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadDataTable.swift; sourceTree = "<group>"; };
 		637CA725281A593100058708 /* LinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTableViewCell.swift; sourceTree = "<group>"; };
 		637CA726281A593100058708 /* LinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkTableViewCell.xib; sourceTree = "<group>"; };
@@ -128,19 +129,19 @@
 		638E99E0281433DC00367F44 /* NewGroupSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupSearchModel.swift; sourceTree = "<group>"; };
 		638E99E22814345400367F44 /* getNewGroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getNewGroupList.swift; sourceTree = "<group>"; };
 		638E99E4281434F400367F44 /* loadNewGroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadNewGroupList.swift; sourceTree = "<group>"; };
-		638E99E628144A4500367F44 /* getUserNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserNews.swift; sourceTree = "<group>"; };
 		638E99E828144B3200367F44 /* LoadNewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNewsData.swift; sourceTree = "<group>"; };
-		638E99EA2815543E00367F44 /* getUserWall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserWall.swift; sourceTree = "<group>"; };
 		638E99EC2815548300367F44 /* UserWallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWallModel.swift; sourceTree = "<group>"; };
 		638E99EE281554A100367F44 /* loadUserWall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadUserWall.swift; sourceTree = "<group>"; };
-		638E99F02815AB1000367F44 /* DetailsControllerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsControllerData.swift; sourceTree = "<group>"; };
-		639B4256280C0A5C0097D53F /* getListOfFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getListOfFriends.swift; sourceTree = "<group>"; };
 		639B4258280C0AFE0097D53F /* InternetConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnections.swift; sourceTree = "<group>"; };
-		639B425A280C19190097D53F /* getPhotoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getPhotoUser.swift; sourceTree = "<group>"; };
 		639B425C280C1BE90097D53F /* getUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserGroups.swift; sourceTree = "<group>"; };
 		639B425E280C252F0097D53F /* getGroupsByRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getGroupsByRequest.swift; sourceTree = "<group>"; };
 		639B4261280D2D200097D53F /* unixTimeConvertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unixTimeConvertion.swift; sourceTree = "<group>"; };
 		639B4263280D36430097D53F /* isUrlString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isUrlString.swift; sourceTree = "<group>"; };
+		63B47766282915CB0072CE24 /* LoadAndSaveFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSaveFriends.swift; sourceTree = "<group>"; };
+		63B477682829160E0072CE24 /* LoadAndSavePhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSavePhotoData.swift; sourceTree = "<group>"; };
+		63B4776A2829181F0072CE24 /* LoadAndSaveUserWall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSaveUserWall.swift; sourceTree = "<group>"; };
+		63B4776C28295A420072CE24 /* LoadAndSaveNewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSaveNewsData.swift; sourceTree = "<group>"; };
+		796DC62054F81A4D3A7CB7BA /* Pods-VKApp_KonishchevIvan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp_KonishchevIvan.release.xcconfig"; path = "Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan.release.xcconfig"; sourceTree = "<group>"; };
 		8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendTableUserCell.swift; sourceTree = "<group>"; };
 		8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendTableUserCell.xib; sourceTree = "<group>"; };
 		8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupTableViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +209,7 @@
 		80F4BCCD28031BF6008E07B0 /* AnimateGallaryPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateGallaryPop.swift; sourceTree = "<group>"; };
 		80F4BCD02803E34E008E07B0 /* NetworkSessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionData.swift; sourceTree = "<group>"; };
 		80F4BCD628052F2D008E07B0 /* VKLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginViewController.swift; sourceTree = "<group>"; };
+		9A42EA5E976612657B4D3FDA /* Pods_VKApp_KonishchevIvan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKApp_KonishchevIvan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D2517253E5C8F47C10B6E68 /* Pods_VKApp_KonishchevIvan.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,17 +239,8 @@
 				6385D21B280DCD2C007F6142 /* Model */,
 				6385D21A280DCD11007F6142 /* HomeNewsView */,
 				638E99A928125CCE00367F44 /* Extension */,
-				6385D219280DCCED007F6142 /* HomeNewsService */,
 			);
 			path = HomeNewsScene;
-			sourceTree = "<group>";
-		};
-		6385D219280DCCED007F6142 /* HomeNewsService */ = {
-			isa = PBXGroup;
-			children = (
-				638E99E628144A4500367F44 /* getUserNews.swift */,
-			);
-			path = HomeNewsService;
 			sourceTree = "<group>";
 		};
 		6385D21A280DCD11007F6142 /* HomeNewsView */ = {
@@ -261,7 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				80850ED127DE37EE0078039E /* NewsDataModel.swift */,
-				638E99F02815AB1000367F44 /* DetailsControllerData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -273,7 +266,7 @@
 				80C19ACA27D76C40009C34CB /* CouruselCell */,
 				806284D627DDCB0D00D37674 /* GalaryCell */,
 				80850ED327DE3C650078039E /* SinglePhotoAndTextCell */,
-				80850EC027DE08650078039E /* SinglePhotoCell */,
+				80850EC027DE08650078039E /* SinglePhotoTableViewCell */,
 				8003DA2427D5E19F0048B191 /* ExtendedCell */,
 				8003DA2327D5E1680048B191 /* SimpleTableCell */,
 			);
@@ -548,7 +541,6 @@
 				639B4266280D39760097D53F /* Model */,
 				639B4268280D3D470097D53F /* FriendsView */,
 				639B4269280D3E4A0097D53F /* extensionFriendsController */,
-				639B4267280D3CF30097D53F /* FriendsService */,
 			);
 			path = FriendScene;
 			sourceTree = "<group>";
@@ -559,14 +551,6 @@
 				808E9D9F27BE98BC0089E4A4 /* Friends.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		639B4267280D3CF30097D53F /* FriendsService */ = {
-			isa = PBXGroup;
-			children = (
-				639B4256280C0A5C0097D53F /* getListOfFriends.swift */,
-			);
-			path = FriendsService;
 			sourceTree = "<group>";
 		};
 		639B4268280D3D470097D53F /* FriendsView */ = {
@@ -594,7 +578,6 @@
 				639B426D280D3F360097D53F /* Model */,
 				639B426C280D3F0C0097D53F /* DetailFriendView */,
 				639B426F280D3F4F0097D53F /* ExtensionDetailController */,
-				639B426E280D3F430097D53F /* DetailService */,
 			);
 			path = DetailFriendScene;
 			sourceTree = "<group>";
@@ -617,15 +600,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		639B426E280D3F430097D53F /* DetailService */ = {
-			isa = PBXGroup;
-			children = (
-				639B425A280C19190097D53F /* getPhotoUser.swift */,
-				638E99EA2815543E00367F44 /* getUserWall.swift */,
-			);
-			path = DetailService;
-			sourceTree = "<group>";
-		};
 		639B426F280D3F4F0097D53F /* ExtensionDetailController */ = {
 			isa = PBXGroup;
 			children = (
@@ -646,6 +620,27 @@
 				80F4BCCA28031B97008E07B0 /* AnimationForGallaryScreen */,
 			);
 			path = AllAnimation;
+			sourceTree = "<group>";
+		};
+		63B47764282915830072CE24 /* InternetConnection */ = {
+			isa = PBXGroup;
+			children = (
+				639B4258280C0AFE0097D53F /* InternetConnections.swift */,
+				63B47766282915CB0072CE24 /* LoadAndSaveFriends.swift */,
+				63B477682829160E0072CE24 /* LoadAndSavePhotoData.swift */,
+				63B4776A2829181F0072CE24 /* LoadAndSaveUserWall.swift */,
+				63B4776C28295A420072CE24 /* LoadAndSaveNewsData.swift */,
+			);
+			path = InternetConnection;
+			sourceTree = "<group>";
+		};
+		7CFE21C9457B13484B5FD2C5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				264B86B2F5EC30BA07EBE4AF /* Pods-VKApp_KonishchevIvan.debug.xcconfig */,
+				796DC62054F81A4D3A7CB7BA /* Pods-VKApp_KonishchevIvan.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		8003DA2327D5E1680048B191 /* SimpleTableCell */ = {
@@ -695,6 +690,8 @@
 			children = (
 				804154ED27B62FE900160418 /* VKApp_KonishchevIvan */,
 				804154EC27B62FE900160418 /* Products */,
+				7CFE21C9457B13484B5FD2C5 /* Pods */,
+				BD2AAF2E8FD4F9DAC48FDAA0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -767,13 +764,13 @@
 			path = GalaryCell;
 			sourceTree = "<group>";
 		};
-		80850EC027DE08650078039E /* SinglePhotoCell */ = {
+		80850EC027DE08650078039E /* SinglePhotoTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
 				80850EC127DE08980078039E /* SinglePhotoTableViewCell.swift */,
 				80850EC227DE08980078039E /* SinglePhotoTableViewCell.xib */,
 			);
-			path = SinglePhotoCell;
+			path = SinglePhotoTableViewCell;
 			sourceTree = "<group>";
 		};
 		80850EC527DE122C0078039E /* XibSingleCollectionCell */ = {
@@ -896,9 +893,9 @@
 		80F4BCCF2803E328008E07B0 /* InternetConnections */ = {
 			isa = PBXGroup;
 			children = (
+				63B47764282915830072CE24 /* InternetConnection */,
 				639B4255280C0A100097D53F /* VKRequests */,
 				80F4BCD02803E34E008E07B0 /* NetworkSessionData.swift */,
-				639B4258280C0AFE0097D53F /* InternetConnections.swift */,
 			);
 			path = InternetConnections;
 			sourceTree = "<group>";
@@ -911,6 +908,14 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		BD2AAF2E8FD4F9DAC48FDAA0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A42EA5E976612657B4D3FDA /* Pods_VKApp_KonishchevIvan.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -918,9 +923,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 804154FF27B62FEB00160418 /* Build configuration list for PBXNativeTarget "VKApp_KonishchevIvan" */;
 			buildPhases = (
+				54C642730CE61D7FB1598E4C /* [CP] Check Pods Manifest.lock */,
 				804154E727B62FE900160418 /* Sources */,
 				804154E827B62FE900160418 /* Frameworks */,
 				804154E927B62FE900160418 /* Resources */,
+				6304FD03F1D4407F21B88494 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -989,6 +996,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		54C642730CE61D7FB1598E4C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VKApp_KonishchevIvan-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6304FD03F1D4407F21B88494 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		804154E727B62FE900160418 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1001,7 +1050,6 @@
 				80F4BCCC28031BD5008E07B0 /* AnimateGallaryPush.swift in Sources */,
 				80601F7527DF095C00490809 /* ShadowViewRadius.swift in Sources */,
 				808E9DA027BE98BC0089E4A4 /* Friends.swift in Sources */,
-				638E99F12815AB1000367F44 /* DetailsControllerData.swift in Sources */,
 				637CA727281A593100058708 /* LinkTableViewCell.swift in Sources */,
 				8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */,
 				80F4BCD12803E34E008E07B0 /* NetworkSessionData.swift in Sources */,
@@ -1011,14 +1059,11 @@
 				80D1315C27FEA85E009EA04D /* CustomNavigationController.swift in Sources */,
 				638E99C5281267EC00367F44 /* CustomSingleCollectionLayout.swift in Sources */,
 				80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */,
-				639B4257280C0A5C0097D53F /* getListOfFriends.swift in Sources */,
 				638E99E32814345400367F44 /* getNewGroupList.swift in Sources */,
 				80F4BCCE28031BF6008E07B0 /* AnimateGallaryPop.swift in Sources */,
 				80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */,
 				80850ED627DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.swift in Sources */,
-				639B425B280C19190097D53F /* getPhotoUser.swift in Sources */,
 				638E99DE2814048500367F44 /* loadUserGroupFromVK.swift in Sources */,
-				638E99E728144A4500367F44 /* getUserNews.swift in Sources */,
 				80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */,
 				8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */,
 				80850ECF27DE37910078039E /* HomeNewsTableViewController.swift in Sources */,
@@ -1033,17 +1078,19 @@
 				80CCB6B827E4E55800BC2085 /* HorizontalCollectionViewCell.swift in Sources */,
 				630471D6281B9E5400B3359B /* loadDataTable.swift in Sources */,
 				805E76F027BC17EC0033098D /* AllertWrongUserData.swift in Sources */,
+				63B4776D28295A420072CE24 /* LoadAndSaveNewsData.swift in Sources */,
 				80E3274D27D4F6A80014C760 /* addNewGroup.swift in Sources */,
 				638E99D02813BE3B00367F44 /* LoadImageFromUrlString.swift in Sources */,
 				638E99BA281260C800367F44 /* AnimationDelegate.swift in Sources */,
 				80850ED227DE37EE0078039E /* NewsDataModel.swift in Sources */,
 				80E3274827D4F4950014C760 /* setDataSectionTable.swift in Sources */,
 				80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */,
-				638E99EB2815543E00367F44 /* getUserWall.swift in Sources */,
 				80850EC827DE12480078039E /* SingleCollectionViewCell.swift in Sources */,
 				639B4264280D36430097D53F /* isUrlString.swift in Sources */,
 				638E99E928144B3200367F44 /* LoadNewsData.swift in Sources */,
 				639B4262280D2D200097D53F /* unixTimeConvertion.swift in Sources */,
+				63B47767282915CB0072CE24 /* LoadAndSaveFriends.swift in Sources */,
+				63B4776B2829181F0072CE24 /* LoadAndSaveUserWall.swift in Sources */,
 				80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */,
 				80F4BCC527FFEC1F008E07B0 /* AnimationPopNavigationController.swift in Sources */,
 				638E99E1281433DC00367F44 /* NewGroupSearchModel.swift in Sources */,
@@ -1074,6 +1121,7 @@
 				80850ECD27DE20350078039E /* ControlForLike.swift in Sources */,
 				806284D127DDB68E00D37674 /* UserDetailViewModel.swift in Sources */,
 				80EAC05227F6D64B006DDB9A /* UserGroupTableViewDelegate.swift in Sources */,
+				63B477692829160E0072CE24 /* LoadAndSavePhotoData.swift in Sources */,
 				80F4BCC92802E0A2008E07B0 /* SetFrameImages.swift in Sources */,
 				80DD23A727D3332000F78417 /* TableViewCellXib.swift in Sources */,
 				638E99CD2813BDC900367F44 /* LoadFriendsSelectedUser.swift in Sources */,
@@ -1153,7 +1201,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1208,7 +1256,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1220,6 +1268,7 @@
 		};
 		8041550027B62FEB00160418 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 264B86B2F5EC30BA07EBE4AF /* Pods-VKApp_KonishchevIvan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1250,6 +1299,7 @@
 		};
 		8041550127B62FEB00160418 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 796DC62054F81A4D3A7CB7BA /* Pods-VKApp_KonishchevIvan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

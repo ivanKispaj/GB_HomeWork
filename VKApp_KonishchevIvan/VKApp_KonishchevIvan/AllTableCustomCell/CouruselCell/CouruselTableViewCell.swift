@@ -11,7 +11,7 @@ import UIKit
 class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet var CouruselCollection: UICollectionView!
-    var collectionData: [FriendArray]! {
+    var collectionData: [Friend]! {
         didSet {
             CouruselCollection.reloadData()
         }

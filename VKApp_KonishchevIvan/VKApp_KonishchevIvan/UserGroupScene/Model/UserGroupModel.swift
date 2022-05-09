@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct UserGroupModel: Decodable {
     let response: GroupResponse
@@ -15,7 +16,7 @@ struct GroupResponse: Decodable {
     let items: [ItemsGroup]
 }
 
-struct ItemsGroup: Decodable {
+final class ItemsGroup: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case activity = "activity"
         case id
@@ -23,10 +24,24 @@ struct ItemsGroup: Decodable {
         case isClosed = "is_closed"
         case photoGroup = "photo_50"
     }
-    let activity: String?
-    let id: Int
-    let groupName: String
-    let isClosed: Int
-    let photoGroup: String
+    @objc dynamic var activity: String? = nil
+    @objc dynamic var id: Int = 0
+    @objc dynamic var groupName: String = ""
+    @objc dynamic var isClosed: Int = 0
+    @objc dynamic var photoGroup: String = ""
+    
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        activity = try container.decodeIfPresent(String.self, forKey: .activity) ?? nil
+        id = try container.decode(Int.self, forKey: .id)
+        groupName = try container.decode(String.self, forKey: .groupName)
+        isClosed = try container.decode(Int.self, forKey: .isClosed)
+        photoGroup = try container.decode(String.self, forKey: .photoGroup)
+    }
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
