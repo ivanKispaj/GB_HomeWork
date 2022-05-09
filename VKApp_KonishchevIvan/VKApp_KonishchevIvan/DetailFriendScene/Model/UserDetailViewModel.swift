@@ -12,8 +12,10 @@ enum SectionType {
     case Gallary
     case SingleFoto
     case link
+    case linkPhoto
     case video
     case newsText
+    case unknown
     
 }
 
@@ -25,59 +27,38 @@ struct UserDetailsTableData {
 }
 
 struct DetailsSectionData {
-    let id: Int
-    let ownerId: Int
-    let date: Int
-    let textNews: String
-    var likes: WallLikes
-    let views: WallViews?
-    let urlNewsImage: [String]?
-    let titleNews: String?
-    let captionNews: String?
-    let friends: [FriendArray]?
-    let photo: [ImageAndLikeData]?
-    let linkUrl:  String?
+    var id: Int = 0
+    var ownerId: Int = 0
+    var date: Int = 0
+    var textNews: String = ""
+    var likes: WallLikes = WallLikes()
+    var views: WallViews? = nil
+    var urlNewsImage: String? = nil
+    var titleNews: String? = nil
+    var captionNews: String? = nil
+    var friends: [Friend]? = nil
+    var photo: [ImageAndLikeData]? = nil
+    var linkUrl:  String? = nil
+    init() {}
+    init( id: Int, ownerId: Int, date: Int, textNews: String, likes: WallLikes, views: WallViews?, urlNewsImage: String?, titleNews: String?, captionNews: String?, link: String ) {
+        self.id = id
+        self.ownerId = ownerId
+        self.date = date
+        self.textNews = textNews
+        self.likes = likes
+        self.views = views
+        self.urlNewsImage = urlNewsImage
+        self.titleNews = titleNews
+        self.captionNews = captionNews
+        self.linkUrl = link
 
-    init( id: Int, ownerId: Int, date: Int, textNews: String, likes: WallLikes, views: WallViews?, urlNewsImage: [String]?, titleNews: String?, captionNews: String?, link: String,friends: [FriendArray]? = nil, photo: [ImageAndLikeData] ) {
-        self.id = id
-        self.ownerId = ownerId
-        self.date = date
-        self.textNews = textNews
-        self.likes = likes
-        self.views = views
-        self.urlNewsImage = urlNewsImage
-        self.titleNews = titleNews
-        self.captionNews = captionNews
-        self.linkUrl = link
-        self.friends = friends
-        self.photo = photo
     }
-    init( id: Int = 0, ownerId: Int = 0, date: Int = 0, textNews: String = "", likes: WallLikes = WallLikes(count: 0, userLike: 0), views: WallViews? = nil ,urlNewsImage: [String]? = [], titleNews: String? = "", captionNews: String? = "", link: String? = "",friends: [FriendArray] , photo: [ImageAndLikeData]? = nil) {
-        self.id = id
-        self.ownerId = ownerId
-        self.date = date
-        self.textNews = textNews
-        self.likes = likes
-        self.views = views
-        self.urlNewsImage = urlNewsImage
-        self.titleNews = titleNews
-        self.captionNews = captionNews
-        self.linkUrl = link
+    
+    init(friends: [Friend] ) {
         self.friends = friends
-        self.photo = photo
     }
-    init( id: Int = 0, ownerId: Int = 0, date: Int = 0, textNews: String = "", likes: WallLikes = WallLikes(count: 0, userLike: 0), views: WallViews? = nil ,urlNewsImage: [String]? = [], titleNews: String? = "", captionNews: String? = "", link: String? = "",friends: [FriendArray]? = nil , photo: [ImageAndLikeData]) {
-        self.id = id
-        self.ownerId = ownerId
-        self.date = date
-        self.textNews = textNews
-        self.likes = likes
-        self.views = views
-        self.urlNewsImage = urlNewsImage
-        self.titleNews = titleNews
-        self.captionNews = captionNews
-        self.linkUrl = link
-        self.friends = friends
+    
+    init( photo: [ImageAndLikeData]) {
         self.photo = photo
     }
 }

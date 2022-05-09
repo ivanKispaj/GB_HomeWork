@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkSessionData {
+final class NetworkSessionData {
     
     static var shared = NetworkSessionData()
     var token: String?

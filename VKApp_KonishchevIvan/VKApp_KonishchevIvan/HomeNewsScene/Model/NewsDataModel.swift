@@ -6,48 +6,73 @@
 //
 
 import UIKit
-enum CellType {
-    case photo
-    case link
-    case wall
-    case histroy
-}
-//MARK: - Model для отображения страницы новостей
-struct NewsCellData {
-    var ovnerId: Int
-    var date: Int
-    var newsLike: NewsLikes
-    var newsSeenCount: Int
-    var newsDescription: String
-    var newsUserLogo: String
-    var newsUserName: String
-    var online: Bool
-    var newsText: String
-    var albumId: Int
-    var newsImage: String
-    var newsTitle: String
-    
-  
- 
+import RealmSwift
+
+enum CellType: String {
+    case photo = "photo"
+    case link = "link"
+    case wall = "wall"
+    case histroy = "histroy"
 }
 
-//MARK: -  Модель для парсинга новостей!!!!
+struct NewsData  {
+    var photo = NewsCellData()
+    var link = NewsCellData()
+    var wall = NewsCellData()
+    var histroy = NewsCellData()
+}
+
+
+//MARK: - Model для отображения страницы новостей
+struct NewsCellData {
+    var ownerId: Int = 0
+    var date: Int = 0
+    var newsLikeCount: Int = 0
+    var newsLikeStatus: Bool = false
+    var newsSeenCount: Int = 0
+    var newsDescription: String = ""
+    var newsUserLogo: String = ""
+    var newsUserName: String = ""
+    var online: Bool = false
+    var newsText: String = ""
+    var albumId: Int = 0
+    var newsImage: String = ""
+    var newsTitle: String = ""
+    
+}
+
+//MARK: -  Модель для парсинга новостей и сохранения в Realm !!!!
 struct NewsDataModel:Decodable {
     let response: NewsResponse // response
 }
-struct NewsResponse: Decodable {
-    let items: [NewsItems]  // items
-    let profiles: [NewsProfiles]  //profiles
-    let groups: [NewsGroups]  //groups
+
+final class NewsResponse: Object, Decodable {
+    enum CodingKeys: String, CodingKey {
+        case items
+        case profiles
+        case groups
+    }
+    dynamic var items = List<NewsItems>() // items
+    dynamic var profiles = List<NewsProfiles>() //profiles
+    dynamic var  groups = List<NewsGroups>() //groups
+    
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        items = try container.decode(List<NewsItems>.self, forKey: .items)
+        profiles = try container.decode(List<NewsProfiles>.self, forKey: .profiles)
+        groups = try container.decode(List<NewsGroups>.self, forKey: .groups)
+    }
+
 }
 
 //MARK: -  items data model
-struct NewsItems: Decodable{
+final class NewsItems: Object, Decodable{
     enum CodingKeys: String, CodingKey {
         case sourceId = "source_id"  // id profiles or (Groups with  -sours_id )
         case date                   // дата
         case attachments            // опционально либо copy_history вместо него
-        case copyHistory = "copy_history"
+        case newsCopyHistory = "copy_history"
         case postId = "post_id"
         case type
         case likes
@@ -55,63 +80,92 @@ struct NewsItems: Decodable{
         case text
         case wallPhotos = "photos"
     }
-    let sourceId: Int
-    let date: Int
-    let attachments: [NewsAttachments]?
-    let copyHistory: [NewsCopyHistory]?
-    let postId: Int
-    let type: String
-    let likes: NewsLikes?
-    let views: NewsViews?
-    let text: String?
-    let wallPhotos: NewsWallPhotos?
+    @objc dynamic var sourceId: Int = 0
+    @objc dynamic var date: Int = 0
+    dynamic var attachments = List<NewsAttachments>()
+    dynamic var newsCopyHistory = List<NewsCopyHistory>()
+    @objc dynamic var postId: Int = 0
+    @objc dynamic var type: String = ""
+    @objc dynamic var likes: NewsLikes? = nil
+    @objc dynamic var views: NewsViews? = nil
+    @objc dynamic var text: String? = nil
+    @objc dynamic var wallPhotos: NewsWallPhotos? = nil
 
+    
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        sourceId = try container.decode(Int.self, forKey: .sourceId)
+        date = try container.decode(Int.self, forKey: .date)
+        postId = try container.decode(Int.self, forKey: .postId)
+        type = try container.decode(String.self, forKey: .type)
+        text = try? container.decodeIfPresent(String.self, forKey: .text)
+        likes = try? container.decode(NewsLikes.self, forKey: .likes)
+        views = try? container.decode(NewsViews.self, forKey: .views)
+        attachments = try container.decodeIfPresent(List<NewsAttachments>.self, forKey: .attachments) ?? List<NewsAttachments>()
+        newsCopyHistory = try container.decodeIfPresent(List<NewsCopyHistory>.self, forKey: .newsCopyHistory) ?? List<NewsCopyHistory>()
+        wallPhotos = try? container.decode(NewsWallPhotos.self, forKey: .wallPhotos)
+    }
 }
+    //MARK: -  NewsAttachments ( attachments )
+    final class NewsAttachments: Object, Decodable {
+        enum CodingKeys: String, CodingKey {
+            case type
+            case photoData = "photo"
+            case link
+            case video
+        }
+        @objc dynamic var type: String  = ""
+    
+        @objc dynamic var photoData: NewsPhotosData?
+        @objc dynamic var link: NewsLink?
+        @objc dynamic var video: NewsVideo?
+        convenience init(from decoder: Decoder) throws {
+            self.init()
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            type = try container.decode(String.self, forKey: .type)
+            photoData = try? container.decode(NewsPhotosData.self, forKey: .photoData)
+            link = try? container.decode(NewsLink.self, forKey: .link)
+            video = try? container.decode(NewsVideo.self, forKey: .video)
+        }
 
-struct NewsWallPhotos: Decodable {
-    let items: [NewsWallPhotoData]
-}
+    }
+ 
 
-struct NewsCopyHistory: Decodable {
-    enum codingKeys: String, CodingKey {
+//MARK: - NewsCopyHistory  ( copyHistory )
+final class NewsCopyHistory: Object, Decodable {
+    enum CodingKeys: String, CodingKey {
         case ownerId = "owner_id"
         case date
         case attachments
     }
-    let ownerId: Int?
-    let date: Int
-    let attachments: [NewsHistoryAttachments]
-}
-
-struct NewsHistoryAttachments: Decodable {
-    let video: NewsHistoryVideo
+    @objc dynamic var ownerId: Int = 0
+    @objc dynamic var date: Int = 0
+     dynamic var attachments = List<NewsHistoryAttachments>()
+    
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        ownerId = try container.decodeIfPresent(Int.self, forKey: .ownerId) ?? 0
+        date = try container.decode(Int.self, forKey: .date)
+        attachments = try container.decode(List<NewsHistoryAttachments>.self, forKey: .attachments)
+    }
     
 }
 
-struct NewsHistoryVideo: Decodable {
+
+
+final class NewsWallPhotos: Object, Decodable {
     enum CodingKeys: String, CodingKey {
-        case accesKey = "access_key"
-        case date
-        case description
-        case duration
-        case newsImage = "image"
-        case title
-
+        case items
     }
-    let accesKey: String?
-    let date: Int
-    let description: String
-    let duration: Int?
-    let newsImage: [NewsImage]
-    let title: String
+    dynamic var items = List<NewsWallPhotoData>()
+
+    
 }
 
-struct NewsImage: Decodable {
-    let url: String
-    let width: Int
-    let height: Int
-}
-struct NewsWallPhotoData: Decodable {
+// MARK: - NewsWallPhotoData
+final class NewsWallPhotoData: Object, Decodable {
     enum CodingKeys: String, CodingKey  {
         case albumId = "album_id"
         case date
@@ -120,41 +174,133 @@ struct NewsWallPhotoData: Decodable {
         case text
         case likes
     }
-    let albumId: Int
-    let date: Int
-    let idPhoto: Int
-    let photo: [ImageArray]
-    let likes: NewsLikes
-    let text: String
+    @objc dynamic var albumId: Int = 0
+    @objc dynamic var date: Int = 0
+    @objc dynamic var idPhoto: Int = 0
+     dynamic var photo = List<ImageArray>()
+    @objc dynamic var likes: NewsLikes? = nil
+    @objc dynamic var text: String = ""
+    
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        albumId = try container.decode(Int.self, forKey: .albumId)
+        date = try container.decode(Int.self, forKey: .date)
+        idPhoto = try container.decode(Int.self, forKey: .idPhoto)
+        likes = try? container.decode(NewsLikes.self, forKey: .likes)
+        text = try container.decode(String.self, forKey: .text)
+        photo = try container.decodeIfPresent(List<ImageArray>.self, forKey: .photo) ?? List<ImageArray>()
+    }
+    
 }
-struct NewsViews: Decodable {
-    let count: Int
-}
-struct NewsAttachments: Decodable {
+
+//MARK: - NewsHistoryAttachments
+
+final class NewsHistoryAttachments: Object, Decodable {
     enum CodingKeys: String, CodingKey {
-        case type
-        case photoData = "photo"
-        case link
         case video
     }
-    let type: String
-    let photoData: NewsPhotosData?
-    let link: NewsLink?
-    let video: NewsVideo?
+    @objc dynamic var video: NewsHistoryVideo? = nil
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let contaioner = try decoder.container(keyedBy: CodingKeys.self)
+        video = try? contaioner.decode(NewsHistoryVideo.self, forKey: .video)
+    }
+}
 
+final class NewsHistoryVideo: Object, Decodable {
+    enum CodingKeys: String, CodingKey {
+        case accesKey = "access_key"
+        case date
+        case historyDescription = "description"
+        case duration
+        case newsImage = "image"
+        case title
+
+    }
+    @objc dynamic var accesKey: String? = nil
+    @objc dynamic var date: Int = 0
+    @objc dynamic var historyDescription: String = ""
+    @objc dynamic var duration: Int = 0
+     dynamic var newsImage = List<NewsImage>()
+    @objc dynamic var title: String = ""
+    
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        accesKey = try? container.decodeIfPresent(String.self, forKey: .accesKey)
+        date = try container.decode(Int.self, forKey: .date)
+        historyDescription = try container.decode(String.self, forKey: .historyDescription)
+        duration = try container.decodeIfPresent(Int.self, forKey: .duration) ?? 0
+        newsImage = try container.decodeIfPresent(List<NewsImage>.self, forKey: .newsImage) ?? List<NewsImage>()
+        title = try container.decode(String.self, forKey: .title)
+        
+    }
 }
-struct NewsVideo:  Decodable {
-    let image: [NewsImage]
-    let title: String?
+
+final class NewsImage: Object, Decodable {
+    @objc dynamic var url: String
+    @objc dynamic var width: Int
+    @objc dynamic var height: Int
 }
-struct NewsLink: Decodable {
-    let url: String
-    let title: String
-    let caption: String
-    let description: String
-    let photo: NewsPhotosData
+
+
+// MARK: - NewsViews
+final class NewsViews: Object, Decodable {
+    enum CodingKeys: String, CodingKey{
+        case count
+    }
+    @objc dynamic var count: Int = 0
 }
-struct NewsPhotosData: Decodable {
+
+//MARK: - NewsVideo
+final class NewsVideo: Object, Decodable {
+    enum CodingKeys: String, CodingKey {
+        case image
+        case title
+    }
+    dynamic var image = List<NewsImage>()
+    @objc dynamic var title: String? = nil
+    
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        image = try container.decodeIfPresent(List<NewsImage>.self, forKey: .image) ?? List<NewsImage>()
+        title = try? container.decodeIfPresent(String.self, forKey: .title)
+    }
+}
+
+//MARK: - NewsLink
+final class NewsLink: Object, Decodable {
+    enum CodingKeys: String, CodingKey {
+        case url
+        case title
+        case caption
+        case LinkDescription = "description"
+        case photo
+    }
+    
+    @objc dynamic var url: String
+    @objc dynamic var title: String
+    @objc dynamic var caption: String
+    @objc dynamic var LinkDescription: String
+    @objc dynamic var photo: NewsPhotosData?
+    
+    convenience init(form decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        url = try container.decode(String.self, forKey: .url)
+        title = try container.decode(String.self, forKey: .title)
+        caption = try container.decode(String.self, forKey: .caption)
+        LinkDescription = try container.decode(String.self, forKey: .LinkDescription)
+        photo = try? container.decode(NewsPhotosData.self, forKey: .photo)
+    }
+}
+
+
+//MARK: - NewsPhotosData
+
+final class NewsPhotosData: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case albumId = "album_id"
         case date
@@ -163,33 +309,50 @@ struct NewsPhotosData: Decodable {
         case text
         case photoArray = "sizes"
        }
-    let albumId: Int
-    let date: Int
-    let id: Int
-    let ownerId: Int
-    let text: String?
-    let photoArray: [ImageArray]
+    @objc dynamic var albumId: Int = 0
+    @objc dynamic var date: Int = 0
+    @objc dynamic var id: Int = 0
+    @objc dynamic var ownerId: Int = 0
+    @objc dynamic var text: String = ""
+     dynamic var photoArray = List<ImageArray>()
+    
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        albumId = try container.decode(Int.self, forKey: .albumId)
+        date = try container.decode(Int.self, forKey: .date)
+        id = try container.decode(Int.self, forKey: .id)
+        ownerId = try container.decode(Int.self, forKey: .ownerId)
+        text = try container.decodeIfPresent(String.self, forKey: .text) ?? ""
+        photoArray = try container.decode(List<ImageArray>.self, forKey: .photoArray)
+    }
    
 }
 
-struct ImageArray: Decodable {
+
+//MARK: - ImageArray
+final class ImageArray: Object, Decodable {
  
-    let height: Int
-    let width: Int
-    let url: String
-    let type: String
+    @objc dynamic var height: Int
+    @objc dynamic var width: Int
+    @objc dynamic var url: String
+    @objc dynamic var type: String
+    
 }
 
-struct NewsLikes: Decodable {
+
+//MARK: - NewsLikes
+final class NewsLikes: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case count
         case likeStatus = "user_likes"
     }
-    var count: Int
-    var likeStatus: Int
+    @objc dynamic var count: Int = 0
+    @objc dynamic var likeStatus: Int = 0
 }
 
-struct NewsProfiles: Decodable {
+//MARK: - profiles профили пользователей оставивших новость!
+final class NewsProfiles: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case fName = "first_name"
@@ -200,36 +363,61 @@ struct NewsProfiles: Decodable {
         case onlineInfo = "online_info"
         case banned = "deactivated"
     }
-    let id: Int
-    let fName: String
-    let lName: String
-    let photo: String
-    let screenName: String?
-    let online: Int
-    let onlineInfo: NewsOnlineInfo?
-    let banned: String?
+    @objc dynamic var id: Int = 0
+    @objc dynamic var  fName: String = ""
+    @objc dynamic var  lName: String = ""
+    @objc dynamic var  photo: String = ""
+    @objc dynamic var  screenName: String? = nil
+    @objc dynamic var  online: Int = 0
+     dynamic var  onlineInfo: NewsOnlineInfo? = NewsOnlineInfo()
+    @objc dynamic var  banned: String? = nil
+    
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(Int.self, forKey: .id)
+        fName = try container.decode(String.self, forKey: .fName)
+        lName = try container.decode(String.self, forKey: .lName)
+        photo = try container.decode(String.self, forKey: .photo)
+        screenName = try? container.decodeIfPresent(String.self, forKey: .screenName)
+        online = try container.decode(Int.self, forKey: .online)
+        onlineInfo = try? container.decodeIfPresent(NewsOnlineInfo.self, forKey: .onlineInfo) ?? NewsOnlineInfo()
+        banned = try? container.decodeIfPresent(String.self, forKey: .banned)
+    }
+    
+ 
 }
 
-struct NewsOnlineInfo: Decodable {
+final class NewsOnlineInfo: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case isOnline = "is_online"
         case isMobile = "is_mobile"
         case lastSeen = "last_seen"
     }
-    let isOnline: Bool
-    let isMobile: Bool
-    let lastSeen: Int?
+    @objc dynamic var isOnline: Bool = false
+    @objc dynamic var isMobile: Bool = false
+    dynamic var lastSeen: Int? = nil
+    
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let contaioner = try decoder.container(keyedBy: CodingKeys.self)
+        isOnline = try contaioner.decode(Bool.self, forKey: .isOnline)
+        isMobile = try contaioner.decode(Bool.self, forKey: .isMobile)
+        lastSeen = try contaioner.decodeIfPresent(Int.self, forKey: .lastSeen) ?? nil
+    }
 }
 
-
-struct NewsGroups: Decodable {
+//MARK: - groups группы оставившие новость!
+final class NewsGroups: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case name
         case photo = "photo_50"
     }
-    let id: Int
-    let name: String
-    let photo: String
+    @objc dynamic var id: Int
+    @objc dynamic var name: String
+    @objc dynamic var photo: String
+ 
 }
+
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct ImageAndLikeData {
     var image: String
@@ -24,14 +25,30 @@ struct ImageAndLikeData {
     }
 }
 
-
 struct PhotoUser: Decodable {
     let response: PhotoResponse
 }
-struct PhotoResponse: Decodable {
-    let items: [PhotoItems]
+
+final class PhotoResponse: Object, Decodable {
+    enum CodingKeys: String, CodingKey {
+        case items
+    }
+    @objc dynamic var id = 0
+    dynamic var items = List<PhotoItems>()
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let user = decoder.userInfo.first { $0.key.rawValue == "ownerId" }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        items = try container.decode(List<PhotoItems>.self, forKey: .items)
+        id = user?.value as! Int
+    }
+    override class func primaryKey() -> String? {
+        return "id"
+    }
+    
 }
-struct PhotoItems: Decodable {
+
+final class PhotoItems: Object, Decodable {
 
     enum CodingKeys: String, CodingKey {
         case albumId = "album_id"
@@ -41,27 +58,46 @@ struct PhotoItems: Decodable {
         case id
         case ownerId = "owner_id"
     }
-    let ownerId: Int
-    let date: Int
-    let albumId: Int
-    let id: Int
-    let likes: PhotoLikes
-    let photo: [PhotoData]
-}
-struct PhotoData: Decodable {
+    @objc dynamic var ownerId: Int = 0
+    @objc dynamic var date: Int = 0
+    @objc dynamic var albumId: Int = 0
+    @objc dynamic var id: Int = 0
+    @objc dynamic var likes: PhotoLikes? = PhotoLikes()
+     dynamic var photo: List<PhotoData> = List<PhotoData>()
     
-    let height: Double
-    let width: Double
-    let url: String
-    let type: String
+    convenience init(from decoder:  Decoder) throws {
+        self.init()
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        ownerId = try container.decode(Int.self, forKey: .ownerId)
+        date = try container.decode(Int.self, forKey: .date)
+        albumId = try container.decode(Int.self, forKey: .albumId)
+        id = try container.decode(Int.self, forKey: .id)
+        likes = try? container.decode(PhotoLikes.self, forKey: .likes)
+        photo = try container.decode(List<PhotoData>.self, forKey: .photo)
+        
+    }
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
-struct PhotoLikes: Decodable {
+
+
+final class PhotoData: Object, Decodable {
+    
+    @objc dynamic var height: Double
+    @objc dynamic var width: Double
+    @objc dynamic var url: String
+    @objc dynamic var type: String
+}
+
+final class PhotoLikes: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case userLikes = "user_likes"
         case count
     }
-    let count: Int
-    let userLikes: Int
+    @objc dynamic var count: Int
+    @objc dynamic var userLikes: Int
 }
 
 

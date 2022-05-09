@@ -6,61 +6,78 @@
 //
 
 import UIKit
+import RealmSwift
 
 // MARK: - Подгружаем друзей друга и сохраняем результат в hisFriends
 extension DetailUserTableViewController {
   
-    func loadFriendsSelectedUser() {
+    func loadFriendsSelectedUser() async -> [Friend]? {
   
-        var hisFriends: [FriendArray]!{
-            didSet {
-                self.loadPhotoAlbumSelctedUser( hisFriends )
-            }
-        }
-        
-        InternetConnections(host: "api.vk.com", path: "/method/friends.get").getListOfFirends(for: String(self.friendsSelectedd.id)) { request in
-            switch request {
-                case .success(let result):
-                var friends: [FriendArray] = []
-                for arrayFriends in result.response.items {
-                    var online: Bool?
-                    var isBanned: Bool?
-                    if arrayFriends.online == 0 {
-                        online = false
+        do {
+            try await InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelectedd.id))
+            
+            if let friendsArray = await loadFriendsFromRealm(from: self.friendsSelectedd.id) {
+                var arrays = [Friend]()
+                for friendData in friendsArray {
+                    let friends = Friend()
+                    
+                    if friendData.online == 1 {
+                        friends.online = true
+                    }
+                    
+                    if friendData.banned != nil {
+                        friends.isBanned = true
+                    }
+                    
+                    if friendData.city != nil {
+                        friends.city = friendData.city!.title
                     }else {
-                        online = true
+                        friends.city = "unknown"
                     }
-                    if arrayFriends.banned != nil {
-                        isBanned = true
-                    }else {
-                        isBanned = false
-                    }
-                    var cityName: String = "unknown"
-                    if arrayFriends.city != nil {
-                        cityName = arrayFriends.city!.title
-                    }
-                    var lastSeenData: Double = 0
-                    if arrayFriends.lastSeen != nil {
-                        lastSeenData = arrayFriends.lastSeen!.time
-                    }
-                    var statusText: String!
-                    if arrayFriends.status != nil {
-                        statusText = arrayFriends.status
-                    }else {
-                        statusText = " "
+                    
+                    if friendData.lastSeen != nil {
+                        friends.lastSeenDate = friendData.lastSeen!.time
                     }
 
-                    let name = (arrayFriends.fName) + " " + (arrayFriends.lName)
-                    let friend = FriendArray(userName: name, photo: arrayFriends.photo50, id: arrayFriends.id, city: cityName, lastSeenDate: lastSeenData, isClosedProfile: arrayFriends.isClosedProfile ?? false, isBanned: isBanned!, online: online!, status: statusText)
-                    friends.append(friend)
+                    if  let status = friendData.status {
+                        friends.status = status
+                    }
                     
+                    let name = (friendData.fName) + " " + (friendData.lName)
+                    friends.userName = name
+                    friends.id = friendData.id
+                    friends.photo = friendData.photo50
+                    friends.isClosedProfile = friendData.isClosedProfile
+
+                    arrays.append(friends)
                 }
-                hisFriends = friends
- 
-                case .failure(_):
-                    print("Error request friends")
+                
+                return arrays
+               // hisFriends = arrays
             }
+        }catch {
+            print(error)
         }
-        
+        return nil
+    }
+}
+
+
+
+extension DetailUserTableViewController {
+    func loadFriendsFromRealm(from userId: Int ) async -> List<FriendsItems>?{
+        var friends: List<FriendsItems>?
+        do {
+            let realm = try await Realm()
+            realm.objects(FriendsResponse.self)
+                .where{ $0.id == userId}
+                .forEach{friend in
+                    friends = friend.items
+                }
+            return friends
+        }catch {
+            print(error)
+        }
+        return nil
     }
 }

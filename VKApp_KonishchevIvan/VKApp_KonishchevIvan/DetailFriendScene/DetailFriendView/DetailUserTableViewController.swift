@@ -11,7 +11,7 @@ import UIKit
 class DetailUserTableViewController: UITableViewController, TableViewDelegate {
  
 // Данные пользователя которого выбрали на предыдущем контроллере (FriendsTableViewController)
-    var friendsSelectedd: FriendArray!
+    var friendsSelectedd: Friend!
     var activityIndicator: UIActivityIndicatorView!
    // var detailsControllerData: DetailsControllerData!
     
@@ -46,7 +46,12 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
  //  подгружаем данные пользователя
-        self.loadDataTable()
+        Task(priority: .userInitiated) {
+            await self.loadDataTable()
+           
+        }
+        
+        
         setHeaderDetailView()
         tableView.register(UINib(nibName: "CouruselTableViewCell", bundle: nil), forCellReuseIdentifier: "CouruselCellForDetails")
         tableView.register(UINib(nibName: "GallaryTableViewCell", bundle: nil), forCellReuseIdentifier: "GallaryTableCell")
@@ -89,7 +94,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             }
             let data = dataTable![indexPath.section].sectionData
             cell.collectionData = data.friends
-         //   cell.collectionData = self.hisFriends
             cell.delegate = self
             return cell
         case .Gallary:
@@ -114,13 +118,19 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.singleAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
             cell.likeControll.delegate = self
             cell.likeControll.indexPath = indexPath
-            let seen: String = String((data.views?.count)!)
-            cell.singlePhotoSeenCount.text = seen
+            if let seen = data.views {
+                cell.singlePhotoSeenCount.text = String(seen.count)
+            }else {
+                cell.singlePhotoSeenCount.text = "0"
+            }
+          //  let seen: String = String((data.views?.count)!)
+            
             cell.delegate = self
             cell.singlePhoto = data.photo![indexPath.row]
             cell.singlPhotoLikeLable.text = String(data.likes.count)
             cell.singlePhotoSeenCount.text = String(data.views!.count)
             return cell
+// Закомментированное в процессе разработки! Чтоб не забыть что такое есть и можно вывести!
 //        case .newsText:
 //            print(" Текст новость со стены")
 //        case .video:
@@ -139,7 +149,12 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.linkText.text = data.titleNews
             cell.linkSeenCount.text = String(data.views!.count)
             return cell
-            
+        
+        case .unknown:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
+                preconditionFailure("Error")
+            }
+        return cell
          default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
                 preconditionFailure("Error")
@@ -151,6 +166,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         guard let destinationVC = segue.destination as? GallaryViewController else {
@@ -158,7 +174,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         }
      
         destinationVC.arrayPhoto = self.nextViewData
- 
         destinationVC.title = "Фото галлерея"
         destinationVC.currentFrame = self.currentFrameImages
         destinationVC.frameArray = self.frameImages
