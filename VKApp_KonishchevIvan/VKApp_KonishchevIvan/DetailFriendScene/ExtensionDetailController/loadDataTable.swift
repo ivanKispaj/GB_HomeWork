@@ -9,11 +9,16 @@ import UIKit
 
 extension DetailUserTableViewController {
     func loadDataTable() async {
-        if let friend = await self.loadFriendsSelectedUser() {
-            
-            if let friendsPhoto = await self.loadPhotoAlbumSelctedUser(friend) {
-                await LoadUserWall( friend, photos: friendsPhoto)
-            }
-        }
+        await self.loadFriendsSelectedUser()
+        await self.loadPhotoAlbumSelctedUser()
+        await self.loadUserWall()
+//        if let friend = await self.loadFriendsSelectedUser() {
+//
+//            if let friendsPhoto = await self.loadPhotoAlbumSelctedUser(friend) {
+//                await LoadUserWall( friend, photos: friendsPhoto)
+//            }
+//        }else {
+//            print("wait")
+//        }
     }
 }

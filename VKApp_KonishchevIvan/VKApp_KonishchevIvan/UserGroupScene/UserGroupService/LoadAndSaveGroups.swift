@@ -10,7 +10,7 @@ import RealmSwift
 
 //MARK: - метод для запроса групп пользователя
 extension InternetConnections {
-    func getUserGroupList(for user_id: String) async throws {
+    func getUserGroupList(for user_id: String) {
         guard let access_token = NetworkSessionData.shared.token else { return }
         self.urlComponents.queryItems = [
             URLQueryItem(name: "user_id", value: user_id),
@@ -20,31 +20,35 @@ extension InternetConnections {
             URLQueryItem(name: "v", value: "5.131"),
            // URLQueryItem(name: "count", value: "3")
         ]
-        guard let url = self.urlComponents.url else { throw InternetError.parseError }
- 
+        guard let url = self.urlComponents.url else { return }
         
+        self.session.dataTask(with: url) { data, _, error in
+            if let error = error {
+                print(InternetError.requestError(error))
+            }
+            guard let data = data else {
+                return
+            }
             do {
-                let (data, _ ) = try await self.session.data(from: url)
                 let decode = JSONDecoder()
                 let result = try decode.decode(UserGroupModel.self, from: data)
-                await self.saveUserGroups(result)
+                self.saveUserGroups(result)
             }catch {
-                throw InternetError.parseError
+                print(InternetError.parseError)
+
             }
-       
+        }.resume()
     }
     
     //MARK: - Save Wall Data To Realm
-        private func saveUserGroups(_ groupsData:  UserGroupModel ) async {
-            if let realm = try? await Realm() {
-                   do {
-                           try realm.write{
-                               realm.add(groupsData.response.items, update: .modified)
-                           }
-                       
-                   } catch let error as NSError {
-                       print("Something went wrong: \(error.localizedDescription)")
-                   }
+        private func saveUserGroups(_ groupsData:  UserGroupModel )  {
+            do {
+                let realm = try Realm()
+                try realm.write{
+                    realm.add(groupsData.response.items, update: .modified)
+                }
+            }catch {
+                print("Error Save Realm: \(error.localizedDescription)")
             }
         }
 }

@@ -7,6 +7,7 @@
 
 
 import UIKit
+import RealmSwift
 
 class DetailUserTableViewController: UITableViewController, TableViewDelegate {
  
@@ -15,6 +16,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var activityIndicator: UIActivityIndicatorView!
    // var detailsControllerData: DetailsControllerData!
     
+    var notifiToken: NotificationToken?
     
     var frameImages: [CGRect]?
     var currentFrameImages: CGRect?
@@ -45,12 +47,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var likeCount: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
- //  подгружаем данные пользователя
-        Task(priority: .userInitiated) {
-            await self.loadDataTable()
-           
-        }
-        
+
         
         setHeaderDetailView()
         tableView.register(UINib(nibName: "CouruselTableViewCell", bundle: nil), forCellReuseIdentifier: "CouruselCellForDetails")
@@ -59,7 +56,14 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         tableView.register(UINib(nibName: "LinkTableViewCell", bundle: nil), forCellReuseIdentifier: "LinkTableViewCell")
     }
 
-
+    override func viewWillAppear(_ animated: Bool) {
+        //  подгружаем данные пользователя
+               Task(priority: .userInitiated) {
+                   await self.loadDataTable()
+                  
+               }
+               
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -123,7 +127,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             }else {
                 cell.singlePhotoSeenCount.text = "0"
             }
-          //  let seen: String = String((data.views?.count)!)
             
             cell.delegate = self
             cell.singlePhoto = data.photo![indexPath.row]

@@ -50,9 +50,9 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleCollectionID", for: indexPath) as? SingleCollectionViewCell else {
             preconditionFailure("Error")
         }
-
-        cell.singlePhoto.loadImageFromUrlString(singlePhoto.image)
-
+        
+        cell.singlePhoto.loadImageFromUrlString(self.singlePhoto.image)
+        
         return cell
     }
 
@@ -62,4 +62,5 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         
         self.delegate.selectRow(nextViewData: photo)
     }
+
 }

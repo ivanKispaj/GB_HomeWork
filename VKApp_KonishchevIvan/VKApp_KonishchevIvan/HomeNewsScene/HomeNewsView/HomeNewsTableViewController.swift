@@ -7,10 +7,12 @@
 
 import UIKit
 import AVKit
+import RealmSwift
 //import AVFoundation
 
 class HomeNewsTableViewController: UITableViewController {
     
+    var newsRealmToken: NotificationToken?
 
     var nextViewData: [ImageAndLikeData?] = [nil]
     var newsArray: [[CellType : [NewsCellData]]]! {
@@ -38,9 +40,7 @@ class HomeNewsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    @objc func likeIsTapped() {
-        
-    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
  
         if self.newsArray == nil {

@@ -11,19 +11,19 @@ import RealmSwift
 
 extension DetailUserTableViewController {
 
-    func LoadUserWall (_ friends: [Friend], photos: [ImageAndLikeData]) async {
+    func loadUserWall () async {
         
-        var userDetailsTableData: [UserDetailsTableData]! {
-            didSet {
-                return finishLoadData( friends: friends, photos: photos, wall: userDetailsTableData)
-            }
-        }
+//        var userDetailsTableData: [UserDetailsTableData]! {
+//            didSet {
+//                return finishLoadData( friends: friends, photos: photos, wall: userDetailsTableData)
+//            }
+//        }
         
-        do {
-            try await InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelectedd.id))
+   
+             InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelectedd.id))
 
-            if let items = await self.loadUserWall(from: self.friendsSelectedd.id) {
-                var detailsTableData: [UserDetailsTableData] = []
+            if let items = await self.loadUserWallFromRealm(from: self.friendsSelectedd.id) {
+              //  var detailsTableData: [UserDetailsTableData] = []
                 
                 for item in items {
                     var sectionData = DetailsSectionData()
@@ -99,15 +99,17 @@ extension DetailUserTableViewController {
                  
                     }
                     let data = UserDetailsTableData(sectionType: typeSection, sectionData: sectionData)
-                    detailsTableData.append(data)
+                    if self.dataTable != nil {
+                        self.dataTable.append(data)
+                    }else {
+                        self.dataTable = [data]
+                    }
+                    
+                   // detailsTableData.append(data)
                 }
-                userDetailsTableData = detailsTableData
+              //  self.dataTable.append(detailsTableData)
+                // userDetailsTableData = detailsTableData
             }
-            
-            
-        }catch {
-            print(error)
-        }
 
     }
 
@@ -147,7 +149,7 @@ extension DetailUserTableViewController {
 
 extension DetailUserTableViewController {
     
-    func loadUserWall(from userId: Int ) async -> List<UserWallItems>? {
+    func loadUserWallFromRealm(from userId: Int ) async -> List<UserWallItems>? {
         var wallItems: List<UserWallItems>?
         do {
             let realm = try await Realm()

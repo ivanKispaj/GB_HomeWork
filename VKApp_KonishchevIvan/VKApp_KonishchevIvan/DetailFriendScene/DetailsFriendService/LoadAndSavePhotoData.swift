@@ -11,7 +11,7 @@ import RealmSwift
 
 //MARK: - Load photo selected user
 extension InternetConnections {
-    func LoadPhotoUser(for ownerId: String) async throws {
+    func LoadPhotoUser(for ownerId: String) {
         guard let access_token = NetworkSessionData.shared.token else { return }
         self.urlComponents.queryItems = [
             URLQueryItem(name: "access_token", value: access_token),
@@ -23,29 +23,45 @@ extension InternetConnections {
             URLQueryItem(name: "v", value: "5.131"),
             URLQueryItem(name: "skip_hidden", value: "0")
         ]
-        guard let url = self.urlComponents.url else { throw InternetError.parseError }
-        do {
-            let (data, _ ) = try await self.session.data(from: url)
-            let decode = JSONDecoder()
-            decode.userInfo = [CodingUserInfoKey(rawValue: "ownerId")! : Int(ownerId)!]
-            let result = try decode.decode(PhotoUser.self, from: data)
-            await self.saveUserPhotoAlbum(result.response)
-        }catch {
-            throw InternetError.parseError
-        }
+        guard let url = self.urlComponents.url else { return }
+    
+        self.session.dataTask(with: url) { data, _, error in
+            
+            if let error = error {
+                print(InternetError.requestError(error))
+            }
+            guard let data = data else {
+                return
+            }
+            do {
+                let decode = JSONDecoder()
+                decode.userInfo = [CodingUserInfoKey(rawValue: "ownerId")! : Int(ownerId)!]
+                let result = try decode.decode(PhotoUser.self, from: data)
+               
+                DispatchQueue.main.async {
+                    self.saveUserPhotoAlbum(result.response)
+                }
+                  
+            }catch {
+                print(InternetError.parseError)
+
+            }
+        }.resume()
+    
+           
+    
     }
     
  //MARK: - Запись фото друга в Realm
-    private func saveUserPhotoAlbum(_ data: PhotoResponse ) async {
-        if let realm = try? await Realm() {
-            do {
-                try realm.write {
-                    realm.add(data, update: .modified)
-                }
-                
-            }catch {
-                print("Error Save Realm: \(error.localizedDescription)")
+    private func saveUserPhotoAlbum(_ data: PhotoResponse ) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(data, update: .modified)
             }
+        }catch {
+            print("Error Save Realm: \(error.localizedDescription)")
+
         }
     }
 }

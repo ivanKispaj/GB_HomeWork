@@ -12,28 +12,40 @@ import RealmSwift
 
 extension DetailUserTableViewController {
 
-    func loadPhotoAlbumSelctedUser (_ friends: [Friend])  async -> [ImageAndLikeData]? {
+    func loadPhotoAlbumSelctedUser ()  async  {
+        
+            InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelectedd.id))
+        if let photoData = await loadFriendsPhotoFromRealm(from: self.friendsSelectedd.id) {
+
+        }
+        
+    }
+}
+
+extension DetailUserTableViewController {
+    func loadFriendsPhotoFromRealm(from userId: Int ) async -> List<PhotoItems>?{
+       // var photoItems: List<PhotoItems>?
         do {
-            try await InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelectedd.id))
-            
-            if let photoData = await loadFriendsPhotoFromRealm(from: self.friendsSelectedd.id) {
-                var imageArray = [ImageAndLikeData]()
-                
-                for photoArray in photoData {
-                    var imageArr = ImageAndLikeData(image: "", likeStatus: false, likeLabel: 0, height: 0, width: 0,seenCount: 0)
-                    imageArr.likeStatus = false
-                    imageArr.likeLabel = photoArray.likes!.count
-                        for photo in photoArray.photo {
-                            if photo.type == "y" {
-                                imageArr.image = photo.url
-                                imageArr.height = CGFloat(photo.height)
-                                imageArr.width = CGFloat(photo.width)
-                                imageArray.append(imageArr)
-                                break
-                            }
-                        }
+            let realm = try await Realm()
+            let photosItem = realm.objects(PhotoResponse.self)
+                .where{ $0.id == userId}
+                .first
+            if let resalt = photosItem?.items {
+                self.notifiToken = resalt.observe { (changes: RealmCollectionChange) in
+                    switch changes {
+                    case .initial(let results):
+                        print(results)
+                    case let .update(results, deletions, insertions, modifications):
+                    
+                        self.updateUserPhotoData(from: results)
+                        print(results)
+                       print("Update RealmPhotos")
+                    case .error(let error):
+                        print(error)
+                    }
+                  print("changet")
                 }
-            return imageArray
+                return resalt
             }
             
         }catch {
@@ -44,19 +56,31 @@ extension DetailUserTableViewController {
 }
 
 extension DetailUserTableViewController {
-    func loadFriendsPhotoFromRealm(from userId: Int ) async -> List<PhotoItems>?{
-        var photoItems: List<PhotoItems>?
-        do {
-            let realm = try await Realm()
-            realm.objects(PhotoResponse.self)
-                .where{ $0.id == userId}
-                .forEach{ photos in
-                    photoItems = photos.items
-                }
-            return photoItems
-        }catch {
-            print(error)
-        }
-        return nil
+    
+    func updateUserPhotoData(from photoData: List<PhotoItems>)  {
+        
+            var imageArray = [ImageAndLikeData]()
+            
+            for photoArray in photoData {
+                var imageArr = ImageAndLikeData(image: "", likeStatus: false, likeLabel: 0, height: 0, width: 0,seenCount: 0)
+                imageArr.likeStatus = false
+                imageArr.likeLabel = photoArray.likes!.count
+                    for photo in photoArray.photo {
+                        if photo.type == "y" {
+                            imageArr.image = photo.url
+                            imageArr.height = CGFloat(photo.height)
+                            imageArr.width = CGFloat(photo.width)
+                            imageArray.append(imageArr)
+                            break
+                        }
+                    }
+            }
+            let userDetailsTableData = UserDetailsTableData(sectionType: .Gallary, sectionData: DetailsSectionData(photo: imageArray))
+            if self.dataTable != nil{
+                self.dataTable.append(userDetailsTableData)
+            }else {
+                self.dataTable = [userDetailsTableData]
+            }
+  
     }
 }

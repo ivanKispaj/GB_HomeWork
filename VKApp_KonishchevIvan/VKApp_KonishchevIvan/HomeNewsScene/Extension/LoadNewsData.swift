@@ -13,9 +13,11 @@ extension HomeNewsTableViewController {
         
 //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
         
-        do {
-           try await  InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
-            //let newsData = NewsData()
+   
+            InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
+
+            await self.notificationToken()
+        
             var newsDatasPhoto: [CellType: [NewsCellData]] = [.photo: []] // конечный массив с данными
             var newsDatasLink: [CellType: [NewsCellData]] = [.link: []] // конечный массив с данными
             var newsDatasWall: [CellType: [NewsCellData]] = [.wall : []] // конечный массив с данными
@@ -135,11 +137,6 @@ extension HomeNewsTableViewController {
                 }
               
             }
-   
-        }catch {
-            print(error)
-        }
-   
       }
         func getUserDataFromId(_ ownerId: Int, profiles: List<NewsProfiles>) -> NewsProfiles? {
             let profile = profiles.first { $0.id == ownerId }
@@ -170,7 +167,29 @@ extension HomeNewsTableViewController {
             return url ?? " "
         }
     
-  
+    private func notificationToken() async {
+        do {
+            let realm = try await Realm()
+            let objcItems = realm.objects(NewsItems.self)
+            self.newsRealmToken = objcItems.observe { (changes: RealmCollectionChange) in
+               switch changes {
+               case .initial(let results):
+                   print(results)
+               case let .update(results, deletions, insertions, modifications):
+               
+        
+                  print("Update RealmNews")
+               case .error(let error):
+                   print(error)
+               }
+             print("changet")
+           
+        }
+        }catch {
+            
+        }
+ 
+    }
   private func loadNewsItems() async ->  List<NewsItems>?{
             do {
                 let realm = try await Realm()
@@ -196,6 +215,7 @@ extension HomeNewsTableViewController {
               do {
                   let realm = try await Realm()
                   let newsItems = realm.objects(NewsResponse.self).first
+                  
                   return newsItems?.groups
               }catch {
                   print(error)

@@ -12,14 +12,8 @@ extension UserGroupTableViewController {
     
     func loadUserGroupFromVK() async {
 
-        do {
-            try await InternetConnections(host: "api.vk.com", path: "/method/groups.get").getUserGroupList(for: String(NetworkSessionData.shared.userId!))
+        InternetConnections(host: "api.vk.com", path: "/method/groups.get").getUserGroupList(for: String(NetworkSessionData.shared.userId!))
 
-        }catch {
-
-            print(error)
-        }
-        
         if let result = await loadUserGroups() {
             var group: [AllUserGroups] = []
             for items in result {

@@ -27,9 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
         }
         
-//        let url = Realm.Configuration.defaultConfiguration.fileURL!
-//        remove(realmURL: url)
-//            
+        let url = Realm.Configuration.defaultConfiguration.fileURL!
+        remove(realmURL: url)
+            
         return true
     }
 

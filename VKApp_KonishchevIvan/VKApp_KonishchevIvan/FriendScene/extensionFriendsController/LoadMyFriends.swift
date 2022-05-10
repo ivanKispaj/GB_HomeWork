@@ -15,11 +15,11 @@ extension FriendsTableViewController {
             self.activityIndicator.startAnimating()
 //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
         
-        do {
+      
             
             //   После теста заменить id пользователя на id NetworkSessionData.shared.userId!
             
-            try await InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: "72287677")
+            InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: "72287677")
     
             var arrays = [Friend]()
             if let friendsArray = await loadFriendsFromRealm() {
@@ -64,9 +64,6 @@ extension FriendsTableViewController {
                 self.friendsArray = arrays
             }
 
-        } catch {
-            print(error)
-        }
     }
 }
 
