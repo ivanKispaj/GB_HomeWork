@@ -12,12 +12,12 @@ import RealmSwift
 
 extension DetailUserTableViewController {
 
-    func loadPhotoAlbumSelctedUser ()  async  {
+    func loadPhotoAlbumSelctedUser ()  {
         
         
         setNotificationTokenPhoto()
         InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelectedd.id))
-        if let photoData = await loadFriendsPhotoFromRealm(from: self.friendsSelectedd.id) {
+        if let photoData = loadFriendsPhotoFromRealm(from: self.friendsSelectedd.id) {
             self.updateUserPhotoData(from: photoData)
         }
     }
@@ -51,10 +51,10 @@ extension DetailUserTableViewController {
 
 extension DetailUserTableViewController {
     
-    func loadFriendsPhotoFromRealm(from userId: Int ) async -> List<PhotoItems>?{
+    func loadFriendsPhotoFromRealm(from userId: Int )  -> List<PhotoItems>?{
         
         do {
-            let realm = try await Realm()
+            let realm = try Realm()
             let photosItem = realm.objects(PhotoResponse.self)
                 .where{ $0.id == userId}
                 .first

@@ -13,6 +13,7 @@ import UIKit
 extension FriendsTableViewController {
     
     func setDataSectionTable() {
+        self.friends = []
         self.friends.append(posibleFriends)
         self.friends.append(DataSection(header: "Мои друзья", row: self.friendsArray))
     }

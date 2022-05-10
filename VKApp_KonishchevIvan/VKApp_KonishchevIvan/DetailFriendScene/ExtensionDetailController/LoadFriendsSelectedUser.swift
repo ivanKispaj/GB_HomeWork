@@ -11,13 +11,13 @@ import RealmSwift
 // MARK: - Подгружаем друзей друга и сохраняем результат в hisFriends
 extension DetailUserTableViewController {
   
-    func loadFriendsSelectedUser() async {
+    func loadFriendsSelectedUser()  {
   
    
        
         InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelectedd.id))
         self.setNotificationtokenFriends()
-            if let friendsArray = await loadFriendsFromRealm(from: self.friendsSelectedd.id) {
+            if let friendsArray =  loadFriendsFromRealm(from: self.friendsSelectedd.id) {
                 self.updateUserFromRealm(from: friendsArray)
             }
      
@@ -101,10 +101,10 @@ extension DetailUserTableViewController {
 
 
 extension DetailUserTableViewController {
-    func loadFriendsFromRealm(from userId: Int ) async -> List<FriendsItems>?{
+    func loadFriendsFromRealm(from userId: Int )  -> List<FriendsItems>?{
         var friends: List<FriendsItems>?
         do {
-            let realm = try await Realm()
+            let realm = try  Realm()
             realm.objects(FriendsResponse.self)
                 .where{ $0.id == userId}
                 .forEach{friend in

@@ -11,13 +11,13 @@ import RealmSwift
 
 extension DetailUserTableViewController {
 
-    func loadUserWall () async {
+    func loadUserWall () {
    
         InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelectedd.id))
         
         self.setNotificationtokenWall()
         
-        if let items = await self.loadUserWallFromRealm(from: self.friendsSelectedd.id) {
+        if let items = self.loadUserWallFromRealm(from: self.friendsSelectedd.id) {
             self.updateWallData(from: items)
         }
 
@@ -177,10 +177,10 @@ extension DetailUserTableViewController {
 
 extension DetailUserTableViewController {
     
-    func loadUserWallFromRealm(from userId: Int ) async -> List<UserWallItems>? {
+    func loadUserWallFromRealm(from userId: Int ) -> List<UserWallItems>? {
         var wallItems: List<UserWallItems>?
         do {
-            let realm = try await Realm()
+            let realm = try Realm()
             realm.objects(UserWallResponse.self)
                 .where{ $0.id == userId}
                 .forEach { wall in

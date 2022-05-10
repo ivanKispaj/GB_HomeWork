@@ -31,10 +31,10 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     // данные для отображения секций таблицы
     var dataTable: [UserDetailsTableData]! {
         didSet {
-            DispatchQueue.main.async {
+         
     // перезагружаем таблицу после получения данных
                          self.tableView.reloadData()
-            }
+            
         }
     }
 
@@ -61,11 +61,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         //  подгружаем данные пользователя
-               Task(priority: .userInitiated) {
-                   await self.loadDataTable()
-                  
-               }
-               
+                    self.loadDataTable()            
     }
     // MARK: - Table view data source
 
