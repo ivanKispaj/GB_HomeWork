@@ -61,6 +61,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         tableView.register(UINib(nibName: "GallaryTableViewCell", bundle: nil), forCellReuseIdentifier: "GallaryTableCell")
         tableView.register(UINib(nibName: "SinglePhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleTableCellID")
         tableView.register(UINib(nibName: "LinkTableViewCell", bundle: nil), forCellReuseIdentifier: "LinkTableViewCell")
+        tableView.register(UINib(nibName: "DetailOlugCell", bundle: nil), forCellReuseIdentifier: "DetailsTablePlugCell")
     }
 
     // MARK: - Table view data source
@@ -153,12 +154,12 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             return cell
         
         case .unknown:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTablePlugCell", for: indexPath) as? DetailOlugCell else {
                 preconditionFailure("Error")
             }
         return cell
          default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTablePlugCell", for: indexPath) as? DetailOlugCell else {
                 preconditionFailure("Error")
             }
         return cell

@@ -11,6 +11,8 @@
 		630471D6281B9E5400B3359B /* loadDataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630471D5281B9E5400B3359B /* loadDataTable.swift */; };
 		6324462C2829987900AB1C72 /* LoadAndSaveGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324462B2829987900AB1C72 /* LoadAndSaveGroups.swift */; };
 		63244632282AB97E00AB1C72 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63244631282AB97E00AB1C72 /* RealmService.swift */; };
+		63244636282AD72500AB1C72 /* DetailOlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63244634282AD72500AB1C72 /* DetailOlugCell.swift */; };
+		63244637282AD72500AB1C72 /* DetailOlugCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63244635282AD72500AB1C72 /* DetailOlugCell.xib */; };
 		637CA727281A593100058708 /* LinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637CA725281A593100058708 /* LinkTableViewCell.swift */; };
 		637CA728281A593100058708 /* LinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637CA726281A593100058708 /* LinkTableViewCell.xib */; };
 		638E99AB28125CF600367F44 /* DelegateLikeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99AA28125CF600367F44 /* DelegateLikeExtension.swift */; };
@@ -113,6 +115,8 @@
 		630471D5281B9E5400B3359B /* loadDataTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadDataTable.swift; sourceTree = "<group>"; };
 		6324462B2829987900AB1C72 /* LoadAndSaveGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSaveGroups.swift; sourceTree = "<group>"; };
 		63244631282AB97E00AB1C72 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		63244634282AD72500AB1C72 /* DetailOlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOlugCell.swift; sourceTree = "<group>"; };
+		63244635282AD72500AB1C72 /* DetailOlugCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailOlugCell.xib; sourceTree = "<group>"; };
 		637CA725281A593100058708 /* LinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTableViewCell.swift; sourceTree = "<group>"; };
 		637CA726281A593100058708 /* LinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkTableViewCell.xib; sourceTree = "<group>"; };
 		638E99AA28125CF600367F44 /* DelegateLikeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateLikeExtension.swift; sourceTree = "<group>"; };
@@ -251,6 +255,15 @@
 			path = RealmService;
 			sourceTree = "<group>";
 		};
+		63244633282AD6EB00AB1C72 /* DetailFriendsPlugCell */ = {
+			isa = PBXGroup;
+			children = (
+				63244634282AD72500AB1C72 /* DetailOlugCell.swift */,
+				63244635282AD72500AB1C72 /* DetailOlugCell.xib */,
+			);
+			path = DetailFriendsPlugCell;
+			sourceTree = "<group>";
+		};
 		637CA724281A590000058708 /* TableCellLink */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +303,7 @@
 		6385D21C280DCD90007F6142 /* AllTableCustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				63244633282AD6EB00AB1C72 /* DetailFriendsPlugCell */,
 				637CA724281A590000058708 /* TableCellLink */,
 				80C19ACA27D76C40009C34CB /* CouruselCell */,
 				806284D627DDCB0D00D37674 /* GalaryCell */,
@@ -1016,6 +1030,7 @@
 				80C19ACE27D76C6E009C34CB /* CouruselTableViewCell.xib in Resources */,
 				80CCB6B927E4E55800BC2085 /* HorizontalCollectionViewCell.xib in Resources */,
 				804154F627B62FE900160418 /* Main.storyboard in Resources */,
+				63244637282AD72500AB1C72 /* DetailOlugCell.xib in Resources */,
 				80DD23A827D3332000F78417 /* TableViewCellXib.xib in Resources */,
 				80C19AD527D76FDE009C34CB /* CouruselCollectionViewCell.xib in Resources */,
 			);
@@ -1139,6 +1154,7 @@
 				638E99E5281434F400367F44 /* loadNewGroupList.swift in Sources */,
 				638E99EF281554A100367F44 /* loadUserWall.swift in Sources */,
 				8025F7F527E7517F0009C488 /* PhotoUser.swift in Sources */,
+				63244636282AD72500AB1C72 /* DetailOlugCell.swift in Sources */,
 				80DAF95027F377AD00428C67 /* CustomCodeSearchBar.swift in Sources */,
 				80850EDB27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.swift in Sources */,
 				80C7D08627F8440E00E03A27 /* GallaryViewController.swift in Sources */,
