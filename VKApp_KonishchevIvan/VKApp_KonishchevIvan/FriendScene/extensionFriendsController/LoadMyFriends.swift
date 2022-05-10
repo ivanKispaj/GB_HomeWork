@@ -10,44 +10,34 @@ import RealmSwift
 
 extension FriendsTableViewController {
   
-    func loadMyFriends() async {
+    func loadMyFriends() {
             self.activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
 //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
+          //   После теста заменить id пользователя на id NetworkSessionData.shared.userId!
         
-      
-            
-            //   После теста заменить id пользователя на id NetworkSessionData.shared.userId!
-        self.setNotificationtoken()
+       
         InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: "72287677")
      
-            if let friendsArray = loadFriendsFromRealm() {
-
-                updateFriendsView(From: friendsArray)
-            
-            }
+        let friendsData = self.realmService.readData(FriendsResponse.self)!.where{ $0.id == 72287677 }.first?.items
+        if let data = friendsData {
+            updateFriendsView(From: data)
+        }
 
     }
     
-    private func setNotificationtoken() {
-        do {
-            let realm = try Realm()
-            let data = realm.objects(FriendsResponse.self)
+     func setNotificationtoken() {
+        if let data = self.realmService.readData(FriendsResponse.self) {
             self.notifiToken = data.observe { (changes: RealmCollectionChange) in
                 switch changes {
-                case .initial( let results ):
-                    print("Initial NewsRealm")
-                case let .update(results, deletions, insertions, modifications):
+                case .initial(_):
+                    print("Signed")
+                case let .update(results, _, _, _):
                     self.updateFriendsView(From: results.first!.items)
-                   print("Update RealmNews")
-                case .error(let error):
-                    print(error)
+                case .error(_):
+                    print("Asd")
                 }
-              print("changet")
-            
-         }
-        }catch {
-            
+            }
         }
     }
     
@@ -94,23 +84,4 @@ extension FriendsTableViewController {
     }
 }
 
-extension FriendsTableViewController {
-    
-    func loadFriendsFromRealm()  -> List<FriendsItems>?{
-        var friends: List<FriendsItems>?
-        do {
-            
-            let realm = try Realm()
-            realm.objects(FriendsResponse.self)
-//   После теста заменить id пользователя на let id = NetworkSessionData.shared.userId!
-                .where{ $0.id == 72287677}
-                .forEach{friend in
-                    friends = friend.items
-                }
-            return friends
-        }catch {
-            print(error)
-        }
-        return nil
-    }
-}
+

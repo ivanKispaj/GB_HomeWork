@@ -29,29 +29,13 @@ extension InternetConnections {
                 let decode = JSONDecoder()
                 let result = try decode.decode(NewsDataModel.self, from: data)
                 DispatchQueue.main.async {
-                    self.saveNewsData(result)
+                    self.realmService.saveData(result.response)
                 }
-                
             }catch {
                 print(InternetError.parseError)
             }
         }.resume()
     }
-    
-    //MARK: - Save Wall Data To Realm
-        private func saveNewsData(_ newsData:  NewsDataModel) {
-            
-            do {
-                let realm = try Realm()
-                print(realm.configuration.fileURL!)
-                realm.beginWrite()
-                realm.add(newsData.response)
-                try realm.commitWrite()
-                
-            }catch {
-                print("Error Save Realm: \(error.localizedDescription)")
-            }
-        }
 }
 
 

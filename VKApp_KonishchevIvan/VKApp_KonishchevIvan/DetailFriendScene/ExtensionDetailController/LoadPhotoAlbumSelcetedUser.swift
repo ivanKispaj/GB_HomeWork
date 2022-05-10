@@ -14,66 +14,43 @@ extension DetailUserTableViewController {
 
     func loadPhotoAlbumSelctedUser ()  {
         
+        InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelectedd.id))
         
         setNotificationTokenPhoto()
-        InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelectedd.id))
-        if let photoData = loadFriendsPhotoFromRealm(from: self.friendsSelectedd.id) {
-            self.updateUserPhotoData(from: photoData)
+        
+        let photoData = self.realmService.readData(PhotoResponse.self)?.where { $0.id == self.friendsSelectedd.id }.first?.items
+        if let data = photoData {
+            self.updateUserPhotoData(from: data)
         }
     }
     
-    private func setNotificationTokenPhoto() {
-        do {
-            let realm = try  Realm()
-            let photosItem = realm.objects(PhotoResponse.self)
-                .where {$0.id == self.friendsSelectedd.id}
-                
-               
-            self.notifiTokenPhoto = photosItem.observe { (changes: RealmCollectionChange) in
+     func setNotificationTokenPhoto() {
+        if let data = self.realmService.readData(PhotoResponse.self) {
+            self.notifiTokenPhoto = data.observe { (changes: RealmCollectionChange) in
                 switch changes {
-                case .initial(let results):
-                    print(results)
-                case let .update(results, deletions, insertions, modifications):
-                   
-                    self.updateUserPhotoData(from: results.first!.items)
-                    print(results)
-                   print("Update RealmPhotos")
-                case .error(let error):
-                    print(error)
+                case .initial(_):
+                    print("Signed")
+                case let .update(results, _, _, _):
+                    let dataPhoto = results
+                        .where { $0.id == self.friendsSelectedd.id }
+                        .first!
+                        .items
+                    self.updateUserPhotoData(from: dataPhoto)
+                case .error(_):
+                    print("Asd")
                 }
-              print("changet")
             }
-        }catch {
-            
         }
     }
+    
 }
 
-extension DetailUserTableViewController {
-    
-    func loadFriendsPhotoFromRealm(from userId: Int )  -> List<PhotoItems>?{
-        
-        do {
-            let realm = try Realm()
-            let photosItem = realm.objects(PhotoResponse.self)
-                .where{ $0.id == userId}
-                .first
-            if let resalt = photosItem?.items {
-               
-                return resalt
-            }
-            
-        }catch {
-            print(error)
-        }
-        return nil
-    }
-}
+
 
 extension DetailUserTableViewController {
     
     func updateUserPhotoData(from photoData: List<PhotoItems>)  {
-        if photoData != nil {
+    
             var imageArray = [ImageAndLikeData]()
             
             for photoArray in photoData {
@@ -101,8 +78,6 @@ extension DetailUserTableViewController {
             }
         }else {
             self.dataTable.append(userDetailsTableData)
-        }
-    
-        }
+        } 
     }
 }

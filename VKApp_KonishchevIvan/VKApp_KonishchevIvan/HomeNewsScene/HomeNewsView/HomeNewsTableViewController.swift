@@ -13,7 +13,7 @@ import RealmSwift
 class HomeNewsTableViewController: UITableViewController {
     
     var newsRealmToken: NotificationToken?
-
+    var realmService = RealmService()
     var nextViewData: [ImageAndLikeData?] = [nil]
     var newsArray: [[CellType : [NewsCellData]]]! {
         didSet {
@@ -27,12 +27,9 @@ class HomeNewsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNotificationToken()
+        self.loadNewsData()
         
-        Task(priority: .userInitiated) {
-            await  self.loadNewsData()
-           
-        }
-       
         self.currentOrientation = UIDevice.current.orientation
         tableView.register(UINib(nibName: "SinglePhotoAndTextTableViewCell", bundle: nil), forCellReuseIdentifier: "SinglePhotoAndTextCell")
     }

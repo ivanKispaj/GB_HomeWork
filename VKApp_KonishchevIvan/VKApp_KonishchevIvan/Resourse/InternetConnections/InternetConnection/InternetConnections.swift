@@ -16,6 +16,8 @@ enum InternetError: Error {
 
 // MARK: - Класс для доступа в интернет по умолчанию протокол(схема) hhtps, host и path надо передавать при создании соединения
 final class InternetConnections {
+    let realmService = RealmService()
+    
     let session: URLSession = {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)

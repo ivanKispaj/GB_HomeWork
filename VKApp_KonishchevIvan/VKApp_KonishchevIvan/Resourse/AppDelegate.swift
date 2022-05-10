@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     try? FileManager.default.removeItem(at: URL)
                 }
         }
-//        
+        
 //        let url = Realm.Configuration.defaultConfiguration.fileURL!
 //        remove(realmURL: url)
             

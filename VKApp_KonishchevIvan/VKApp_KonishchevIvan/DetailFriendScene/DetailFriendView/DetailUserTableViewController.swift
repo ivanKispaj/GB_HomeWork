@@ -19,6 +19,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var notifiTokenPhoto: NotificationToken?
     var notifiTokenFriends: NotificationToken?
     var notifiTokenWall: NotificationToken?
+    var realmService = RealmService()
     
     
     var frameImages: [CGRect]?
@@ -50,19 +51,18 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var likeCount: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        self.loadDataTable()
+        self.setNotificationtokenWall()
+        self.setNotificationTokenPhoto()
+        self.setNotificationtokenFriends()
         setHeaderDetailView()
+        
         tableView.register(UINib(nibName: "CouruselTableViewCell", bundle: nil), forCellReuseIdentifier: "CouruselCellForDetails")
         tableView.register(UINib(nibName: "GallaryTableViewCell", bundle: nil), forCellReuseIdentifier: "GallaryTableCell")
         tableView.register(UINib(nibName: "SinglePhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleTableCellID")
         tableView.register(UINib(nibName: "LinkTableViewCell", bundle: nil), forCellReuseIdentifier: "LinkTableViewCell")
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        //  подгружаем данные пользователя
-                    self.loadDataTable()            
-    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

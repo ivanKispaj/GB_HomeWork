@@ -36,32 +36,12 @@ extension InternetConnections {
                         let result = try decode.decode(Friends.self, from: data )
                 // Записываем друзей для переданного пользователя в Realm!
                 DispatchQueue.main.async {
-                    self.saveFriends(result, to: Int(userId)!)
+                    self.realmService.updateData(result.response)
                 }
             }catch {
                 print(InternetError.parseError)
             }
         }.resume()
-             
-       
+    }
 
-       
-    }
-    
-//MARK: - Запись друзей в RealmSwift
-    private func saveFriends(_ friends: Friends, to ownerId: Int) {
-        do {
-            let realm = try Realm()
-            print(realm.configuration.fileURL!)
-            
-                try realm.write {
-                    realm.add(friends.response, update: .modified)
-                }
-            
-          
-        }catch {
-            print("Error Save Realm: \(error.localizedDescription)")
-        }
-         
-    }
 }

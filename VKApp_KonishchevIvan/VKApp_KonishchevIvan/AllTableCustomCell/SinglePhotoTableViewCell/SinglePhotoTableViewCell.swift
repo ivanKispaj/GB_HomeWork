@@ -51,7 +51,9 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
             preconditionFailure("Error")
         }
         
-        cell.singlePhoto.loadImageFromUrlString(self.singlePhoto.image)
+            cell.singlePhoto.loadImageFromUrlString(self.singlePhoto.image)
+    
+       
         
         return cell
     }

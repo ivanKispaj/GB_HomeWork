@@ -10,18 +10,19 @@ import RealmSwift
 
 extension UserGroupTableViewController {
     
-    func loadUserGroupFromVK() async {
+    func loadUserGroupFromVK()  {
 
         InternetConnections(host: "api.vk.com", path: "/method/groups.get").getUserGroupList(for: String(NetworkSessionData.shared.userId!))
-        self.setNitificationGroups()
-        if let result = await loadUserGroups() {
-            self.updateViewGroups(from: result)
+        
+        let groupsData = self.realmService.readData(ItemsGroup.self)
+        if let data = groupsData {
+            self.updateViewGroups(from: data)
         }
         
     }
     
     
-    private func updateViewGroups(from data: Results<ItemsGroup> ){
+     func updateViewGroups(from data: Results<ItemsGroup> ){
         var group: [AllUserGroups] = []
         for items in data {
             if let activity = items.activity {
@@ -35,43 +36,22 @@ extension UserGroupTableViewController {
         self.myActiveGroup = group
     }
     
-    private func setNitificationGroups() {
-            do {
-                let realm = try Realm()
-                let data = realm.objects(ItemsGroup.self)
-                self.nitifiTokenGroups = data.observe { (changes: RealmCollectionChange) in
-                    switch changes {
-                    case .initial( let results ):
-                        print("Initial NewsRealm")
-                    case let .update(results, deletions, insertions, modifications):
-                        self.updateViewGroups(from: results)
-                       print("Update RealmNews")
-                    case .error(let error):
-                        print(error)
-                    }
-                  print("changet")
-                
-             }
-            }catch {
-                print("error Notification Set!")
-            }
-        
-    }
-}
-
-
-
-private extension UserGroupTableViewController {
     
-    func loadUserGroups () async -> Results<ItemsGroup>? {
-        do {
-            let realm = try await Realm()
-            let itemGroups = realm.objects(ItemsGroup.self)
-            return itemGroups
-        }catch {
-            print(error)
+     func setNitificationGroups() {
+        if let data = self.realmService.readData(ItemsGroup.self) {
+            self.nitifiTokenGroups = data.observe { (changes: RealmCollectionChange) in
+                switch changes {
+                case .initial(_):
+                    print("Signed")
+                case let .update(results, _, _, _):
+                    self.updateViewGroups(from: results)
+                case .error(_):
+                    print("Asd")
+                }
+            }
         }
-        
-            return nil
     }
+    
 }
+
+

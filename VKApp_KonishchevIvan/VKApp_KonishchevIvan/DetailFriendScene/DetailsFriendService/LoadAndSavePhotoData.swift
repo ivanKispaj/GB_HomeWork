@@ -39,29 +39,12 @@ extension InternetConnections {
                 let result = try decode.decode(PhotoUser.self, from: data)
                
                 DispatchQueue.main.async {
-                    self.saveUserPhotoAlbum(result.response)
+                    self.realmService.updateData(result.response)
                 }
-                  
             }catch {
                 print(InternetError.parseError)
-
             }
         }.resume()
-    
-           
-    
     }
     
- //MARK: - Запись фото друга в Realm
-    private func saveUserPhotoAlbum(_ data: PhotoResponse ) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(data, update: .modified)
-            }
-        }catch {
-            print("Error Save Realm: \(error.localizedDescription)")
-
-        }
-    }
 }

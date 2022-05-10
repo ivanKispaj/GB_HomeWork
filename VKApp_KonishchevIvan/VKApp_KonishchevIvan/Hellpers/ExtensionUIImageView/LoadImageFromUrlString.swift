@@ -8,27 +8,18 @@
 import UIKit
 
 extension UIImageView {
-    func loadImageFromUrlString(_ url: String, placeholder: UIImage? = UIImage(named: "noFoto")) {
-        self.image = nil
-
-        let imageServerUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-
-        if let url = URL(string: imageServerUrl) {
-            URLSession.shared.dataTask(with: url) { data, _, error in
-                if error != nil {
-                    DispatchQueue.main.async {
-                        self.image = placeholder
-                    }
-                    return
-                }
+         func loadImageFromUrlString(_ url: String?) -> () {
+             guard let urlImage = url, urlImage != "" else { return }
+            let url = URL(string: urlImage)!
+            DispatchQueue.global(qos: .userInitiated).async {
+                let content = try? Data(contentsOf: url)
                 DispatchQueue.main.async {
-                    if let data = data {
-                        if let downloadImage = UIImage(data: data) {
-                            self.image = downloadImage
-                        }
+                    if let imageData = content {
+                        self.image = UIImage(data: imageData)
+                    }else {
+                        self.image = UIImage(named: "noFoto")
                     }
                 }
-            }.resume()
+            }
         }
-    }
 }

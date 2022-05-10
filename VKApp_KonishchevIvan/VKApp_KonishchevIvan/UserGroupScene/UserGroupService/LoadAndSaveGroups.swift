@@ -33,7 +33,7 @@ extension InternetConnections {
                 let decode = JSONDecoder()
                 let result = try decode.decode(UserGroupModel.self, from: data)
                 DispatchQueue.main.async {
-                    self.saveUserGroups(result)
+                    self.realmService.updateData(result.response.items)
                 }
                 
             }catch {
@@ -43,17 +43,6 @@ extension InternetConnections {
         }.resume()
     }
     
-    //MARK: - Save Wall Data To Realm
-        private func saveUserGroups(_ groupsData:  UserGroupModel )  {
-            do {
-                let realm = try Realm()
-                try realm.write{
-                    realm.add(groupsData.response.items, update: .modified)
-                }
-            }catch {
-                print("Error Save Realm: \(error.localizedDescription)")
-            }
-        }
 }
 
 

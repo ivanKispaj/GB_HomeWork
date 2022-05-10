@@ -32,25 +32,12 @@ extension InternetConnections {
                 decode.userInfo = [CodingUserInfoKey(rawValue: "ownerId")! : Int(ownerId)!]
                 let result = try decode.decode(UserWallModel.self, from: data)
                 DispatchQueue.main.async {
-                    self.saveUserWall(result.response)
+                    self.realmService.updateData(result.response)
                 }
                
             }catch {
                 print(InternetError.parseError)
             }
         }.resume()
-    }
-  
-    
-//MARK: - Save Wall Data To Realm
-    private func saveUserWall(_ userWall: UserWallResponse )  {
-        do {
-            let realm = try Realm()
-            try realm.write{
-                realm.add(userWall, update: .modified)
-            }
-        }catch {
-            print("Error Save Realm: \(error.localizedDescription)")
-        }
     }
 }

@@ -14,7 +14,7 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
 
     var nitifiTokenGroups: NotificationToken?
-    
+    let realmService = RealmService()
     var myActiveGroup: [AllUserGroups] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -27,11 +27,10 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        
-        Task(priority: .userInitiated) {
-            await self.loadUserGroupFromVK()
+        self.setNitificationGroups()
+        self.loadUserGroupFromVK()
            
-        }
+      
         
         
         

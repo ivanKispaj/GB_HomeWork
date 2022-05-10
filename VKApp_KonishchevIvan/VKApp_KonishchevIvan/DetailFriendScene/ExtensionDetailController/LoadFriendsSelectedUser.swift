@@ -12,44 +12,36 @@ import RealmSwift
 extension DetailUserTableViewController {
   
     func loadFriendsSelectedUser()  {
-  
-   
-       
+        
         InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelectedd.id))
-        self.setNotificationtokenFriends()
-            if let friendsArray =  loadFriendsFromRealm(from: self.friendsSelectedd.id) {
-                self.updateUserFromRealm(from: friendsArray)
-            }
-     
+        
+        let friendsData = self.realmService.readData(FriendsResponse.self)?.where{ $0.id == self.friendsSelectedd.id }.first?.items
+        
+        if let data = friendsData {
+            self.updateUserFromRealm(from: data)
+            
+        }
     }
     
-    private func setNotificationtokenFriends() {
-        do {
-            let realm = try Realm()
-            let data = realm.objects(FriendsResponse.self)
-                .where { $0.id == self.friendsSelectedd.id}
+     func setNotificationtokenFriends() {
+        if let data = self.realmService.readData(FriendsResponse.self) {
             self.notifiTokenFriends = data.observe { (changes: RealmCollectionChange) in
                 switch changes {
-                case .initial( let results ):
-                    print("Initial NewsRealm")
-                case let .update(results, deletions, insertions, modifications):
+                case .initial(_):
+                    print("Signed")
+                case let .update(results, _, _, _):
                     let dataFriends = results
                         .where { $0.id == self.friendsSelectedd.id }
                         .first!
                         .items
                     self.updateUserFromRealm(from: dataFriends)
-                    
-                   print("Update RealmNews")
-                case .error(let error):
-                    print(error)
+                case .error(_):
+                    print("Asd")
                 }
-              print("changet")
-            
-         }
-        }catch {
-            
+            }
         }
     }
+ 
     
    private func updateUserFromRealm(from data: List<FriendsItems>) {
         var arrays = [Friend]()
@@ -100,21 +92,5 @@ extension DetailUserTableViewController {
 }
 
 
-extension DetailUserTableViewController {
-    func loadFriendsFromRealm(from userId: Int )  -> List<FriendsItems>?{
-        var friends: List<FriendsItems>?
-        do {
-            let realm = try  Realm()
-            realm.objects(FriendsResponse.self)
-                .where{ $0.id == userId}
-                .forEach{friend in
-                    friends = friend.items
-                }
-            return friends
-        }catch {
-            print(error)
-        }
-        return nil
-    }
-}
+
 

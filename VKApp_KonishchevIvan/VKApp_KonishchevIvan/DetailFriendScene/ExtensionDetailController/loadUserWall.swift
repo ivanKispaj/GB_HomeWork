@@ -15,13 +15,32 @@ extension DetailUserTableViewController {
    
         InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelectedd.id))
         
-        self.setNotificationtokenWall()
-        
-        if let items = self.loadUserWallFromRealm(from: self.friendsSelectedd.id) {
-            self.updateWallData(from: items)
+        let wallData = self.realmService.readData(UserWallResponse.self)?.where { $0.id == self.friendsSelectedd.id }.first?.items
+        if let data = wallData {
+            self.updateWallData(from: data)
         }
-
     }
+    
+    //MARK: - setNotificationTokenWall
+        
+         func setNotificationtokenWall() {
+            if let data = self.realmService.readData(UserWallResponse.self) {
+                self.notifiTokenWall = data.observe { (changes: RealmCollectionChange) in
+                    switch changes {
+                    case .initial(_):
+                        print("Signed")
+                    case let .update(results, _, _, _):
+                        let dataWall = results
+                            .where { $0.id == self.friendsSelectedd.id }
+                            .first!
+                            .items
+                        self.updateWallData(from: dataWall)
+                    case .error(_):
+                        print("Asd")
+                    }
+                }
+            }
+        }
     
    private func getPhotoUrl(_ photoArr: List<WallSizes>) -> WallSizes {
         if let photoData = photoArr.first(where: { $0.type == "y" }) {
@@ -46,34 +65,8 @@ extension DetailUserTableViewController {
         let url = photoArray.first { $0.width > 300 }?.url
         return url ?? " "
     }
-//MARK: - setNotificationTokenWall
-    private func setNotificationtokenWall() {
-        do {
-            let realm = try Realm()
-            let data = realm.objects(UserWallResponse.self)
-                .where { $0.id == self.friendsSelectedd.id}
-            self.notifiTokenWall = data.observe { (changes: RealmCollectionChange) in
-                switch changes {
-                case .initial( let results ):
-                    print("Initial NewsRealm")
-                case let .update(results, deletions, insertions, modifications):
-                    let dataWall = results
-                        .where { $0.id == self.friendsSelectedd.id }
-                        .first!
-                        .items
-                    self.updateWallData(from: dataWall)
-                    
-                   print("Update RealmNews")
-                case .error(let error):
-                    print(error)
-                }
-              print("changet")
-            
-         }
-        }catch {
-            
-        }
-    }
+
+    
     private func updateWallData(from data: List<UserWallItems>) {
         var wallData: [UserDetailsTableData] = []
            for item in data {
@@ -175,21 +168,4 @@ extension DetailUserTableViewController {
     }
 }
 
-extension DetailUserTableViewController {
-    
-    func loadUserWallFromRealm(from userId: Int ) -> List<UserWallItems>? {
-        var wallItems: List<UserWallItems>?
-        do {
-            let realm = try Realm()
-            realm.objects(UserWallResponse.self)
-                .where{ $0.id == userId}
-                .forEach { wall in
-                    wallItems = wall.items
-                }
-            return wallItems
-        }catch {
-            print(error)
-        }
-        return nil
-    }
-}
+
