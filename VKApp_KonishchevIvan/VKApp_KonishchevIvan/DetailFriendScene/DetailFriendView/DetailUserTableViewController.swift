@@ -16,7 +16,10 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var activityIndicator: UIActivityIndicatorView!
    // var detailsControllerData: DetailsControllerData!
     
-    var notifiToken: NotificationToken?
+    var notifiTokenPhoto: NotificationToken?
+    var notifiTokenFriends: NotificationToken?
+    var notifiTokenWall: NotificationToken?
+    
     
     var frameImages: [CGRect]?
     var currentFrameImages: CGRect?

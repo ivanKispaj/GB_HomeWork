@@ -16,15 +16,102 @@ extension HomeNewsTableViewController {
    
             InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
 
-            await self.notificationToken()
+             self.notificationToken()
+        
+      }
+        func getUserDataFromId(_ ownerId: Int, profiles: List<NewsProfiles>) -> NewsProfiles? {
+            let profile = profiles.first { $0.id == ownerId }
+            return profile
+        }
+        
+        func getGroupFromId(_ ownerId: Int, groups: List<NewsGroups>) -> NewsGroups? {
+            var id = ownerId
+            id.negate()
+            let group = groups.first { $0.id == id }
+            return group
+        }
+    
+        func getNewsPhoto(_ newsPhotoArray: List<ImageArray>) -> String {
+            if let url = newsPhotoArray.first(where: { $0.type == "y" }) {
+                return url.url
+            } else if let url = newsPhotoArray.first (where: { $0.type == "k" }) {
+                return url.url
+            }
+            let url = newsPhotoArray.first(where: { $0.type == "q"})
+            return url?.url ?? ""
+            
+        }
+    
+        func getPhotoNewsHistory(_ photoArray: List<NewsImage>) -> String {
+         
+            let url = photoArray.first { $0.width > 300 }?.url
+            return url ?? " "
+        }
+    
+    private func notificationToken()  {
+        do {
+            let realm = try  Realm()
+            let objcItems = realm.objects(NewsItems.self)
+            self.newsRealmToken = objcItems.observe { (changes: RealmCollectionChange) in
+               switch changes {
+               case .initial( let results ):
+                   print("Initial NewsRealm")
+               case let .update(results, deletions, insertions, modifications):
+                 self.updateNewsView()
+                  print("Update RealmNews")
+               case .error(let error):
+                   print(error)
+               }
+             print("changet")
+           
+        }
+        }catch {
+            
+        }
+ 
+    }
+  private func loadNewsItems()  ->  List<NewsItems>?{
+            do {
+                let realm = try  Realm()
+                let newsItems = realm.objects(NewsResponse.self).first
+                return newsItems?.items
+            }catch {
+                print(error)
+            }
+            return nil
+        }
+    private func loadNewsProfiles()  ->  List<NewsProfiles>?{
+              do {
+                  let realm = try  Realm()
+                  let newsItems = realm.objects(NewsResponse.self).first
+                  return newsItems?.profiles
+              }catch {
+                  print(error)
+              }
+              return nil
+          }
+    
+    private func loadNewsGroups()  ->  List<NewsGroups>?{
+              do {
+                  let realm = try  Realm()
+                  let newsItems = realm.objects(NewsResponse.self).first
+                  
+                  return newsItems?.groups
+              }catch {
+                  print(error)
+              }
+              return nil
+          }
+    
+    private func updateNewsView()  {
         
             var newsDatasPhoto: [CellType: [NewsCellData]] = [.photo: []] // конечный массив с данными
             var newsDatasLink: [CellType: [NewsCellData]] = [.link: []] // конечный массив с данными
             var newsDatasWall: [CellType: [NewsCellData]] = [.wall : []] // конечный массив с данными
             var newsDatasHistory:  [CellType: [NewsCellData]] = [.histroy: []]  // конечный массив с данными
-            if let items = await loadNewsItems() {
-                if let profiles = await loadNewsProfiles() {
-                    if let groups = await loadNewsGroups(){
+            if let items =  loadNewsItems() {
+                if let profiles =  loadNewsProfiles() {
+                    if let groups =  loadNewsGroups(){
                         for item in items {
                             var newsCellData = NewsCellData()
                             newsCellData.ownerId = item.sourceId
@@ -137,92 +224,9 @@ extension HomeNewsTableViewController {
                 }
               
             }
-      }
-        func getUserDataFromId(_ ownerId: Int, profiles: List<NewsProfiles>) -> NewsProfiles? {
-            let profile = profiles.first { $0.id == ownerId }
-            return profile
-        }
         
-        func getGroupFromId(_ ownerId: Int, groups: List<NewsGroups>) -> NewsGroups? {
-            var id = ownerId
-            id.negate()
-            let group = groups.first { $0.id == id }
-            return group
-        }
-    
-        func getNewsPhoto(_ newsPhotoArray: List<ImageArray>) -> String {
-            if let url = newsPhotoArray.first(where: { $0.type == "y" }) {
-                return url.url
-            } else if let url = newsPhotoArray.first (where: { $0.type == "k" }) {
-                return url.url
-            }
-            let url = newsPhotoArray.first(where: { $0.type == "q"})
-            return url?.url ?? ""
-            
-        }
-    
-        func getPhotoNewsHistory(_ photoArray: List<NewsImage>) -> String {
-         
-            let url = photoArray.first { $0.width > 300 }?.url
-            return url ?? " "
-        }
-    
-    private func notificationToken() async {
-        do {
-            let realm = try await Realm()
-            let objcItems = realm.objects(NewsItems.self)
-            self.newsRealmToken = objcItems.observe { (changes: RealmCollectionChange) in
-               switch changes {
-               case .initial(let results):
-                   print(results)
-               case let .update(results, deletions, insertions, modifications):
-               
         
-                  print("Update RealmNews")
-               case .error(let error):
-                   print(error)
-               }
-             print("changet")
-           
-        }
-        }catch {
-            
-        }
- 
     }
-  private func loadNewsItems() async ->  List<NewsItems>?{
-            do {
-                let realm = try await Realm()
-                let newsItems = realm.objects(NewsResponse.self).first
-                return newsItems?.items
-            }catch {
-                print(error)
-            }
-            return nil
-        }
-    private func loadNewsProfiles() async ->  List<NewsProfiles>?{
-              do {
-                  let realm = try await Realm()
-                  let newsItems = realm.objects(NewsResponse.self).first
-                  return newsItems?.profiles
-              }catch {
-                  print(error)
-              }
-              return nil
-          }
-    
-    private func loadNewsGroups() async ->  List<NewsGroups>?{
-              do {
-                  let realm = try await Realm()
-                  let newsItems = realm.objects(NewsResponse.self).first
-                  
-                  return newsItems?.groups
-              }catch {
-                  print(error)
-              }
-              return nil
-          }
-    
 }
 
 

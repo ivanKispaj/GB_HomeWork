@@ -12,115 +12,17 @@ import RealmSwift
 extension DetailUserTableViewController {
 
     func loadUserWall () async {
-        
-//        var userDetailsTableData: [UserDetailsTableData]! {
-//            didSet {
-//                return finishLoadData( friends: friends, photos: photos, wall: userDetailsTableData)
-//            }
-//        }
-        
    
-             InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelectedd.id))
-
-            if let items = await self.loadUserWallFromRealm(from: self.friendsSelectedd.id) {
-              //  var detailsTableData: [UserDetailsTableData] = []
-                
-                for item in items {
-                    var sectionData = DetailsSectionData()
-                    sectionData.id = item.id
-                    sectionData.ownerId = item.ownerId
-                    sectionData.date = item.date
-                    sectionData.textNews = item.text
-                    
-                    if let likes = item.likes {
-                        sectionData.likes = likes
-                    }
-                    
-                    if let views = item.views {
-                        sectionData.views = views
-                    }
-                    
-                    var typeSection: SectionType = .unknown
-                    
-                    if let attachments = item.attachments.first{
-                        if let photo = attachments.photo {
-                            typeSection = .SingleFoto
-                            var likeStatus = false
-                            if sectionData.likes.userLike == 1 {
-                              likeStatus = true
-                            }
-                            
-                            let size = getPhotoUrl(photo.sizes)
-                            let photos = ImageAndLikeData(image: size.url, likeStatus: likeStatus, height:CGFloat(size.height), width: CGFloat(size.width), seenCount: sectionData.views?.count ?? 0)
-                            sectionData.photo = [photos]
-                            sectionData.urlNewsImage = size.url
-                          
-                        }else if let link = attachments.link {
-                            if let photo = link.photo {
-                                typeSection = .linkPhoto
-                                
-                                sectionData.urlNewsImage = getPhotoUrl(photo.sizes).url
-                            }else {
-                                typeSection = .link
-                            }
-                            
-                            sectionData.linkUrl = link.url
-                            sectionData.captionNews = link.caption
-                            sectionData.titleNews = link.title
-                            
-                        }
-                    }else if let attachments = item.wallcopyHystory.first?.attachments {
-                        for attachData in attachments {
-                            if let photo = attachData.photo {
-                                typeSection = .SingleFoto
-                                let size = getPhotoUrl(photo.sizes)
-                                sectionData.urlNewsImage = size.url
-                                var likeStatus = false
-                                if sectionData.likes.userLike == 1 {
-                                  likeStatus = true
-                                }
-                                let photos = ImageAndLikeData(image: size.url, likeStatus: likeStatus, height:CGFloat(size.height), width: CGFloat(size.width), seenCount: sectionData.views?.count ?? 0)
-                                sectionData.photo = [photos]
-                                
-                            }else if let link = attachData.link {
-                                if let photo = link.photo {
-                                    typeSection = .linkPhoto
-                                    sectionData.urlNewsImage = getPhotoUrl(photo.sizes).url
-                                }else {
-                                    typeSection = .link
-                                }
-                                sectionData.linkUrl = link.url
-                                sectionData.captionNews = link.caption
-                                sectionData.titleNews = link.title
-                                
-                            }
-                            
-                        }
-                 
-                    }
-                    let data = UserDetailsTableData(sectionType: typeSection, sectionData: sectionData)
-                    if self.dataTable != nil {
-                        self.dataTable.append(data)
-                    }else {
-                        self.dataTable = [data]
-                    }
-                    
-                   // detailsTableData.append(data)
-                }
-              //  self.dataTable.append(detailsTableData)
-                // userDetailsTableData = detailsTableData
-            }
+        InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelectedd.id))
+        
+        self.setNotificationtokenWall()
+        
+        if let items = await self.loadUserWallFromRealm(from: self.friendsSelectedd.id) {
+            self.updateWallData(from: items)
+        }
 
     }
-
-    private func finishLoadData( friends: [Friend], photos: [ImageAndLikeData], wall: [UserDetailsTableData]) {
-              var details = wall
-                    details.insert(UserDetailsTableData(sectionType: .Gallary, sectionData: DetailsSectionData(photo: photos)), at: 0)
-                    details.insert(UserDetailsTableData(sectionType: .Friends, sectionData: DetailsSectionData(friends: friends)), at: 0)
-                    self.dataTable = details
-            
-
-    }
+    
    private func getPhotoUrl(_ photoArr: List<WallSizes>) -> WallSizes {
         if let photoData = photoArr.first(where: { $0.type == "y" }) {
             return photoData
@@ -144,7 +46,133 @@ extension DetailUserTableViewController {
         let url = photoArray.first { $0.width > 300 }?.url
         return url ?? " "
     }
-    
+//MARK: - setNotificationTokenWall
+    private func setNotificationtokenWall() {
+        do {
+            let realm = try Realm()
+            let data = realm.objects(UserWallResponse.self)
+                .where { $0.id == self.friendsSelectedd.id}
+            self.notifiTokenWall = data.observe { (changes: RealmCollectionChange) in
+                switch changes {
+                case .initial( let results ):
+                    print("Initial NewsRealm")
+                case let .update(results, deletions, insertions, modifications):
+                    let dataWall = results
+                        .where { $0.id == self.friendsSelectedd.id }
+                        .first!
+                        .items
+                    self.updateWallData(from: dataWall)
+                    
+                   print("Update RealmNews")
+                case .error(let error):
+                    print(error)
+                }
+              print("changet")
+            
+         }
+        }catch {
+            
+        }
+    }
+    private func updateWallData(from data: List<UserWallItems>) {
+        var wallData: [UserDetailsTableData] = []
+           for item in data {
+               var sectionData = DetailsSectionData()
+               sectionData.id = item.id
+               sectionData.ownerId = item.ownerId
+               sectionData.date = item.date
+               sectionData.textNews = item.text
+               
+               if let likes = item.likes {
+                   sectionData.likes = likes
+               }
+               
+               if let views = item.views {
+                   sectionData.views = views
+               }
+               
+               var typeSection: SectionType = .unknown
+               
+               if let attachments = item.attachments.first{
+                   if let photo = attachments.photo {
+                       typeSection = .SingleFoto
+                       var likeStatus = false
+                       if sectionData.likes.userLike == 1 {
+                         likeStatus = true
+                       }
+                       
+                       let size = getPhotoUrl(photo.sizes)
+                       let photos = ImageAndLikeData(image: size.url, likeStatus: likeStatus, height:CGFloat(size.height), width: CGFloat(size.width), seenCount: sectionData.views?.count ?? 0)
+                       sectionData.photo = [photos]
+                       sectionData.urlNewsImage = size.url
+                     
+                   }else if let link = attachments.link {
+                       if let photo = link.photo {
+                           typeSection = .linkPhoto
+                           
+                           sectionData.urlNewsImage = getPhotoUrl(photo.sizes).url
+                       }else {
+                           typeSection = .link
+                       }
+                       
+                       sectionData.linkUrl = link.url
+                       sectionData.captionNews = link.caption
+                       sectionData.titleNews = link.title
+                       
+                   }
+               }else if let attachments = item.wallcopyHystory.first?.attachments {
+                   for attachData in attachments {
+                       if let photo = attachData.photo {
+                           typeSection = .SingleFoto
+                           let size = getPhotoUrl(photo.sizes)
+                           sectionData.urlNewsImage = size.url
+                           var likeStatus = false
+                           if sectionData.likes.userLike == 1 {
+                             likeStatus = true
+                           }
+                           let photos = ImageAndLikeData(image: size.url, likeStatus: likeStatus, height:CGFloat(size.height), width: CGFloat(size.width), seenCount: sectionData.views?.count ?? 0)
+                           sectionData.photo = [photos]
+                           
+                       }else if let link = attachData.link {
+                           if let photo = link.photo {
+                               typeSection = .linkPhoto
+                               sectionData.urlNewsImage = getPhotoUrl(photo.sizes).url
+                           }else {
+                               typeSection = .link
+                           }
+                           sectionData.linkUrl = link.url
+                           sectionData.captionNews = link.caption
+                           sectionData.titleNews = link.title
+                           
+                       }
+                       
+                   }
+            
+               }
+               let data = UserDetailsTableData(sectionType: typeSection, sectionData: sectionData)
+               wallData.append(data)
+               
+       }
+        var friendData: UserDetailsTableData!
+        var photoData: UserDetailsTableData!
+        if self.dataTable != nil {
+            
+            if let friendsIndex = self.dataTable.firstIndex(where: { $0.sectionType == .Friends }) {
+                friendData = self.dataTable[friendsIndex]
+            }
+            if let photoIndex = self.dataTable.firstIndex(where: { $0.sectionType == .Gallary }) {
+                photoData = self.dataTable[photoIndex]
+            }
+        }
+        self.dataTable = wallData
+        if photoData != nil {
+            self.dataTable.insert(photoData, at: 0)
+        }
+          
+        if friendData != nil {
+            self.dataTable.insert(friendData, at: 0)
+        }
+    }
 }
 
 extension DetailUserTableViewController {

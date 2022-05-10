@@ -13,21 +13,48 @@ extension UserGroupTableViewController {
     func loadUserGroupFromVK() async {
 
         InternetConnections(host: "api.vk.com", path: "/method/groups.get").getUserGroupList(for: String(NetworkSessionData.shared.userId!))
-
+        self.setNitificationGroups()
         if let result = await loadUserGroups() {
-            var group: [AllUserGroups] = []
-            for items in result {
-                if let activity = items.activity {
-                let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup, activity: activity)
-                    group.append(res)
-                }else {
-                    let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup, activity: "")
-                        group.append(res)
-                }
-            }
-            self.myActiveGroup = group
-            
+            self.updateViewGroups(from: result)
         }
+        
+    }
+    
+    
+    private func updateViewGroups(from data: Results<ItemsGroup> ){
+        var group: [AllUserGroups] = []
+        for items in data {
+            if let activity = items.activity {
+            let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup, activity: activity)
+                group.append(res)
+            }else {
+                let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup, activity: "")
+                    group.append(res)
+            }
+        }
+        self.myActiveGroup = group
+    }
+    
+    private func setNitificationGroups() {
+            do {
+                let realm = try Realm()
+                let data = realm.objects(ItemsGroup.self)
+                self.nitifiTokenGroups = data.observe { (changes: RealmCollectionChange) in
+                    switch changes {
+                    case .initial( let results ):
+                        print("Initial NewsRealm")
+                    case let .update(results, deletions, insertions, modifications):
+                        self.updateViewGroups(from: results)
+                       print("Update RealmNews")
+                    case .error(let error):
+                        print(error)
+                    }
+                  print("changet")
+                
+             }
+            }catch {
+                print("error Notification Set!")
+            }
         
     }
 }

@@ -12,6 +12,8 @@ import RealmSwift
 
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
+    var notifiToken: NotificationToken?
+    
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
     @IBOutlet weak var headerTableView: UIView!
     @IBOutlet weak var headerSubview: UIView!

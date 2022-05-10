@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import RealmSwift
 
 
 class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
   
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
 
-  //  var allGroup = DataController.shared.getdataGroup()
+    var nitifiTokenGroups: NotificationToken?
+    
     var myActiveGroup: [AllUserGroups] = [] {
         didSet {
             DispatchQueue.main.async {
