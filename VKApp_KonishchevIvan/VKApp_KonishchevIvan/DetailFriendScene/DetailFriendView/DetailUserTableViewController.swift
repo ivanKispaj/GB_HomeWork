@@ -119,7 +119,11 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
            
             let data = dataTable[indexPath.section].sectionData
             cell.singleLableUserName.text = self.friendsSelectedd.userName
-            cell.singleAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
+            
+            
+            cell.singleAvatarHeader.image = UIImage(data: self.friendsSelectedd.photo)
+            
+         //   cell.singleAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
             cell.likeControll.delegate = self
             cell.likeControll.indexPath = indexPath
             if let seen = data.views {
@@ -147,7 +151,10 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.linkDate.text = unixTimeConvertion(unixTime: Double(data.date))
             cell.linkLink.setTitle(data.linkUrl, for: .normal)
             cell.linkLikeCount.text = String(data.likes.count)
-            cell.linkUserLogo.loadImageFromUrlString(self.friendsSelectedd.photo)
+            
+            cell.linkUserLogo.image = UIImage(data: self.friendsSelectedd.photo)
+       //     cell.linkUserLogo.loadImageFromUrlString(self.friendsSelectedd.photo)
+            
             cell.linkUserName.text = self.friendsSelectedd.userName
             cell.linkText.text = data.titleNews
             cell.linkSeenCount.text = String(data.views?.count ?? 0)

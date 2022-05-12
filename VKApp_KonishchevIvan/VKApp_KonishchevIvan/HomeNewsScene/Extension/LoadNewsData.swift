@@ -13,8 +13,11 @@ extension HomeNewsTableViewController {
         
 //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
         
-   
-        InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
+        let queue = DispatchQueue.global(qos: .utility)
+        queue.async {
+            InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
+        }
+        
        
         self.updateNewsView()
             

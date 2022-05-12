@@ -13,7 +13,10 @@ extension DetailUserTableViewController {
 
     func loadUserWall () {
    
+        let queue = DispatchQueue.global(qos: .utility)
+        queue.async {
         InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelectedd.id))
+        }
         
         let wallData = self.realmService.readData(UserWallResponse.self)?.where { $0.id == self.friendsSelectedd.id }.first?.items
         if let data = wallData {

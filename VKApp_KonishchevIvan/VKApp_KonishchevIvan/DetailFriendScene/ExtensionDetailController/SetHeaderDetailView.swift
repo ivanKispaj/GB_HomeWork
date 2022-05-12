@@ -16,7 +16,9 @@ extension DetailUserTableViewController {
             self.detailUserNameLable.text = self.friendsSelectedd.userName
             self.detailUserInfoLable.text = self.friendsSelectedd.status
         }
-        self.detailAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
+        
+        self.detailAvatarHeader.image = UIImage(data: self.friendsSelectedd.photo)
+        //self.detailAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
        
         let time = unixTimeConvertion(unixTime: self.friendsSelectedd.lastSeenDate)
         if self.friendsSelectedd.online {

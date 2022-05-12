@@ -13,8 +13,11 @@ extension UserGroupTableViewController {
     func loadUserGroupFromVK()  {
 
         if let userId = NetworkSessionData.shared.userId {
+            let queue = DispatchQueue.global(qos: .utility)
+            queue.async {
             InternetConnections(host: "api.vk.com", path: "/method/groups.get").getUserGroupList(for: String(userId))
-        }
+            }
+            }
         
         let groupsData = self.realmService.readData(ItemsGroup.self)
         if let data = groupsData {

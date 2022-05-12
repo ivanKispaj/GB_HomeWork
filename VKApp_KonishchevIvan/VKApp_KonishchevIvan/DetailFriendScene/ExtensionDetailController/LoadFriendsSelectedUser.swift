@@ -12,8 +12,10 @@ import RealmSwift
 extension DetailUserTableViewController {
   
     func loadFriendsSelectedUser()  {
-        
+        let queue = DispatchQueue.global(qos: .utility)
+        queue.async {
         InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelectedd.id))
+        }
         
         let friendsData = self.realmService.readData(FriendsResponse.self)?.where{ $0.id == self.friendsSelectedd.id }.first?.items
         

@@ -105,7 +105,8 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
         let groupes = group[indexPath.row]
         cell.profileStatus.text = ""
         cell.lableCellXib.text = groupes.nameGroup
-        cell.imageCellAvatar.loadImageFromUrlString(groupes.imageGroup)
+        cell.imageCellAvatar.image = UIImage(data: groupes.imageGroup)
+       // cell.imageCellAvatar.loadImageFromUrlString(groupes.imageGroup)
         cell.labelCityCellXib.text = "-"
     
         return cell

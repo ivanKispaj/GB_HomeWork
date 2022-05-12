@@ -28,7 +28,7 @@ final class ItemsGroup: Object, Decodable {
     @objc dynamic var id: Int = 0
     @objc dynamic var groupName: String = ""
     @objc dynamic var isClosed: Int = 0
-    @objc dynamic var photoGroup: String = ""
+    @objc dynamic var photoGroup: Data!
     
     convenience init(from decoder: Decoder) throws {
         self.init()
@@ -38,7 +38,9 @@ final class ItemsGroup: Object, Decodable {
         id = try container.decode(Int.self, forKey: .id)
         groupName = try container.decode(String.self, forKey: .groupName)
         isClosed = try container.decode(Int.self, forKey: .isClosed)
-        photoGroup = try container.decode(String.self, forKey: .photoGroup)
+        let url = try container.decode(String.self, forKey: .photoGroup)
+        photoGroup =  try? Data(contentsOf: URL(string: url)!)
+       // photoGroup = try container.decode(String.self, forKey: .photoGroup)
     }
     override class func primaryKey() -> String? {
         return "id"

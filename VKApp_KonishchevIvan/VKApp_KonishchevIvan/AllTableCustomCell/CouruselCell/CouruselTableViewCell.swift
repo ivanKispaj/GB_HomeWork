@@ -43,8 +43,9 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = CouruselCollection.dequeueReusableCell(withReuseIdentifier: "CouruselID1", for: indexPath) as? CouruselCollectionViewCell else { preconditionFailure("Error")
         }
-
-         cell.imageCouruselCell.loadImageFromUrlString(self.collectionData![indexPath.row].photo)
+         cell.imageCouruselCell.image = UIImage(data: self.collectionData![indexPath.row].photo)
+         
+         //cell.imageCouruselCell.loadImageFromUrlString(self.collectionData![indexPath.row].photo)
          cell.lableForDetailsCorusel.text = self.collectionData![indexPath.row].userName
         return cell
     }

@@ -11,7 +11,7 @@ import RealmSwift
 
 final class Friend {
     var userName: String = ""
-    var photo: String = ""
+    var photo: Data!
     var id: Int = 0
     var city: String = ""
     var lastSeenDate: Double = 0
@@ -63,7 +63,7 @@ final class FriendsItems: Object, Decodable {
     
     }
     
-    @objc dynamic var photo50: String = ""
+    @objc dynamic var photo50: Data!
     @objc dynamic var city: City? = nil
     @objc dynamic var fName: String = ""
     @objc dynamic var lName: String = ""
@@ -78,7 +78,10 @@ final class FriendsItems: Object, Decodable {
         self.init()
  
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        photo50 = try container.decode(String.self, forKey: .photo50)
+        
+        let url = try container.decode(String.self, forKey: .photo50)
+        photo50 =  try? Data(contentsOf: URL(string: url)!)
+        
         city = try? container.decodeIfPresent(City.self, forKey: .city)
         fName = try container.decode(String.self, forKey: .fName)
         lName = try container.decode(String.self, forKey: .lName)

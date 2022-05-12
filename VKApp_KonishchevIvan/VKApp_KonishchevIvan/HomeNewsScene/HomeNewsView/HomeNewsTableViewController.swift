@@ -66,7 +66,9 @@ class HomeNewsTableViewController: UITableViewController {
         cell.likeControll.delegate = self
         cell.likeControll.indexPath = indexPath
 // устанавливаем данные для отображения
-        cell.newsUserAvatar.loadImageFromUrlString(data!.newsUserLogo)
+        
+        cell.newsUserAvatar.image = UIImage(data: data!.newsUserLogo)
+      //  cell.newsUserAvatar.loadImageFromUrlString(data!.newsUserLogo)
         cell.newsTextView.text = data?.newsDescription
         cell.newsUserName.text = data?.newsUserName
         let counLike: String = String((data?.newsLikeCount)!)

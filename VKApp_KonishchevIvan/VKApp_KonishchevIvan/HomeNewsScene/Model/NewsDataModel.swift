@@ -31,7 +31,9 @@ struct NewsCellData {
     var newsLikeStatus: Bool = false
     var newsSeenCount: Int = 0
     var newsDescription: String = ""
-    var newsUserLogo: String = ""
+    
+    var newsUserLogo: Data!
+    
     var newsUserName: String = ""
     var online: Bool = false
     var newsText: String = ""
@@ -366,7 +368,9 @@ final class NewsProfiles: Object, Decodable {
     @objc dynamic var id: Int = 0
     @objc dynamic var  fName: String = ""
     @objc dynamic var  lName: String = ""
-    @objc dynamic var  photo: String = ""
+    
+    @objc dynamic var  photo: Data!
+    
     @objc dynamic var  screenName: String? = nil
     @objc dynamic var  online: Int = 0
      dynamic var  onlineInfo: NewsOnlineInfo? = NewsOnlineInfo()
@@ -378,7 +382,11 @@ final class NewsProfiles: Object, Decodable {
         id = try container.decode(Int.self, forKey: .id)
         fName = try container.decode(String.self, forKey: .fName)
         lName = try container.decode(String.self, forKey: .lName)
-        photo = try container.decode(String.self, forKey: .photo)
+        
+        let url = try container.decode(String.self, forKey: .photo)
+        photo =  try? Data(contentsOf: URL(string: url)!)
+     //   photo = try container.decode(String.self, forKey: .photo)
+        
         screenName = try? container.decodeIfPresent(String.self, forKey: .screenName)
         online = try container.decode(Int.self, forKey: .online)
         onlineInfo = try? container.decodeIfPresent(NewsOnlineInfo.self, forKey: .onlineInfo) ?? NewsOnlineInfo()
@@ -414,10 +422,19 @@ final class NewsGroups: Object, Decodable {
         case name
         case photo = "photo_50"
     }
-    @objc dynamic var id: Int
-    @objc dynamic var name: String
-    @objc dynamic var photo: String
+    @objc dynamic var id: Int = 0
+    @objc dynamic var name: String = ""
+    
+    @objc dynamic var photo: Data!
  
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(Int.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        let url = try container.decode(String.self, forKey: .photo)
+        photo = try? Data(contentsOf: URL(string: url)!)
+    }
 }
 
 

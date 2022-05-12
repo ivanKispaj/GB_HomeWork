@@ -62,8 +62,8 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
             preconditionFailure("Error")
         }
 
-       
-            cell.imageCellAvatar.loadImageFromUrlString(self.myActiveGroup[indexPath.row].imageGroup)
+        cell.imageCellAvatar.image = UIImage(data: self.myActiveGroup[indexPath.row].imageGroup)
+           // cell.imageCellAvatar.loadImageFromUrlString(self.myActiveGroup[indexPath.row].imageGroup)
 
         cell.lableCellXib.text = myActiveGroup[indexPath.row].nameGroup
         cell.labelCityCellXib.text = myActiveGroup[indexPath.row].activity

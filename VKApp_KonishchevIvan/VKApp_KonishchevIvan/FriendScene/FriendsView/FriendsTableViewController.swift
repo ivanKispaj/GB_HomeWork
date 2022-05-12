@@ -91,7 +91,10 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExtendCellXib", for: indexPath) as? ExtendTableUserCell else {
                 preconditionFailure("FriendsCell cannot")
             }
-            cell.ExtendImageCell.loadImageFromUrlString(self.friends[indexPath.section].row[indexPath.row].photo)
+            
+            cell.ExtendImageCell.image = UIImage(named: "vkLogo")
+            
+          //  cell.ExtendImageCell.loadImageFromUrlString(self.friends[indexPath.section].row[indexPath.row].photo)
             cell.ExtendLabelCity.text = self.friends[indexPath.section].row[indexPath.row].city
             cell.ExtendLabelName.text = self.friends[indexPath.section].row[indexPath.row].userName
             cell.isSelected = false
@@ -102,7 +105,10 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("FriendsCell cannot")
         }
-            cell.imageCellAvatar.loadImageFromUrlString(self.friends[indexPath.section].row[indexPath.row].photo)
+            
+            cell.imageCellAvatar.image = UIImage(data: self.friends[indexPath.section].row[indexPath.row].photo)
+            
+         //   cell.imageCellAvatar.loadImageFromUrlString(self.friends[indexPath.section].row[indexPath.row].photo)
             cell.labelCityCellXib.text = friends[indexPath.section].row[indexPath.row].city
             cell.lableCellXib.text = friends[indexPath.section].row[indexPath.row].userName
             let friend = friends[indexPath.section].row[indexPath.row]

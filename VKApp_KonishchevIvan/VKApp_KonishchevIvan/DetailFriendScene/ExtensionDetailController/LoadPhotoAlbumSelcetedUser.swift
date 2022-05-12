@@ -14,14 +14,19 @@ extension DetailUserTableViewController {
 
     func loadPhotoAlbumSelctedUser ()  {
         
+        let queue = DispatchQueue.global(qos: .utility)
+        queue.async {
         InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelectedd.id))
+        }
         
         setNotificationTokenPhoto()
-        
-        let photoData = self.realmService.readData(PhotoResponse.self)?.where { $0.id == self.friendsSelectedd.id }.first?.items
-        if let data = photoData {
-            self.updateUserPhotoData(from: data)
+      
+            let photoData = self.realmService.readData(PhotoResponse.self)?.where { $0.id == self.friendsSelectedd.id }.first?.items
+            if let data = photoData {
+                self.updateUserPhotoData(from: data)
+            
         }
+        
     }
     
      func setNotificationTokenPhoto() {
