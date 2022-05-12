@@ -7,9 +7,16 @@
 
 import UIKit
 import WebKit
+import RealmSwift
+import SystemConfiguration
+
+final class DeviceId: Object {
+    @objc dynamic var deviceId = ""
+}
 
 final class VKLoginViewController: UIViewController {
 
+    let realm = RealmService()
 
     private lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
@@ -26,7 +33,34 @@ final class VKLoginViewController: UIViewController {
         super.viewDidLoad()
 
         configureWebView()
-        loadAuth()
+        if connectedToNetwork() {
+            let deviceId = DeviceId()
+            deviceId.deviceId = UIDevice.current.identifierForVendor!.uuidString
+            self.realm.saveData(deviceId)
+            loadAuth()
+        }else {
+            if (self.realm.readData(DeviceId.self)?.first?.deviceId) != nil{
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                   guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController else { return }
+                   nextVC.modalPresentationStyle = .fullScreen
+                   nextVC.transitioningDelegate = nextVC
+                   self.present(nextVC, animated: true)
+                DispatchQueue.main.async {
+                    
+                    self.present(nextVC, animated: true, completion: nil)
+                    
+                }
+               
+            }else {
+                let allert = AllertWrongUserData().getAllert(title: "Fail internet connections!", message: "First start the VKApp on this device! Please check your internet connection")
+                DispatchQueue.main.async {
+                    self.present(allert, animated: true)
+                }
+                
+            }
+            
+        }
+    
     }
 
 }
@@ -56,6 +90,30 @@ private extension VKLoginViewController {
         let request = URLRequest(url: url)
         self.webView.load(request)
     }
-}
+    
+    func connectedToNetwork() -> Bool {
 
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+
+        guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress, {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                SCNetworkReachabilityCreateWithAddress(nil, $0)
+            }
+        }) else {
+            return false
+        }
+
+        var flags: SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+            return false
+        }
+
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+
+        return (isReachable && !needsConnection)
+    }
+}
 

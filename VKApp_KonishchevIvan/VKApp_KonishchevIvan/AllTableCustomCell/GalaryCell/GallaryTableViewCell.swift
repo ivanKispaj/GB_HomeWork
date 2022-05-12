@@ -58,9 +58,11 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GallaryCollectionCell", for: indexPath) as? GallaryCollectionViewCell else {
             preconditionFailure("Error")
         }
-        guard self.gallaryData != nil else { return cell}
         cell.gallaryImage.contentMode = .scaleAspectFill
+      
             cell.gallaryImage.loadImageFromUrlString(self.gallaryData[self.countCell].image)
+        
+            
             self.countCell += 1
         return cell
     }

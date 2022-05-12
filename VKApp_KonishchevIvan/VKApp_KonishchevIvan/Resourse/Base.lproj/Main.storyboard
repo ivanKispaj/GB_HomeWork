@@ -19,6 +19,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="YkZ-gf-gFY"/>
                     </view>
+                    <connections>
+                        <segue destination="eGU-XY-KQm" kind="presentation" identifier="tabBar" modalPresentationStyle="currentContext" id="CbQ-uk-4ri"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYp-ik-XUN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
