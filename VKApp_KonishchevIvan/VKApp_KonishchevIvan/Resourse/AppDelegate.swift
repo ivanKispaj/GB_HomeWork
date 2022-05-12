@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
    // для удаления базы данных! использовал для тестирования иначе ошибки были!
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         func remove(realmURL: URL) {
                 let realmURLs = [
                     realmURL,

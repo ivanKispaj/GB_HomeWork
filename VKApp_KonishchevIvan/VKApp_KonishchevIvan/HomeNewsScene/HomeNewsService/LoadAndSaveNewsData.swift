@@ -29,7 +29,7 @@ extension InternetConnections {
                 let decode = JSONDecoder()
                 let result = try decode.decode(NewsDataModel.self, from: data)
                 DispatchQueue.main.async {
-                    self.realmService.saveData(result.response)
+                    self.realmService.updateData(result.response)
                 }
             }catch {
                 print(InternetError.parseError)

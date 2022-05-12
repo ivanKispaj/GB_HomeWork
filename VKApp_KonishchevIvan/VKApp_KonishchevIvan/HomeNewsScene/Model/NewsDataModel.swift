@@ -54,6 +54,7 @@ final class NewsResponse: Object, Decodable {
         case profiles
         case groups
     }
+    @objc dynamic var id = 0
     dynamic var items = List<NewsItems>() // items
     dynamic var profiles = List<NewsProfiles>() //profiles
     dynamic var  groups = List<NewsGroups>() //groups
@@ -64,8 +65,11 @@ final class NewsResponse: Object, Decodable {
         items = try container.decode(List<NewsItems>.self, forKey: .items)
         profiles = try container.decode(List<NewsProfiles>.self, forKey: .profiles)
         groups = try container.decode(List<NewsGroups>.self, forKey: .groups)
+       // date = Date()
     }
-
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 //MARK: -  items data model

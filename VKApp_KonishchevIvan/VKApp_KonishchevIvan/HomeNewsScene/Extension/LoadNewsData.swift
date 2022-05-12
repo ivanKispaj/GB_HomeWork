@@ -18,7 +18,6 @@ extension HomeNewsTableViewController {
             InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
         }
         
-       
         self.updateNewsView()
             
       }
@@ -29,8 +28,10 @@ extension HomeNewsTableViewController {
                 switch changes {
                 case .initial(_):
                     print("Signed")
-                case .update(_, _, _, _):
-                    self.updateNewsView()
+                case let .update(_, deletions, insertions, _):
+                    if deletions.count != 0 || insertions.count != 0 {
+                        self.updateNewsView()                    }
+                    
                 case .error(_):
                     print("Asd")
                 }

@@ -34,7 +34,7 @@ final class RealmService {
     func saveData<T: Object>(_ object: T) {
         do {
             let realm = try Realm()
-            print(realm.configuration.fileURL!)
+           
             realm.beginWrite()
             realm.add(object)
             try realm.commitWrite()

@@ -11,7 +11,11 @@ import RealmSwift
 import SystemConfiguration
 
 final class DeviceId: Object {
+    @objc dynamic var id = 0
     @objc dynamic var deviceId = ""
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 final class VKLoginViewController: UIViewController {
@@ -32,11 +36,12 @@ final class VKLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+       
         configureWebView()
         if connectedToNetwork() {
             let deviceId = DeviceId()
             deviceId.deviceId = UIDevice.current.identifierForVendor!.uuidString
-            self.realm.saveData(deviceId)
+            self.realm.updateData(deviceId)
             loadAuth()
         }else {
             if (self.realm.readData(DeviceId.self)?.first?.deviceId) != nil{
@@ -46,9 +51,7 @@ final class VKLoginViewController: UIViewController {
                    nextVC.transitioningDelegate = nextVC
                    self.present(nextVC, animated: true)
                 DispatchQueue.main.async {
-                    
                     self.present(nextVC, animated: true, completion: nil)
-                    
                 }
                
             }else {
