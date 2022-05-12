@@ -29,12 +29,14 @@ extension DetailUserTableViewController {
                 switch changes {
                 case .initial(_):
                     print("Signed")
-                case let .update(results, _, _, _):
+                case let .update(results, deletions, insertions, _):
                     let dataFriends = results
                         .where { $0.id == self.friendsSelectedd.id }
                         .first!
                         .items
+                    if deletions.count != 0 || insertions.count != 0 {
                     self.updateUserFromRealm(from: dataFriends)
+                    }
                 case .error(_):
                     print("Asd")
                 }

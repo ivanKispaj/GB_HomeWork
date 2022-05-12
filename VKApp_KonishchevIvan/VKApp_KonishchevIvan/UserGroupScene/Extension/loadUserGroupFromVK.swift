@@ -27,6 +27,7 @@ extension UserGroupTableViewController {
      func updateViewGroups(from data: Results<ItemsGroup> ){
         var group: [AllUserGroups] = []
         for items in data {
+            
             if let activity = items.activity {
             let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup, activity: activity)
                 group.append(res)
@@ -35,7 +36,10 @@ extension UserGroupTableViewController {
                     group.append(res)
             }
         }
-        self.myActiveGroup = group
+         
+             self.myActiveGroup = group
+         
+        
     }
     
     
@@ -45,8 +49,10 @@ extension UserGroupTableViewController {
                 switch changes {
                 case .initial(_):
                     print("Signed")
-                case let .update(results, _, _, _):
+                case let .update(results, deletions, insertions, _):
+                    if deletions.count != 0 || insertions.count != 0 {
                     self.updateViewGroups(from: results)
+                    }
                 case .error(_):
                     print("Asd")
                 }
