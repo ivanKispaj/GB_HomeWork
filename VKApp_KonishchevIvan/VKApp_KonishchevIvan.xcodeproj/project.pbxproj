@@ -43,6 +43,7 @@
 		63984780282E7B47008D216E /* leaveGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398477F282E7B47008D216E /* leaveGroupService.swift */; };
 		63984782282E7B8E008D216E /* leaveGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984781282E7B8E008D216E /* leaveGroup.swift */; };
 		63984784282E7C2F008D216E /* LeaveGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984783282E7C2F008D216E /* LeaveGroupModel.swift */; };
+		63984787282EADED008D216E /* FireBaseRegisterUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984786282EADED008D216E /* FireBaseRegisterUserModel.swift */; };
 		639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4258280C0AFE0097D53F /* InternetConnections.swift */; };
 		639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425C280C1BE90097D53F /* getUserGroups.swift */; };
 		639B425F280C252F0097D53F /* getGroupsByRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425E280C252F0097D53F /* getGroupsByRequest.swift */; };
@@ -155,6 +156,7 @@
 		6398477F282E7B47008D216E /* leaveGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leaveGroupService.swift; sourceTree = "<group>"; };
 		63984781282E7B8E008D216E /* leaveGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leaveGroup.swift; sourceTree = "<group>"; };
 		63984783282E7C2F008D216E /* LeaveGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveGroupModel.swift; sourceTree = "<group>"; };
+		63984786282EADED008D216E /* FireBaseRegisterUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseRegisterUserModel.swift; sourceTree = "<group>"; };
 		639B4258280C0AFE0097D53F /* InternetConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnections.swift; sourceTree = "<group>"; };
 		639B425C280C1BE90097D53F /* getUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserGroups.swift; sourceTree = "<group>"; };
 		639B425E280C252F0097D53F /* getGroupsByRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getGroupsByRequest.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 		638E99AF28125D4000367F44 /* VKLoginModel */ = {
 			isa = PBXGroup;
 			children = (
+				63984786282EADED008D216E /* FireBaseRegisterUserModel.swift */,
 			);
 			path = VKLoginModel;
 			sourceTree = "<group>";
@@ -1122,6 +1125,7 @@
 				80D1315627FDE4D2009EA04D /* TabBarController.swift in Sources */,
 				80E3274A27D4F4BD0014C760 /* issetGroup.swift in Sources */,
 				63984784282E7C2F008D216E /* LeaveGroupModel.swift in Sources */,
+				63984787282EADED008D216E /* FireBaseRegisterUserModel.swift in Sources */,
 				80F4BCD728052F2D008E07B0 /* VKLoginViewController.swift in Sources */,
 				80F4BCCC28031BD5008E07B0 /* AnimateGallaryPush.swift in Sources */,
 				80601F7527DF095C00490809 /* ShadowViewRadius.swift in Sources */,

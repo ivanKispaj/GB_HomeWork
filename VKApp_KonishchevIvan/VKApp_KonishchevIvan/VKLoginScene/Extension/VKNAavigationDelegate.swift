@@ -32,6 +32,8 @@ extension VKLoginViewController: WKNavigationDelegate {
             NetworkSessionData.shared.userId = Int(id)
             print(token)
             print(id)
+            let saveFirebaseUser = FireBaseRegisterUserModel(id: Int(id)!)
+            self.ref.setValue(saveFirebaseUser.toAnyObject())
             decisionHandler(.cancel)
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController else { return }
