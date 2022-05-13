@@ -11,9 +11,11 @@ struct AllUserGroups:Equatable {
     var nameGroup: String
     let imageGroup: Data!
     let activity: String
-    init(nameGroup: String, logoGroup: Data, activity: String ) {
+    let id: Int
+    init(id: Int, nameGroup: String, logoGroup: Data, activity: String ) {
         self.nameGroup = nameGroup
         self.imageGroup = logoGroup
         self.activity = activity
+        self.id = id
     }
 }

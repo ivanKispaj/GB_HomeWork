@@ -17,8 +17,7 @@ extension InternetConnections {
             URLQueryItem(name: "access_token", value: access_token),
             URLQueryItem(name: "extended", value: "1"),
             URLQueryItem(name: "fields", value: "activity, city, description, links, site, status "),
-            URLQueryItem(name: "v", value: "5.131"),
-           // URLQueryItem(name: "count", value: "3")
+            URLQueryItem(name: "v", value: "5.131")
         ]
         guard let url = self.urlComponents.url else { return }
         

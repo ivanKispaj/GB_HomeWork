@@ -17,7 +17,7 @@ extension UserGroupTableViewController {
             queue.async {
             InternetConnections(host: "api.vk.com", path: "/method/groups.get").getUserGroupList(for: String(userId))
             }
-            }
+        }
         
         let groupsData = self.realmService.readData(ItemsGroup.self)
         if let data = groupsData {
@@ -32,10 +32,10 @@ extension UserGroupTableViewController {
         for items in data {
             
             if let activity = items.activity {
-            let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup, activity: activity)
+                let res = AllUserGroups(id: items.id,nameGroup: items.groupName, logoGroup: items.photoGroup, activity: activity)
                 group.append(res)
             }else {
-                let res = AllUserGroups(nameGroup: items.groupName, logoGroup: items.photoGroup, activity: "")
+                let res = AllUserGroups(id: items.id,nameGroup: items.groupName, logoGroup: items.photoGroup, activity: "")
                     group.append(res)
             }
         }

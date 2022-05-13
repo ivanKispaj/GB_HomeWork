@@ -23,20 +23,25 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     
         }
     }
+    var dataGroups: Results<ItemsGroup>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
         self.setNitificationGroups()
-        self.loadUserGroupFromVK()
-           
-      
-        
-        
+        DispatchQueue.main.async {
+            self.dataGroups = self.realmService.readData(ItemsGroup.self)
+
+        }
         
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
         tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.setNitificationGroups()
+        self.loadUserGroupFromVK()
     }
 
 //MARK: - SearchBar Method
@@ -53,7 +58,8 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-        return myActiveGroup.count
+        self.dataGroups?.count ?? 0
+       // return myActiveGroup.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,13 +67,17 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("Error")
         }
-
-        cell.imageCellAvatar.image = UIImage(data: self.myActiveGroup[indexPath.row].imageGroup)
-           // cell.imageCellAvatar.loadImageFromUrlString(self.myActiveGroup[indexPath.row].imageGroup)
-
-        cell.lableCellXib.text = myActiveGroup[indexPath.row].nameGroup
-        cell.labelCityCellXib.text = myActiveGroup[indexPath.row].activity
+        guard let data = self.dataGroups else { return cell}
+        
+        cell.imageCellAvatar.image = UIImage(data: data[indexPath.row].photoGroup)
+        cell.lableCellXib.text = data[indexPath.row].groupName
+        cell.labelCityCellXib.text = data[indexPath.row].activity
         cell.profileStatus.text = ""
+        
+//        cell.imageCellAvatar.image = UIImage(data: self.myActiveGroup[indexPath.row].imageGroup)
+//        cell.lableCellXib.text = myActiveGroup[indexPath.row].nameGroup
+//        cell.labelCityCellXib.text = myActiveGroup[indexPath.row].activity
+//        cell.profileStatus.text = ""
         return cell
     
     }
@@ -77,7 +87,7 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
         }
        destinationVC.userGroupDelegate = self
     }
-   
+
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -85,15 +95,31 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let data = self.dataGroups else { return }
+        print(data[indexPath.row].id)
+        
         if editingStyle == .delete {
-            let deliteRow = self.myActiveGroup[indexPath.row]
-            let index = self.myActiveGroup.firstIndex(of: (deliteRow))
-            self.myActiveGroup.remove(at: index!)
+            let id = data[indexPath.row].id
+            self.leaveGroup(to: id) { status, message in
+                if status {
+                    DispatchQueue.main.async {
+                        print(data[indexPath.row].id)
+                        self.realmService.deliteData(data[indexPath.row])
+                    }
+                    DispatchQueue.main.async {
+                        self.tableView.deleteRows(at: [indexPath], with: .right)
+                    }
+                }else {
+                    print("Failure Delite groups")
+                }
+            }
+            
             tableView.reloadData()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
   
     }

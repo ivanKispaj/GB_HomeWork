@@ -9,6 +9,18 @@ import RealmSwift
 
 final class RealmService {
     
+    func deliteData<T: Object> (_ object: T) {
+        do {
+            let realm = try Realm()
+            try! realm.write{
+                realm.delete(object)
+            }
+            
+        }catch {
+           print(error)
+        }
+    }
+    
     func updateData<T: Object>(_ object: T) {
         do {
             let realm = try Realm()

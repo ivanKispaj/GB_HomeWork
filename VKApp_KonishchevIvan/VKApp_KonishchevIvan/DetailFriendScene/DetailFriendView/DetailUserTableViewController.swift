@@ -49,12 +49,10 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     
     var isLikeStatus: Bool = false
     var likeCount: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadDataTable()
-        self.setNotificationtokenWall()
-        self.setNotificationTokenPhoto()
-        self.setNotificationtokenFriends()
+   
         setHeaderDetailView()
         
         tableView.register(UINib(nibName: "CouruselTableViewCell", bundle: nil), forCellReuseIdentifier: "CouruselCellForDetails")
@@ -64,6 +62,13 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         tableView.register(UINib(nibName: "DetailOlugCell", bundle: nil), forCellReuseIdentifier: "DetailsTablePlugCell")
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.setNotificationtokenWall()
+        self.setNotificationTokenPhoto()
+        self.setNotificationtokenFriends()
+        self.loadDataTable()
+
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

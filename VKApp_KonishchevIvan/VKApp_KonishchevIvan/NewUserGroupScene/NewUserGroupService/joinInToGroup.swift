@@ -1,22 +1,21 @@
 //
-//  NewGroupService.swift
+//  File.swift
 //  VKApp_KonishchevIvan
 //
-//  Created by Ivan Konishchev on 23.04.2022.
+//  Created by Ivan Konishchev on 13.05.2022.
 //
 
-import UIKit
+import Foundation
 
 extension InternetConnections {
-    func getNewGroupList(for searchText: String, completion: @escaping(Result<NewGroupSearchModel,Error>) -> ()) {
+    func joinInToGroup(for groupId: Int, completion: @escaping(Result<JoinGroupModel,Error>) -> ()) {
         guard let access_token = NetworkSessionData.shared.token else { return }
+        let id = String(groupId)
         self.urlComponents.queryItems = [
-            URLQueryItem(name: "q", value: searchText),
             URLQueryItem(name: "access_token", value: access_token),
-            URLQueryItem(name: "sort", value: "0"),
-            URLQueryItem(name: "type", value: "group, page, event"),
-            URLQueryItem(name: "v", value: "5.131"),
-           URLQueryItem(name: "count", value: "1000")
+            URLQueryItem(name: "group_id", value: id),
+            URLQueryItem(name: "not_sure", value: "1"),
+            URLQueryItem(name: "v", value: "5.131")
         ]
         guard let url = self.urlComponents.url else { return }
         let request = URLRequest(url: url)
@@ -26,7 +25,7 @@ extension InternetConnections {
             guard let data = data else { return }
             let decode = JSONDecoder()
             do {
-            let result = try decode.decode(NewGroupSearchModel.self, from: data)
+            let result = try decode.decode(JoinGroupModel.self, from: data)
                 completion(.success(result))
             }catch {
                 completion(.failure(error))
@@ -34,5 +33,3 @@ extension InternetConnections {
         }.resume()
     }
 }
-
-

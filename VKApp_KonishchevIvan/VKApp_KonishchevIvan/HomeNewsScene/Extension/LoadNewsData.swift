@@ -64,7 +64,7 @@ extension HomeNewsTableViewController {
                            
                         }else {
                             newsCellData.newsLikeCount = item.likes!.count
-                            newsCellData.newsSeenCount = item.views!.count
+                            newsCellData.newsSeenCount = item.views?.count ?? 0
                             if item.likes!.likeStatus == 1 {
                                 newsCellData.newsLikeStatus = true
                             }
@@ -123,10 +123,14 @@ extension HomeNewsTableViewController {
           // если новость с истории
                         }else if let copyHistory = item.newsCopyHistory.first {
                             cellType = .histroy
-                            newsCellData.newsText = (copyHistory.attachments.first?.video!.title)!
-                            newsCellData.newsDescription = (copyHistory.attachments.first?.video!.description)!
+                            newsCellData.newsText = (copyHistory.attachments.first?.video?.title) ?? ""
+                            newsCellData.newsDescription = (copyHistory.attachments.first?.video?.description) ?? ""
                             newsCellData.albumId = 0
-                            newsCellData.newsImage = getPhotoNewsHistory((copyHistory.attachments.first?.video!.newsImage)!)
+                            if let listItems = copyHistory.attachments.first?.video?.newsImage {
+                                newsCellData.newsImage = getPhotoNewsHistory(listItems)
+                            }
+                            newsCellData.newsImage = ""
+                           // newsCellData.newsImage = getPhotoNewsHistory((copyHistory.attachments.first?.video!.newsImage)!)
                         }
                      
                         

@@ -27,14 +27,14 @@ class HomeNewsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNotificationToken()
-        self.loadNewsData()
-        
         self.currentOrientation = UIDevice.current.orientation
         tableView.register(UINib(nibName: "SinglePhotoAndTextTableViewCell", bundle: nil), forCellReuseIdentifier: "SinglePhotoAndTextCell")
     }
 
-
+    override func viewWillAppear(_ animated: Bool) {
+        self.setNotificationToken()
+        self.loadNewsData()
+    }
     // MARK: - Table view data source
 
 

@@ -18,7 +18,7 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     // аллерт для поиска групп
     var allert: UIAlertController!
     var userGroupDelegate: UserGroupTableViewDelegate? = nil
-    var allGroups: [AllUserGroups] = []{
+    var allGroups: [AllNewUserGroups] = []{
         didSet {
             self.allGroupSeacrch = allGroups
             self.allGroupDictionary = sort(group: allGroupSeacrch)
@@ -27,10 +27,10 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
     }
-    var allGroupSeacrch: [AllUserGroups] = []
-    var myActiveGroup: [AllUserGroups] = []
+    var allGroupSeacrch: [AllNewUserGroups] = []
+    var myActiveGroup: [AllNewUserGroups] = []
     var shar: [String] = []
-    var allGroupDictionary = [String: [AllUserGroups]]()
+    var allGroupDictionary = [String: [AllNewUserGroups]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,15 +82,19 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
 
     // количество секций с одной буквой
         override func numberOfSections(in tableView: UITableView) -> Int {
-            return self.allGroupDictionary.keys.count
+            
+           return self.shar.count
+            //return self.allGroupDictionary.keys.count
         }
         
     // количество строк таблици в одной секции
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            let groupCell = allGroupDictionary.keys.sorted()
-            let cell = allGroupDictionary[groupCell[section]]?.count ?? 0
             
-            return cell
+            let count = allGroupDictionary[self.shar[section]]?.count
+//            let groupCell = allGroupDictionary.keys.sorted()
+//            let cell = allGroupDictionary[groupCell[section]]?.count ?? 0
+//
+            return count ?? 0
         }
 
   
@@ -99,51 +103,51 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
             preconditionFailure("Error")
         }
-        
-        let firstchar = allGroupDictionary.keys.sorted()[indexPath.section]
-        let group = allGroupDictionary[firstchar]!
-        let groupes = group[indexPath.row]
-        cell.profileStatus.text = ""
-        cell.lableCellXib.text = groupes.nameGroup
-        cell.imageCellAvatar.image = UIImage(data: groupes.imageGroup)
-       // cell.imageCellAvatar.loadImageFromUrlString(groupes.imageGroup)
-        cell.labelCityCellXib.text = "-"
-    
+        if let firstchar = allGroupDictionary[self.shar[indexPath.section]] {
+            let groupes = firstchar[indexPath.row]
+            cell.profileStatus.text = ""
+            cell.lableCellXib.text = groupes.nameGroup
+            cell.imageCellAvatar.loadImageFromUrlString(groupes.imageGroup)//UIImage(data: groupes.imageGroup)
+            cell.labelCityCellXib.text = "-"
+        }else {
+            return cell
+        }
         return cell
         
     }
     
     // установка имени секции
         override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            return String(allGroupDictionary.keys.sorted()[section])
+            return self.shar[section]
         }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//MARK: - Реализация этого метода добавления групп через VK  будет позже ....
-//        let allDictionaryKey = self.allGroupDictionary.keys.sorted()[indexPath.section]
-//        let row = indexPath.row
-//        var groupArray = allGroupDictionary[allDictionaryKey]!
-//        let group = groupArray[row]
-//
-//        groupArray.remove(at: row)
-//        allGroupDictionary[allDictionaryKey] = groupArray
-//
-//       if (issetGroup(group, groupArray: self.myActiveGroup)) == nil {
-//
-//            self.myActiveGroup.append(group)
-//            guard let index = issetGroup(group, groupArray: self.allGroupSeacrch) else { return }
-//            self.allGroupSeacrch.remove(at: index)
-//
-//           tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.right)
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.12) {
-//                self.userGroupDelegate?.addNewGroup(self.myActiveGroup, allGroup: self.allGroupSeacrch)
-//                self.navigationController?.popViewController(animated: true)
-//            }
-//
-//        }else {
-//            let allert = AllertWrongUserData().getAllert(title: "Message", message: "You are already a member of this group!")
-//            present(allert, animated: true, completion: nil)
-//        }
+        guard let arrayGroups = self.allGroupDictionary[self.shar[indexPath.section]]  else { return }
+        let selectedGroup = arrayGroups[indexPath.row]
+        self.joinNewGroup(to: selectedGroup.id) { status, message in
+            
+            if message.first == "success" {
+                if arrayGroups.count <= 1 {
+                    let index = self.allGroupDictionary.firstIndex(where: {$0.key == self.shar[indexPath.section] })
+                    self.allGroupDictionary.remove(at: index!)
+                    self.shar.remove(at: indexPath.section)
+                    DispatchQueue.main.async {
+                        let indexSet = IndexSet(arrayLiteral: indexPath.section)
+                        self.tableView.deleteSections(indexSet, with: .fade)
+                    }
+                }else {
+                    let newArrayGroups = arrayGroups.filter{ $0.id != selectedGroup.id }
+                    self.allGroupDictionary[self.shar[indexPath.section]] = newArrayGroups
+                    DispatchQueue.main.async {
+                        self.tableView.deleteRows(at: [indexPath], with: .right)
+                    }
+                }
+                
+                
+            }else {
+                print(message)
+            }
+        }
     
     }
     
@@ -156,9 +160,9 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
 
 extension NewGroupTableViewController {
     
-    private func sort(group: [AllUserGroups]) -> [String: [AllUserGroups]]{
+    private func sort(group: [AllNewUserGroups]) -> [String: [AllNewUserGroups]]{
         
-        var groupDictionary = [String: [AllUserGroups]]()
+        var groupDictionary = [String: [AllNewUserGroups]]()
         group.forEach() { grupes in
             guard let char = grupes.nameGroup.first else { return }
             let chars = String(char)
@@ -167,6 +171,7 @@ extension NewGroupTableViewController {
                 groupDictionary[chars] = thisCharGroup
             }else {
                 groupDictionary[chars] = [grupes]
+                
                 self.shar.append(String(chars))
             }
         }
