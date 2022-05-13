@@ -29,7 +29,7 @@ struct UserDetailsTableData {
 struct DetailsSectionData {
     var id: Int = 0
     var ownerId: Int = 0
-    var date: Int = 0
+    var date: Double = 0
     var textNews: String = ""
     var likes: WallLikes = WallLikes()
     var views: WallViews? = nil
@@ -40,7 +40,7 @@ struct DetailsSectionData {
     var photo: [ImageAndLikeData]? = nil
     var linkUrl:  String? = nil
     init() {}
-    init( id: Int, ownerId: Int, date: Int, textNews: String, likes: WallLikes, views: WallViews?, urlNewsImage: String?, titleNews: String?, captionNews: String?, link: String ) {
+    init( id: Int, ownerId: Int, date: Double, textNews: String, likes: WallLikes, views: WallViews?, urlNewsImage: String?, titleNews: String?, captionNews: String?, link: String ) {
         self.id = id
         self.ownerId = ownerId
         self.date = date

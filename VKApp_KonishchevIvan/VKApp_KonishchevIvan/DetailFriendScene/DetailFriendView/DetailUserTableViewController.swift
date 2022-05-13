@@ -148,7 +148,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             }
             let data = dataTable[indexPath.section].sectionData
             cell.linkCaption.text = data.captionNews
-            cell.linkDate.text = unixTimeConvertion(unixTime: Double(data.date))
+            cell.linkDate.text = data.date.unixTimeConvertion() // unixTimeConvertion(unixTime: Double(data.date))
             cell.linkLink.setTitle(data.linkUrl, for: .normal)
             cell.linkLikeCount.text = String(data.likes.count)
             

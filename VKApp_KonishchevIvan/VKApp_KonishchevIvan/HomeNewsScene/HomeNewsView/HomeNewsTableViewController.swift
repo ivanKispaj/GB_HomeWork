@@ -68,12 +68,11 @@ class HomeNewsTableViewController: UITableViewController {
 // устанавливаем данные для отображения
         
         cell.newsUserAvatar.image = UIImage(data: data!.newsUserLogo)
-      //  cell.newsUserAvatar.loadImageFromUrlString(data!.newsUserLogo)
         cell.newsTextView.text = data?.newsDescription
         cell.newsUserName.text = data?.newsUserName
         let counLike: String = String((data?.newsLikeCount)!)
         cell.newsLikeLable.text = counLike
-        cell.newsUserApdateTime.text = unixTimeConvertion(unixTime: Double(data!.date))
+        cell.newsUserApdateTime.text =  data!.date.unixTimeConvertion()
         cell.seenViewLable.text = String(data!.newsSeenCount)
         return cell
     }

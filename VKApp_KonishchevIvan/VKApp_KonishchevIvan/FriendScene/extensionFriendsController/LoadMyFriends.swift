@@ -21,9 +21,9 @@ extension FriendsTableViewController {
         InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: "72287677")
         }
         
-        let friendsData = self.realmService.readData(FriendsResponse.self)!.where{ $0.id == 72287677 }.first?.items
-        if let data = friendsData {
-            updateFriendsView(From: data)
+        
+        if let friendsData = self.realmService.readData(FriendsResponse.self)!.where({ $0.id == 72287677 }).first?.items {
+            updateFriendsView(From: friendsData)
         }
 
     }

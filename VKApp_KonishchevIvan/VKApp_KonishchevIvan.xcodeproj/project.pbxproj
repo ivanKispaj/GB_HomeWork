@@ -34,10 +34,10 @@
 		638E99E928144B3200367F44 /* LoadNewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E828144B3200367F44 /* LoadNewsData.swift */; };
 		638E99ED2815548300367F44 /* UserWallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99EC2815548300367F44 /* UserWallModel.swift */; };
 		638E99EF281554A100367F44 /* loadUserWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99EE281554A100367F44 /* loadUserWall.swift */; };
+		63984771282E154D008D216E /* unixTimeConvertionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984770282E154D008D216E /* unixTimeConvertionDouble.swift */; };
 		639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4258280C0AFE0097D53F /* InternetConnections.swift */; };
 		639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425C280C1BE90097D53F /* getUserGroups.swift */; };
 		639B425F280C252F0097D53F /* getGroupsByRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425E280C252F0097D53F /* getGroupsByRequest.swift */; };
-		639B4262280D2D200097D53F /* unixTimeConvertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4261280D2D200097D53F /* unixTimeConvertion.swift */; };
 		639B4264280D36430097D53F /* isUrlString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4263280D36430097D53F /* isUrlString.swift */; };
 		63B47767282915CB0072CE24 /* LoadAndSaveFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B47766282915CB0072CE24 /* LoadAndSaveFriends.swift */; };
 		63B477692829160E0072CE24 /* LoadAndSavePhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B477682829160E0072CE24 /* LoadAndSavePhotoData.swift */; };
@@ -138,10 +138,10 @@
 		638E99E828144B3200367F44 /* LoadNewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNewsData.swift; sourceTree = "<group>"; };
 		638E99EC2815548300367F44 /* UserWallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWallModel.swift; sourceTree = "<group>"; };
 		638E99EE281554A100367F44 /* loadUserWall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadUserWall.swift; sourceTree = "<group>"; };
+		63984770282E154D008D216E /* unixTimeConvertionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unixTimeConvertionDouble.swift; sourceTree = "<group>"; };
 		639B4258280C0AFE0097D53F /* InternetConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnections.swift; sourceTree = "<group>"; };
 		639B425C280C1BE90097D53F /* getUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserGroups.swift; sourceTree = "<group>"; };
 		639B425E280C252F0097D53F /* getGroupsByRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getGroupsByRequest.swift; sourceTree = "<group>"; };
-		639B4261280D2D200097D53F /* unixTimeConvertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unixTimeConvertion.swift; sourceTree = "<group>"; };
 		639B4263280D36430097D53F /* isUrlString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isUrlString.swift; sourceTree = "<group>"; };
 		63B47766282915CB0072CE24 /* LoadAndSaveFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSaveFriends.swift; sourceTree = "<group>"; };
 		63B477682829160E0072CE24 /* LoadAndSavePhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSavePhotoData.swift; sourceTree = "<group>"; };
@@ -557,6 +557,14 @@
 			path = ExtensionUIImageView;
 			sourceTree = "<group>";
 		};
+		6398476A282E135E008D216E /* ExtensionDouble */ = {
+			isa = PBXGroup;
+			children = (
+				63984770282E154D008D216E /* unixTimeConvertionDouble.swift */,
+			);
+			path = ExtensionDouble;
+			sourceTree = "<group>";
+		};
 		639B4255280C0A100097D53F /* VKRequests */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,10 +577,10 @@
 		639B4260280D2D030097D53F /* Hellpers */ = {
 			isa = PBXGroup;
 			children = (
+				6398476A282E135E008D216E /* ExtensionDouble */,
 				638E99CE2813BE0800367F44 /* ExtensionUIImageView */,
 				638E99BD2812635B00367F44 /* ExtensionString */,
 				805E76EE27BC17B50033098D /* AllertMessage */,
-				639B4261280D2D200097D53F /* unixTimeConvertion.swift */,
 			);
 			path = Hellpers;
 			sourceTree = "<group>";
@@ -1131,7 +1139,6 @@
 				80850EC827DE12480078039E /* SingleCollectionViewCell.swift in Sources */,
 				639B4264280D36430097D53F /* isUrlString.swift in Sources */,
 				638E99E928144B3200367F44 /* LoadNewsData.swift in Sources */,
-				639B4262280D2D200097D53F /* unixTimeConvertion.swift in Sources */,
 				63B47767282915CB0072CE24 /* LoadAndSaveFriends.swift in Sources */,
 				63B4776B2829181F0072CE24 /* LoadAndSaveUserWall.swift in Sources */,
 				80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */,
@@ -1143,6 +1150,7 @@
 				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,
 				638E99B128125D9D00367F44 /* VKNAavigationDelegate.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
+				63984771282E154D008D216E /* unixTimeConvertionDouble.swift in Sources */,
 				804154F127B62FE900160418 /* SceneDelegate.swift in Sources */,
 				638E99BC2812616D00367F44 /* LikeProtocolMethods.swift in Sources */,
 				80EAC05027F6D453006DDB9A /* TableViewDelegate.swift in Sources */,

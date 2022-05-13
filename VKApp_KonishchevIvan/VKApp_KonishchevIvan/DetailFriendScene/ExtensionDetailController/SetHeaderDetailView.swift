@@ -18,9 +18,8 @@ extension DetailUserTableViewController {
         }
         
         self.detailAvatarHeader.image = UIImage(data: self.friendsSelectedd.photo)
-        //self.detailAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
        
-        let time = unixTimeConvertion(unixTime: self.friendsSelectedd.lastSeenDate)
+        let time = self.friendsSelectedd.lastSeenDate.unixTimeConvertion()
         if self.friendsSelectedd.online {
             self.detailUserAccountLable.textColor = UIColor.red
             self.detailUserAccountLable.text = "online"

@@ -48,7 +48,7 @@ final class UserWallItems: Object, Decodable {
     }
     @objc dynamic var id: Int = 0
     @objc dynamic var ownerId: Int = 0
-    @objc dynamic var date: Int = 0
+    @objc dynamic var date: Double = 0
     @objc dynamic var text: String = ""
      dynamic var attachments = List<WallAttachments>()
      dynamic var wallcopyHystory = List<WallCopyHistory>()
@@ -60,7 +60,7 @@ final class UserWallItems: Object, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
         ownerId = try container.decode(Int.self, forKey: .ownerId)
-        date = try container.decode(Int.self, forKey: .date)
+        date = try container.decode(Double.self, forKey: .date)
         text = try container.decode(String.self, forKey: .text)
         attachments = try container.decodeIfPresent(List<WallAttachments>.self, forKey: .attachments) ?? List<WallAttachments>()
         wallcopyHystory = try container.decodeIfPresent(List<WallCopyHistory>.self, forKey: .wallcopyHystory) ?? List<WallCopyHistory>()

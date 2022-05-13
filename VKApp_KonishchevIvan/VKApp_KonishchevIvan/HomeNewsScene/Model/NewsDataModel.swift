@@ -26,7 +26,7 @@ struct NewsData  {
 //MARK: - Model для отображения страницы новостей
 struct NewsCellData {
     var ownerId: Int = 0
-    var date: Int = 0
+    var date: Double = 0
     var newsLikeCount: Int = 0
     var newsLikeStatus: Bool = false
     var newsSeenCount: Int = 0
@@ -87,7 +87,7 @@ final class NewsItems: Object, Decodable{
         case wallPhotos = "photos"
     }
     @objc dynamic var sourceId: Int = 0
-    @objc dynamic var date: Int = 0
+    @objc dynamic var date: Double = 0
     dynamic var attachments = List<NewsAttachments>()
     dynamic var newsCopyHistory = List<NewsCopyHistory>()
     @objc dynamic var postId: Int = 0
@@ -102,7 +102,7 @@ final class NewsItems: Object, Decodable{
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         sourceId = try container.decode(Int.self, forKey: .sourceId)
-        date = try container.decode(Int.self, forKey: .date)
+        date = try container.decode(Double.self, forKey: .date)
         postId = try container.decode(Int.self, forKey: .postId)
         type = try container.decode(String.self, forKey: .type)
         text = try? container.decodeIfPresent(String.self, forKey: .text)

@@ -59,7 +59,7 @@ final class PhotoItems: Object, Decodable {
         case ownerId = "owner_id"
     }
     @objc dynamic var ownerId: Int = 0
-    @objc dynamic var date: Int = 0
+    @objc dynamic var date: Double = 0
     @objc dynamic var albumId: Int = 0
     @objc dynamic var id: Int = 0
     @objc dynamic var likes: PhotoLikes? = PhotoLikes()
@@ -70,7 +70,7 @@ final class PhotoItems: Object, Decodable {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         ownerId = try container.decode(Int.self, forKey: .ownerId)
-        date = try container.decode(Int.self, forKey: .date)
+        date = try container.decode(Double.self, forKey: .date)
         albumId = try container.decode(Int.self, forKey: .albumId)
         id = try container.decode(Int.self, forKey: .id)
         likes = try? container.decode(PhotoLikes.self, forKey: .likes)
