@@ -22,7 +22,7 @@ final class DeviceId: Object {
 final class VKLoginViewController: UIViewController {
 
    // private var cities = [FireBaseRegisterUserModel]()
-     let ref = Database.database().reference(withPath: "userId")
+     let ref = Database.database().reference(withPath: "registerUser")
     
     let realm = RealmService()
 

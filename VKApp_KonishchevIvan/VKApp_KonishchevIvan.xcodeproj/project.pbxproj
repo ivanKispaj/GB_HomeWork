@@ -44,6 +44,7 @@
 		63984782282E7B8E008D216E /* leaveGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984781282E7B8E008D216E /* leaveGroup.swift */; };
 		63984784282E7C2F008D216E /* LeaveGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984783282E7C2F008D216E /* LeaveGroupModel.swift */; };
 		63984787282EADED008D216E /* FireBaseRegisterUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984786282EADED008D216E /* FireBaseRegisterUserModel.swift */; };
+		63984789282EBD52008D216E /* saveUserIdFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984788282EBD52008D216E /* saveUserIdFirebase.swift */; };
 		639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4258280C0AFE0097D53F /* InternetConnections.swift */; };
 		639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425C280C1BE90097D53F /* getUserGroups.swift */; };
 		639B425F280C252F0097D53F /* getGroupsByRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425E280C252F0097D53F /* getGroupsByRequest.swift */; };
@@ -157,6 +158,7 @@
 		63984781282E7B8E008D216E /* leaveGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leaveGroup.swift; sourceTree = "<group>"; };
 		63984783282E7C2F008D216E /* LeaveGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveGroupModel.swift; sourceTree = "<group>"; };
 		63984786282EADED008D216E /* FireBaseRegisterUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseRegisterUserModel.swift; sourceTree = "<group>"; };
+		63984788282EBD52008D216E /* saveUserIdFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = saveUserIdFirebase.swift; path = VKApp_KonishchevIvan/VKLoginScene/VKLoginModel/saveUserIdFirebase.swift; sourceTree = SOURCE_ROOT; };
 		639B4258280C0AFE0097D53F /* InternetConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnections.swift; sourceTree = "<group>"; };
 		639B425C280C1BE90097D53F /* getUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserGroups.swift; sourceTree = "<group>"; };
 		639B425E280C252F0097D53F /* getGroupsByRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getGroupsByRequest.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 		638E99AC28125D1500367F44 /* VKLoginService */ = {
 			isa = PBXGroup;
 			children = (
+				63984788282EBD52008D216E /* saveUserIdFirebase.swift */,
 			);
 			path = VKLoginService;
 			sourceTree = "<group>";
@@ -1155,6 +1158,7 @@
 				8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */,
 				80C19AEA27D7C6BA009C34CB /* SetHeaderDetailView.swift in Sources */,
 				638E99D22813C27100367F44 /* LoadPhotoAlbumSelcetedUser.swift in Sources */,
+				63984789282EBD52008D216E /* saveUserIdFirebase.swift in Sources */,
 				63984775282E2EF3008D216E /* AllNewUserGroups.swift in Sources */,
 				639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */,
 				80CCB6B827E4E55800BC2085 /* HorizontalCollectionViewCell.swift in Sources */,
