@@ -7,6 +7,8 @@
 
 import UIKit
 import RealmSwift
+import FirebaseCore
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -30,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let url = Realm.Configuration.defaultConfiguration.fileURL!
 //        remove(realmURL: url)
-            
+        FirebaseApp.configure()
         return true
     }
 

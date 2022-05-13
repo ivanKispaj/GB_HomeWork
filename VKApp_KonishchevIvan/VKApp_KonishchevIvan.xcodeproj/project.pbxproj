@@ -35,6 +35,7 @@
 		638E99ED2815548300367F44 /* UserWallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99EC2815548300367F44 /* UserWallModel.swift */; };
 		638E99EF281554A100367F44 /* loadUserWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99EE281554A100367F44 /* loadUserWall.swift */; };
 		63984771282E154D008D216E /* unixTimeConvertionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984770282E154D008D216E /* unixTimeConvertionDouble.swift */; };
+		63984773282E1B9A008D216E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63984772282E1B9A008D216E /* GoogleService-Info.plist */; };
 		639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4258280C0AFE0097D53F /* InternetConnections.swift */; };
 		639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425C280C1BE90097D53F /* getUserGroups.swift */; };
 		639B425F280C252F0097D53F /* getGroupsByRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425E280C252F0097D53F /* getGroupsByRequest.swift */; };
@@ -139,6 +140,7 @@
 		638E99EC2815548300367F44 /* UserWallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWallModel.swift; sourceTree = "<group>"; };
 		638E99EE281554A100367F44 /* loadUserWall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadUserWall.swift; sourceTree = "<group>"; };
 		63984770282E154D008D216E /* unixTimeConvertionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unixTimeConvertionDouble.swift; sourceTree = "<group>"; };
+		63984772282E1B9A008D216E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		639B4258280C0AFE0097D53F /* InternetConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnections.swift; sourceTree = "<group>"; };
 		639B425C280C1BE90097D53F /* getUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserGroups.swift; sourceTree = "<group>"; };
 		639B425E280C252F0097D53F /* getGroupsByRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getGroupsByRequest.swift; sourceTree = "<group>"; };
@@ -774,6 +776,7 @@
 				638E99B42812604700367F44 /* PhotoGallaryScene */,
 				80233AB227BF5A870040D702 /* Controllers */,
 				804154FC27B62FEB00160418 /* Info.plist */,
+				63984772282E1B9A008D216E /* GoogleService-Info.plist */,
 			);
 			path = VKApp_KonishchevIvan;
 			sourceTree = "<group>";
@@ -1037,6 +1040,7 @@
 				80850ED727DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.xib in Resources */,
 				80C19ACE27D76C6E009C34CB /* CouruselTableViewCell.xib in Resources */,
 				80CCB6B927E4E55800BC2085 /* HorizontalCollectionViewCell.xib in Resources */,
+				63984773282E1B9A008D216E /* GoogleService-Info.plist in Resources */,
 				804154F627B62FE900160418 /* Main.storyboard in Resources */,
 				63244637282AD72500AB1C72 /* DetailOlugCell.xib in Resources */,
 				80DD23A827D3332000F78417 /* TableViewCellXib.xib in Resources */,
