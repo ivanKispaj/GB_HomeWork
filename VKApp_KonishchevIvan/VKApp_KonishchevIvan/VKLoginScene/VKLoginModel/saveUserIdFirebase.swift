@@ -10,7 +10,7 @@ import FirebaseDatabase
 
 extension VKLoginViewController {
     func saveUserIdFirebase(to userId: Int) {
-        let saveFirebaseUser = FireBaseRegisterUserModel(id: userId)
-        self.ref.setValue(saveFirebaseUser.toAnyObject())
+      //  let saveFirebaseUser = FireBaseRegisterUserModel(id: userId)
+      //  self.ref.setValue(saveFirebaseUser.toAnyObject())
     }
 }

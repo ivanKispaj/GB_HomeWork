@@ -40,6 +40,7 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.setNitificationGroups()
         self.loadUserGroupFromVK()
     }
@@ -52,14 +53,12 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-    
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
         self.dataGroups?.count ?? 0
-       // return myActiveGroup.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,11 +72,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
         cell.lableCellXib.text = data[indexPath.row].groupName
         cell.labelCityCellXib.text = data[indexPath.row].activity
         cell.profileStatus.text = ""
-        
-//        cell.imageCellAvatar.image = UIImage(data: self.myActiveGroup[indexPath.row].imageGroup)
-//        cell.lableCellXib.text = myActiveGroup[indexPath.row].nameGroup
-//        cell.labelCityCellXib.text = myActiveGroup[indexPath.row].activity
-//        cell.profileStatus.text = ""
         return cell
     
     }

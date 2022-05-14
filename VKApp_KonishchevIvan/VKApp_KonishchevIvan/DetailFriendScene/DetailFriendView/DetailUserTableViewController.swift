@@ -63,6 +63,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.setNotificationtokenWall()
         self.setNotificationTokenPhoto()
         self.setNotificationtokenFriends()

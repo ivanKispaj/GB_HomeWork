@@ -13,6 +13,7 @@
 		63244632282AB97E00AB1C72 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63244631282AB97E00AB1C72 /* RealmService.swift */; };
 		63244636282AD72500AB1C72 /* DetailOlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63244634282AD72500AB1C72 /* DetailOlugCell.swift */; };
 		63244637282AD72500AB1C72 /* DetailOlugCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63244635282AD72500AB1C72 /* DetailOlugCell.xib */; };
+		6348F4D2282FC5B700D69134 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6348F4D1282FC5B700D69134 /* GoogleService-Info.plist */; };
 		637CA727281A593100058708 /* LinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637CA725281A593100058708 /* LinkTableViewCell.swift */; };
 		637CA728281A593100058708 /* LinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637CA726281A593100058708 /* LinkTableViewCell.xib */; };
 		638E99AB28125CF600367F44 /* DelegateLikeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99AA28125CF600367F44 /* DelegateLikeExtension.swift */; };
@@ -35,7 +36,6 @@
 		638E99ED2815548300367F44 /* UserWallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99EC2815548300367F44 /* UserWallModel.swift */; };
 		638E99EF281554A100367F44 /* loadUserWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99EE281554A100367F44 /* loadUserWall.swift */; };
 		63984771282E154D008D216E /* unixTimeConvertionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984770282E154D008D216E /* unixTimeConvertionDouble.swift */; };
-		63984773282E1B9A008D216E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63984772282E1B9A008D216E /* GoogleService-Info.plist */; };
 		63984775282E2EF3008D216E /* AllNewUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984774282E2EF3008D216E /* AllNewUserGroups.swift */; };
 		63984777282E3651008D216E /* joinInToGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984776282E3651008D216E /* joinInToGroup.swift */; };
 		63984779282E3715008D216E /* JoinGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984778282E3715008D216E /* JoinGroupModel.swift */; };
@@ -127,6 +127,7 @@
 		63244631282AB97E00AB1C72 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		63244634282AD72500AB1C72 /* DetailOlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOlugCell.swift; sourceTree = "<group>"; };
 		63244635282AD72500AB1C72 /* DetailOlugCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailOlugCell.xib; sourceTree = "<group>"; };
+		6348F4D1282FC5B700D69134 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		637CA725281A593100058708 /* LinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTableViewCell.swift; sourceTree = "<group>"; };
 		637CA726281A593100058708 /* LinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkTableViewCell.xib; sourceTree = "<group>"; };
 		638E99AA28125CF600367F44 /* DelegateLikeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateLikeExtension.swift; sourceTree = "<group>"; };
@@ -149,7 +150,6 @@
 		638E99EC2815548300367F44 /* UserWallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWallModel.swift; sourceTree = "<group>"; };
 		638E99EE281554A100367F44 /* loadUserWall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadUserWall.swift; sourceTree = "<group>"; };
 		63984770282E154D008D216E /* unixTimeConvertionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unixTimeConvertionDouble.swift; sourceTree = "<group>"; };
-		63984772282E1B9A008D216E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63984774282E2EF3008D216E /* AllNewUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNewUserGroups.swift; sourceTree = "<group>"; };
 		63984776282E3651008D216E /* joinInToGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = joinInToGroup.swift; sourceTree = "<group>"; };
 		63984778282E3715008D216E /* JoinGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupModel.swift; sourceTree = "<group>"; };
@@ -803,7 +803,7 @@
 				638E99B42812604700367F44 /* PhotoGallaryScene */,
 				80233AB227BF5A870040D702 /* Controllers */,
 				804154FC27B62FEB00160418 /* Info.plist */,
-				63984772282E1B9A008D216E /* GoogleService-Info.plist */,
+				6348F4D1282FC5B700D69134 /* GoogleService-Info.plist */,
 			);
 			path = VKApp_KonishchevIvan;
 			sourceTree = "<group>";
@@ -1067,7 +1067,7 @@
 				80850ED727DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.xib in Resources */,
 				80C19ACE27D76C6E009C34CB /* CouruselTableViewCell.xib in Resources */,
 				80CCB6B927E4E55800BC2085 /* HorizontalCollectionViewCell.xib in Resources */,
-				63984773282E1B9A008D216E /* GoogleService-Info.plist in Resources */,
+				6348F4D2282FC5B700D69134 /* GoogleService-Info.plist in Resources */,
 				804154F627B62FE900160418 /* Main.storyboard in Resources */,
 				63244637282AD72500AB1C72 /* DetailOlugCell.xib in Resources */,
 				80DD23A827D3332000F78417 /* TableViewCellXib.xib in Resources */,

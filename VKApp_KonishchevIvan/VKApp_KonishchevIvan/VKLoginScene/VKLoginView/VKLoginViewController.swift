@@ -21,7 +21,6 @@ final class DeviceId: Object {
 
 final class VKLoginViewController: UIViewController {
 
-   // private var cities = [FireBaseRegisterUserModel]()
      let ref = Database.database().reference(withPath: "registerUser")
     
     let realm = RealmService()
@@ -40,7 +39,6 @@ final class VKLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
         configureWebView()
         if connectedToNetwork() {
             let deviceId = DeviceId()
