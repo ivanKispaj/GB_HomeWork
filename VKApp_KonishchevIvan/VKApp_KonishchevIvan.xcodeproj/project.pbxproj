@@ -46,8 +46,6 @@
 		63984782282E7B8E008D216E /* leaveGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984781282E7B8E008D216E /* leaveGroup.swift */; };
 		63984784282E7C2F008D216E /* LeaveGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984783282E7C2F008D216E /* LeaveGroupModel.swift */; };
 		639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4258280C0AFE0097D53F /* InternetConnections.swift */; };
-		639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425C280C1BE90097D53F /* getUserGroups.swift */; };
-		639B425F280C252F0097D53F /* getGroupsByRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425E280C252F0097D53F /* getGroupsByRequest.swift */; };
 		639B4264280D36430097D53F /* isUrlString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4263280D36430097D53F /* isUrlString.swift */; };
 		63B47767282915CB0072CE24 /* LoadAndSaveFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B47766282915CB0072CE24 /* LoadAndSaveFriends.swift */; };
 		63B477692829160E0072CE24 /* LoadAndSavePhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B477682829160E0072CE24 /* LoadAndSavePhotoData.swift */; };
@@ -160,8 +158,6 @@
 		63984781282E7B8E008D216E /* leaveGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leaveGroup.swift; sourceTree = "<group>"; };
 		63984783282E7C2F008D216E /* LeaveGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveGroupModel.swift; sourceTree = "<group>"; };
 		639B4258280C0AFE0097D53F /* InternetConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnections.swift; sourceTree = "<group>"; };
-		639B425C280C1BE90097D53F /* getUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserGroups.swift; sourceTree = "<group>"; };
-		639B425E280C252F0097D53F /* getGroupsByRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getGroupsByRequest.swift; sourceTree = "<group>"; };
 		639B4263280D36430097D53F /* isUrlString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isUrlString.swift; sourceTree = "<group>"; };
 		63B47766282915CB0072CE24 /* LoadAndSaveFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSaveFriends.swift; sourceTree = "<group>"; };
 		63B477682829160E0072CE24 /* LoadAndSavePhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSavePhotoData.swift; sourceTree = "<group>"; };
@@ -578,15 +574,6 @@
 			path = ExtensionDouble;
 			sourceTree = "<group>";
 		};
-		639B4255280C0A100097D53F /* VKRequests */ = {
-			isa = PBXGroup;
-			children = (
-				639B425C280C1BE90097D53F /* getUserGroups.swift */,
-				639B425E280C252F0097D53F /* getGroupsByRequest.swift */,
-			);
-			path = VKRequests;
-			sourceTree = "<group>";
-		};
 		639B4260280D2D030097D53F /* Hellpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -957,7 +944,6 @@
 			isa = PBXGroup;
 			children = (
 				63B47764282915830072CE24 /* InternetConnection */,
-				639B4255280C0A100097D53F /* VKRequests */,
 				80F4BCD02803E34E008E07B0 /* NetworkSessionData.swift */,
 			);
 			path = InternetConnections;
@@ -1166,7 +1152,6 @@
 				638E99E1281433DC00367F44 /* NewGroupSearchModel.swift in Sources */,
 				638E99C3281267B200367F44 /* CustomCollectionLayout.swift in Sources */,
 				638E99ED2815548300367F44 /* UserWallModel.swift in Sources */,
-				639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */,
 				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,
 				63984780282E7B47008D216E /* leaveGroupService.swift in Sources */,
 				638E99B128125D9D00367F44 /* VKNAavigationDelegate.swift in Sources */,
@@ -1178,7 +1163,6 @@
 				80EAC05027F6D453006DDB9A /* TableViewDelegate.swift in Sources */,
 				806284D427DDCAFF00D37674 /* GallaryTableViewCell.swift in Sources */,
 				638E99DC2814024100367F44 /* UserGroupModel.swift in Sources */,
-				639B425F280C252F0097D53F /* getGroupsByRequest.swift in Sources */,
 				638E99CB28131D8E00367F44 /* LoadMyFriends.swift in Sources */,
 				806284CE27DDB24F00D37674 /* GallaryCollectionViewCell.swift in Sources */,
 				63984782282E7B8E008D216E /* leaveGroup.swift in Sources */,

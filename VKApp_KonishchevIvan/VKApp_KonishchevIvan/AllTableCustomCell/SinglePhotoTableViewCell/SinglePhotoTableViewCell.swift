@@ -20,6 +20,7 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
     @IBOutlet weak var singlePhotoLikeImage: UIImageView!
     @IBOutlet weak var singlePhotoSeenCount: UILabel!
     
+    var delegateIndexPatch: IndexPath!
     var singlePhoto: ImageAndLikeData! {
         didSet {
             self.singlCollection.reloadData()
@@ -59,10 +60,10 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-        let photo:[ImageAndLikeData] = [self.singlePhoto]
+   
+        let photo  = [self.singlePhoto!]
         
-        self.delegate.selectRow(nextViewData: photo)
+        self.delegate.selectRow(nextViewData: photo, indexPath: self.delegateIndexPatch)
     }
 
 }

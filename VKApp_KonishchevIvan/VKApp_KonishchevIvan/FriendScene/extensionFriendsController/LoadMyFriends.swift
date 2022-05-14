@@ -34,10 +34,10 @@ extension FriendsTableViewController {
                 switch changes {
                 case .initial(_):
                     print("Signed")
-                case let .update(results, deletions, insertions, _):
-                    if deletions.count != 0 || insertions.count != 0 {
+                case let .update(results, _, _, _):
+                
                         self.updateFriendsView(From: results.first!.items)
-                    }
+                    
                     
                 case .error(_):
                     print("Asd")

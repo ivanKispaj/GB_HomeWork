@@ -116,6 +116,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
                 cell.countCell = 0
             }
             cell.delegate = self
+            cell.delegateIndexPath = indexPath
             cell.delegateFrameImages = self
             return cell
         case .SingleFoto:
@@ -125,11 +126,8 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
            
             let data = dataTable[indexPath.section].sectionData
             cell.singleLableUserName.text = self.friendsSelectedd.userName
-            
-            
+            cell.delegateIndexPatch = indexPath
             cell.singleAvatarHeader.image = UIImage(data: self.friendsSelectedd.photo)
-            
-         //   cell.singleAvatarHeader.loadImageFromUrlString(self.friendsSelectedd.photo)
             cell.likeControll.delegate = self
             cell.likeControll.indexPath = indexPath
             if let seen = data.views {
@@ -137,9 +135,12 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             }else {
                 cell.singlePhotoSeenCount.text = "0"
             }
-            
+        
             cell.delegate = self
-            cell.singlePhoto = data.photo![indexPath.row]
+            var photo =  data.photo![indexPath.row]
+            photo.likeLabel = data.likes.count
+            
+            cell.singlePhoto = photo
             cell.singlPhotoLikeLable.text = String(data.likes.count)
             cell.singlePhotoSeenCount.text = String(data.views?.count ?? 0)
             return cell
@@ -157,10 +158,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.linkDate.text = data.date.unixTimeConvertion() // unixTimeConvertion(unixTime: Double(data.date))
             cell.linkLink.setTitle(data.linkUrl, for: .normal)
             cell.linkLikeCount.text = String(data.likes.count)
-            
             cell.linkUserLogo.image = UIImage(data: self.friendsSelectedd.photo)
-       //     cell.linkUserLogo.loadImageFromUrlString(self.friendsSelectedd.photo)
-            
             cell.linkUserName.text = self.friendsSelectedd.userName
             cell.linkText.text = data.titleNews
             cell.linkSeenCount.text = String(data.views?.count ?? 0)
@@ -178,47 +176,27 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         return cell
         }
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        guard let destinationVC = segue.destination as? GallaryViewController else {
-            preconditionFailure("Error")
-        }
-     
-        destinationVC.arrayPhoto = self.nextViewData
-        destinationVC.title = "Фото галлерея"
-        destinationVC.currentFrame = self.currentFrameImages
-        destinationVC.frameArray = self.frameImages
-        destinationVC.collectionViewFrame = collectionFrame
-    }
 
 
 //MARK: - TableViewDelegate method
-    func selectRow(nextViewData: [ImageAndLikeData]) {
+    func selectRow(nextViewData: [ImageAndLikeData], indexPath: IndexPath) {
         self.nextViewData = nextViewData
-        let indexPath = IndexPath(row: 0, section: 1)
-        var cellRect = self.tableView.rectForRow(at: indexPath) //Получаем область нужной ячейки
-        let contentOffset = tableView.contentOffset //смещение контента таблицы относительно начального нулевого положения
-        let y_coordinate = cellRect.origin.y - contentOffset.y //чистая y координата ячейки относительно экранных координат
-        cellRect.origin.y = y_coordinate
-        self.collectionFrame = cellRect
+        guard let data = self.dataTable else { return }
+        let sectionType = data[indexPath.section].sectionType
         
- //MARK: - Custom push imageGallary
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-           guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "GallaryVievController") as? GallaryViewController else { return }
-            nextVC.modalPresentationStyle = .fullScreen
-            nextVC.transitioningDelegate = nextVC
-            nextVC.collectionViewFrame = self.collectionFrame
-            nextVC.currentFrame = self.currentFrameImages
-            nextVC.frameArray = self.frameImages
-            nextVC.arrayPhoto = nextViewData
-            nextVC.title = "Фото галлерея"
-            nextVC.currentImage = self.currentImage!
-           self.present(nextVC, animated: true)
+        if sectionType == .Gallary {
+            getViewGallary(to: indexPath)
+        }else if sectionType == .SingleFoto {
+            self.currentImage = 0
+            let frame = self.tableView.rectForRow(at: indexPath)
+            let frame1 = CGRect(x: frame.origin.x, y: 0, width: frame.width, height: frame.height)
+            self.frameImages = [frame1]
+            self.currentFrameImages = frame1
+            self.collectionFrame = frame
+            getViewGallary(to: indexPath)
+         //   getViewSinglephoto(to: indexPath)
+        }
+
     }
 }
 
@@ -259,6 +237,34 @@ extension DetailUserTableViewController: SetFrameImages {
 
     func setCurrentImage(_ currentImage: Int) {
         self.currentImage = currentImage
+    }
+    
+    private func getViewGallary(to indexPath: IndexPath) {
+        
+          var cellRect = self.tableView.rectForRow(at: indexPath) //Получаем область нужной ячейки
+          let contentOffset = tableView.contentOffset //смещение контента таблицы относительно начального нулевого положения
+          let y_coordinate = cellRect.origin.y - contentOffset.y //чистая y координата ячейки относительно экранных координат
+          cellRect.origin.y = y_coordinate
+          self.collectionFrame = cellRect
+          
+   //MARK: - Custom push imageGallary
+          let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+             guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "GallaryVievController") as? GallaryViewController else { return }
+              nextVC.modalPresentationStyle = .fullScreen
+              nextVC.transitioningDelegate = nextVC
+              nextVC.collectionViewFrame = self.collectionFrame
+              nextVC.currentFrame = self.currentFrameImages
+              nextVC.frameArray = self.frameImages
+              nextVC.arrayPhoto = nextViewData
+              nextVC.title = "Фото галлерея"
+              nextVC.currentImage = self.currentImage!
+             self.present(nextVC, animated: true)
+    }
+    
+    private func getViewSinglephoto(to indexPath: IndexPath) {
+        
+        
+        
     }
 
 }

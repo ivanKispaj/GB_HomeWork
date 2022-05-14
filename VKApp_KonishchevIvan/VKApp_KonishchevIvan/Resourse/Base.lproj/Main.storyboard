@@ -58,7 +58,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYz-jq-Z4F">
-                                <rect key="frame" x="0.0" y="711" width="390" height="50"/>
+                                <rect key="frame" x="0.0" y="760" width="390" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b9O-CL-ul4" customClass="ControlForLike" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
                                         <rect key="frame" x="10" y="0.0" width="50" height="50"/>
@@ -170,7 +170,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbx-Bg-c3d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6383" y="-314"/>
+            <point key="canvasLocation" x="6051" y="-1142"/>
         </scene>
         <!--Главная-->
         <scene sceneID="ONK-BH-Icm">
@@ -588,7 +588,6 @@
                         <outlet property="detailUserAccountLable" destination="Iws-EY-Dyg" id="Bz0-js-2cs"/>
                         <outlet property="detailUserInfoLable" destination="YpC-l3-tyt" id="feg-uQ-C5z"/>
                         <outlet property="detailUserNameLable" destination="aXq-Um-eVW" id="Wcq-9K-UbF"/>
-                        <segue destination="cXd-IT-8hq" kind="show" identifier="gallaryViewController" id="b2g-hB-51C"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTu-86-NLN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

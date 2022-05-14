@@ -9,5 +9,5 @@ import Foundation
 
 protocol TableViewDelegate {
     var nextViewData: [ImageAndLikeData] {set get}
-    func selectRow(nextViewData: [ImageAndLikeData])
+    func selectRow(nextViewData: [ImageAndLikeData], indexPath: IndexPath)
 }

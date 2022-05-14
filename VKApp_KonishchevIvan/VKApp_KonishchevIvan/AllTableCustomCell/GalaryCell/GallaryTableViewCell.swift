@@ -18,7 +18,7 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         }
     }
     var countCell: Int = 0
-    
+    var delegateIndexPath: IndexPath!
   
     
     override func awakeFromNib() {
@@ -87,7 +87,7 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
       
         self.delegateFrameImages.setCurrentImage(currentImage)
         self.delegateFrameImages.setFrameImages(frameArray, currentFrame: currentFrame) 
-        self.delegate.selectRow(nextViewData: self.gallaryData)
+        self.delegate.selectRow(nextViewData: self.gallaryData, indexPath: self.delegateIndexPath)
         // Выбранная ячейка коллекции!!
        
     }
