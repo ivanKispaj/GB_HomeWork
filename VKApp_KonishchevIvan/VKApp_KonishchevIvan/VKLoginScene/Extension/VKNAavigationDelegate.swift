@@ -8,6 +8,7 @@
 
 import WebKit
 
+
 // MARK: - WKNavigationDelegate
 extension VKLoginViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
@@ -32,9 +33,6 @@ extension VKLoginViewController: WKNavigationDelegate {
             NetworkSessionData.shared.userId = Int(id)
             print(token)
             print(id)
-            let userData = FireBaseRegisterUserModel(userId: Int(id)!, groupId: 987, groupName: "hih28")
-            let referense = self.ref.child(id).child("gro")
-            referense.setValue(userData.toAnyObject())
             decisionHandler(.cancel)
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController else { return }

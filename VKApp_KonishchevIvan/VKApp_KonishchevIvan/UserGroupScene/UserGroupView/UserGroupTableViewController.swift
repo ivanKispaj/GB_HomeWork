@@ -7,10 +7,12 @@
 
 import UIKit
 import RealmSwift
-
+import FirebaseDatabase
 
 class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
   
+    let ref = Database.database().reference(withPath: "registerUser")
+    
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
 
     var nitifiTokenGroups: NotificationToken?

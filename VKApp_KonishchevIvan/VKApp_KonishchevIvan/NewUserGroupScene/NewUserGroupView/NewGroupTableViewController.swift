@@ -9,6 +9,8 @@ import UIKit
 
 class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     
+    var activityIndicator: UIActivityIndicatorView!
+    
     @IBAction func NewSearchGroup(_ sender: Any) {
         setSearchFieldAllert()
         self.present(self.allert, animated: true)
@@ -20,9 +22,12 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     var userGroupDelegate: UserGroupTableViewDelegate? = nil
     var allGroups: [AllNewUserGroups] = []{
         didSet {
+          
             self.allGroupSeacrch = allGroups
             self.allGroupDictionary = sort(group: allGroupSeacrch)
             DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
                 self.tableView.reloadData()
             }
         }
@@ -35,6 +40,7 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        getActivityIndicatorLoadData()
         setSearchFieldAllert()
         self.searchBar.delegate = self
         self.allGroupSeacrch = self.allGroups
@@ -186,6 +192,8 @@ extension NewGroupTableViewController {
                 allert.addTextField()
                 let action = UIAlertAction(title: "Искать", style: .default) { action in
                     if let searchtext = allert.textFields?.first?.text {
+                        self.activityIndicator.isHidden = false
+                        self.activityIndicator.startAnimating()
                         self.LoadNewGroupList(searchText: searchtext)
                     }
                 }

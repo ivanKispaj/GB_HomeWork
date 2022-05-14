@@ -7,8 +7,10 @@
 
 import UIKit
 import RealmSwift
+import FirebaseDatabase
 
 extension UserGroupTableViewController {
+    
     
     func loadUserGroupFromVK()  {
 
@@ -29,7 +31,16 @@ extension UserGroupTableViewController {
     
      func updateViewGroups(from data: Results<ItemsGroup> ){
         var group: [AllUserGroups] = []
+         guard let userId = NetworkSessionData.shared.userId else { return }
+
+         
+         
         for items in data {
+            
+         // Запись групп и пользователя в Firebase
+            let referense = self.ref.child(String(userId)).child("userGroup").child(String(items.id)) // id group
+            let groupData = FirebaseGroupModel(groupId: items.id, groupName: items.groupName)
+            referense.setValue(groupData.toAnyObject())
             
             if let activity = items.activity {
                 let res = AllUserGroups(id: items.id,nameGroup: items.groupName, logoGroup: items.photoGroup, activity: activity)

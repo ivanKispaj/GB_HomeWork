@@ -46,10 +46,10 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         getActivityIndicatorLoadData()
-      
-    
+        
         self.loadMyFriends()
         self.setNotificationtoken()
+        
         self.searchBar!.delegate = self
         tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
         tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")

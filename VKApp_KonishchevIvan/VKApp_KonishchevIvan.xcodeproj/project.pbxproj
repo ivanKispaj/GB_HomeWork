@@ -14,6 +14,8 @@
 		63244636282AD72500AB1C72 /* DetailOlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63244634282AD72500AB1C72 /* DetailOlugCell.swift */; };
 		63244637282AD72500AB1C72 /* DetailOlugCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63244635282AD72500AB1C72 /* DetailOlugCell.xib */; };
 		6348F4D2282FC5B700D69134 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6348F4D1282FC5B700D69134 /* GoogleService-Info.plist */; };
+		6348F4D4282FDC3C00D69134 /* FirebaseGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6348F4D3282FDC3C00D69134 /* FirebaseGroupModel.swift */; };
+		6348F4D8282FE56100D69134 /* NewGroupActivitiIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6348F4D7282FE56100D69134 /* NewGroupActivitiIndicator.swift */; };
 		637CA727281A593100058708 /* LinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637CA725281A593100058708 /* LinkTableViewCell.swift */; };
 		637CA728281A593100058708 /* LinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637CA726281A593100058708 /* LinkTableViewCell.xib */; };
 		638E99AB28125CF600367F44 /* DelegateLikeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99AA28125CF600367F44 /* DelegateLikeExtension.swift */; };
@@ -43,8 +45,6 @@
 		63984780282E7B47008D216E /* leaveGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398477F282E7B47008D216E /* leaveGroupService.swift */; };
 		63984782282E7B8E008D216E /* leaveGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984781282E7B8E008D216E /* leaveGroup.swift */; };
 		63984784282E7C2F008D216E /* LeaveGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984783282E7C2F008D216E /* LeaveGroupModel.swift */; };
-		63984787282EADED008D216E /* FireBaseRegisterUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984786282EADED008D216E /* FireBaseRegisterUserModel.swift */; };
-		63984789282EBD52008D216E /* saveUserIdFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63984788282EBD52008D216E /* saveUserIdFirebase.swift */; };
 		639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B4258280C0AFE0097D53F /* InternetConnections.swift */; };
 		639B425D280C1BE90097D53F /* getUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425C280C1BE90097D53F /* getUserGroups.swift */; };
 		639B425F280C252F0097D53F /* getGroupsByRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B425E280C252F0097D53F /* getGroupsByRequest.swift */; };
@@ -128,6 +128,8 @@
 		63244634282AD72500AB1C72 /* DetailOlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOlugCell.swift; sourceTree = "<group>"; };
 		63244635282AD72500AB1C72 /* DetailOlugCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailOlugCell.xib; sourceTree = "<group>"; };
 		6348F4D1282FC5B700D69134 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6348F4D3282FDC3C00D69134 /* FirebaseGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseGroupModel.swift; sourceTree = "<group>"; };
+		6348F4D7282FE56100D69134 /* NewGroupActivitiIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupActivitiIndicator.swift; sourceTree = "<group>"; };
 		637CA725281A593100058708 /* LinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTableViewCell.swift; sourceTree = "<group>"; };
 		637CA726281A593100058708 /* LinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkTableViewCell.xib; sourceTree = "<group>"; };
 		638E99AA28125CF600367F44 /* DelegateLikeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateLikeExtension.swift; sourceTree = "<group>"; };
@@ -157,8 +159,6 @@
 		6398477F282E7B47008D216E /* leaveGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leaveGroupService.swift; sourceTree = "<group>"; };
 		63984781282E7B8E008D216E /* leaveGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leaveGroup.swift; sourceTree = "<group>"; };
 		63984783282E7C2F008D216E /* LeaveGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveGroupModel.swift; sourceTree = "<group>"; };
-		63984786282EADED008D216E /* FireBaseRegisterUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseRegisterUserModel.swift; sourceTree = "<group>"; };
-		63984788282EBD52008D216E /* saveUserIdFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = saveUserIdFirebase.swift; path = VKApp_KonishchevIvan/VKLoginScene/VKLoginModel/saveUserIdFirebase.swift; sourceTree = SOURCE_ROOT; };
 		639B4258280C0AFE0097D53F /* InternetConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnections.swift; sourceTree = "<group>"; };
 		639B425C280C1BE90097D53F /* getUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getUserGroups.swift; sourceTree = "<group>"; };
 		639B425E280C252F0097D53F /* getGroupsByRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getGroupsByRequest.swift; sourceTree = "<group>"; };
@@ -381,6 +381,7 @@
 			children = (
 				6324462B2829987900AB1C72 /* LoadAndSaveGroups.swift */,
 				6398477F282E7B47008D216E /* leaveGroupService.swift */,
+				6348F4D3282FDC3C00D69134 /* FirebaseGroupModel.swift */,
 			);
 			path = UserGroupService;
 			sourceTree = "<group>";
@@ -430,6 +431,7 @@
 				80E3274927D4F4BD0014C760 /* issetGroup.swift */,
 				638E99E4281434F400367F44 /* loadNewGroupList.swift */,
 				6398477D282E39B7008D216E /* joinNewGroup.swift */,
+				6348F4D7282FE56100D69134 /* NewGroupActivitiIndicator.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -446,10 +448,8 @@
 		638E99A828125C8600367F44 /* VKLoginScene */ = {
 			isa = PBXGroup;
 			children = (
-				638E99AF28125D4000367F44 /* VKLoginModel */,
 				638E99AE28125D3000367F44 /* VKLoginView */,
 				638E99AD28125D2400367F44 /* Extension */,
-				638E99AC28125D1500367F44 /* VKLoginService */,
 			);
 			path = VKLoginScene;
 			sourceTree = "<group>";
@@ -461,14 +461,6 @@
 				638E99E828144B3200367F44 /* LoadNewsData.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		638E99AC28125D1500367F44 /* VKLoginService */ = {
-			isa = PBXGroup;
-			children = (
-				63984788282EBD52008D216E /* saveUserIdFirebase.swift */,
-			);
-			path = VKLoginService;
 			sourceTree = "<group>";
 		};
 		638E99AD28125D2400367F44 /* Extension */ = {
@@ -485,14 +477,6 @@
 				80F4BCD628052F2D008E07B0 /* VKLoginViewController.swift */,
 			);
 			path = VKLoginView;
-			sourceTree = "<group>";
-		};
-		638E99AF28125D4000367F44 /* VKLoginModel */ = {
-			isa = PBXGroup;
-			children = (
-				63984786282EADED008D216E /* FireBaseRegisterUserModel.swift */,
-			);
-			path = VKLoginModel;
 			sourceTree = "<group>";
 		};
 		638E99B42812604700367F44 /* PhotoGallaryScene */ = {
@@ -1128,7 +1112,6 @@
 				80D1315627FDE4D2009EA04D /* TabBarController.swift in Sources */,
 				80E3274A27D4F4BD0014C760 /* issetGroup.swift in Sources */,
 				63984784282E7C2F008D216E /* LeaveGroupModel.swift in Sources */,
-				63984787282EADED008D216E /* FireBaseRegisterUserModel.swift in Sources */,
 				80F4BCD728052F2D008E07B0 /* VKLoginViewController.swift in Sources */,
 				80F4BCCC28031BD5008E07B0 /* AnimateGallaryPush.swift in Sources */,
 				80601F7527DF095C00490809 /* ShadowViewRadius.swift in Sources */,
@@ -1158,7 +1141,6 @@
 				8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */,
 				80C19AEA27D7C6BA009C34CB /* SetHeaderDetailView.swift in Sources */,
 				638E99D22813C27100367F44 /* LoadPhotoAlbumSelcetedUser.swift in Sources */,
-				63984789282EBD52008D216E /* saveUserIdFirebase.swift in Sources */,
 				63984775282E2EF3008D216E /* AllNewUserGroups.swift in Sources */,
 				639B4259280C0AFE0097D53F /* InternetConnections.swift in Sources */,
 				80CCB6B827E4E55800BC2085 /* HorizontalCollectionViewCell.swift in Sources */,
@@ -1188,6 +1170,7 @@
 				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,
 				63984780282E7B47008D216E /* leaveGroupService.swift in Sources */,
 				638E99B128125D9D00367F44 /* VKNAavigationDelegate.swift in Sources */,
+				6348F4D4282FDC3C00D69134 /* FirebaseGroupModel.swift in Sources */,
 				804154EF27B62FE900160418 /* AppDelegate.swift in Sources */,
 				63984771282E154D008D216E /* unixTimeConvertionDouble.swift in Sources */,
 				804154F127B62FE900160418 /* SceneDelegate.swift in Sources */,
@@ -1203,6 +1186,7 @@
 				638E99EF281554A100367F44 /* loadUserWall.swift in Sources */,
 				8025F7F527E7517F0009C488 /* PhotoUser.swift in Sources */,
 				63244636282AD72500AB1C72 /* DetailOlugCell.swift in Sources */,
+				6348F4D8282FE56100D69134 /* NewGroupActivitiIndicator.swift in Sources */,
 				80DAF95027F377AD00428C67 /* CustomCodeSearchBar.swift in Sources */,
 				80850EDB27DE42D70078039E /* NewsPhotoAndTextCollectionViewCell.swift in Sources */,
 				80C7D08627F8440E00E03A27 /* GallaryViewController.swift in Sources */,

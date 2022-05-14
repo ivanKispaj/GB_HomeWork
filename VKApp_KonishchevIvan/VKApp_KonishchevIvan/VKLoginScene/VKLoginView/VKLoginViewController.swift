@@ -9,7 +9,6 @@ import UIKit
 import WebKit
 import RealmSwift
 import SystemConfiguration
-import FirebaseDatabase
 
 final class DeviceId: Object {
     @objc dynamic var id = 0
@@ -21,8 +20,6 @@ final class DeviceId: Object {
 
 final class VKLoginViewController: UIViewController {
 
-     let ref = Database.database().reference(withPath: "registerUser")
-    
     let realm = RealmService()
 
     private lazy var webView: WKWebView = {

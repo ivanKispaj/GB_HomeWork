@@ -8,7 +8,8 @@
 import RealmSwift
 
 final class RealmService {
-    
+  
+// удаление объекта из базы
     func deliteData<T: Object> (_ object: T) {
         do {
             let realm = try Realm()
@@ -20,7 +21,7 @@ final class RealmService {
            print(error)
         }
     }
-    
+// Обновление данных в базе
     func updateData<T: Object>(_ object: T) {
         do {
             let realm = try Realm()
@@ -31,7 +32,8 @@ final class RealmService {
             print(error)
         }
     }
-    
+
+// Обновление данных в базе массивом
     func updateData<T: Object>(_ object: [T]) {
         do {
             let realm = try Realm()
@@ -42,7 +44,8 @@ final class RealmService {
             print(error)
         }
     }
-    
+ 
+// Запись данных в базу
     func saveData<T: Object>(_ object: T) {
         do {
             let realm = try Realm()
@@ -56,7 +59,7 @@ final class RealmService {
     }
     
     
-    
+ // чтение данных из базы
     func readData<T: Object>(_ object: T.Type) -> Results<T>? {
         do {
             let realm = try Realm()
