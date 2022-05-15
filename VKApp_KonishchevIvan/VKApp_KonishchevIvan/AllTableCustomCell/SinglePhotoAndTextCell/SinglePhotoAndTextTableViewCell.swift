@@ -28,7 +28,7 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell {
     
     var newsData: PhotoDataNews! {// NewsCellData!// {
         didSet {
-            
+            if self.newsData != nil {
             let ratio = (self.newsData.width) / UIScreen.main.bounds.width
             let height = (self.newsData.height) / ratio
            
@@ -36,10 +36,15 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell {
                 self.photoViewHeightConstraint.constant = height
                 self.layoutIfNeeded()
             }
-            self.imageParentView.frame.size.height = newsData.height
-            self.newsImage.frame.size.height = newsData.height
+         
            
             
+            }else {
+                UIView.animate(withDuration: 0.5) {
+                    self.photoViewHeightConstraint.constant = 0
+                    self.layoutIfNeeded()
+                }
+            }
         }
     }
     

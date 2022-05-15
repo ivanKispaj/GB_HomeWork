@@ -160,7 +160,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="tintColor" red="0.1049160005" green="0.1240671757" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="200" id="GM1-hf-9SN"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="GM1-hf-9SN"/>
                         </constraints>
                         <attributedString key="attributedText">
                             <fragment content="[https://vk.com/@vk-daidzhest-aprel-22?anchor=zvonki|VK Звонки]">

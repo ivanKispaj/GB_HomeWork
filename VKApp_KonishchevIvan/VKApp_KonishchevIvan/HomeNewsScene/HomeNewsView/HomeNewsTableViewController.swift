@@ -78,8 +78,8 @@ class HomeNewsTableViewController: UITableViewController {
             cell.lableUserNameOnPhoto.text = data.lableUserNameOnPhoto
             
         }
-        cell.newsData = data.newsImage
-        cell.newsImage.loadImageFromUrlString(data.newsImage.url)
+       
+
 // передаем контроллер и текущий индекс патч в делегат likecontroll!!!
         cell.likeControll.delegate = self
         cell.likeControll.indexPath = indexPath
@@ -92,7 +92,13 @@ class HomeNewsTableViewController: UITableViewController {
         cell.newsLikeLable.text = counLike
         cell.newsUserApdateTime.text =  data.date.unixTimeConvertion()
         cell.seenViewLable.text = String(data.newsSeenCount)
-   
+        if data.newsImage != nil {
+        cell.newsImage.loadImageFromUrlString(data.newsImage.url)
+            cell.newsData = data.newsImage
+           
+        }else {
+            cell.newsTextView.text = data.newsDescription
+        }
         return cell
     }
     
