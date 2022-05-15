@@ -11,6 +11,8 @@ import RealmSwift
 //import AVFoundation
 
 class HomeNewsTableViewController: UITableViewController {
+ 
+    
     
     var newsRealmToken: NotificationToken?
     var realmService = RealmService()
@@ -27,13 +29,15 @@ class HomeNewsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNotificationToken()
         self.currentOrientation = UIDevice.current.orientation
         tableView.register(UINib(nibName: "SinglePhotoAndTextTableViewCell", bundle: nil), forCellReuseIdentifier: "SinglePhotoAndTextCell")
+      
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         super.viewWillAppear(true)
-        self.setNotificationToken()
         self.loadNewsData()
     }
     // MARK: - Table view data source
@@ -61,20 +65,34 @@ class HomeNewsTableViewController: UITableViewController {
             preconditionFailure("Error")
         }
         let array = newsArray?[indexPath.section].first
-        let data = array?.value[indexPath.row]
-        cell.newsData = data
+        guard let data = array?.value[indexPath.row] else { return cell }
+        
+        if data.lableOnPhoto == "" {
+            cell.imageParentView.backgroundColor = .clear
+            cell.lableOnPhoto.text = ""
+            cell.lableUserNameOnPhoto.text = ""
+        }else {
+            cell.imageParentView.backgroundColor = UIColor(named: "AppButton")
+            cell.imageParentView.layer.opacity = 0.5
+            cell.lableOnPhoto.text = data.lableOnPhoto
+            cell.lableUserNameOnPhoto.text = data.lableUserNameOnPhoto
+            
+        }
+        cell.newsData = data.newsImage
+        cell.newsImage.loadImageFromUrlString(data.newsImage.url)
 // передаем контроллер и текущий индекс патч в делегат likecontroll!!!
         cell.likeControll.delegate = self
         cell.likeControll.indexPath = indexPath
 // устанавливаем данные для отображения
-        
-        cell.newsUserAvatar.image = UIImage(data: data!.newsUserLogo)
-        cell.newsTextView.text = data?.newsDescription
-        cell.newsUserName.text = data?.newsUserName
-        let counLike: String = String((data?.newsLikeCount)!)
+
+        cell.newsUserAvatar.image = UIImage(data: data.newsUserLogo)
+        cell.newsTextView.text = data.newsText
+        cell.newsUserName.text = data.newsUserName
+        let counLike: String = String((data.newsLikeCount))
         cell.newsLikeLable.text = counLike
-        cell.newsUserApdateTime.text =  data!.date.unixTimeConvertion()
-        cell.seenViewLable.text = String(data!.newsSeenCount)
+        cell.newsUserApdateTime.text =  data.date.unixTimeConvertion()
+        cell.seenViewLable.text = String(data.newsSeenCount)
+   
         return cell
     }
     

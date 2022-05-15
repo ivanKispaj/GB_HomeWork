@@ -62,7 +62,7 @@ extension UserGroupTableViewController {
             self.nitifiTokenGroups = data.observe { (changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
-                    print("Signed")
+                    print("UserGroup Signed")
                 case let .update(results, deletions, insertions, _):
                     if deletions.count != 0 || insertions.count != 0 {
                     self.updateViewGroups(from: results)

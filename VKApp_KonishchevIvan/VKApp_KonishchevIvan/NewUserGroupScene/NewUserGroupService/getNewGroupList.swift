@@ -13,7 +13,7 @@ extension InternetConnections {
         self.urlComponents.queryItems = [
             URLQueryItem(name: "q", value: searchText),
             URLQueryItem(name: "access_token", value: access_token),
-            URLQueryItem(name: "sort", value: "0"),
+            URLQueryItem(name: "sort", value: "6"),
             URLQueryItem(name: "type", value: "group, page, event"),
             URLQueryItem(name: "v", value: "5.131"),
            URLQueryItem(name: "count", value: "1000")

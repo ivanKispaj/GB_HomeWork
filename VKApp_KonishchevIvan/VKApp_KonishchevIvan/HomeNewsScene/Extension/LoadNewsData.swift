@@ -27,7 +27,7 @@ extension HomeNewsTableViewController {
             self.newsRealmToken = data.observe { (changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
-                    print("Signed")
+                    print("NewsVC Signed")
                 case let .update(_, deletions, insertions, _):
                     if deletions.count != 0 || insertions.count != 0 {
                         self.updateNewsView()                    }
@@ -98,20 +98,31 @@ extension HomeNewsTableViewController {
                                 cellType = .photo
                                 newsCellData.newsText = photoData.text
                                 newsCellData.albumId = photoData.albumId
-                                newsCellData.newsImage = getNewsPhoto(photoData.photoArray)
+                                if  let photoResult = getNewsPhoto(photoData.photoArray) {
+                                let photoImageData = PhotoDataNews(url: photoResult.url, height: CGFloat(photoResult.height), width: CGFloat(photoResult.width))
+                                newsCellData.newsImage = photoImageData
+                                }
                                 newsCellData.newsTitle = " "
           // если новость с ссылочным массивом ( игры )
                             }else if let link = atachments.link {
                                 cellType = .link
-                                newsCellData.newsText = link.title
-                                newsCellData.newsDescription = link.description
+                                newsCellData.newsTitle = link.title
+                                newsCellData.lableOnPhoto = link.title
+                                newsCellData.lableUserNameOnPhoto = newsCellData.newsUserName
+                                newsCellData.newsText = item.text!
                                 newsCellData.albumId = link.photo!.albumId
-                                newsCellData.newsImage = getNewsPhoto(link.photo!.photoArray)
+                                if let photoResult = getNewsPhoto(link.photo!.photoArray) {
+                                let photoImageData = PhotoDataNews(url: photoResult.url, height: CGFloat(photoResult.height), width: CGFloat(photoResult.width))
+                                newsCellData.newsImage = photoImageData
+                                }
                            } else if let video = atachments.video {
                                cellType = .photo
                                newsCellData.newsText = item.text!
                                newsCellData.newsTitle = video.title!
-                               newsCellData.newsImage = getPhotoNewsHistory(video.image)
+                               if let photoResult = getPhotoNewsHistory(video.image) {
+                               let photoImageData = PhotoDataNews(url: photoResult.url, height: CGFloat(photoResult.height), width: CGFloat(photoResult.width))
+                               newsCellData.newsImage = photoImageData
+                               }
                             }
           // если новость со стены
                         }else if let wallPhoto = item.wallPhotos {
@@ -119,17 +130,26 @@ extension HomeNewsTableViewController {
                             newsCellData.newsText = " "
                             newsCellData.newsDescription = wallPhoto.items[0].text
                             newsCellData.newsTitle = " "
-                            newsCellData.newsImage = getNewsPhoto(wallPhoto.items[0].photo)
+                            if let photoResult = getNewsPhoto(wallPhoto.items[0].photo) {
+                            let photoImageData = PhotoDataNews(url: photoResult.url, height: CGFloat(photoResult.height), width: CGFloat(photoResult.width))
+                            newsCellData.newsImage = photoImageData
+                            }
           // если новость с истории
                         }else if let copyHistory = item.newsCopyHistory.first {
                             cellType = .histroy
                             newsCellData.newsText = (copyHistory.attachments.first?.video?.title) ?? ""
-                            newsCellData.newsDescription = (copyHistory.attachments.first?.video?.description) ?? ""
+                            newsCellData.newsDescription = (copyHistory.attachments.first?.video?.historyDescription) ?? ""
                             newsCellData.albumId = 0
                             if let listItems = copyHistory.attachments.first?.video?.newsImage {
-                                newsCellData.newsImage = getPhotoNewsHistory(listItems)
+                                if let photoResult = getPhotoNewsHistory(listItems){
+                                let photoImageData = PhotoDataNews(url: photoResult.url, height: CGFloat(photoResult.height), width: CGFloat(photoResult.width))
+                                    
+                                newsCellData.newsImage = photoImageData
+                                }
+                            }else {
+                                 newsCellData.newsImage = PhotoDataNews(url: "", height: 0, width: 0)
                             }
-                            newsCellData.newsImage = ""
+                        
                            // newsCellData.newsImage = getPhotoNewsHistory((copyHistory.attachments.first?.video!.newsImage)!)
                         }
                      
@@ -181,21 +201,21 @@ extension HomeNewsTableViewController {
         return group
     }
 
-    private func getNewsPhoto(_ newsPhotoArray: List<ImageArray>) -> String {
+    private func getNewsPhoto(_ newsPhotoArray: List<ImageArray>) -> ImageArray? {
         if let url = newsPhotoArray.first(where: { $0.type == "y" }) {
-            return url.url
+            return url
         } else if let url = newsPhotoArray.first (where: { $0.type == "k" }) {
-            return url.url
+            return url
         }
         let url = newsPhotoArray.first(where: { $0.type == "q"})
-        return url?.url ?? ""
+        return url
         
     }
 
-    private func getPhotoNewsHistory(_ photoArray: List<NewsImage>) -> String {
+    private func getPhotoNewsHistory(_ photoArray: List<NewsImage>) -> NewsImage? {
      
-        let url = photoArray.first { $0.width > 300 }?.url
-        return url ?? " "
+        let data = photoArray.first { $0.width > 300 }
+        return data ?? nil
     }
 }
 

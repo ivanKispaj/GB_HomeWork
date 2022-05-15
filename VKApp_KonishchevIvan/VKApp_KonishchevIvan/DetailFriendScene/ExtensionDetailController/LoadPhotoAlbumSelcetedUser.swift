@@ -34,7 +34,7 @@ extension DetailUserTableViewController {
             self.notifiTokenPhoto = data.observe { (changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
-                    print("Signed")
+                    print("DetailVC UserPhoto Signed")
                 case let .update(results, deletions, insertions, _):
                     let dataPhoto = results
                         .where { $0.id == self.friendsSelectedd.id }

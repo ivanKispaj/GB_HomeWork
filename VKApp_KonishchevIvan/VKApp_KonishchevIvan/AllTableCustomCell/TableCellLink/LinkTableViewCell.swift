@@ -12,7 +12,7 @@ class LinkTableViewCell: UITableViewCell {
     @IBOutlet weak var linkUserLogo: UIImageView!
     @IBOutlet weak var linkUserName: UILabel!
     @IBOutlet weak var linkDate: UILabel!
-    @IBOutlet weak var linkLink: UIButton!
+    @IBOutlet weak var linkLink: UILabel!
     @IBOutlet weak var linkText: UILabel!
     @IBOutlet weak var linkCaption: UILabel!
     

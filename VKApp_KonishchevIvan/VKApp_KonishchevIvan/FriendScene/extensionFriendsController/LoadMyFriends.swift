@@ -15,14 +15,15 @@ extension FriendsTableViewController {
             self.activityIndicator.startAnimating()
 //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
           //   После теста заменить id пользователя на id NetworkSessionData.shared.userId!
-        
+     
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
-        InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: "72287677")
+            InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser))
         }
         
         
-        if let friendsData = self.realmService.readData(FriendsResponse.self)!.where({ $0.id == 72287677 }).first?.items {
+        if let friendsData = self.realmService.readData(FriendsResponse.self)!.where({ $0.id == NetworkSessionData.shared.testUser }).first?.items{
+           
             updateFriendsView(From: friendsData)
         }
 
@@ -33,12 +34,12 @@ extension FriendsTableViewController {
             self.notifiToken = data.observe { (changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
-                    print("Signed")
-                case let .update(results, _, _, _):
-                
-                        self.updateFriendsView(From: results.first!.items)
-                    
-                    
+                    print("FriendsController Signed ")
+                case let .update(results, deletions, insertions, _):
+                    if deletions.count != 0 || insertions.count != 0 {
+                            self.updateFriendsView(From: results.where({ $0.id == NetworkSessionData.shared.testUser }).first!.items)
+                    }
+          
                 case .error(_):
                     print("Asd")
                 }
@@ -46,6 +47,7 @@ extension FriendsTableViewController {
         }
     }
     
+  
     private func updateFriendsView(From items: List<FriendsItems> ) {
         var arrays = [Friend]()
         for friendData in items {

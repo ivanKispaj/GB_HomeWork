@@ -8,7 +8,8 @@
 import UIKit
 
 class DetailOlugCell: UITableViewCell {
-
+    @IBOutlet weak var testPlugText: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

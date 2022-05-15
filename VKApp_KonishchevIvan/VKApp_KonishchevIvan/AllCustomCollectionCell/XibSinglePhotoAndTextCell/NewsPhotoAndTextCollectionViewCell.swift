@@ -10,6 +10,7 @@ import UIKit
 class NewsPhotoAndTextCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var newsImage: UIImageView!
+    @IBOutlet weak var lableOnPhoto: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -30,14 +30,17 @@ extension DetailUserTableViewController {
             self.notifiTokenFriends = data.observe { (changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
-                    print("Signed")
+                    print("DetailVC UserFriends Signed")
                 case let .update(results, deletions, insertions, _):
                     let dataFriends = results
                         .where { $0.id == self.friendsSelectedd.id }
-                        .first!
+                        .first?
                         .items
                     if deletions.count != 0 || insertions.count != 0 {
-                    self.updateUserFromRealm(from: dataFriends)
+                        if let data = dataFriends {
+                            self.updateUserFromRealm(from: data)
+
+                        }
                     }
                 case .error(_):
                     print("Asd")

@@ -7,15 +7,16 @@
 
 import UIKit
 
-class SinglePhotoAndTextTableViewCell: UITableViewCell,UICollectionViewDelegate, UICollectionViewDataSource {
+class SinglePhotoAndTextTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var newsImage: UIImageView!
+    @IBOutlet weak var lableOnPhoto: UILabel!
+    @IBOutlet weak var lableUserNameOnPhoto: UILabel!
+    @IBOutlet weak var imageParentView: UIView!
     
-
+    @IBOutlet weak var photoViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var likeControll: ControlForLike!
     
-  
-    
-    @IBOutlet weak var newsCollection: UICollectionView!
     @IBOutlet weak var newsTextView: UITextView!
     @IBOutlet weak var newsUserAvatar: UIImageView!
     @IBOutlet weak var newsUserName: UILabel!
@@ -24,39 +25,29 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell,UICollectionViewDelegate,
     @IBOutlet weak var newsLikeLable: UILabel!
     @IBOutlet weak var seenViewLable: UILabel!
     
-    var newsData: NewsCellData! {
+    
+    var newsData: PhotoDataNews! {// NewsCellData!// {
         didSet {
-            DispatchQueue.main.async {
-                self.newsCollection.reloadData()
+            
+            let ratio = (self.newsData.width) / UIScreen.main.bounds.width
+            let height = (self.newsData.height) / ratio
+           
+            UIView.animate(withDuration: 0.5) {
+                self.photoViewHeightConstraint.constant = height
+                self.layoutIfNeeded()
             }
+            self.imageParentView.frame.size.height = newsData.height
+            self.newsImage.frame.size.height = newsData.height
+           
+            
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.newsCollection.delegate = self
-        self.newsCollection.dataSource = self
-        self.newsCollection.register(UINib(nibName: "NewsPhotoAndTextCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NewsPhotoAndTextID")
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
 
     }
-   
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = newsCollection.dequeueReusableCell(withReuseIdentifier: "NewsPhotoAndTextID", for: indexPath) as? NewsPhotoAndTextCollectionViewCell else {
-            preconditionFailure("Error")
-        }
-        
-        let url = newsData.newsImage
-        cell.newsImage.loadImageFromUrlString(url)
-        return cell
-    }
+
 
 }
 

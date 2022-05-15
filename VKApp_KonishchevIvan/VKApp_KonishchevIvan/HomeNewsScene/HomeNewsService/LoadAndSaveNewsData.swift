@@ -14,7 +14,7 @@ extension InternetConnections {
         guard let access_token = NetworkSessionData.shared.token else { return }
         self.urlComponents.queryItems = [
             URLQueryItem(name: "access_token", value: access_token),
-            URLQueryItem(name: "filters", value: "post, photo, wall_photo"),
+            URLQueryItem(name: "filters", value: "post, photo, wall_photo, video"),
             URLQueryItem(name: "v", value: "5.131"),
         ]
         guard let url = self.urlComponents.url else { return }

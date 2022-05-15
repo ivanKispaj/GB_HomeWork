@@ -14,7 +14,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 // Данные пользователя которого выбрали на предыдущем контроллере (FriendsTableViewController)
     var friendsSelectedd: Friend!
     var activityIndicator: UIActivityIndicatorView!
-   // var detailsControllerData: DetailsControllerData!
     
     var notifiTokenPhoto: NotificationToken?
     var notifiTokenFriends: NotificationToken?
@@ -52,7 +51,9 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        self.setNotificationtokenWall()
+        self.setNotificationTokenPhoto()
+        self.setNotificationtokenFriends()
         setHeaderDetailView()
         
         tableView.register(UINib(nibName: "CouruselTableViewCell", bundle: nil), forCellReuseIdentifier: "CouruselCellForDetails")
@@ -64,9 +65,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.setNotificationtokenWall()
-        self.setNotificationTokenPhoto()
-        self.setNotificationtokenFriends()
         self.loadDataTable()
 
     }
@@ -144,11 +142,8 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.singlPhotoLikeLable.text = String(data.likes.count)
             cell.singlePhotoSeenCount.text = String(data.views?.count ?? 0)
             return cell
-// Закомментированное в процессе разработки! Чтоб не забыть что такое есть и можно вывести!
-//        case .newsText:
-//            print(" Текст новость со стены")
-//        case .video:
-//            print( "Video news from wall")
+
+            
         case .link:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LinkTableViewCell", for: indexPath) as? LinkTableViewCell else {
                 preconditionFailure("Error")
@@ -156,23 +151,40 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             let data = dataTable[indexPath.section].sectionData
             cell.linkCaption.text = data.captionNews
             cell.linkDate.text = data.date.unixTimeConvertion() // unixTimeConvertion(unixTime: Double(data.date))
-            cell.linkLink.setTitle(data.linkUrl, for: .normal)
+            cell.linkLink.text = data.linkUrl
             cell.linkLikeCount.text = String(data.likes.count)
             cell.linkUserLogo.image = UIImage(data: self.friendsSelectedd.photo)
             cell.linkUserName.text = self.friendsSelectedd.userName
             cell.linkText.text = data.titleNews
             cell.linkSeenCount.text = String(data.views?.count ?? 0)
             return cell
-        
+            // Закомментированное в процессе разработки! Чтоб не забыть что такое есть и можно вывести!
+        case .newsText:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTablePlugCell", for: indexPath) as? DetailOlugCell else {
+                preconditionFailure("Error")
+            }
+            cell.testPlugText.text = "NewsText"
+        return cell
+            
+        case .video:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTablePlugCell", for: indexPath) as? DetailOlugCell else {
+                preconditionFailure("Error")
+            }
+            cell.testPlugText.text = "VideoCell"
+        return cell
+            
         case .unknown:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTablePlugCell", for: indexPath) as? DetailOlugCell else {
                 preconditionFailure("Error")
             }
+            cell.testPlugText.text = "Unknown"
         return cell
-         default:
+
+        case .linkPhoto:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTablePlugCell", for: indexPath) as? DetailOlugCell else {
                 preconditionFailure("Error")
             }
+            cell.testPlugText.text = "LinkPhoto"
         return cell
         }
     }

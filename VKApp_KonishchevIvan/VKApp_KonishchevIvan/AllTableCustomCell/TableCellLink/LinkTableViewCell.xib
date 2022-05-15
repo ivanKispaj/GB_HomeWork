@@ -80,26 +80,8 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z2z-uW-MNZ" secondAttribute="trailing" id="wlz-Yp-T7W"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHO-bz-ybG">
-                        <rect key="frame" x="30" y="55" width="493" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="lKA-jb-scO"/>
-                        </constraints>
-                        <color key="tintColor" name="ButtonTint"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain">
-                            <attributedString key="attributedTitle">
-                                <fragment content="Button">
-                                    <attributes>
-                                        <font key="NSFont" size="11" name="Helvetica"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
-                            </attributedString>
-                        </buttonConfiguration>
-                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIU-0c-PXB">
-                        <rect key="frame" x="0.0" y="80" width="553" height="80"/>
+                        <rect key="frame" x="0.0" y="76" width="553" height="80"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sfl-ug-OhS">
                                 <rect key="frame" x="10" y="20.5" width="40" height="39"/>
@@ -156,7 +138,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ba6-XD-AQh">
-                        <rect key="frame" x="0.0" y="165" width="553" height="40"/>
+                        <rect key="frame" x="0.0" y="161" width="553" height="40"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LnN-FS-uEp">
                                 <rect key="frame" x="10" y="5" width="50" height="30"/>
@@ -228,21 +210,27 @@
                             <constraint firstAttribute="height" constant="40" id="pe4-uR-By5"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y6t-mb-EWj">
+                        <rect key="frame" x="25" y="55" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                        <color key="textColor" name="ButtonTint"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ba6-XD-AQh" secondAttribute="bottom" id="0R1-ev-s0e"/>
+                    <constraint firstItem="y6t-mb-EWj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="12t-4C-4R0"/>
+                    <constraint firstItem="gIU-0c-PXB" firstAttribute="top" secondItem="y6t-mb-EWj" secondAttribute="bottom" constant="4" id="19X-Yp-DK5"/>
                     <constraint firstItem="Ba6-XD-AQh" firstAttribute="top" secondItem="gIU-0c-PXB" secondAttribute="bottom" constant="5" id="34S-gX-N38"/>
                     <constraint firstItem="Ba6-XD-AQh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="4Y2-fG-idM"/>
-                    <constraint firstItem="bHO-bz-ybG" firstAttribute="top" secondItem="oAT-2E-Oob" secondAttribute="bottom" constant="5" id="CFW-XQ-HVM"/>
-                    <constraint firstItem="bHO-bz-ybG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="Eah-nD-HNH"/>
                     <constraint firstItem="oAT-2E-Oob" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IUM-Pe-h14"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="bHO-bz-ybG" secondAttribute="trailing" constant="10" id="JwI-mv-isx"/>
                     <constraint firstAttribute="trailing" secondItem="gIU-0c-PXB" secondAttribute="trailing" id="MQt-oV-5CZ"/>
                     <constraint firstItem="gIU-0c-PXB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="QZ4-yG-pfI"/>
                     <constraint firstAttribute="trailing" secondItem="Ba6-XD-AQh" secondAttribute="trailing" id="T4i-fL-vY1"/>
                     <constraint firstItem="oAT-2E-Oob" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Tar-cJ-Qfc"/>
-                    <constraint firstItem="gIU-0c-PXB" firstAttribute="top" secondItem="bHO-bz-ybG" secondAttribute="bottom" constant="5" id="aj2-Hc-MG2"/>
+                    <constraint firstItem="y6t-mb-EWj" firstAttribute="top" secondItem="oAT-2E-Oob" secondAttribute="bottom" constant="5" id="dSK-GJ-62C"/>
                     <constraint firstAttribute="trailing" secondItem="oAT-2E-Oob" secondAttribute="trailing" id="k1i-VC-WWP"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="y6t-mb-EWj" secondAttribute="trailing" id="toz-XX-tKq"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -251,7 +239,7 @@
                 <outlet property="linkDate" destination="z2z-uW-MNZ" id="fe3-OR-DPc"/>
                 <outlet property="linkLikeCount" destination="VI4-zR-6fg" id="USX-kp-wfg"/>
                 <outlet property="linkLikeHeart" destination="6Kd-bP-hSg" id="BJU-np-DMx"/>
-                <outlet property="linkLink" destination="bHO-bz-ybG" id="HWd-cH-YZM"/>
+                <outlet property="linkLink" destination="y6t-mb-EWj" id="Ihn-LZ-Q8t"/>
                 <outlet property="linkSeenCount" destination="0U9-jO-Vhb" id="rWs-os-Q9n"/>
                 <outlet property="linkText" destination="0mJ-ub-TaZ" id="Io9-jT-TiJ"/>
                 <outlet property="linkUserLogo" destination="LMG-Qy-uF5" id="kQR-HR-9Zu"/>

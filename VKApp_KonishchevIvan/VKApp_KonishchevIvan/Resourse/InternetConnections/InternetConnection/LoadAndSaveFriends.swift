@@ -15,10 +15,9 @@ extension InternetConnections {
         self.urlComponents.queryItems = [
             URLQueryItem(name: "user_id", value: userId),
             URLQueryItem(name: "access_token", value: access_token),
-            URLQueryItem(name: "order", value: "random"),
+            URLQueryItem(name: "order", value: "hints"),
             URLQueryItem(name: "fields", value: "photo_50, city, last_seen, online, status "),
-            URLQueryItem(name: "v", value: "5.131"),
-            URLQueryItem(name: "count", value: "20")
+            URLQueryItem(name: "v", value: "5.131")
         ]
         guard let url = self.urlComponents.url else { return }
     

@@ -21,7 +21,11 @@ struct NewsData  {
     var wall = NewsCellData()
     var histroy = NewsCellData()
 }
-
+struct PhotoDataNews {
+    var url: String
+    var height: CGFloat
+    var width: CGFloat
+}
 
 //MARK: - Model для отображения страницы новостей
 struct NewsCellData {
@@ -31,16 +35,15 @@ struct NewsCellData {
     var newsLikeStatus: Bool = false
     var newsSeenCount: Int = 0
     var newsDescription: String = ""
-    
     var newsUserLogo: Data!
-    
     var newsUserName: String = ""
     var online: Bool = false
     var newsText: String = ""
     var albumId: Int = 0
-    var newsImage: String = ""
+    var newsImage: PhotoDataNews!
     var newsTitle: String = ""
-    
+    var lableOnPhoto: String = ""
+    var lableUserNameOnPhoto: String = ""
 }
 
 //MARK: -  Модель для парсинга новостей и сохранения в Realm !!!!
@@ -65,7 +68,7 @@ final class NewsResponse: Object, Decodable {
         items = try container.decode(List<NewsItems>.self, forKey: .items)
         profiles = try container.decode(List<NewsProfiles>.self, forKey: .profiles)
         groups = try container.decode(List<NewsGroups>.self, forKey: .groups)
-       // date = Date()
+       
     }
     override class func primaryKey() -> String? {
         return "id"

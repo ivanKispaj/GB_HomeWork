@@ -12,6 +12,7 @@ final class NetworkSessionData {
     static var shared = NetworkSessionData()
     var token: String?
     var userId: Int?
+    var testUser: Int = 72287677 // удалить после завершения тестов!
     
     private init(){}
 }

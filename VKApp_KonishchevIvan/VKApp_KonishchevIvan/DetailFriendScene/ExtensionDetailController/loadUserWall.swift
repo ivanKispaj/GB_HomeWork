@@ -31,7 +31,7 @@ extension DetailUserTableViewController {
                 self.notifiTokenWall = data.observe { (changes: RealmCollectionChange) in
                     switch changes {
                     case .initial(_):
-                        print("Signed")
+                        print("DetailVC userWall Signed")
                     case let .update(results, deletions, insertions, _):
                         let dataWall = results
                             .where { $0.id == self.friendsSelectedd.id }

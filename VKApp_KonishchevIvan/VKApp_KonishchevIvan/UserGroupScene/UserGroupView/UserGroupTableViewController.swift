@@ -43,7 +43,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.setNitificationGroups()
         self.loadUserGroupFromVK()
     }
 
