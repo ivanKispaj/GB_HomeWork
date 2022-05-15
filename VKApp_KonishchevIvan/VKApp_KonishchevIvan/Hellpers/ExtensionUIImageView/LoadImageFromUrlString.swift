@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImageView {
-         func loadImageFromUrlString(_ url: String?) -> () {
+    func loadImageFromUrlString(_ url: String?)  {
              guard let urlImage = url, urlImage != "" else { return }
             let url = URL(string: urlImage)!
             // DispatchQueue.global(qos: .userInteractive).async {
@@ -16,6 +16,7 @@ extension UIImageView {
                DispatchQueue.main.async {
                     if let imageData = content {
                             self.image = UIImage(data: imageData)
+                     
                     }else {
                         self.image = UIImage(named: "noFoto")
                     }

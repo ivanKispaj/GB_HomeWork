@@ -414,9 +414,19 @@ private extension GallaryViewController {
     }
 //MARK: - Метод для получения размеров изображения
     private func getSizeImage(_ numberImage: Int) -> CGSize {
+        if arrayPhoto[numberImage].height == 0 || arrayPhoto[numberImage].width == 0 {
+            let width: CGFloat = 724
+            let h: CGFloat = 724
+            let ratio = width / self.viewImage.frame.width
+            let height = h / ratio
+            return CGSize(width: UIScreen.main.bounds.width, height: height)
+            
+        }
+       
         let ratio = (self.arrayPhoto[numberImage].width) / self.viewImage.frame.width
         let height = (self.arrayPhoto[numberImage].height) / ratio
         return CGSize(width: UIScreen.main.bounds.width, height: height)
+        
     }
 //MARK: - Метод для выставления лайков
     private func setLikeData() {
