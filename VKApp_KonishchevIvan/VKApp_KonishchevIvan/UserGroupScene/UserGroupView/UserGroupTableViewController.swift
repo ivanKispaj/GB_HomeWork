@@ -82,45 +82,67 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
         }
        destinationVC.userGroupDelegate = self
     }
-
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+    
+    override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        tableView.customzeSwipeView(for: self.tableView)
     }
-   
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let data = self.dataGroups else { return }
-        print(data[indexPath.row].id)
-        
-        if editingStyle == .delete {
+    
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delite = UIContextualAction(style: .destructive, title: "Выйти") { [weak self] action,view, completionHandler in
+           
+            guard let data = self!.dataGroups else { return }
             let id = data[indexPath.row].id
-            self.leaveGroup(to: id) { status, message in
+            self!.leaveGroup(to: id) { status, message in
                 if status {
                     DispatchQueue.main.async {
-                        print(data[indexPath.row].id)
-                        self.realmService.deliteData(data[indexPath.row])
+                        self!.realmService.deliteData(data[indexPath.row])
                     }
                     DispatchQueue.main.async {
-                        self.tableView.deleteRows(at: [indexPath], with: .right)
+                        self!.tableView.deleteRows(at: [indexPath], with: .left)
                     }
                 }else {
                     print("Failure Delite groups")
                 }
             }
-            
+
             tableView.reloadData()
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            
+            
+            
+            print("Выйти из группы!")
         }
+
+        delite.image = UIImage(systemName: "figure.walk") // minus.circle.fill
+        
+        delite.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 0.2624110008)
+        let configuration =  UISwipeActionsConfiguration(actions: [delite])
+        //configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-  
+
+ 
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let details = UIContextualAction(style: .normal, title: "Подробно") { [weak self] action, view, completionHandler in
+            print("Подробности о группе")
+       
+        }
+        
+        let message = UIContextualAction(style: .normal, title: "Написать") { [weak self] action,view, completionHandler in
+            
+            print("Написать сообщение в группу")
+        }
+        message.image = UIImage(systemName: "quote.bubble")
+        message.backgroundColor = #colorLiteral(red: 0.8213813901, green: 0.8213813901, blue: 0.8213813901, alpha: 0.3316367013)
+
+        details.image = UIImage(systemName: "list.bullet.rectangle.portrait")
+        details.backgroundColor = #colorLiteral(red: 0.8213813901, green: 0.8213813901, blue: 0.8213813901, alpha: 0.3316367013)
+        let configuration = UISwipeActionsConfiguration(actions: [details, message])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
-    
-    
-   
 }
+
+
 
 

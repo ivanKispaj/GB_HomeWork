@@ -11,8 +11,7 @@ extension NewGroupTableViewController {
         InternetConnections(host: "api.vk.com", path: "/method/groups.search").getNewGroupList(for: text) { response in
             switch response {
             
-            case .success(let result): //let result
-                print("NewGroupsDevelopment!")
+            case .success(let result): 
                 var group: [AllNewUserGroups] = []
                 for items in result.response.items {
                 if let activity = items.activity {

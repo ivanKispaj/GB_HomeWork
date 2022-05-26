@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0D2517253E5C8F47C10B6E68 /* Pods_VKApp_KonishchevIvan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A42EA5E976612657B4D3FDA /* Pods_VKApp_KonishchevIvan.framework */; };
 		630471D6281B9E5400B3359B /* loadDataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630471D5281B9E5400B3359B /* loadDataTable.swift */; };
+		630DF7A4283C9AF7002F831A /* extensionUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630DF7A3283C9AF7002F831A /* extensionUITableView.swift */; };
 		6324462C2829987900AB1C72 /* LoadAndSaveGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324462B2829987900AB1C72 /* LoadAndSaveGroups.swift */; };
 		63244632282AB97E00AB1C72 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63244631282AB97E00AB1C72 /* RealmService.swift */; };
 		63244636282AD72500AB1C72 /* DetailOlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63244634282AD72500AB1C72 /* DetailOlugCell.swift */; };
@@ -121,6 +122,7 @@
 /* Begin PBXFileReference section */
 		264B86B2F5EC30BA07EBE4AF /* Pods-VKApp_KonishchevIvan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp_KonishchevIvan.debug.xcconfig"; path = "Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan.debug.xcconfig"; sourceTree = "<group>"; };
 		630471D5281B9E5400B3359B /* loadDataTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadDataTable.swift; sourceTree = "<group>"; };
+		630DF7A3283C9AF7002F831A /* extensionUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionUITableView.swift; sourceTree = "<group>"; };
 		6324462B2829987900AB1C72 /* LoadAndSaveGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSaveGroups.swift; sourceTree = "<group>"; };
 		63244631282AB97E00AB1C72 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		63244634282AD72500AB1C72 /* DetailOlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOlugCell.swift; sourceTree = "<group>"; };
@@ -246,6 +248,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		630DF7A2283C9AAD002F831A /* ExtensionUITableView */ = {
+			isa = PBXGroup;
+			children = (
+				630DF7A3283C9AF7002F831A /* extensionUITableView.swift */,
+			);
+			path = ExtensionUITableView;
+			sourceTree = "<group>";
+		};
 		6324462D28299EAF00AB1C72 /* HomeNewsService */ = {
 			isa = PBXGroup;
 			children = (
@@ -577,6 +587,7 @@
 		639B4260280D2D030097D53F /* Hellpers */ = {
 			isa = PBXGroup;
 			children = (
+				630DF7A2283C9AAD002F831A /* ExtensionUITableView */,
 				6398476A282E135E008D216E /* ExtensionDouble */,
 				638E99CE2813BE0800367F44 /* ExtensionUIImageView */,
 				638E99BD2812635B00367F44 /* ExtensionString */,
@@ -1125,6 +1136,7 @@
 				80D1315227FDD876009EA04D /* AnimationLoginController.swift in Sources */,
 				80EAC04E27F6D3F0006DDB9A /* CastomlayoutDelegate.swift in Sources */,
 				8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */,
+				630DF7A4283C9AF7002F831A /* extensionUITableView.swift in Sources */,
 				80C19AEA27D7C6BA009C34CB /* SetHeaderDetailView.swift in Sources */,
 				638E99D22813C27100367F44 /* LoadPhotoAlbumSelcetedUser.swift in Sources */,
 				63984775282E2EF3008D216E /* AllNewUserGroups.swift in Sources */,

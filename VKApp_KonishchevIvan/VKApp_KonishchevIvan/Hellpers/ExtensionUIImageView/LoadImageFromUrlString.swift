@@ -11,7 +11,7 @@ extension UIImageView {
     func loadImageFromUrlString(_ url: String?)  {
              guard let urlImage = url, urlImage != "" else { return }
             let url = URL(string: urlImage)!
-            // DispatchQueue.global(qos: .userInteractive).async {
+             DispatchQueue.global(qos: .userInteractive).async {
                 let content = try? Data(contentsOf: url)
                DispatchQueue.main.async {
                     if let imageData = content {
@@ -21,6 +21,6 @@ extension UIImageView {
                         self.image = UIImage(named: "noFoto")
                     }
                 }
-           // }
+            }
         }
 }

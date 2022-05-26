@@ -126,7 +126,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             return cell
         }
     }
-
+    
 // Действия при выборе ячейки
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -157,13 +157,13 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             return headerView
         }
     } 
- //подготовка сегуе перехода. Срабатывает перед вызовом didSelectRowAt
+    //подготовка сегуе перехода. Срабатывает перед вызовом didSelectRowAt
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let detailVC = segue.destination as? DetailUserTableViewController else { return
         }
         self.nextViewData = detailVC
     }
-
+    
 }
 
 
