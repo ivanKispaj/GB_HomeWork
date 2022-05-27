@@ -174,7 +174,7 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     </textView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jxd-UP-Y0v">
+                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Jxd-UP-Y0v">
                         <rect key="frame" x="0.0" y="299" width="320" height="291"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-2p-xUD">
@@ -195,17 +195,17 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="Vm4-4t-3zY"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEx-5Q-IT2">
-                                                <rect key="frame" x="5" y="109" width="244" height="20"/>
+                                                <rect key="frame" x="5" y="105" width="244" height="20"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="E3R-b3-wWi"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -214,11 +214,11 @@
                                             <constraint firstAttribute="trailing" secondItem="nEx-5Q-IT2" secondAttribute="trailing" constant="5" id="Ekz-Fv-KX3"/>
                                             <constraint firstItem="krm-f9-xg9" firstAttribute="top" secondItem="kv2-4g-2HK" secondAttribute="top" constant="10" id="b9q-e8-c7B"/>
                                             <constraint firstAttribute="trailing" secondItem="krm-f9-xg9" secondAttribute="trailing" constant="5" id="bQ0-EL-jl0"/>
-                                            <constraint firstItem="nEx-5Q-IT2" firstAttribute="top" relation="lessThanOrEqual" secondItem="krm-f9-xg9" secondAttribute="bottom" constant="45" id="f0d-8c-V4i"/>
+                                            <constraint firstItem="nEx-5Q-IT2" firstAttribute="top" secondItem="krm-f9-xg9" secondAttribute="bottom" constant="15" id="f0d-8c-V4i"/>
                                             <constraint firstAttribute="height" priority="999" constant="160" id="i2B-VJ-5tZ"/>
                                             <constraint firstItem="nEx-5Q-IT2" firstAttribute="leading" secondItem="kv2-4g-2HK" secondAttribute="leading" constant="5" id="iki-kV-AB4"/>
                                             <constraint firstItem="krm-f9-xg9" firstAttribute="leading" secondItem="kv2-4g-2HK" secondAttribute="leading" constant="5" id="neE-uD-xeu"/>
-                                            <constraint firstAttribute="bottom" secondItem="nEx-5Q-IT2" secondAttribute="bottom" constant="31" id="zxO-qs-voR"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nEx-5Q-IT2" secondAttribute="bottom" id="zxO-qs-voR"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -230,7 +230,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="P0k-t2-Tce" firstAttribute="leading" secondItem="PmU-2p-xUD" secondAttribute="leadingMargin" constant="-10" id="CO5-oP-O9E"/>
                             <constraint firstAttribute="trailing" secondItem="PmU-2p-xUD" secondAttribute="trailing" id="Mrr-GJ-GXt"/>

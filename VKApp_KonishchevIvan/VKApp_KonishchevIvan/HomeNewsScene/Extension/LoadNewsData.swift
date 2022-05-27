@@ -13,7 +13,7 @@ extension HomeNewsTableViewController {
         
 //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
         
-        let queue = DispatchQueue.global(qos: .utility)
+        let queue = DispatchQueue.global(qos: .default)
         queue.async {
             InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
         }
@@ -40,183 +40,231 @@ extension HomeNewsTableViewController {
     }
     
     private func updateNewsView()  {
-        var newsDatasPhoto: [CellType: [NewsCellData]] = [.photo: []] // конечный массив с данными
-        var newsDatasLink: [CellType: [NewsCellData]] = [.link: []] // конечный массив с данными
-        var newsDatasWall: [CellType: [NewsCellData]] = [.wall : []] // конечный массив с данными
-        var newsDatasHistory:  [CellType: [NewsCellData]] = [.histroy: []]  // конечный массив с данными
+      
+        guard let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles else { return }
+        guard let groupes = self.realmService.readData(NewsResponse.self)?.first?.groups else { return }
+        guard let items = self.realmService.readData(NewsResponse.self)?.first?.items else { return }
+        guard  items.count > 0 else { return }
         
-        if let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles {
-            if let groups = self.realmService.readData(NewsResponse.self)?.first?.groups {
-                if let items = self.realmService.readData(NewsResponse.self)?.first?.items {
+        var newsDatasToController: [[CellType: NewsCellData]] = []
+     
+        for item in items {
+            var newsDatas: [CellType: NewsCellData] = [ : ]
+            var cellType: CellType = .uncnown
+            guard let newsUserData = getUserData(from: item.sourceId, profiles: profiles, groupes: groupes) else { continue }
+            var newsCellData = NewsCellData()
+            newsCellData.date = item.date
+            newsCellData.ownerId = item.sourceId
+        
+            if let likes = item.likes {
+                newsCellData.newsLikeCount = likes.count
+                if likes.likeStatus == 1 {
+                    newsCellData.newsLikeStatus = true
+                }
+            }
+            
+            if let views = item.views {
+                newsCellData.newsSeenCount = views.count
+            }
+            
+            newsCellData.isOnline = newsUserData.isOnline
+            newsCellData.isBanned = newsUserData.isBanned
+            newsCellData.newsUserName = newsUserData.userName
+            newsCellData.newsUserLogo = newsUserData.userLogo
+            newsCellData.newsText = item.text ?? ""
+            if item.type == "post" && item.attachments.count == 0 && item.newsCopyHistory.count == 0 {
+                cellType = .post
+                newsCellData.newsText = item.text ?? ""
+                
+            }else if item.type == "post" && item.attachments.count == 1 && item.newsCopyHistory.count == 0 {
+               
+                if item.attachments[0].type == "photo" {
+                    cellType = .photo
+                    let photoData = item.attachments[0].photoData!.photoArray
+                    if let data = getNewsPhoto(photoData) {
+                        newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
+                    }
+                    newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
                     
-                    for item in items {
-                        var newsCellData = NewsCellData()
-                        newsCellData.ownerId = item.sourceId
-                        newsCellData.date = item.date
-
-                        
-                        if let wall = item.wallPhotos {
-                            newsCellData.newsLikeCount = wall.items[0].likes!.count
-                            if wall.items[0].likes!.likeStatus == 1 {
-                                newsCellData.newsLikeStatus = true
-                            }
-                            newsCellData.newsSeenCount = 0
-                           
-                        }else {
-                            newsCellData.newsLikeCount = item.likes!.count
-                            newsCellData.newsSeenCount = item.views?.count ?? 0
-                            if item.likes!.likeStatus == 1 {
-                                newsCellData.newsLikeStatus = true
-                            }
+                }else if item.attachments[0].type == "link" {
+                    cellType = .link
+                    if let link = item.attachments[0].link {
+                        newsCellData.lableOnPhoto = link.title
+                        newsCellData.lableUserNameOnPhoto = newsUserData.userName
+                        if let data = getNewsPhoto(link.photo!.photoArray) {
+                            newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
-                        
-                        if let text = item.text {
-                            newsCellData.newsDescription = text
-                        }else {
-                            newsCellData.newsDescription = " "
-                        }
-                        var cellType: CellType = .photo
+                    }
+                }else if item.attachments[0].type == "video" {
+                    cellType = .video
+                    if let video = item.attachments[0].video {
+                        newsCellData.accessKey = video.accessKey!
+                        newsCellData.trackCode = video.trackCode!
                       
-      // получаем пользователя по id
-                      
-                        if let user = getUserDataFromId(newsCellData.ownerId, profiles: profiles) {
-                            newsCellData.newsUserLogo = user.photo
-                            newsCellData.newsUserName = user.fName + " " + user.lName
-                            if user.online == 1 {
-                                newsCellData.online = true
-                            }
-                        }else if let user = getGroupFromId(newsCellData.ownerId, groups: groups) {
-                            newsCellData.newsUserLogo = user.photo
-                            newsCellData.newsUserName = user.name
-                            newsCellData.online = false
-
+                        if let data = getFirstFrame(from: video.firstFrame) {
+                            newsCellData.firstFrame = PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width))
                         }
-                        
-                        if let atachments = item.attachments.first {
-
-                            if let photoData = atachments.photoData {
-                                cellType = .photo
-                                newsCellData.newsText = photoData.text
-                                newsCellData.albumId = photoData.albumId
-                                if  let photoResult = getNewsPhoto(photoData.photoArray) {
-                                let photoImageData = PhotoDataNews(url: photoResult.url, height: CGFloat(photoResult.height), width: CGFloat(photoResult.width))
-                                newsCellData.newsImage = photoImageData
-                                }
-                                newsCellData.newsTitle = " "
-          // если новость с ссылочным массивом ( игры )
-                            }else if let link = atachments.link {
-                                cellType = .link
-                                newsCellData.newsTitle = link.title
-                                newsCellData.lableOnPhoto = link.title
-                                newsCellData.lableUserNameOnPhoto = newsCellData.newsUserName
-                                newsCellData.newsText = item.text!
-                                newsCellData.albumId = link.photo!.albumId
-                                if let photoResult = getNewsPhoto(link.photo!.photoArray) {
-                                let photoImageData = PhotoDataNews(url: photoResult.url, height: CGFloat(photoResult.height), width: CGFloat(photoResult.width))
-                                newsCellData.newsImage = photoImageData
-                                }
-                           } else if let video = atachments.video {
-                               cellType = .photo
-                               newsCellData.newsText = item.text!
-                               newsCellData.newsTitle = video.title!
-                               if let photoResult = getPhotoNewsHistory(video.image) {
-                               let photoImageData = PhotoDataNews(url: photoResult.url, height: CGFloat(photoResult.height), width: CGFloat(photoResult.width))
-                               newsCellData.newsImage = photoImageData
-                               }
-                            }
-          // если новость со стены
-                        }else if let wallPhoto = item.wallPhotos {
-                            cellType = .wall
-                            newsCellData.newsText = " "
-                            newsCellData.newsDescription = wallPhoto.items[0].text
-                            newsCellData.newsTitle = " "
-                            if let photoResult = getNewsPhoto(wallPhoto.items[0].photo) {
-                            let photoImageData = PhotoDataNews(url: photoResult.url, height: CGFloat(photoResult.height), width: CGFloat(photoResult.width))
-                            newsCellData.newsImage = photoImageData
-                            }
-          // если новость с истории
-                        }else if let copyHistory = item.newsCopyHistory.first {
-                            cellType = .histroy
-                            newsCellData.newsText = (copyHistory.attachments.first?.video?.title) ?? ""
-                            newsCellData.newsDescription = (copyHistory.attachments.first?.video?.historyDescription) ?? ""
-                            newsCellData.albumId = 0
-                            if let listItems = copyHistory.attachments.first?.video?.newsImage {
-                                if let photoResult = getPhotoNewsHistory(listItems){
-                                let photoImageData = PhotoDataNews(url: photoResult.url, height: CGFloat(photoResult.height), width: CGFloat(photoResult.width))
-                                    
-                                newsCellData.newsImage = photoImageData
-                                }
-                            }else {
-                                 newsCellData.newsImage = PhotoDataNews(url: "", height: 0, width: 0)
-                            }
-                        
-                           // newsCellData.newsImage = getPhotoNewsHistory((copyHistory.attachments.first?.video!.newsImage)!)
+                    }
+                }
+                
+                
+            }else if item.type == "post" && item.attachments.count == 2 && item.newsCopyHistory.count == 0 {
+                if item.attachments[0].type == "photo" && item.attachments[1].type == "link" {
+                    cellType = .photoLink
+                    let photoData = item.attachments[0].photoData!.photoArray
+                    if let data = getNewsPhoto(photoData) {
+                        newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
+                    }
+                    newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
+                    
+                    newsCellData.newsLink = item.attachments[1].link?.url ?? ""
+                    
+                }
+            }else if item.type == "post" && item.attachments.count > 2 && item.newsCopyHistory.count == 0 {
+                let photo = item.attachments.filter({ $0.type == "photo" })
+                if photo.count == item.attachments.count {
+                    cellType = .gallary
+                    for attach in item.attachments {
+                        let photoData = attach.photoData!.photoArray
+                        if let data = getNewsPhoto(photoData) {
+                            newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
-                     
-                        
-                            switch cellType {
-                            case .photo:
-                               // newsData.photo.append(newsCellData)
-                                var arr = newsDatasPhoto[.photo]
-                                arr?.append(newsCellData)
-                                newsDatasPhoto[.photo] = arr
-                            case .link:
-                             //   newsData.link.append(newsCellData)
-                                var arr = newsDatasLink[.link]
-                                arr?.append(newsCellData)
-                                newsDatasLink[.link] = arr
-                            case .wall:
-                            //    newsData.wall.append(newsCellData)
-                                var arr = newsDatasWall[.wall]
-                                arr?.append(newsCellData)
-                                newsDatasWall[.wall] = arr
-                            case .histroy:
-                           //     newsData.histroy.append(newsCellData)
-                                var arr = newsDatasHistory[.histroy]
-                                arr?.append(newsCellData)
-                                newsDatasHistory[.histroy] = arr
-                            }
-                                     }
-                                      var arrayNewsData = [newsDatasPhoto]
-                                      arrayNewsData.append(newsDatasLink)
-                                      arrayNewsData.append(newsDatasWall)
-                                      arrayNewsData.append(newsDatasHistory)
-                    self.newsArray = arrayNewsData
+                       
+                    }
+                    newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
                     
                     
                 }
-            }
-        }
-    }
-    
-    private func getUserDataFromId(_ ownerId: Int, profiles: List<NewsProfiles>) -> NewsProfiles? {
-        let profile = profiles.first { $0.id == ownerId }
-        return profile
-    }
-    
-    private func getGroupFromId(_ ownerId: Int, groups: List<NewsGroups>) -> NewsGroups? {
-        var id = ownerId
-        id.negate()
-        let group = groups.first { $0.id == id }
-        return group
-    }
+            }else if item.type == "post" && item.attachments.count == 0, let copyHistory = item.newsCopyHistory.first {
+                if copyHistory.attachments.count == 1 {
+                    let attachments = copyHistory.attachments
 
-    private func getNewsPhoto(_ newsPhotoArray: List<ImageArray>) -> ImageArray? {
-        if let url = newsPhotoArray.first(where: { $0.type == "y" }) {
-            return url
-        } else if let url = newsPhotoArray.first (where: { $0.type == "k" }) {
-            return url
+                    switch attachments[0].type {
+                        
+                    case "photo":
+                        cellType = .photo
+                       
+                        let photoData = attachments[0].photoData!.photoArray
+                        
+                        if let data = getNewsPhoto(photoData) {
+                            newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
+                        }
+                        newsCellData.albumId = attachments[0].photoData?.albumId ?? 0
+                        
+                    case "link":
+                        cellType = .link
+                        if let link = attachments[0].link {
+                            newsCellData.lableOnPhoto = link.title
+                            newsCellData.lableUserNameOnPhoto = newsUserData.userName
+                            if let data = getNewsPhoto(link.photo!.photoArray) {
+                                newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
+                            }
+                        }
+                        
+                    case "video":
+                        cellType = .video
+                        
+                        if let video = attachments[0].video {
+                            newsCellData.accessKey = video.accessKey!
+                            newsCellData.trackCode = video.trackCode!
+                          
+                            if let data = getFirstFrame(from: video.firstFrame) {
+                                newsCellData.firstFrame = PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width))
+                            }
+                        }
+                        
+                    default:
+                        cellType = .uncnown
+                    }
+                    
+                }else if copyHistory.attachments.count == 2 {
+                    let attachments = copyHistory.attachments
+                    if attachments[0].type == "photo" && attachments[1].type == "link" {
+                        cellType = .photoLink
+                        
+                        let photoData = attachments[0].photoData!.photoArray
+                        if let data = getNewsPhoto(photoData) {
+                            newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
+                        }
+                        newsCellData.albumId = attachments[0].photoData?.albumId ?? 0
+                        newsCellData.newsLink = attachments[1].link?.url ?? ""
+                    }
+                    
+                }else if copyHistory.attachments.count > 2 {
+                    let photo = copyHistory.attachments.filter({ $0.type == "photo" })
+                    if photo.count == copyHistory.attachments.count {
+                        cellType = .gallary
+                    }
+                    for attach in copyHistory.attachments {
+                        let photoData = attach.photoData!.photoArray
+                        if let data = getNewsPhoto(photoData) {
+                            newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
+                        }
+                       
+                    }
+                    newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
+                    
+                }
+                
+               
+                
+            
+            }
+            newsDatas = [cellType: newsCellData]
+            newsDatasToController.append(newsDatas)
+         
         }
-        let url = newsPhotoArray.first(where: { $0.type == "q"})
-        return url
+        self.newsArray = newsDatasToController
+    }
+    
+
+
+    private func getFirstFrame(from data: List<NewsVideoFirstFrame>) -> NewsVideoFirstFrame? {
+        if let frameData = data.first(where: { $0.width < 1000 }) {
+            return frameData
+        }
+        return nil
+    }
+    
+    private func getNewsPhoto(_ newsPhotoArray: List<ImageArray>) -> ImageArray? {
+        if let data = newsPhotoArray.last(where: { $0.width < 1000 }) {
+     
+            return data
+        }
         
+        return nil
     }
 
     private func getPhotoNewsHistory(_ photoArray: List<NewsImage>) -> NewsImage? {
      
-        let data = photoArray.first { $0.width > 300 }
+        let data = photoArray.last { $0.width < 1000 }
         return data ?? nil
     }
+    
+    private func getUserData(from sourceId: Int, profiles: List<NewsProfiles> , groupes: List<NewsGroups>) ->  NewsUserData? {
+        var group = sourceId
+        group.negate()
+        if let group = groupes.first(where: { $0.id == group }) {
+           
+            return NewsUserData(userLogo: group.photo, userName: group.name, isOnline: false, isBanned: false, screenName: group.screenName)
+        }else if let profile = profiles.first(where: { $0.id == sourceId }) {
+            let name = profile.fName + " " + profile.lName
+            var isOnline = false
+            var isBanned = false
+            if profile.online == 1 {
+                isOnline = true
+            }
+            if profile.banned != nil {
+                isBanned = true
+            }
+            return NewsUserData(userLogo: profile.photo , userName: name, isOnline: isOnline, isBanned: isBanned, screenName: profile.screenName!)
+        }
+        return nil
+    }
+    
+
+    
+    
 }
 
 

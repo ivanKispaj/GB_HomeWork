@@ -11,9 +11,9 @@ import UIKit
 extension HomeNewsTableViewController: ProtocolLikeDelegate {
 
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
-        let data = (self.newsArray?[indexPath.section].first?.value[indexPath.row])!
-        let countLike =  data.newsLikeCount
-        return [countLike: data.newsLikeStatus]
+      //  let data = (self.newsArray?[indexPath.section].first?.value[indexPath.row])!
+      //  let countLike =  data.newsLikeCount
+        return  [0: false] //[countLike: data.newsLikeStatus]
     }
 
     

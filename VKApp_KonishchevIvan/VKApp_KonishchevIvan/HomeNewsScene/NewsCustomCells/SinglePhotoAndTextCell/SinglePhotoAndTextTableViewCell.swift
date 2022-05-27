@@ -9,7 +9,7 @@ import UIKit
 
 class SinglePhotoAndTextTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var newsImage: UIImageView!
+    @IBOutlet weak var newsImage: UIImageView! 
     @IBOutlet weak var lableOnPhoto: UILabel!
     @IBOutlet weak var lableUserNameOnPhoto: UILabel!
     @IBOutlet weak var imageParentView: UIView!
@@ -31,11 +31,13 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell {
             if self.newsData != nil {
             let ratio = (self.newsData.width) / UIScreen.main.bounds.width
             let height = (self.newsData.height) / ratio
-           
-            UIView.animate(withDuration: 0.5) {
-                self.photoViewHeightConstraint.constant = height
-                self.layoutIfNeeded()
-            }
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.5) {
+                        self.photoViewHeightConstraint.constant = height
+                        self.layoutIfNeeded()
+                    }
+                }
+          
          
            
             
