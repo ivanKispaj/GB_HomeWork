@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LinkTableViewCell: UITableViewCell {
+class LinkTableViewCell: UITableViewCell, DequeuableProtocol {
 
     @IBOutlet weak var linkUserLogo: UIImageView!
     @IBOutlet weak var linkUserName: UILabel!
@@ -26,10 +26,15 @@ class LinkTableViewCell: UITableViewCell {
         self.linkViewLike.layer.cornerRadius = 20
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func setCellData(from data: DetailsSectionData, to friend: Friend) {
+        
+        self.linkCaption.text = data.captionNews
+        self.linkDate.text = data.date.unixTimeConvertion()
+        self.linkLink.text = data.linkUrl
+        self.linkLikeCount.text = String(data.likes.count)
+        self.linkUserLogo.image = UIImage(data: friend.photo)
+        self.linkUserName.text = friend.userName
+        self.linkText.text = data.titleNews
+        self.linkSeenCount.text = String(data.views?.count ?? 0)
     }
-    
 }

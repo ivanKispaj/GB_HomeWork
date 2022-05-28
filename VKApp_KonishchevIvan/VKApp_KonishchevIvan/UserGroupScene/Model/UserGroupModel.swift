@@ -40,7 +40,6 @@ final class ItemsGroup: Object, Decodable {
         isClosed = try container.decode(Int.self, forKey: .isClosed)
         let url = try container.decode(String.self, forKey: .photoGroup)
         photoGroup =  try? Data(contentsOf: URL(string: url)!)
-       // photoGroup = try container.decode(String.self, forKey: .photoGroup)
     }
     override class func primaryKey() -> String? {
         return "id"

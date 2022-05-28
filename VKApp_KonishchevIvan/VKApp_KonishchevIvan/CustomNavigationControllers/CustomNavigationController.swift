@@ -24,7 +24,6 @@ class CustomNavigationController: UINavigationController, UINavigationController
         let panEndgeGR = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(panRecognaiserScreen))
         panEndgeGR.edges = .left
         self.view.addGestureRecognizer(panEndgeGR)
-        // Do any additional setup after loading the view.
     }
     
 

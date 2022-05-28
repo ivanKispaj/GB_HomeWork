@@ -35,10 +35,7 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
             self.dataGroups = self.realmService.readData(ItemsGroup.self)
 
         }
-        
-        tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
-        tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")
-        
+        tableView.register(SimpleTableCell.self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,16 +60,9 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-               
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
-            preconditionFailure("Error")
-        }
+        let cell: SimpleTableCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         guard let data = self.dataGroups else { return cell}
-        
-        cell.imageCellAvatar.image = UIImage(data: data[indexPath.row].photoGroup)
-        cell.lableCellXib.text = data[indexPath.row].groupName
-        cell.labelCityCellXib.text = data[indexPath.row].activity
-        cell.profileStatus.text = ""
+        cell.setCellData(toGroupScene: data[indexPath.row])
         return cell
     
     }
@@ -108,8 +98,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
 
             tableView.reloadData()
             
-            
-            
             print("Выйти из группы!")
         }
 
@@ -117,7 +105,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
         
         delite.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 0.2624110008)
         let configuration =  UISwipeActionsConfiguration(actions: [delite])
-        //configuration.performsFirstActionWithFullSwipe = false
         return configuration
     }
 

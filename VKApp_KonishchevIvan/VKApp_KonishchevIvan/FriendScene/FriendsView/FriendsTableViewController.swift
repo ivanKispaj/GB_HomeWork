@@ -48,11 +48,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         getActivityIndicatorLoadData()
         self.setNotificationtoken()
         self.searchBar!.delegate = self
-        tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
-        tableView.register(UINib(nibName: "ExtendTableUserCell", bundle: nil), forCellReuseIdentifier: "ExtendCellXib")
-        
-        print(self.friends)
-
+        registerCell()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,42 +83,19 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
 
 // Отрисовка ячеек
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+       
+        let data = friends[indexPath.section].row[indexPath.row]
         let section = friends[indexPath.section].header
+      
         if section == "Возможные друзья" {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExtendCellXib", for: indexPath) as? ExtendTableUserCell else {
-                preconditionFailure("FriendsCell cannot")
-            }
-            
-            cell.ExtendImageCell.image = UIImage(named: "vkLogo")
-            
-          //  cell.ExtendImageCell.loadImageFromUrlString(self.friends[indexPath.section].row[indexPath.row].photo)
-            cell.ExtendLabelCity.text = self.friends[indexPath.section].row[indexPath.row].city
-            cell.ExtendLabelName.text = self.friends[indexPath.section].row[indexPath.row].userName
-            cell.isSelected = false
+            let cell: ExtendTableUserCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.setCelldata(from: data)
             return cell
 
         } else {
-            
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
-            preconditionFailure("FriendsCell cannot")
-        }
-            
-            cell.imageCellAvatar.image = UIImage(data: self.friends[indexPath.section].row[indexPath.row].photo)
-            
-         //   cell.imageCellAvatar.loadImageFromUrlString(self.friends[indexPath.section].row[indexPath.row].photo)
-            cell.labelCityCellXib.text = friends[indexPath.section].row[indexPath.row].city
-            cell.lableCellXib.text = friends[indexPath.section].row[indexPath.row].userName
-            let friend = friends[indexPath.section].row[indexPath.row]
-            cell.profileStatus.text = ""
-            if friend.isBanned {
-                cell.profileStatus.text = "Banned!"
-                cell.profileStatus.tintColor = UIColor.red
-            }
-            if friend.isClosedProfile {
-                cell.profileStatus.text = "Private"
-                cell.profileStatus.tintColor = UIColor.blue
-            }
+            let cell: SimpleTableCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.setCellData(toFriendsScene: data)
+         
             return cell
         }
     }
@@ -141,7 +114,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             performSegue(withIdentifier: "detailsUserSegueId", sender: nil)
             guard let detailVC = self.nextViewData else { return }
             detailVC.title = friendSelected.userName
-            detailVC.friendsSelectedd = friendSelected
+            detailVC.friendsSelected = friendSelected
         }
     }
 
@@ -164,6 +137,10 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         self.nextViewData = detailVC
     }
     
+    private func registerCell() {
+        tableView.register(SimpleTableCell.self)
+        tableView.register(ExtendTableUserCell.self)
+    }
 }
 
 

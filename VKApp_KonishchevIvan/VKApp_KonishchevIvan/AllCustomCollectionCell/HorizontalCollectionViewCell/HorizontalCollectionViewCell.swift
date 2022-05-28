@@ -10,9 +10,4 @@ import UIKit
 class HorizontalCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var hirizontalCellImage: UIImageView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
 }

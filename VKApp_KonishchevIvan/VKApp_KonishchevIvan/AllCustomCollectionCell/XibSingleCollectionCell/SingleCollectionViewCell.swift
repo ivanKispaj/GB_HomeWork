@@ -11,9 +11,6 @@ class SingleCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var singlePhoto: UIImageView!
     private var animateImage = UIViewPropertyAnimator()
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 
 }
 

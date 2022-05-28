@@ -15,10 +15,10 @@ extension DetailUserTableViewController {
    
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
-        InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelectedd.id))
+        InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelected.id))
         }
         
-        let wallData = self.realmService.readData(UserWallResponse.self)?.where { $0.id == self.friendsSelectedd.id }.first?.items
+        let wallData = self.realmService.readData(UserWallResponse.self)?.where { $0.id == self.friendsSelected.id }.first?.items
         if let data = wallData {
             self.updateWallData(from: data)
         }
@@ -34,7 +34,7 @@ extension DetailUserTableViewController {
                         print("DetailVC userWall Signed")
                     case let .update(results, deletions, insertions, _):
                         let dataWall = results
-                            .where { $0.id == self.friendsSelectedd.id }
+                            .where { $0.id == self.friendsSelected.id }
                             .first!
                             .items
                         if deletions.count != 0 || insertions.count != 0 {

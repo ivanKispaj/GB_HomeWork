@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, DequeuableProtocol {
 
     
     @IBOutlet weak var likeControll: ControlForLike!
@@ -51,19 +51,31 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleCollectionID", for: indexPath) as? SingleCollectionViewCell else {
             preconditionFailure("Error")
         }
-        
             cell.singlePhoto.loadImageFromUrlString(self.singlePhoto.image)
-    
-       
-        
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
    
-        let photo  = [self.singlePhoto!]
-        
+        let photo  = [self.singlePhoto!] 
         self.delegate.selectRow(nextViewData: photo, indexPath: self.delegateIndexPatch)
     }
 
+
+    func setCellData(from data: DetailsSectionData, to user: Friend) {
+        
+        self.singleAvatarHeader.image = UIImage(data: user.photo)
+     
+        if let seen = data.views {
+            self.singlePhotoSeenCount.text = String(seen.count)
+        }else {
+            self.singlePhotoSeenCount.text = "0"
+        }
+        var photo =  data.photo![self.delegateIndexPatch.row]
+        photo.likeLabel = data.likes.count
+        
+        self.singlePhoto = photo
+        self.singlPhotoLikeLable.text = String(data.likes.count)
+        self.singlePhotoSeenCount.text = String(data.views?.count ?? 0)
+    }
 }

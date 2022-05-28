@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GallaryViewController: UIViewController, ProtocolLikeDelegate {
+class GallaryViewController: UIViewController, LikeDelegate {
 
     var dataImage: Data!
     
@@ -96,9 +96,7 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                 let scale = CGAffineTransform(scaleX: 1, y: 1)
                 self.currentImageView.transform = transition.concatenating(scale)
             })
-        }) { finish in
-           // self.currentImageView.transform = CGAffineTransform.identity
-        }
+        })
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -337,7 +335,6 @@ class GallaryViewController: UIViewController, ProtocolLikeDelegate {
                         self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
                         self.lastImage = true
                     }else {
-                      //  self.nextAnimateImage!.isReversed = true
                         self.animateImage.isReversed = true
                         self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor: 0)
                

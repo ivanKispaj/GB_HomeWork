@@ -7,21 +7,17 @@
 
 import UIKit
 
-class ExtendTableUserCell: UITableViewCell {
+class ExtendTableUserCell: UITableViewCell, DequeuableProtocol {
 
     @IBOutlet weak var ExtendImageCell: UIImageView!
     @IBOutlet weak var ExtendLabelCity: UILabel!
     @IBOutlet weak var ExtendLabelName: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-       
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
+    func setCelldata(from data: Friend) {
+        self.ExtendImageCell.image = UIImage(named: "vkLogo")
+        self.ExtendLabelCity.text = data.city
+        self.ExtendLabelName.text = data.userName
+        self.isSelected = false
+    }
 }

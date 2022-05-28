@@ -4,6 +4,8 @@
 //
 //  Created by Ivan Konishchev on 27.03.2022.
 //
+// Домашнее задание по интерфейсу
+
 
 import UIKit
 

@@ -20,10 +20,4 @@ class CouruselCollectionViewCell: UICollectionViewCell {
         lableForDetailsCorusel.textColor = UIColor(named: "AppBW")
 
     }
-
-    override func layoutSubviews() {
-
-    }
-
-    
 }

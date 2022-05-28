@@ -13,7 +13,7 @@ class ControlForLike: UIControl {
     @IBOutlet weak var likeImage: UIImageView!
     @IBOutlet weak var likeLable: UILabel!
    
-    var delegate: ProtocolLikeDelegate!
+    var delegate: LikeDelegate!
     var indexPath: IndexPath!
     var indexForGallary: Int = 0
     var isLike: Bool = false

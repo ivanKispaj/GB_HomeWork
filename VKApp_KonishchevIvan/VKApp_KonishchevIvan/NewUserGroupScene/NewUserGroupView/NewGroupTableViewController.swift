@@ -40,15 +40,11 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
         getActivityIndicatorLoadData()
-        
         self.searchBar.delegate = self
         self.allGroupSeacrch = self.allGroups
-
         self.allGroupDictionary = sort(group: allGroupSeacrch)
-        tableView.register(UINib(nibName: "TableViewCellXib", bundle: nil), forCellReuseIdentifier: "XibCellForTable")
+        tableView.register(SimpleTableCell.self)
         
     }
 // MARK: - SearchBar
@@ -57,10 +53,6 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     
             setSearchFieldAllert()
             self.present(self.allert, animated: true)
-    
-        
-       
-        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -114,25 +106,19 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
         
     // количество строк таблици в одной секции
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            
             let count = allGroupDictionary[self.chars[section]]?.count
-//            let groupCell = allGroupDictionary.keys.sorted()
-//            let cell = allGroupDictionary[groupCell[section]]?.count ?? 0
-//
             return count ?? 0
         }
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: SimpleTableCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "XibCellForTable", for: indexPath) as? TableViewCellXib else {
-            preconditionFailure("Error")
-        }
         if let firstchar = allGroupDictionary[self.chars[indexPath.section]] {
             let groupes = firstchar[indexPath.row]
             cell.profileStatus.text = ""
             cell.lableCellXib.text = groupes.nameGroup
-            cell.imageCellAvatar.loadImageFromUrlString(groupes.imageGroup)//UIImage(data: groupes.imageGroup)
+            cell.imageCellAvatar.loadImageFromUrlString(groupes.imageGroup)
             cell.labelCityCellXib.text = "-"
         }else {
             return cell
@@ -145,36 +131,6 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
         override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
             return self.chars[section]
         }
-    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let arrayGroups = self.allGroupDictionary[self.shar[indexPath.section]]  else { return }
-//        let selectedGroup = arrayGroups[indexPath.row]
-//        self.joinNewGroup(to: selectedGroup.id) { status, message in
-//
-//            if message.first == "success" {
-//                if arrayGroups.count <= 1 {
-//                    let index = self.allGroupDictionary.firstIndex(where: {$0.key == self.shar[indexPath.section] })
-//                    self.allGroupDictionary.remove(at: index!)
-//                    self.shar.remove(at: indexPath.section)
-//                    DispatchQueue.main.async {
-//                        let indexSet = IndexSet(arrayLiteral: indexPath.section)
-//                        self.tableView.deleteSections(indexSet, with: .fade)
-//                    }
-//                }else {
-//                    let newArrayGroups = arrayGroups.filter{ $0.id != selectedGroup.id }
-//                    self.allGroupDictionary[self.shar[indexPath.section]] = newArrayGroups
-//                    DispatchQueue.main.async {
-//                        self.tableView.deleteRows(at: [indexPath], with: .right)
-//                    }
-//                }
-//
-//
-//            }else {
-//                print(message)
-//            }
-//        }
-//
-//    }
     
    //  Установка бокового буквенного поиска
         override func sectionIndexTitles(for tableView: UITableView) -> [String]? {

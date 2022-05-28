@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import AVKit
 
-class SinglePhotoAndTextTableViewCell: UITableViewCell {
-
+class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
+ 
+    
     @IBOutlet weak var newsImage: UIImageView! 
     @IBOutlet weak var lableOnPhoto: UILabel!
     @IBOutlet weak var lableUserNameOnPhoto: UILabel!
@@ -24,23 +26,19 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell {
     @IBOutlet weak var newsLikeImage: UIImageView!
     @IBOutlet weak var newsLikeLable: UILabel!
     @IBOutlet weak var seenViewLable: UILabel!
-    
-    
-    var newsData: PhotoDataNews! {// NewsCellData!// {
+    let newsCellData: NewsCellData? = nil
+   
+    var newsPhotoData: PhotoDataNews! {
         didSet {
-            if self.newsData != nil {
-            let ratio = (self.newsData.width) / UIScreen.main.bounds.width
-            let height = (self.newsData.height) / ratio
+            if self.newsPhotoData != nil {
+            let ratio = (self.newsPhotoData.width) / UIScreen.main.bounds.width
+            let height = (self.newsPhotoData.height) / ratio
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.5) {
                         self.photoViewHeightConstraint.constant = height
                         self.layoutIfNeeded()
                     }
                 }
-          
-         
-           
-            
             }else {
                 UIView.animate(withDuration: 0.5) {
                     self.photoViewHeightConstraint.constant = 0
@@ -49,13 +47,32 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell {
             }
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+  
 
+    func configureCellForPhoto(from data: NewsCellData, linkStatus: Bool) {
+        if let image = data.newsImage.first {
+            self.newsPhotoData = image
+            self.newsImage.loadImageFromUrlString(image.url)
+            
+        }
+        
+        self.newsTextView.text = data.newsText
+        self.newsUserName.text = data.newsUserName
+        self.newsLikeLable.text = String(data.newsLikeCount)
+        self.newsUserAvatar.image = UIImage(data: data.newsUserLogo)
+        self.imageParentView.backgroundColor = .clear
+        self.newsUserApdateTime.text = data.date.unixTimeConvertion()
+        self.seenViewLable.text = String(data.newsSeenCount)
+        if linkStatus {
+            self.lableOnPhoto.text = data.lableOnPhoto
+            self.lableUserNameOnPhoto.text = data.lableUserNameOnPhoto
+            self.imageParentView.backgroundColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 0.4388283451)
+        }else {
+            self.lableOnPhoto.text = ""
+            self.lableUserNameOnPhoto.text = ""
+        }
     }
-
+ 
 
 }
-
 

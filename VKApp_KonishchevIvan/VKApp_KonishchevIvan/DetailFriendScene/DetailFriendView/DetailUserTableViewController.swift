@@ -12,7 +12,7 @@ import RealmSwift
 class DetailUserTableViewController: UITableViewController, TableViewDelegate {
  
 // Данные пользователя которого выбрали на предыдущем контроллере (FriendsTableViewController)
-    var friendsSelectedd: Friend!
+    var friendsSelected: Friend!
     var activityIndicator: UIActivityIndicatorView!
     
     var notifiTokenPhoto: NotificationToken?
@@ -55,12 +55,8 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         self.setNotificationTokenPhoto()
         self.setNotificationtokenFriends()
         setHeaderDetailView()
+        registerCells()
         
-        tableView.register(UINib(nibName: "CouruselTableViewCell", bundle: nil), forCellReuseIdentifier: "CouruselCellForDetails")
-        tableView.register(UINib(nibName: "GallaryTableViewCell", bundle: nil), forCellReuseIdentifier: "GallaryTableCell")
-        tableView.register(UINib(nibName: "SinglePhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleTableCellID")
-        tableView.register(UINib(nibName: "LinkTableViewCell", bundle: nil), forCellReuseIdentifier: "LinkTableViewCell")
-        tableView.register(UINib(nibName: "DetailOlugCell", bundle: nil), forCellReuseIdentifier: "DetailsTablePlugCell")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -95,22 +91,22 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let data = dataTable?[indexPath.section].sectionData else {
+            preconditionFailure("Error")
+        }
+        
         switch dataTable[indexPath.section].sectionType {
         case .Friends:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CouruselCellForDetails", for: indexPath) as? CouruselTableViewCell else {
-                preconditionFailure("Error")
-            }
-            let data = dataTable![indexPath.section].sectionData
+            let cell: CouruselTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.collectionData = data.friends
             cell.delegate = self
             return cell
         case .Gallary:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GallaryTableCell", for: indexPath) as? GallaryTableViewCell else {
-                preconditionFailure("Error")
-            }
-            let data = dataTable![indexPath.section].sectionData
+            
+            let cell: GallaryTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+           
             if let photo = data.photo {
-                    cell.gallaryData = photo
+                cell.gallaryData = photo
                 cell.countCell = 0
             }
             cell.delegate = self
@@ -118,77 +114,53 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             cell.delegateFrameImages = self
             return cell
         case .SingleFoto:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTableCellID", for: indexPath) as? SinglePhotoTableViewCell else {
-                preconditionFailure("Error")
-            }
-           
-            let data = dataTable[indexPath.section].sectionData
-            cell.singleLableUserName.text = self.friendsSelectedd.userName
+            let cell: SinglePhotoTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+ 
             cell.delegateIndexPatch = indexPath
-            cell.singleAvatarHeader.image = UIImage(data: self.friendsSelectedd.photo)
+            cell.delegate = self
             cell.likeControll.delegate = self
             cell.likeControll.indexPath = indexPath
-            if let seen = data.views {
-                cell.singlePhotoSeenCount.text = String(seen.count)
-            }else {
-                cell.singlePhotoSeenCount.text = "0"
-            }
-        
-            cell.delegate = self
-            var photo =  data.photo![indexPath.row]
-            photo.likeLabel = data.likes.count
-            
-            cell.singlePhoto = photo
-            cell.singlPhotoLikeLable.text = String(data.likes.count)
-            cell.singlePhotoSeenCount.text = String(data.views?.count ?? 0)
+            cell.singleLableUserName.text = self.friendsSelected.userName
+            cell.setCellData(from: data, to: self.friendsSelected)
             return cell
 
             
         case .link:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LinkTableViewCell", for: indexPath) as? LinkTableViewCell else {
-                preconditionFailure("Error")
-            }
-            let data = dataTable[indexPath.section].sectionData
-            cell.linkCaption.text = data.captionNews
-            cell.linkDate.text = data.date.unixTimeConvertion() // unixTimeConvertion(unixTime: Double(data.date))
-            cell.linkLink.text = data.linkUrl
-            cell.linkLikeCount.text = String(data.likes.count)
-            cell.linkUserLogo.image = UIImage(data: self.friendsSelectedd.photo)
-            cell.linkUserName.text = self.friendsSelectedd.userName
-            cell.linkText.text = data.titleNews
-            cell.linkSeenCount.text = String(data.views?.count ?? 0)
+            let cell: LinkTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+
+            cell.setCellData(from: data, to: self.friendsSelected)
+            
             return cell
-            // Закомментированное в процессе разработки! Чтоб не забыть что такое есть и можно вывести!
         case .newsText:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTablePlugCell", for: indexPath) as? DetailOlugCell else {
-                preconditionFailure("Error")
-            }
+            let cell: DetailPlugCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.testPlugText.text = "NewsText"
         return cell
             
         case .video:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTablePlugCell", for: indexPath) as? DetailOlugCell else {
-                preconditionFailure("Error")
-            }
+            let cell: DetailPlugCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.testPlugText.text = "VideoCell"
         return cell
             
         case .unknown:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTablePlugCell", for: indexPath) as? DetailOlugCell else {
-                preconditionFailure("Error")
-            }
+            let cell: DetailPlugCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+
             cell.testPlugText.text = "Unknown"
         return cell
 
         case .linkPhoto:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsTablePlugCell", for: indexPath) as? DetailOlugCell else {
-                preconditionFailure("Error")
-            }
+            let cell: DetailPlugCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.testPlugText.text = "LinkPhoto"
         return cell
         }
     }
 
+    private func registerCells() {
+        tableView.register(CouruselTableViewCell.self)
+        tableView.register(GallaryTableViewCell.self)
+        tableView.register(SinglePhotoTableViewCell.self)
+        tableView.register(LinkTableViewCell.self)
+        tableView.register(DetailPlugCell.self)
+    }
 
 //MARK: - TableViewDelegate method
     func selectRow(nextViewData: [ImageAndLikeData], indexPath: IndexPath) {
@@ -206,14 +178,13 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             self.currentFrameImages = frame1
             self.collectionFrame = frame
             getViewGallary(to: indexPath)
-         //   getViewSinglephoto(to: indexPath)
         }
 
     }
 }
 
 // MARK: - методы для делегата like controll !!
-extension DetailUserTableViewController: ProtocolLikeDelegate {
+extension DetailUserTableViewController: LikeDelegate {
 
     func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
         let data = self.dataTable![indexPath.section].sectionData
@@ -271,12 +242,6 @@ extension DetailUserTableViewController: SetFrameImages {
               nextVC.title = "Фото галлерея"
               nextVC.currentImage = self.currentImage!
              self.present(nextVC, animated: true)
-    }
-    
-    private func getViewSinglephoto(to indexPath: IndexPath) {
-        
-        
-        
     }
 
 }

@@ -14,10 +14,10 @@ extension DetailUserTableViewController {
     func loadFriendsSelectedUser()  {
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
-        InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelectedd.id))
+        InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id))
         }
         
-        let friendsData = self.realmService.readData(FriendsResponse.self)?.where{ $0.id == self.friendsSelectedd.id }.first?.items
+        let friendsData = self.realmService.readData(FriendsResponse.self)?.where{ $0.id == self.friendsSelected.id }.first?.items
         
         if let data = friendsData {
             self.updateUserFromRealm(from: data)
@@ -33,7 +33,7 @@ extension DetailUserTableViewController {
                     print("DetailVC UserFriends Signed")
                 case let .update(results, deletions, insertions, _):
                     let dataFriends = results
-                        .where { $0.id == self.friendsSelectedd.id }
+                        .where { $0.id == self.friendsSelected.id }
                         .first?
                         .items
                     if deletions.count != 0 || insertions.count != 0 {

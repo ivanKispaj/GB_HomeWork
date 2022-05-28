@@ -83,10 +83,10 @@ private extension VKLoginViewController {
         urlComponents.host = "oauth.vk.com"
         urlComponents.path = "/authorize"
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: "8142951"), // ID приложения 8140649, 8142951, 8134649, 8146635
+            URLQueryItem(name: "client_id", value: "8134649"), // ID приложения 8140649, 8142951, 8134649, 8146635
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "display", value: "mobile"),
-            URLQueryItem(name: "scope", value: "offline, friends, groups, photos, status, wall"),
+            URLQueryItem(name: "scope", value: "offline, friends, groups, photos, status, wall, video"),
             URLQueryItem(name: "response_type", value: "token"),
             URLQueryItem(name: "revoke", value: "0")
         ]

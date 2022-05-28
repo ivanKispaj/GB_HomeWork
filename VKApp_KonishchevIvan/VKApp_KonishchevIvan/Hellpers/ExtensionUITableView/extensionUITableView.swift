@@ -4,7 +4,7 @@
 //
 //  Created by Ivan Konishchev on 24.05.2022.
 //
-
+// Расширения для изменения создания кастомных view при действиях с ячейками!
 import UIKit
 
 extension UITableView {
@@ -28,9 +28,6 @@ extension UITableView {
                         btnView.layer.masksToBounds = true
                         btnView.layer.cornerRadius = 10
                         for (index,btnViews) in btnView.subviews.enumerated() {
-                            
-                          
-                            
                             if let btnImageView = btnViews as? UIImageView {
                                
  // btnViews and btnImageview -> это UIImageView

@@ -8,11 +8,7 @@
 import UIKit
 
 class CircleView: UIView {
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
+
     override func layoutSubviews() {
         self.layer.masksToBounds = true
         self.layer.cornerRadius = bounds.height/2

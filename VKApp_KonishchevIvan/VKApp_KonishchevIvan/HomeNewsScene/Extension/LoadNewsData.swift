@@ -9,11 +9,11 @@ import UIKit
 import RealmSwift
 
 extension HomeNewsTableViewController {
+    
     func loadNewsData()  {
-        
 //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
         
-        let queue = DispatchQueue.global(qos: .default)
+        let queue = DispatchQueue.global(qos: .userInitiated)
         queue.async {
             InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
         }
@@ -100,7 +100,7 @@ extension HomeNewsTableViewController {
                     if let video = item.attachments[0].video {
                         newsCellData.accessKey = video.accessKey!
                         newsCellData.trackCode = video.trackCode!
-                      
+                        newsCellData.videoId = video.videoId
                         if let data = getFirstFrame(from: video.firstFrame) {
                             newsCellData.firstFrame = PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width))
                         }
@@ -167,7 +167,7 @@ extension HomeNewsTableViewController {
                         if let video = attachments[0].video {
                             newsCellData.accessKey = video.accessKey!
                             newsCellData.trackCode = video.trackCode!
-                          
+                            newsCellData.videoId = video.videoId
                             if let data = getFirstFrame(from: video.firstFrame) {
                                 newsCellData.firstFrame = PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width))
                             }
@@ -214,7 +214,7 @@ extension HomeNewsTableViewController {
             newsDatasToController.append(newsDatas)
          
         }
-        self.newsArray = newsDatasToController
+        self.newsData = newsDatasToController
     }
     
 

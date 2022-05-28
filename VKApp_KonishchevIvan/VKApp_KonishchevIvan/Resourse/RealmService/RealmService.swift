@@ -25,6 +25,7 @@ final class RealmService {
     func updateData<T: Object>(_ object: T) {
         do {
             let realm = try Realm()
+            print(realm.configuration.fileURL!)
             try realm.write {
                 realm.add(object, update: .modified)
             }

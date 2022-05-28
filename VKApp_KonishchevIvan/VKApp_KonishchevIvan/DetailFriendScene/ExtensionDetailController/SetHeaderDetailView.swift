@@ -13,14 +13,14 @@ extension DetailUserTableViewController {
     
     func setHeaderDetailView(){
         DispatchQueue.main.async {
-            self.detailUserNameLable.text = self.friendsSelectedd.userName
-            self.detailUserInfoLable.text = self.friendsSelectedd.status
+            self.detailUserNameLable.text = self.friendsSelected.userName
+            self.detailUserInfoLable.text = self.friendsSelected.status
         }
         
-        self.detailAvatarHeader.image = UIImage(data: self.friendsSelectedd.photo)
+        self.detailAvatarHeader.image = UIImage(data: self.friendsSelected.photo)
        
-        let time = self.friendsSelectedd.lastSeenDate.unixTimeConvertion()
-        if self.friendsSelectedd.online {
+        let time = self.friendsSelected.lastSeenDate.unixTimeConvertion()
+        if self.friendsSelected.online {
             self.detailUserAccountLable.textColor = UIColor.red
             self.detailUserAccountLable.text = "online"
            

@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     try? FileManager.default.removeItem(at: URL)
                 }
         }
-        
+ //MARK: - Использую при тестировании ( удаляю базу данных realm!!! ) временно нужный закомаентированный код!
 //        let url = Realm.Configuration.defaultConfiguration.fileURL!
 //        remove(realmURL: url)
         FirebaseApp.configure()

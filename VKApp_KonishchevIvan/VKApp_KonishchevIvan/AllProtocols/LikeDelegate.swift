@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ProtocolLikeDelegate: AnyObject {
+protocol LikeDelegate: AnyObject {
    func getCountLike(for indexPath: IndexPath) -> [Int: Bool]
    func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath)
 }

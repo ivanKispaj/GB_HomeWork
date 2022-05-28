@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, DequeuableProtocol {
 
     @IBOutlet weak var gallaryCollection: UICollectionView!
     var delegate: TableViewDelegate!
@@ -27,12 +27,6 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         self.gallaryCollection.dataSource = self
         self.gallaryCollection.register(UINib(nibName: "GallaryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GallaryCollectionCell")
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
-   
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if self.gallaryData != nil && self.gallaryData.count == 0 {

@@ -8,64 +8,6 @@
 import UIKit
 import RealmSwift
 
-struct NewsUserData {
-    let userLogo: Data
-    let userName: String
-    let isOnline: Bool
-    let isBanned: Bool
-    let screenName: String
-    
-}
-
-
-
-enum CellType: String {
-    case photo = "photo"
-    case link = "link"
- //   case wall = "wall"
-//    case histroy = "histroy"
-    case video = "video"
-    case post = "post"
-    case gallary = "gallary"
-    case photoLink
-    case uncnown = "uncnown"
-}
-
-struct NewsData  {
-    var photo = NewsCellData()
-    var link = NewsCellData()
-    var wall = NewsCellData()
-    var histroy = NewsCellData()
-}
-struct PhotoDataNews {
-    var url: String
-    var height: CGFloat
-    var width: CGFloat
-}
-
-//MARK: - Model для отображения страницы новостей
-struct NewsCellData {
-    var ownerId: Int = 0
-    var date: Double = 0
-    var newsLikeCount: Int = 0
-    var newsLikeStatus: Bool = false
-    var newsSeenCount: Int = 0
-    var isOnline: Bool = false
-    var isBanned: Bool = false
-    var newsUserName: String = ""
-    var newsUserLogo: Data!
-    
-    var albumId: Int = 0
-    var newsText: String = ""
-    var newsLink: String = ""
-    var newsDescription: String = ""
-    var newsImage: [PhotoDataNews] = []
-    var firstFrame: PhotoDataNews!
-    var trackCode: String = ""
-    var accessKey: String = ""
-    var lableOnPhoto: String = ""
-    var lableUserNameOnPhoto: String = ""
-}
 
 //MARK: -  Модель для парсинга новостей и сохранения в Realm !!!!
 struct NewsDataModel:Decodable {
@@ -173,7 +115,6 @@ final class NewsCopyHistory: Object, Decodable {
     @objc dynamic var ownerId: Int = 0
     @objc dynamic var date: Int = 0
     dynamic var attachments = List<NewsAttachments>()
- //    dynamic var attachments = List<NewsHistoryAttachments>()
                  
     convenience init(from decoder: Decoder) throws {
         self.init()
@@ -181,7 +122,6 @@ final class NewsCopyHistory: Object, Decodable {
         ownerId = try container.decodeIfPresent(Int.self, forKey: .ownerId) ?? 0
         date = try container.decode(Int.self, forKey: .date)
         attachments = try container.decodeIfPresent(List<NewsAttachments>.self, forKey: .attachments) ?? List<NewsAttachments>()
-       // attachments = try container.decode(List<NewsHistoryAttachments>.self, forKey: .attachments)
     }
     
 }
@@ -194,7 +134,6 @@ final class NewsWallPhotos: Object, Decodable {
     }
     dynamic var items = List<NewsWallPhotoData>()
 
-    
 }
 
 // MARK: - NewsWallPhotoData
@@ -210,7 +149,7 @@ final class NewsWallPhotoData: Object, Decodable {
     @objc dynamic var albumId: Int = 0
     @objc dynamic var date: Int = 0
     @objc dynamic var idPhoto: Int = 0
-     dynamic var photo = List<ImageArray>()
+    dynamic var photo = List<ImageArray>()
     @objc dynamic var likes: NewsLikes? = nil
     @objc dynamic var text: String = ""
     
@@ -232,7 +171,6 @@ final class NewsWallPhotoData: Object, Decodable {
 final class NewsHistoryAttachments: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case video
-      
     }
     @objc dynamic var video: NewsHistoryVideo? = nil
   
@@ -240,7 +178,6 @@ final class NewsHistoryAttachments: Object, Decodable {
         self.init()
         let contaioner = try decoder.container(keyedBy: CodingKeys.self)
         video = try? contaioner.decode(NewsHistoryVideo.self, forKey: .video)
-       
     }
 }
 
@@ -297,13 +234,14 @@ final class NewsVideo: Object, Decodable {
         case accessKey = "access_key"
         case firstFrame = "first_frame"
         case trackCode = "track_code"
+        case videoId = "id"
     }
     dynamic var image = List<NewsImage>()
     @objc dynamic var title: String? = nil
     @objc dynamic var accessKey: String? = nil
     dynamic var firstFrame = List<NewsVideoFirstFrame>()
     @objc dynamic var trackCode: String? = nil
-    
+    @objc dynamic var videoId: Int = 0
     
     convenience init(from decoder: Decoder) throws {
         self.init()
@@ -313,6 +251,7 @@ final class NewsVideo: Object, Decodable {
         accessKey = try? container.decodeIfPresent(String.self, forKey: .accessKey)
         firstFrame = try container.decodeIfPresent(List<NewsVideoFirstFrame>.self, forKey: .firstFrame) ?? List<NewsVideoFirstFrame>()
         trackCode = try? container.decodeIfPresent(String.self, forKey: .trackCode)
+        videoId = try container.decode(Int.self, forKey: .videoId)
     }
 }
 
@@ -345,7 +284,6 @@ final class NewsLink: Object, Decodable {
         url = try container.decode(String.self, forKey: .url)
         title = try container.decode(String.self, forKey: .title)
         caption = try container.decodeIfPresent(String.self, forKey: .caption) ?? nil
-        
         LinkDescription = try container.decode(String.self, forKey: .LinkDescription)
         photo = try? container.decode(NewsPhotosData.self, forKey: .photo)
     }
@@ -368,7 +306,7 @@ final class NewsPhotosData: Object, Decodable {
     @objc dynamic var id: Int = 0
     @objc dynamic var ownerId: Int = 0
     @objc dynamic var text: String = ""
-     dynamic var photoArray = List<ImageArray>()
+    dynamic var photoArray = List<ImageArray>()
     
     convenience init(from decoder: Decoder) throws {
         self.init()
@@ -425,7 +363,7 @@ final class NewsProfiles: Object, Decodable {
     
     @objc dynamic var  screenName: String? = nil
     @objc dynamic var  online: Int = 0
-     dynamic var  onlineInfo: NewsOnlineInfo? = NewsOnlineInfo()
+    dynamic var  onlineInfo: NewsOnlineInfo? = NewsOnlineInfo()
     @objc dynamic var  banned: String? = nil
     
     convenience init(from decoder: Decoder) throws {
@@ -434,11 +372,8 @@ final class NewsProfiles: Object, Decodable {
         id = try container.decode(Int.self, forKey: .id)
         fName = try container.decode(String.self, forKey: .fName)
         lName = try container.decode(String.self, forKey: .lName)
-        
         let url = try container.decode(String.self, forKey: .photo)
         photo =  try? Data(contentsOf: URL(string: url)!)
-     //   photo = try container.decode(String.self, forKey: .photo)
-        
         screenName = try? container.decodeIfPresent(String.self, forKey: .screenName)
         online = try container.decode(Int.self, forKey: .online)
         onlineInfo = try? container.decodeIfPresent(NewsOnlineInfo.self, forKey: .onlineInfo) ?? NewsOnlineInfo()

@@ -10,12 +10,5 @@ import UIKit
 class GallaryCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var gallaryImage: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    
 
 }

@@ -108,10 +108,6 @@ final class WallAttachments: Object, Decodable {
     
 }
 
-//struct WallVideo: Decodable {
-//    let description: String
-//}
-
 final class WallLink: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case url
@@ -192,38 +188,3 @@ final class WallViews: Object, Decodable {
     @objc dynamic var count: Int
 }
 
-
-//struct WallLastSeen: Decodable {
-//    let platform: Int
-//    let time: Int
-//}
-
-//struct UserWallGroups: Decodable {
-//
-//
-//}
-
-
-//struct UserWallProfiles: Decodable {
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case firstName = "first_name"
-//        case lastName = "last_name"
-//        case isClosedProfile = "is_closed"
-//        case profilePhoto = "photo_50"
-//        case profilePhotoAlt = "photo"
-//        case online
-//        case status
-//        case lastSeen = "last_seen"
-//    }
-//    let id: Int
-//    let firstName: String
-//    let lastName: String
-//    let isClosedProfile: Bool
-//    let profilePhoto:String?
-//    let profilePhotoAlt: String
-//    let online: Int
-//    let status: String
-//    let lastSeen: WallLastSeen
-//
-//}
