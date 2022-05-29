@@ -62,13 +62,11 @@ class HomeNewsTableViewController: UITableViewController {
        
     }
 
-    
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell is NewsVideoCell {
             let dataCell = cell as! NewsVideoCell
             if dataCell.player != nil {
                 DispatchQueue.main.async {
-                  //  dataCell.newsVideoFrameImage.isHidden = false
                     dataCell.player.pause()
                 }
                 
@@ -81,7 +79,6 @@ class HomeNewsTableViewController: UITableViewController {
             let dataCell = cell as! NewsVideoCell
             if dataCell.player != nil {
                 DispatchQueue.main.async {
-                  //  dataCell.newsVideoFrameImage.isHidden = false
                     dataCell.player.play()
                 }
                 
@@ -91,9 +88,6 @@ class HomeNewsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        
         
         guard let news = newsData?[indexPath.row].first else {
             preconditionFailure("Error cell")
@@ -122,7 +116,10 @@ class HomeNewsTableViewController: UITableViewController {
             cell.configureCellForPost(from: data)
             return cell
         case .gallary:
-            print("Gallary")
+            print("gallary")
+            let cell: NewsGallaryCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.setCellData(from: data)
+            return cell
         case .photoLink:
             let cell: SinglePhotoAndTextTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.configureCellForPhoto(from: data, linkStatus: false)
@@ -137,9 +134,11 @@ class HomeNewsTableViewController: UITableViewController {
     }
 //MARK: - Регистрация кастомных ячеек таблицы
     private func registerCells() {
+        
         self.tableView.register(SinglePhotoAndTextTableViewCell.self)
         self.tableView.register(NewsPostCell.self)
         self.tableView.register(NewsVideoCell.self)
+        self.tableView.register(NewsGallaryCell.self)
     }
 
 }

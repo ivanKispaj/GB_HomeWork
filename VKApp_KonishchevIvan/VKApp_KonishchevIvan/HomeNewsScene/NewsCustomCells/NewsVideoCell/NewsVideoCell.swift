@@ -42,6 +42,7 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
         let height = (data.firstFrame.height) / ratio
         self.frame.size.height = height + 110
         let queue = DispatchQueue.global(qos: .userInteractive)
+        
        queue.async {
             InternetConnections(host: "api.vk.com", path: "/method/video.get").loadVideoContent(ovnerId: data.ownerId, accessKey: data.accessKey, videoId: data.videoId) { result in
                 
@@ -63,21 +64,39 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
                         let playerHtml = try String(contentsOf: url, encoding: .ascii)
                        
                         let htmlArray = playerHtml.split(separator: ",")
+                        if data.videoType == .video {
             // варианты url video 480/360/320
-                     //   let url480 = htmlArray.first(where: { $0.contains("url480")})
-                       let url360 = htmlArray.first(where: { $0.contains("url360")})
-                  //      let url240 = htmlArray.first(where: { $0.contains("url240")})
+                     //       let url480 = htmlArray.first(where: { $0.contains("url480")})
+                            let url360 = htmlArray.first(where: { $0.contains("url360")})
+                  //          let url240 = htmlArray.first(where: { $0.contains("url240")})
              
-                        if let url480One = url360?.split(separator: ":") {
-                            let url = url480One.last
-                            if var clearUrl = url?.replacingOccurrences(of: "\\", with: "") {
-                                clearUrl = clearUrl.replacingOccurrences(of: "\"", with: "")
-                                clearUrl = "https:" + clearUrl
-                                DispatchQueue.main.async {
-                                    self.initializeVideoPlayerWithVideo(with: clearUrl)
-                                }
+                            if let url480One = url360?.split(separator: ":") {
+                                let url = url480One.last
+                                    if var clearUrl = url?.replacingOccurrences(of: "\\", with: "") {
+                                        clearUrl = clearUrl.replacingOccurrences(of: "\"", with: "")
+                                        clearUrl = "https:" + clearUrl
+                                        DispatchQueue.main.async {
+                                            self.initializeVideoPlayerWithVideo(with: clearUrl)
+                                        }
                                
                                 
+                                    }
+                            }
+                        }else if data.videoType == .live {
+                            let allHls = htmlArray.filter({$0.contains ("hls")})
+                            print(allHls.count)
+                            print(allHls)
+                            let urlHls = htmlArray.first(where: { $0.contains("hls")})
+                            if let hls = urlHls?.split(separator: ":") {
+                                let lastHls = hls.last
+                                if var clearHls = lastHls?.replacingOccurrences(of: "\\", with: "") {
+                                    clearHls = clearHls.replacingOccurrences(of: "\"", with: "")
+                                    clearHls = "https:" + clearHls
+                                    print(clearHls)
+                                    DispatchQueue.main.async {
+                                        self.initializeVideoPlayerWithVideo(with: clearHls)
+                                    }
+                                }
                             }
                         }
                     } catch let error {
@@ -90,6 +109,8 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
         }
     }
       
+    
+    
     func initializeVideoPlayerWithVideo(with url: String) {
     
         let videoURL = URL(string: url)

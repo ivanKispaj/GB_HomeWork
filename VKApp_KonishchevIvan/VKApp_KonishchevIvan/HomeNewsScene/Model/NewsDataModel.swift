@@ -235,6 +235,7 @@ final class NewsVideo: Object, Decodable {
         case firstFrame = "first_frame"
         case trackCode = "track_code"
         case videoId = "id"
+        case type
     }
     dynamic var image = List<NewsImage>()
     @objc dynamic var title: String? = nil
@@ -242,7 +243,7 @@ final class NewsVideo: Object, Decodable {
     dynamic var firstFrame = List<NewsVideoFirstFrame>()
     @objc dynamic var trackCode: String? = nil
     @objc dynamic var videoId: Int = 0
-    
+    @objc dynamic var type: String = ""
     convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -252,6 +253,7 @@ final class NewsVideo: Object, Decodable {
         firstFrame = try container.decodeIfPresent(List<NewsVideoFirstFrame>.self, forKey: .firstFrame) ?? List<NewsVideoFirstFrame>()
         trackCode = try? container.decodeIfPresent(String.self, forKey: .trackCode)
         videoId = try container.decode(Int.self, forKey: .videoId)
+        type = try container.decode(String.self, forKey: .type)
     }
 }
 

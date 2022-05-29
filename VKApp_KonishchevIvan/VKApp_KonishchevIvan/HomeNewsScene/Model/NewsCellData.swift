@@ -8,6 +8,23 @@
 import UIKit
 
 //MARK: - Model для отображения страницы новостей
+
+
+enum CellType: String {
+    case photo = "photo"
+    case link = "link"
+    case video = "video"
+    case post = "post"
+    case gallary = "gallary"
+    case photoLink
+    case uncnown = "uncnown"
+}
+
+enum VideoType  {
+    case live
+    case video
+}
+
 struct NewsCellData {
     var ownerId: Int = 0
     var date: Double = 0
@@ -29,18 +46,10 @@ struct NewsCellData {
     var accessKey: String = ""
     var lableOnPhoto: String = ""
     var lableUserNameOnPhoto: String = ""
+    var videoType: VideoType = .video
 }
 
 
-enum CellType: String {
-    case photo = "photo"
-    case link = "link"
-    case video = "video"
-    case post = "post"
-    case gallary = "gallary"
-    case photoLink
-    case uncnown = "uncnown"
-}
 
 struct NewsUserData {
     let userLogo: Data

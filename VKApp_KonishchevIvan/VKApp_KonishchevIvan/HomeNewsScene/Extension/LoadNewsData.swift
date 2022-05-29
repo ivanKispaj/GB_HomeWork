@@ -104,6 +104,9 @@ extension HomeNewsTableViewController {
                         if let data = getFirstFrame(from: video.firstFrame) {
                             newsCellData.firstFrame = PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width))
                         }
+                        if video.type == "live" {
+                            newsCellData.videoType = .live
+                        }
                     }
                 }
                 
@@ -170,6 +173,9 @@ extension HomeNewsTableViewController {
                             newsCellData.videoId = video.videoId
                             if let data = getFirstFrame(from: video.firstFrame) {
                                 newsCellData.firstFrame = PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width))
+                            }
+                            if video.type == "live" {
+                                newsCellData.videoType = .live
                             }
                         }
                         
