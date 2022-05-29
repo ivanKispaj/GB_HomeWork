@@ -181,7 +181,7 @@
                 <outlet property="newsPostUserName" destination="zvf-cO-T6e" id="1iL-xs-71w"/>
                 <outlet property="newsPostUserSeen" destination="288-FD-GcG" id="qyw-ON-W4y"/>
             </connections>
-            <point key="canvasLocation" x="309.4202898550725" y="176.11607142857142"/>
+            <point key="canvasLocation" x="207" y="32"/>
         </tableViewCell>
     </objects>
     <resources>

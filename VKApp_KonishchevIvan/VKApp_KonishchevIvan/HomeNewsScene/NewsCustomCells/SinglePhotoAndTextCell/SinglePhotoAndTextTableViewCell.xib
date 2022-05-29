@@ -22,13 +22,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oeM-Xs-1l7" customClass="ShadowViewRadius" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                <rect key="frame" x="10" y="10" width="50" height="50"/>
+                                <rect key="frame" x="10" y="10" width="40" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMB-XG-8Mw" customClass="CircleView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pSa-mu-JzR">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -45,20 +45,20 @@
                                     <constraint firstAttribute="trailing" secondItem="VMB-XG-8Mw" secondAttribute="trailing" id="cfT-OJ-64H"/>
                                     <constraint firstAttribute="width" secondItem="oeM-Xs-1l7" secondAttribute="height" multiplier="1:1" id="ivy-KY-SQn"/>
                                     <constraint firstAttribute="bottom" secondItem="VMB-XG-8Mw" secondAttribute="bottom" id="rAp-DW-1ik"/>
-                                    <constraint firstAttribute="height" constant="50" id="rP2-Qd-5u5"/>
+                                    <constraint firstAttribute="height" constant="40" id="rP2-Qd-5u5"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="avatarHeaightConstraint" destination="rP2-Qd-5u5" id="XxA-pi-nUB"/>
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUc-0m-PzR">
-                                <rect key="frame" x="70" y="10" width="36" height="21"/>
+                                <rect key="frame" x="60" y="10" width="36" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сегодня в 10:20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xf6-OH-MJK">
-                                <rect key="frame" x="70" y="34" width="80.5" height="12"/>
+                                <rect key="frame" x="60" y="34" width="80.5" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

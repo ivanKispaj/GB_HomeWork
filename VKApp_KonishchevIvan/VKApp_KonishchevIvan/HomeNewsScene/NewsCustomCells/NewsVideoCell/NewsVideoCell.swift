@@ -13,8 +13,14 @@ import AVFoundation
 
 class NewsVideoCell: UITableViewCell,DequeuableProtocol {
 
+    @IBOutlet weak var newsUserName: UILabel!
+    @IBOutlet weak var newsUserAvatar: UIImageView!
     @IBOutlet weak var videoUIView: UIView!
     @IBOutlet weak var newsVideoFrameImage: UIImageView!
+    @IBOutlet weak var newsUserSeen: UILabel!
+    @IBOutlet weak var newsLikeCount: UILabel!
+    @IBOutlet weak var newsSeenCount: UILabel!
+    @IBOutlet weak var newsVideoText: UILabel!
     
     var player: AVPlayer! {
         didSet {
@@ -27,8 +33,14 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
     
     
     func configureCellForVideo(form data: NewsCellData) {
+        self.newsVideoText.text = data.newsText
+        self.newsUserName.text = data.newsUserName
+        self.newsUserSeen.text = data.date.unixTimeConvertion()
+        self.newsLikeCount.text = String(data.newsLikeCount)
+        self.newsSeenCount.text = String(data.newsSeenCount)
         let ratio = (data.firstFrame.width) / UIScreen.main.bounds.width
         let height = (data.firstFrame.height) / ratio
+        self.frame.size.height = height + 110
         let queue = DispatchQueue.global(qos: .userInteractive)
        queue.async {
             InternetConnections(host: "api.vk.com", path: "/method/video.get").loadVideoContent(ovnerId: data.ownerId, accessKey: data.accessKey, videoId: data.videoId) { result in
@@ -61,7 +73,10 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
                             if var clearUrl = url?.replacingOccurrences(of: "\\", with: "") {
                                 clearUrl = clearUrl.replacingOccurrences(of: "\"", with: "")
                                 clearUrl = "https:" + clearUrl
-                                self.initializeVideoPlayerWithVideo(with: clearUrl)
+                                DispatchQueue.main.async {
+                                    self.initializeVideoPlayerWithVideo(with: clearUrl)
+                                }
+                               
                                 
                             }
                         }
@@ -78,18 +93,19 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
     func initializeVideoPlayerWithVideo(with url: String) {
     
         let videoURL = URL(string: url)
-        
-      
-           
-        DispatchQueue.main.async {
-            self.player = AVPlayer(url: videoURL!)
-            self.playerViewController = AVPlayerViewController()
-            self.playerViewController.player = self.player
-            self.playerViewController.view.frame = self.videoUIView.frame
-            self.playerViewController.player?.pause()
-            self.playerViewController.showsPlaybackControls = false
-            self.videoUIView.addSubview(self.playerViewController.view)
-        }
+        self.player = AVPlayer(url: videoURL!)
+        self.playerViewController = AVPlayerViewController()
+        self.playerViewController.player = self.player
+        self.playerViewController.showsPlaybackControls = false
+        self.videoUIView.addSubview(self.playerViewController.view)
+        self.playerViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            playerViewController.view.leadingAnchor.constraint(equalTo: self.videoUIView.leadingAnchor),
+            playerViewController.view.trailingAnchor.constraint(equalTo: self.videoUIView.trailingAnchor),
+            playerViewController.view.topAnchor.constraint(equalTo: self.videoUIView.topAnchor),
+            playerViewController.view.bottomAnchor.constraint(equalTo: self.videoUIView.bottomAnchor)
+        ])
+
           
     }
     
