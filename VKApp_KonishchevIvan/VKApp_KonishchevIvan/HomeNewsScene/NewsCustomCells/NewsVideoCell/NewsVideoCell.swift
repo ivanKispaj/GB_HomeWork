@@ -14,7 +14,8 @@ import AVFoundation
 class NewsVideoCell: UITableViewCell,DequeuableProtocol {
 
     @IBOutlet weak var videoUIView: UIView!
-
+    @IBOutlet weak var newsVideoFrameImage: UIImageView!
+    
     var player: AVPlayer! {
         didSet {
             self.player.play()
@@ -26,11 +27,18 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
     
     
     func configureCellForVideo(form data: NewsCellData) {
-        
-//        let queue = DispatchQueue.global(qos: .userInteractive)
-//        queue.async {
+        let ratio = (data.firstFrame.width) / UIScreen.main.bounds.width
+        let height = (data.firstFrame.height) / ratio
+        let queue = DispatchQueue.global(qos: .userInteractive)
+       queue.async {
             InternetConnections(host: "api.vk.com", path: "/method/video.get").loadVideoContent(ovnerId: data.ownerId, accessKey: data.accessKey, videoId: data.videoId) { result in
                 
+                if result?.player == nil {
+                    DispatchQueue.main.async {
+                        self.newsVideoFrameImage.loadImageFromUrlString(data.firstFrame.url)
+                        self.videoUIView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: height)
+                    }
+                } else {
                 if let playerUrl = result?.player {
                     
                     guard let url = URL(string: playerUrl) else {
@@ -43,6 +51,7 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
                         let playerHtml = try String(contentsOf: url, encoding: .ascii)
                        
                         let htmlArray = playerHtml.split(separator: ",")
+            // варианты url video 480/360/320
                      //   let url480 = htmlArray.first(where: { $0.contains("url480")})
                        let url360 = htmlArray.first(where: { $0.contains("url360")})
                   //      let url240 = htmlArray.first(where: { $0.contains("url240")})
@@ -61,10 +70,9 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
                     }
                   
                 }
-                
             }
-     //   }
-     
+            }
+        }
     }
       
     func initializeVideoPlayerWithVideo(with url: String) {

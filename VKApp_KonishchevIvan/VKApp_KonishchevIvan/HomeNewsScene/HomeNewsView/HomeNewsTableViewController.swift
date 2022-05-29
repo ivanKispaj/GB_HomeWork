@@ -67,28 +67,28 @@ class HomeNewsTableViewController: UITableViewController {
         if cell is NewsVideoCell {
             let dataCell = cell as! NewsVideoCell
             if dataCell.player != nil {
-                dataCell.player.pause()
-            }
-        }
-    }
-
-    
-    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-
-        let visibleCell = tableView.visibleCells
-       
-        for cell in tableView.visibleCells {
-            if cell is NewsVideoCell {
-                let indexPath = tableView.indexPath(for: cell)!
-                
-                let dataCell = self.tableView.cellForRow(at: indexPath) as! NewsVideoCell
-                if dataCell.player != nil {
-                    dataCell.player.play()
-
+                DispatchQueue.main.async {
+                  //  dataCell.newsVideoFrameImage.isHidden = false
+                    dataCell.player.pause()
                 }
+                
             }
         }
     }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell is NewsVideoCell {
+            let dataCell = cell as! NewsVideoCell
+            if dataCell.player != nil {
+                DispatchQueue.main.async {
+                  //  dataCell.newsVideoFrameImage.isHidden = false
+                    dataCell.player.play()
+                }
+                
+            }
+        }
+    }
+
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

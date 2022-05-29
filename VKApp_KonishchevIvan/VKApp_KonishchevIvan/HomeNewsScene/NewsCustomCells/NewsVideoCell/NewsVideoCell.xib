@@ -33,8 +33,17 @@
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ep3-Ib-xOi">
                         <rect key="frame" x="0.0" y="65" width="546" height="343"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mTp-Fx-3xs">
+                                <rect key="frame" x="0.0" y="0.0" width="546" height="343"/>
+                            </imageView>
+                        </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="mTp-Fx-3xs" secondAttribute="bottom" id="0KD-pN-2aQ"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="343" id="9Cq-Iq-6Qf"/>
+                            <constraint firstItem="mTp-Fx-3xs" firstAttribute="leading" secondItem="Ep3-Ib-xOi" secondAttribute="leading" id="GmF-SV-8K4"/>
+                            <constraint firstItem="mTp-Fx-3xs" firstAttribute="top" secondItem="Ep3-Ib-xOi" secondAttribute="top" id="QqB-jG-1im"/>
+                            <constraint firstAttribute="trailing" secondItem="mTp-Fx-3xs" secondAttribute="trailing" id="mjX-Y0-N1l"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -53,6 +62,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="newsVideoFrameImage" destination="mTp-Fx-3xs" id="QjH-Xf-J0q"/>
                 <outlet property="videoUIView" destination="Ep3-Ib-xOi" id="c4C-c8-7yO"/>
             </connections>
             <point key="canvasLocation" x="114.49275362318842" y="68.638392857142847"/>

@@ -272,6 +272,7 @@
                 <outlet property="newsUserApdateTime" destination="Xf6-OH-MJK" id="qpo-6v-Mrc"/>
                 <outlet property="newsUserAvatar" destination="pSa-mu-JzR" id="aVX-gf-rar"/>
                 <outlet property="newsUserName" destination="pUc-0m-PzR" id="OY9-Xq-J8V"/>
+                <outlet property="parentViewImage" destination="Jxd-UP-Y0v" id="Czl-lY-Qn7"/>
                 <outlet property="photoViewHeightConstraint" destination="eBa-Ld-roY" id="kie-UB-N86"/>
                 <outlet property="seenViewLable" destination="X5P-gb-4R2" id="pwi-Il-Rbq"/>
             </connections>

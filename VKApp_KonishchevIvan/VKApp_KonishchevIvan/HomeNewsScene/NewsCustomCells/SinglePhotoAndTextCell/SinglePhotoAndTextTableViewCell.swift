@@ -11,7 +11,8 @@ import AVKit
 class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
  
     
-    @IBOutlet weak var newsImage: UIImageView! 
+    @IBOutlet weak var parentViewImage: UIView!
+    @IBOutlet weak var newsImage: UIImageView!
     @IBOutlet weak var lableOnPhoto: UILabel!
     @IBOutlet weak var lableUserNameOnPhoto: UILabel!
     @IBOutlet weak var imageParentView: UIView!
@@ -28,29 +29,14 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
     @IBOutlet weak var seenViewLable: UILabel!
     let newsCellData: NewsCellData? = nil
    
-    var newsPhotoData: PhotoDataNews! {
-        didSet {
-            if self.newsPhotoData != nil {
-            let ratio = (self.newsPhotoData.width) / UIScreen.main.bounds.width
-            let height = (self.newsPhotoData.height) / ratio
-                DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.5) {
-                        self.photoViewHeightConstraint.constant = height
-                        self.layoutIfNeeded()
-                    }
-                }
-            }else {
-                UIView.animate(withDuration: 0.5) {
-                    self.photoViewHeightConstraint.constant = 0
-                    self.layoutIfNeeded()
-                }
-            }
-        }
-    }
+    var newsPhotoData: PhotoDataNews! 
   
 
     func configureCellForPhoto(from data: NewsCellData, linkStatus: Bool) {
         if let image = data.newsImage.first {
+            let ratio = (image.width) / UIScreen.main.bounds.width
+            let height = (image.height) / ratio
+            self.photoViewHeightConstraint.constant = height
             self.newsPhotoData = image
             self.newsImage.loadImageFromUrlString(image.url)
             
