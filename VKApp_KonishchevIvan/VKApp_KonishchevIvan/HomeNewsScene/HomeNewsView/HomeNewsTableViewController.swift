@@ -11,7 +11,7 @@ import RealmSwift
 
 class HomeNewsTableViewController: UITableViewController {
    
-    
+    var playIndexPath: [IndexPath]?
  
     var newsRealmToken: NotificationToken?
     var realmService = RealmService()
@@ -32,14 +32,16 @@ class HomeNewsTableViewController: UITableViewController {
         self.currentOrientation = UIDevice.current.orientation
         registerCells()
     
-  
+ 
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.loadNewsData()
+      
     }
+    
     // MARK: - Table view data source
 
 
@@ -60,10 +62,43 @@ class HomeNewsTableViewController: UITableViewController {
        
     }
 
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell is NewsVideoCell {
+            let dataCell = cell as! NewsVideoCell
+            if dataCell.player != nil {
+                dataCell.player.pause()
+            }
+        }
+    }
+
+    
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+
+        let visibleCell = tableView.visibleCells
+       
+        for cell in tableView.visibleCells {
+            if cell is NewsVideoCell {
+                let indexPath = tableView.indexPath(for: cell)!
+                
+                let dataCell = self.tableView.cellForRow(at: indexPath) as! NewsVideoCell
+                if dataCell.player != nil {
+                    dataCell.player.play()
+
+                }
+            }
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        
+        
         guard let news = newsData?[indexPath.row].first else {
             preconditionFailure("Error cell")
         }
+     
         let cellType = news.key
         let data = news.value
         switch cellType {
@@ -71,6 +106,7 @@ class HomeNewsTableViewController: UITableViewController {
         case .photo:
              let cell: SinglePhotoAndTextTableViewCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.configureCellForPhoto(from: data, linkStatus: false)
+            
             return cell
         case .link:
             let cell: SinglePhotoAndTextTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
@@ -105,6 +141,7 @@ class HomeNewsTableViewController: UITableViewController {
         self.tableView.register(NewsPostCell.self)
         self.tableView.register(NewsVideoCell.self)
     }
+
 }
 
 

@@ -31,7 +31,7 @@
                             <constraint firstAttribute="height" constant="40" id="2UX-WF-JYS"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ep3-Ib-xOi" customClass="PlayerView" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ep3-Ib-xOi">
                         <rect key="frame" x="0.0" y="65" width="546" height="343"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="343" id="9Cq-Iq-6Qf"/>
