@@ -81,7 +81,6 @@
 		805E76F027BC17EC0033098D /* AllertWrongUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805E76EF27BC17EC0033098D /* AllertWrongUserData.swift */; };
 		80601F7127DEF62100490809 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80601F7027DEF62100490809 /* CircleView.swift */; };
 		80601F7527DF095C00490809 /* ShadowViewRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80601F7427DF095C00490809 /* ShadowViewRadius.swift */; };
-		80601F7A27DF1ECD00490809 /* SetHeaderInSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80601F7927DF1ECD00490809 /* SetHeaderInSection.swift */; };
 		806284CE27DDB24F00D37674 /* GallaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806284CC27DDB24F00D37674 /* GallaryCollectionViewCell.swift */; };
 		806284CF27DDB24F00D37674 /* GallaryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 806284CD27DDB24F00D37674 /* GallaryCollectionViewCell.xib */; };
 		806284D127DDB68E00D37674 /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806284D027DDB68E00D37674 /* UserDetailViewModel.swift */; };
@@ -211,7 +210,6 @@
 		805E76EF27BC17EC0033098D /* AllertWrongUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllertWrongUserData.swift; sourceTree = "<group>"; };
 		80601F7027DEF62100490809 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		80601F7427DF095C00490809 /* ShadowViewRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowViewRadius.swift; sourceTree = "<group>"; };
-		80601F7927DF1ECD00490809 /* SetHeaderInSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHeaderInSection.swift; sourceTree = "<group>"; };
 		806284CC27DDB24F00D37674 /* GallaryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryCollectionViewCell.swift; sourceTree = "<group>"; };
 		806284CD27DDB24F00D37674 /* GallaryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GallaryCollectionViewCell.xib; sourceTree = "<group>"; };
 		806284D027DDB68E00D37674 /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
@@ -714,7 +712,6 @@
 		639B4269280D3E4A0097D53F /* extensionFriendsController */ = {
 			isa = PBXGroup;
 			children = (
-				80601F7927DF1ECD00490809 /* SetHeaderInSection.swift */,
 				80E3274727D4F4950014C760 /* setDataSectionTable.swift */,
 				638E99CA28131D8E00367F44 /* LoadMyFriends.swift */,
 				638E99D52813EB3500367F44 /* ActivityIndicatorLoadData.swift */,
@@ -1219,7 +1216,6 @@
 				8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */,
 				80F4BCD12803E34E008E07B0 /* NetworkSessionData.swift in Sources */,
 				638E99AB28125CF600367F44 /* DelegateLikeExtension.swift in Sources */,
-				80601F7A27DF1ECD00490809 /* SetHeaderInSection.swift in Sources */,
 				808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */,
 				80D1315C27FEA85E009EA04D /* CustomNavigationController.swift in Sources */,
 				638E99C5281267EC00367F44 /* CustomSingleCollectionLayout.swift in Sources */,

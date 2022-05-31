@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CouruselCollectionViewCell: UICollectionViewCell {
+class CouruselCollectionViewCell: UICollectionViewCell, DequeuableProtocol {
 
     @IBOutlet weak var contentCollectionCell: UIView!
     @IBOutlet weak var avatarCouruselView: UIView!

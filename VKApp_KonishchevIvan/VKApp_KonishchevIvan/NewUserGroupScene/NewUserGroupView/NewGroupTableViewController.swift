@@ -101,7 +101,6 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
         override func numberOfSections(in tableView: UITableView) -> Int {
             
            return self.chars.count
-            //return self.allGroupDictionary.keys.count
         }
         
     // количество строк таблици в одной секции

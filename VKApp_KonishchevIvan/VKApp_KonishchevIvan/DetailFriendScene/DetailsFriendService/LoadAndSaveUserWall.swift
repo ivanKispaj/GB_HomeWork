@@ -31,7 +31,8 @@ extension InternetConnections {
                 let decode = JSONDecoder()
                 decode.userInfo = [CodingUserInfoKey(rawValue: "ownerId")! : Int(ownerId)!]
                 let result = try decode.decode(UserWallModel.self, from: data)
-                DispatchQueue.main.async {
+                let queue = DispatchQueue.global(qos: .utility)
+                queue.async {
                     self.realmService.updateData(result.response)
                 }
                

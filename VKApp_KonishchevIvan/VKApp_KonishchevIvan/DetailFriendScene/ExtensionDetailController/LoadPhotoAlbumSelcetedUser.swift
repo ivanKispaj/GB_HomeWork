@@ -14,19 +14,18 @@ extension DetailUserTableViewController {
 
     func loadPhotoAlbumSelctedUser ()  {
         
+        let photoData = self.realmService.readData(PhotoResponse.self)?.where { $0.id == self.friendsSelected.id }.first?.items
+        if let data = photoData {
+            self.updateUserPhotoData(from: data)
+        
+        }
+        
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
         InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelected.id))
         }
         
         setNotificationTokenPhoto()
-      
-            let photoData = self.realmService.readData(PhotoResponse.self)?.where { $0.id == self.friendsSelected.id }.first?.items
-            if let data = photoData {
-                self.updateUserPhotoData(from: data)
-            
-        }
-        
     }
     
      func setNotificationTokenPhoto() {
@@ -35,14 +34,13 @@ extension DetailUserTableViewController {
                 switch changes {
                 case .initial(_):
                     print("DetailVC UserPhoto Signed")
-                case let .update(results, deletions, insertions, _):
+                case let .update(results, _, _, _):
                     let dataPhoto = results
                         .where { $0.id == self.friendsSelected.id }
                         .first!
                         .items
-                    if deletions.count != 0 || insertions.count != 0 {
                     self.updateUserPhotoData(from: dataPhoto)
-                    }
+                    
                 case .error(_):
                     print("Asd")
                 }

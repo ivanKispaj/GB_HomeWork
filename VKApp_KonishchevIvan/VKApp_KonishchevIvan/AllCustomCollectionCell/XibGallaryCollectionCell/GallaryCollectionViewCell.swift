@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GallaryCollectionViewCell: UICollectionViewCell {
+class GallaryCollectionViewCell: UICollectionViewCell, DequeuableProtocol {
 
     @IBOutlet weak var gallaryImage: UIImageView!
 

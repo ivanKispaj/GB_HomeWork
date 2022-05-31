@@ -9,24 +9,31 @@ import UIKit
 import RealmSwift
 
 extension FriendsTableViewController {
-  
+    
+    //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
+              //   После теста заменить id пользователя на id NetworkSessionData.shared.userId!
+    
     func loadMyFriends() {
             self.activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
-//MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
-          //   После теста заменить id пользователя на id NetworkSessionData.shared.userId!
-     
-        let queue = DispatchQueue.global(qos: .utility)
-        queue.async {
-            InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser))
-        }
-        
+        let queueInteractive = DispatchQueue.global(qos: .userInteractive)
+        let queueDefault = DispatchQueue.global(qos: .default)
         
         if let friendsData = self.realmService.readData(FriendsResponse.self)!.where({ $0.id == NetworkSessionData.shared.testUser }).first{
-           
-            updateFriendsView(From: friendsData)
+            self.updateFriendsView(From: friendsData)
+                queueDefault.async {
+                    InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser), count: "")
+                }
+        }else {
+            
+             queueInteractive.async {
+                 InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser))
+             }
+            
+            queueDefault.async {
+                InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser), count: "")
+            }
         }
-
     }
     
      func setNotificationtoken() {
@@ -35,12 +42,8 @@ extension FriendsTableViewController {
                 switch changes {
                 case .initial(_):
                     print("FriendsController Signed ")
-                case let .update(results, deletions, insertions, _):
-                    if deletions.count != 0 || insertions.count != 0 {
-                  //      let a = results.where({ $0.id == NetworkSessionData.shared.testUser }).first!
-                            self.updateFriendsView(From: results.where({ $0.id == NetworkSessionData.shared.testUser }).first!)
-                    }
-          
+                case let .update(results, _, _, _):
+                    self.updateFriendsView(From: results.where({ $0.id == NetworkSessionData.shared.testUser }).first!)
                 case .error(_):
                     print("Asd")
                 }

@@ -25,7 +25,7 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         super.awakeFromNib()
         self.gallaryCollection.delegate = self
         self.gallaryCollection.dataSource = self
-        self.gallaryCollection.register(UINib(nibName: "GallaryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GallaryCollectionCell")
+        self.gallaryCollection.register(GallaryCollectionViewCell.self)
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -49,14 +49,9 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GallaryCollectionCell", for: indexPath) as? GallaryCollectionViewCell else {
-            preconditionFailure("Error")
-        }
+        let cell: GallaryCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         cell.gallaryImage.contentMode = .scaleAspectFill
-      
             cell.gallaryImage.loadImageFromUrlString(self.gallaryData[self.countCell].image)
-        
-            
             self.countCell += 1
         return cell
     }

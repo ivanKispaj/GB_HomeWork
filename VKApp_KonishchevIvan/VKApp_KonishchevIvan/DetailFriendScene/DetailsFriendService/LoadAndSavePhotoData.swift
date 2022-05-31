@@ -37,10 +37,11 @@ extension InternetConnections {
                 let decode = JSONDecoder()
                 decode.userInfo = [CodingUserInfoKey(rawValue: "ownerId")! : Int(ownerId)!]
                 let result = try decode.decode(PhotoUser.self, from: data)
-               
-                DispatchQueue.main.async {
+                let queue = DispatchQueue.global(qos: .utility)
+                queue.async {
                     self.realmService.updateData(result.response)
                 }
+            
             }catch {
                 print(InternetError.parseError)
             }

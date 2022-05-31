@@ -11,17 +11,28 @@ import RealmSwift
 // MARK: - Подгружаем друзей друга и сохраняем результат в hisFriends
 extension DetailUserTableViewController {
   
+   
+
+        
     func loadFriendsSelectedUser()  {
-        let queue = DispatchQueue.global(qos: .utility)
-        queue.async {
-        InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id))
-        }
-        
+        let queueInteractive = DispatchQueue.global(qos: .userInteractive)
+        let queueDefault = DispatchQueue.global(qos: .utility)
         let friendsData = self.realmService.readData(FriendsResponse.self)?.where{ $0.id == self.friendsSelected.id }.first
-        
+    
         if let data = friendsData {
             self.updateUserFromRealm(from: data)
+       
+                queueDefault.async {
+                    InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id), count: "")
+                }
             
+        }else {
+            queueInteractive.async {
+            InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id))
+            }
+            queueDefault.async {
+                InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id), count: "")
+            }
         }
     }
     
@@ -31,17 +42,14 @@ extension DetailUserTableViewController {
                 switch changes {
                 case .initial(_):
                     print("DetailVC UserFriends Signed")
-                case let .update(results, deletions, insertions, _):
+                case let .update(results, _, _, _):
                     let dataFriends = results
                         .where { $0.id == self.friendsSelected.id }
                         .first
-                        
-                    if deletions.count != 0 || insertions.count != 0 {
                         if let data = dataFriends {
                             self.updateUserFromRealm(from: data)
 
                         }
-                    }
                 case .error(_):
                     print("Asd")
                 }

@@ -12,14 +12,13 @@ extension HomeNewsTableViewController {
     
     func loadNewsData()  {
 //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
+       
+        self.updateNewsView()
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         queue.async {
             InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
         }
-        
-        self.updateNewsView()
-            
       }
     
      func setNotificationToken() {

@@ -31,9 +31,11 @@ extension InternetConnections {
             do {
                 let decode = JSONDecoder()
                 let result = try decode.decode(UserGroupModel.self, from: data)
-                DispatchQueue.main.async {
+                let queue = DispatchQueue.global(qos: .utility)
+                queue.async {
                     self.realmService.updateData(result.response.items)
                 }
+                
                 
             }catch {
                 print(InternetError.parseError)

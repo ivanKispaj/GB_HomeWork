@@ -24,9 +24,8 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
         super.awakeFromNib()
         self.CouruselCollection.dataSource = self
         self.CouruselCollection.delegate = self
-        self.CouruselCollection.register(UINib(nibName: "CouruselCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CouruselID1")
-
-       
+        self.CouruselCollection.register(CouruselCollectionViewCell.self)
+        
     }
 
     
@@ -40,8 +39,7 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     }
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = CouruselCollection.dequeueReusableCell(withReuseIdentifier: "CouruselID1", for: indexPath) as? CouruselCollectionViewCell else { preconditionFailure("Error")
-        }
+         let cell: CouruselCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
          cell.imageCouruselCell.image = UIImage(data: self.collectionData![indexPath.row].photo)
          cell.lableForDetailsCorusel.text = self.collectionData![indexPath.row].userName
         return cell

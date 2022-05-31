@@ -32,7 +32,7 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         super.awakeFromNib()
         self.singlCollection.delegate = self
         self.singlCollection.dataSource = self
-        self.singlCollection.register(UINib(nibName: "SingleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SingleCollectionID")
+        self.singlCollection.register(SingleCollectionViewCell.self)
        
     }
 
@@ -48,9 +48,7 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleCollectionID", for: indexPath) as? SingleCollectionViewCell else {
-            preconditionFailure("Error")
-        }
+        let cell: SingleCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
             cell.singlePhoto.loadImageFromUrlString(self.singlePhoto.image)
         return cell
     }

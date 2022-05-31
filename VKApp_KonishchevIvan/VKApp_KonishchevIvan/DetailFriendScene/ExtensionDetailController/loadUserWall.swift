@@ -13,15 +13,16 @@ extension DetailUserTableViewController {
 
     func loadUserWall () {
    
+        let wallData = self.realmService.readData(UserWallResponse.self)?.where { $0.id == self.friendsSelected.id }.first?.items
+        if let data = wallData {
+            self.updateWallData(from: data)
+        }
+        
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
         InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelected.id))
         }
         
-        let wallData = self.realmService.readData(UserWallResponse.self)?.where { $0.id == self.friendsSelected.id }.first?.items
-        if let data = wallData {
-            self.updateWallData(from: data)
-        }
     }
     
     //MARK: - setNotificationTokenWall
@@ -32,14 +33,13 @@ extension DetailUserTableViewController {
                     switch changes {
                     case .initial(_):
                         print("DetailVC userWall Signed")
-                    case let .update(results, deletions, insertions, _):
+                    case let .update(results, _, _, _):
                         let dataWall = results
                             .where { $0.id == self.friendsSelected.id }
                             .first!
                             .items
-                        if deletions.count != 0 || insertions.count != 0 {
                         self.updateWallData(from: dataWall)
-                        }
+                    
                     case .error(_):
                         print("Asd")
                     }

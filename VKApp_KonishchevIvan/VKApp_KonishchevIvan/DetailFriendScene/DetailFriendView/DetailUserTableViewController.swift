@@ -75,21 +75,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-
-    // установка имени секции
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        guard let data = self.dataTable?[section].sectionData else { return nil }
-//
-//        switch section {
-//        case 0:
-//
-//            return "Друзья   " + String(data.friensCount)
-//        case 1:
-//            return "Фотографии"
-//
-//        default: return nil
-//        }
-//    }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let data = self.dataTable?[section].sectionData else { return nil }

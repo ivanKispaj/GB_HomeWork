@@ -36,16 +36,11 @@ extension InternetConnections {
 
                     }
                 }
-           //     DispatchQueue.main.async {
 // каскадное удаление новостей из базы данных перед обновлением!
-                  
-            //    }
-               // DispatchQueue.main.async {
                 queue.async {
                     self.realmService.updateData(result.response)
 
                 }
-            //    }
             }catch {
                 print(InternetError.parseError)
             }

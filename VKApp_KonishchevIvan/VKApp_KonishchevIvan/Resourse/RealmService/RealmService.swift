@@ -15,8 +15,6 @@ final class RealmService {
             let realm = try Realm()
             try! realm.write{
                 realm.delete(object, cascading: true)
-                
-            //    realm.delete(object)
             }
             
         }catch {

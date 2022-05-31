@@ -27,7 +27,6 @@ extension FriendsTableViewController {
         
         self.friends = []
         self.friends.append(posibleFriends)
-        let countFriends = String(self.friendsArray.count)
         self.friends.append(DataSection(header: "Друзья" , row: self.friendsArray))
     }
 }
