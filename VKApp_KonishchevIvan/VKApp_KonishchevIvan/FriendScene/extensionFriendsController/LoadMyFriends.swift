@@ -22,7 +22,7 @@ extension FriendsTableViewController {
         }
         
         
-        if let friendsData = self.realmService.readData(FriendsResponse.self)!.where({ $0.id == NetworkSessionData.shared.testUser }).first?.items{
+        if let friendsData = self.realmService.readData(FriendsResponse.self)!.where({ $0.id == NetworkSessionData.shared.testUser }).first{
            
             updateFriendsView(From: friendsData)
         }
@@ -37,7 +37,8 @@ extension FriendsTableViewController {
                     print("FriendsController Signed ")
                 case let .update(results, deletions, insertions, _):
                     if deletions.count != 0 || insertions.count != 0 {
-                            self.updateFriendsView(From: results.where({ $0.id == NetworkSessionData.shared.testUser }).first!.items)
+                  //      let a = results.where({ $0.id == NetworkSessionData.shared.testUser }).first!
+                            self.updateFriendsView(From: results.where({ $0.id == NetworkSessionData.shared.testUser }).first!)
                     }
           
                 case .error(_):
@@ -48,11 +49,12 @@ extension FriendsTableViewController {
     }
     
   
-    private func updateFriendsView(From items: List<FriendsItems> ) {
+    private func updateFriendsView(From response: FriendsResponse) {
         var arrays = [Friend]()
+        let items = response.items
         for friendData in items {
             let friends = Friend()
-            
+            friends.countFriends = response.countFriends
             if friendData.online == 1 {
                 friends.online = true
             }

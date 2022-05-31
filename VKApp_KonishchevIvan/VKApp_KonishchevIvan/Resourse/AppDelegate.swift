@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
    // для удаления базы данных! использовал для тестирования иначе ошибки были!
+   
+            
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         func remove(realmURL: URL) {
                 let realmURLs = [
@@ -32,9 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  //MARK: - Использую при тестировании ( удаляю базу данных realm!!! ) временно нужный закомаентированный код!
         let url = Realm.Configuration.defaultConfiguration.fileURL!
         remove(realmURL: url)
+
         FirebaseApp.configure()
         return true
     }
+
 
     // MARK: UISceneSession Lifecycle
 

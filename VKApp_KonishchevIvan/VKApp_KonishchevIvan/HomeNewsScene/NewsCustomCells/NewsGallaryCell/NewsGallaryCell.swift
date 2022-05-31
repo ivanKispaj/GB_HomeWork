@@ -8,6 +8,7 @@
 import UIKit
 
 class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, DequeuableProtocol{
+    @IBOutlet weak var newsTextLabel: UILabel!
     
     @IBOutlet weak var newsGallaryCollection: UICollectionView!
     @IBOutlet weak var newsGallaryUserAvatar: UIImageView!
@@ -73,7 +74,8 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
         self.imageGallaryData = data.newsImage
         self.newsgallaryLikeCount.text = String(data.newsLikeCount)
         self.newsGallarySeenCount.text = String(data.newsSeenCount)
-        self.newsGallaryUserName.text = data.newsText
+        self.newsGallaryUserName.text = data.newsUserName
+        self.newsTextLabel.text = data.newsText
         self.newsGallaryUserAvatar.image = UIImage(data: data.newsUserLogo)
         self.newsGallaryUserSeen.text = data.date.unixTimeConvertion()
       

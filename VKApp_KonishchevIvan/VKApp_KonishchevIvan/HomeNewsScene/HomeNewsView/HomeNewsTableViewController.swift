@@ -39,6 +39,7 @@ class HomeNewsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.loadNewsData()
+    
       
     }
     
@@ -80,6 +81,7 @@ class HomeNewsTableViewController: UITableViewController {
             if dataCell.player != nil {
                 DispatchQueue.main.async {
                     dataCell.player.play()
+                    
                 }
                 
             }

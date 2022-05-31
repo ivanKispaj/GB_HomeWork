@@ -49,6 +49,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         self.setNotificationtoken()
         self.searchBar!.delegate = self
         registerCell()
+        
+        tableView.register(CustomHeaderoCell.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,9 +79,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     }
 
 // установка имени секции
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return friends[section].header
-    }
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return friends[section].header
+//    }
 
 // Отрисовка ячеек
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,13 +123,23 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     //кастомный Header ячеек
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CustomHeaderCell") as! CustomHeaderoCell
+        
         let sectionsName = friends[section].header
+        view.nameSection.text = sectionsName
+
         if sectionsName == "Возможные друзья" {
-            let headerView = getHeaderView(size: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 35), sectionName: sectionsName, buttonTitle: "Показать все", buttonWidth: 150)
-            return headerView
+            
+            view.countFriends.text = " "
+            view.action.text = "Показать все"
+            
+            
+            return view
         }else {
-            let headerView = getHeaderView(size: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 35), sectionName: sectionsName, buttonTitle: "Списки", buttonWidth: 150)
-            return headerView
+            let friendCount = self.friendsArray.first?.countFriends ?? 0
+            view.countFriends.text = String(friendCount) 
+            view.action.text = "Списки"
+            return view
         }
     } 
     //подготовка сегуе перехода. Срабатывает перед вызовом didSelectRowAt

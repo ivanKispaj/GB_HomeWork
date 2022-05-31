@@ -10,14 +10,16 @@ import RealmSwift
 
 //MARK: - Загрузка друзей!
 extension InternetConnections {
-    func loadFriends(for userId: String)  {
+    func loadFriends(for userId: String, count: String = "20")  {
         guard let access_token = NetworkSessionData.shared.token else { return }
         self.urlComponents.queryItems = [
             URLQueryItem(name: "user_id", value: userId),
             URLQueryItem(name: "access_token", value: access_token),
             URLQueryItem(name: "order", value: "hints"),
+            URLQueryItem(name: "count", value: count),
             URLQueryItem(name: "fields", value: "photo_50, city, last_seen, online, status "),
             URLQueryItem(name: "v", value: "5.131")
+            
         ]
         guard let url = self.urlComponents.url else { return }
     

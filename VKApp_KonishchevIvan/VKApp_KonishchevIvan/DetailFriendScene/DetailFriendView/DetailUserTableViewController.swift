@@ -14,7 +14,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
 // Данные пользователя которого выбрали на предыдущем контроллере (FriendsTableViewController)
     var friendsSelected: Friend!
     var activityIndicator: UIActivityIndicatorView!
-    
+// Realm notification and service
     var notifiTokenPhoto: NotificationToken?
     var notifiTokenFriends: NotificationToken?
     var notifiTokenWall: NotificationToken?
@@ -31,9 +31,8 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     // данные для отображения секций таблицы
     var dataTable: [UserDetailsTableData]! {
         didSet {
-         
     // перезагружаем таблицу после получения данных
-                         self.tableView.reloadData()
+            self.tableView.reloadData()
             
         }
     }
@@ -45,9 +44,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     @IBOutlet weak var detailUserAccountLable: UILabel!
     @IBOutlet weak var detailButtonMessage: UIButton!
     @IBOutlet weak var detailButtonCall: UIButton!
-    
-    var isLikeStatus: Bool = false
-    var likeCount: Int = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +53,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         self.setNotificationtokenFriends()
         setHeaderDetailView()
         registerCells()
+        tableView.register(CustomHeaderoCell.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderCell")
         
     }
 
@@ -79,15 +77,47 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     }
 
     // установка имени секции
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        guard let data = self.dataTable?[section].sectionData else { return nil }
+//
+//        switch section {
+//        case 0:
+//
+//            return "Друзья   " + String(data.friensCount)
+//        case 1:
+//            return "Фотографии"
+//
+//        default: return nil
+//        }
+//    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let data = self.dataTable?[section].sectionData else { return nil }
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CustomHeaderCell") as! CustomHeaderoCell
         switch section {
         case 0:
-            return "Друзья"
+            let tap = UITapGestureRecognizer(target: self, action: #selector(FriendsHeaderNextTap))
+
+            view.nameSection.text = "Друзья"
+            view.countFriends.text = String(data.friensCount)
+            view.action.text = ">"
+            let friendsTap = view.action
+            friendsTap.addGestureRecognizer(tap)
+            
         case 1:
-            return "Фотографии"
-       
-        default: return nil
+            let tap = UITapGestureRecognizer(target: self, action: #selector(photoHeaderNextTap))
+            view.nameSection.text = "Фотографии"
+            view.action.text = ">"
+            let photoSectionTap = view.action
+            photoSectionTap.addGestureRecognizer(tap)
+           
+        default:
+            
+            return nil
         }
+        
+        
+        return view
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -180,6 +210,15 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             getViewGallary(to: indexPath)
         }
 
+    }
+ 
+//MARK: - Действия при нажатии на кнопки хедера
+    @objc func photoHeaderNextTap() {
+        print("tapToPhotoGallaryHeaderButton")
+    }
+    
+    @objc func FriendsHeaderNextTap() {
+        print("TapToFriendsHeaderButton")
     }
 }
 

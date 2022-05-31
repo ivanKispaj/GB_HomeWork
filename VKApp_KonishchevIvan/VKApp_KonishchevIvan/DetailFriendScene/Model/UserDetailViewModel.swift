@@ -27,6 +27,7 @@ struct UserDetailsTableData {
 }
 
 struct DetailsSectionData {
+    var friensCount = 0
     var id: Int = 0
     var ownerId: Int = 0
     var date: Double = 0
@@ -54,8 +55,9 @@ struct DetailsSectionData {
 
     }
     
-    init(friends: [Friend] ) {
+    init(friends: [Friend], friendsCount: Int ) {
         self.friends = friends
+        self.friensCount = friendsCount
     }
     
     init( photo: [ImageAndLikeData]) {

@@ -86,7 +86,8 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
             self!.leaveGroup(to: id) { status, message in
                 if status {
                     DispatchQueue.main.async {
-                        self!.realmService.deliteData(data[indexPath.row])
+                      
+                        self!.realmService.deliteData(data[indexPath.row],cascading: true)
                     }
                     DispatchQueue.main.async {
                         self!.tableView.deleteRows(at: [indexPath], with: .left)

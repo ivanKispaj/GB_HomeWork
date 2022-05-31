@@ -154,7 +154,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="mTp-Fx-3xs" secondAttribute="bottom" id="0KD-pN-2aQ"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="343" id="9Cq-Iq-6Qf"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="343" id="9Cq-Iq-6Qf"/>
                             <constraint firstItem="mTp-Fx-3xs" firstAttribute="leading" secondItem="Ep3-Ib-xOi" secondAttribute="leading" id="GmF-SV-8K4"/>
                             <constraint firstItem="mTp-Fx-3xs" firstAttribute="top" secondItem="Ep3-Ib-xOi" secondAttribute="top" id="QqB-jG-1im"/>
                             <constraint firstAttribute="trailing" secondItem="mTp-Fx-3xs" secondAttribute="trailing" id="mjX-Y0-N1l"/>

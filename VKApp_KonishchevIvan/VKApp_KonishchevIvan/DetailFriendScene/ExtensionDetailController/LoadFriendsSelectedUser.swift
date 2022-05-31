@@ -17,7 +17,7 @@ extension DetailUserTableViewController {
         InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id))
         }
         
-        let friendsData = self.realmService.readData(FriendsResponse.self)?.where{ $0.id == self.friendsSelected.id }.first?.items
+        let friendsData = self.realmService.readData(FriendsResponse.self)?.where{ $0.id == self.friendsSelected.id }.first
         
         if let data = friendsData {
             self.updateUserFromRealm(from: data)
@@ -34,8 +34,8 @@ extension DetailUserTableViewController {
                 case let .update(results, deletions, insertions, _):
                     let dataFriends = results
                         .where { $0.id == self.friendsSelected.id }
-                        .first?
-                        .items
+                        .first
+                        
                     if deletions.count != 0 || insertions.count != 0 {
                         if let data = dataFriends {
                             self.updateUserFromRealm(from: data)
@@ -50,11 +50,12 @@ extension DetailUserTableViewController {
     }
  
     
-   private func updateUserFromRealm(from data: List<FriendsItems>) {
+   private func updateUserFromRealm(from data: FriendsResponse) {
         var arrays = [Friend]()
-        for friendData in data {
+       let items = data.items
+        for friendData in items {
             let friends = Friend()
-            
+          
             if friendData.online == 1 {
                 friends.online = true
             }
@@ -85,7 +86,7 @@ extension DetailUserTableViewController {
 
             arrays.append(friends)
         }
-        let dataFriends = UserDetailsTableData(sectionType: .Friends, sectionData: DetailsSectionData(friends: arrays))
+       let dataFriends = UserDetailsTableData(sectionType: .Friends, sectionData: DetailsSectionData( friends: arrays, friendsCount: data.countFriends))
         
         if self.dataTable == nil {
             self.dataTable = [dataFriends]

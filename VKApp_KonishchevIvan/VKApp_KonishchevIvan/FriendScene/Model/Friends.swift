@@ -10,6 +10,7 @@ import RealmSwift
 
 
 final class Friend {
+    var countFriends = 0    
     var userName: String = ""
     var photo: Data!
     var id: Int = 0
@@ -25,13 +26,16 @@ final class Friend {
 
 struct Friends: Decodable {
     let response: FriendsResponse
+    
 }
 
 final class FriendsResponse: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case items
+        case countFriends = "count"
     }
     @objc dynamic var id = 0
+    @objc dynamic var countFriends = 0
      dynamic var items = List<FriendsItems>()
     
     convenience init(from decoder: Decoder) throws {
@@ -39,6 +43,7 @@ final class FriendsResponse: Object, Decodable {
         let user = decoder.userInfo.first { $0.key.rawValue == "ownerId" }
         let container = try decoder.container(keyedBy: CodingKeys.self)
         items = try container.decode(List<FriendsItems>.self, forKey: .items)
+        countFriends = try container.decode(Int.self, forKey: .countFriends)
         id = user?.value as! Int
     }
     override class func primaryKey() -> String? {

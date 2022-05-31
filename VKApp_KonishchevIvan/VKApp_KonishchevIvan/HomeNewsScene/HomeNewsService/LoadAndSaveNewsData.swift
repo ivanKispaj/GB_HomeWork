@@ -28,10 +28,24 @@ extension InternetConnections {
             do {
                 let decode = JSONDecoder()
                 let result = try decode.decode(NewsDataModel.self, from: data)
-            
-                DispatchQueue.main.async {
-                    self.realmService.updateData(result.response)
+                let queue = DispatchQueue.global(qos: .utility)
+                queue.async {
+                    let object = self.realmService.readData(NewsResponse.self)?.first
+                    if object != nil {
+                        self.realmService.deliteData(object!, cascading: true)
+
+                    }
                 }
+           //     DispatchQueue.main.async {
+// каскадное удаление новостей из базы данных перед обновлением!
+                  
+            //    }
+               // DispatchQueue.main.async {
+                queue.async {
+                    self.realmService.updateData(result.response)
+
+                }
+            //    }
             }catch {
                 print(InternetError.parseError)
             }
