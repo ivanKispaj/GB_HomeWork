@@ -381,8 +381,6 @@ final class NewsProfiles: Object, Decodable {
         onlineInfo = try? container.decodeIfPresent(NewsOnlineInfo.self, forKey: .onlineInfo) ?? NewsOnlineInfo()
         banned = try? container.decodeIfPresent(String.self, forKey: .banned)
     }
-    
- 
 }
 
 final class NewsOnlineInfo: Object, Decodable {
