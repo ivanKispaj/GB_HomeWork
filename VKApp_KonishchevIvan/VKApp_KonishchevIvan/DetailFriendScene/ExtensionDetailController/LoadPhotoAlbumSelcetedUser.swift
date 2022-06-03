@@ -24,23 +24,21 @@ extension DetailUserTableViewController {
         queue.async {
         InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelected.id))
         }
-        
-        setNotificationTokenPhoto()
     }
     
      func setNotificationTokenPhoto() {
         if let data = self.realmService.readData(PhotoResponse.self) {
-            self.notifiTokenPhoto = data.observe { (changes: RealmCollectionChange) in
+            self.notifiTokenPhoto = data.observe { [weak self] (changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
                     print("DetailVC UserPhoto Signed")
                 case let .update(results, _, _, _):
                     let dataPhoto = results
-                        .where { $0.id == self.friendsSelected.id }
+                        .where { $0.id == self!.friendsSelected.id }
                         .first!
                         .items
-                    self.updateUserPhotoData(from: dataPhoto)
-                    
+                    self!.updateUserPhotoData(from: dataPhoto)
+                   
                 case .error(_):
                     print("Asd")
                 }
@@ -74,15 +72,22 @@ extension DetailUserTableViewController {
             }
             let userDetailsTableData = UserDetailsTableData(sectionType: .Gallary, sectionData: DetailsSectionData(photo: imageArray))
         
-        if self.dataTable == nil {
-            self.dataTable = [userDetailsTableData]
-        }else if let index = self.dataTable.firstIndex(where: { $0.sectionType == .Gallary }) {
-            self.dataTable.remove(at: index)
-            if self.dataTable.count >= 1 {
-                self.dataTable.insert(userDetailsTableData, at: 1)
+        
+        if var data = self.dataTable {
+            self.dataTable = nil
+            
+            if let index = data.firstIndex(where: { $0.sectionType == .Gallary }) {
+                data.remove(at: index)
             }
+            if data.count >= 1 {
+                data.insert(userDetailsTableData, at: 1)
+            }else {
+                data.append(userDetailsTableData)
+            }
+            self.dataTable = data
         }else {
-            self.dataTable.append(userDetailsTableData)
-        } 
+            self.dataTable = [userDetailsTableData]
+        }
+        self.tableView.reloadData()
     }
 }

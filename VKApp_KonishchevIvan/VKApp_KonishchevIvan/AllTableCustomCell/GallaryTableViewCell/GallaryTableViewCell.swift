@@ -51,6 +51,9 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: GallaryCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         cell.gallaryImage.contentMode = .scaleAspectFill
+        cell.layer.borderColor = UIColor.white.cgColor
+        cell.layer.borderWidth = 2
+        cell.layer.cornerRadius = 4
             cell.gallaryImage.loadImageFromUrlString(self.gallaryData[self.countCell].image)
             self.countCell += 1
         return cell
@@ -73,7 +76,7 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         default:
             print("IndexOutOfRange")
         }
-      
+        
         self.delegateFrameImages.setCurrentImage(currentImage)
         self.delegateFrameImages.setFrameImages(frameArray, currentFrame: currentFrame) 
         self.delegate.selectRow(nextViewData: self.gallaryData, indexPath: self.delegateIndexPath)

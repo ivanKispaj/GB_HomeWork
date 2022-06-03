@@ -20,6 +20,7 @@ class CastomCollectionLayout: UICollectionViewLayout {
         // Проверяем наличие collectionView
     guard let collectionView = self.collectionView else { return }
         let itemsCount = collectionView.numberOfItems(inSection: 0) // Проверяем, что в секции есть хотя бы одна ячейка
+       
     guard itemsCount > 0 else { return }
         
         let smallCellWidth = collectionView.frame.width / CGFloat(self.columnsCount)
@@ -40,10 +41,7 @@ class CastomCollectionLayout: UICollectionViewLayout {
         }
             lastX = 0
         }
-        
-        
     }
-    
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
     return cacheAttributes.values.filter { attributes in return rect.intersects(attributes.frame)

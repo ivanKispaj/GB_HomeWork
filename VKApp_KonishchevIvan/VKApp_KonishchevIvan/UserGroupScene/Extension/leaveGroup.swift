@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension UserGroupTableViewDelegate {
+extension UserGroupTableViewController {
     func leaveGroup(to groupId: Int, completion: @escaping(Bool, [String]) -> ()) {
         var success: Bool!
         var message: [String] = []

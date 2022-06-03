@@ -16,31 +16,31 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var newsGallaryUserSeen: UILabel!
     @IBOutlet weak var newsgallaryLikeCount: UILabel!
     @IBOutlet weak var newsGallarySeenCount: UILabel!
-    var imageGallaryData: [PhotoDataNews]? {
-        didSet {
-            DispatchQueue.main.async {
-                self.countCell = 0
-                self.newsGallaryCollection.reloadData()
-            }
-        }
-    }
+    var imageGallaryData: [PhotoDataNews]?
+
     var countCell: Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.newsGallaryCollection.delegate = self
         self.newsGallaryCollection.dataSource = self
-   //     self.newsGallaryCollection.collectionViewLayout = CastomCollectionLayout()
         self.newsGallaryCollection.register(NewsCollectionViewCell.self)
     }
     
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if let data = self.imageGallaryData  {
-            if data.count >= 4 {
-            return 2
+            switch data.count {
+                
+            case 1...2:
+                return 1
+            case 3...4:
+                return 2
+            case 5...20:
+                return 3
+            default:
+                return 0
             }
-            return 1
         }
         return 0
         
@@ -48,13 +48,43 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let data = self.imageGallaryData {
-            if data.count < 4 {
+            switch data.count {
+            case 1:
                 return 1
-            }else {
+            case 2:
                 return 2
+                
+            case 3:
+                if section == 0 {
+                    return 2
+                }else { return 1 }
+            case 4:
+                if section == 0 {
+                    return 3
+                }else {
+                    return 1
+                }
+            case 5:
+                if section == 0 || section == 2 {
+                    return 2
+                }else {
+                    return 1
+                }
+            case 6:
+                if section == 0 {
+                    return 3
+                }else if section == 2 {
+                    return 2
+                }else { return 1 }
+            
+            default:
+                if section == 0 || section == 2 {
+                    return 3
+                }else { return 1 }
             }
+            
         }
-        return 0
+        return 1
     }
     
     
@@ -62,7 +92,9 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
         
         
         let cell: NewsCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-        
+        cell.layer.cornerRadius = 6
+        cell.layer.borderWidth = 2
+        cell.layer.borderColor = UIColor.white.cgColor
         cell.newsGallaryImageset.loadImageFromUrlString(self.imageGallaryData![self.countCell].url)
         self.countCell += 1
         return cell
@@ -78,7 +110,7 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
         self.newsTextLabel.text = data.newsText
         self.newsGallaryUserAvatar.image = UIImage(data: data.newsUserLogo)
         self.newsGallaryUserSeen.text = data.date.unixTimeConvertion()
-      
+        self.newsGallaryCollection.reloadData()
         
     }
     

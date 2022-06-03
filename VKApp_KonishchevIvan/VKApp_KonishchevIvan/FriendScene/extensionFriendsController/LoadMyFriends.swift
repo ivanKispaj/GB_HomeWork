@@ -93,6 +93,10 @@ extension FriendsTableViewController {
             arrays.append(friends)
         }
         self.friendsArray = arrays
+        DispatchQueue.main.async {
+            self.setDataSectionTable()
+            self.tableView.reloadData()
+        }
     }
 }
 

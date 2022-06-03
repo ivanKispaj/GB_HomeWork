@@ -16,13 +16,7 @@ class HomeNewsTableViewController: UITableViewController {
     var newsRealmToken: NotificationToken?
     var realmService = RealmService()
     var nextViewData: [ImageAndLikeData?] = [nil]
-    var newsData: [[CellType : NewsCellData]]? {
-        didSet {
-            DispatchQueue.main.async {
-                          self.tableView.reloadData()
-                      }
-        }
-    }
+    var newsData: [[CellType : NewsCellData]]?
 
     var currentOrientation: UIDeviceOrientation? = nil
     
@@ -31,17 +25,12 @@ class HomeNewsTableViewController: UITableViewController {
         self.setNotificationToken()
         self.currentOrientation = UIDevice.current.orientation
         registerCells()
-    
+        self.loadNewsData()
  
 
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.loadNewsData()
-    
-      
-    }
+
     
     // MARK: - Table view data source
 

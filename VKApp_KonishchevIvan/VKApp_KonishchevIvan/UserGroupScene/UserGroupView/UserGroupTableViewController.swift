@@ -17,32 +17,21 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
 
     var nitifiTokenGroups: NotificationToken?
     let realmService = RealmService()
-    var myActiveGroup: [AllUserGroups] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-    
-        }
-    }
+
     var dataGroups: Results<ItemsGroup>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
         self.setNitificationGroups()
-        DispatchQueue.main.async {
-            self.dataGroups = self.realmService.readData(ItemsGroup.self)
-
-        }
         tableView.register(SimpleTableCell.self)
+        
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.loadUserGroupFromVK()
     }
-
 //MARK: - SearchBar Method
     // SearchBar FirstResponder
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
@@ -67,11 +56,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destinationVC = segue.destination as? NewGroupTableViewController else { return
-        }
-       destinationVC.userGroupDelegate = self
-    }
     
     override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         tableView.customzeSwipeView(for: self.tableView)
@@ -111,12 +95,12 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
 
  
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let details = UIContextualAction(style: .normal, title: "Подробно") { [weak self] action, view, completionHandler in
+        let details = UIContextualAction(style: .normal, title: "Подробно") {  action, view, completionHandler in
             print("Подробности о группе")
        
         }
         
-        let message = UIContextualAction(style: .normal, title: "Написать") { [weak self] action,view, completionHandler in
+        let message = UIContextualAction(style: .normal, title: "Написать") {  action,view, completionHandler in
             
             print("Написать сообщение в группу")
         }

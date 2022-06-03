@@ -9,7 +9,6 @@ import UIKit
 
 class NewsCollectionViewCell: UICollectionViewCell, DequeuableProtocol {
 
-  
     @IBOutlet weak var newsGallaryImageset: UIImageView!
     
 }

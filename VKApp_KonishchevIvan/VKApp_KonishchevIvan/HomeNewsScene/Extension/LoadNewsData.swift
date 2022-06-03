@@ -220,20 +220,27 @@ extension HomeNewsTableViewController {
          
         }
         self.newsData = newsDatasToController
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
     }
     
 
 
     private func getFirstFrame(from data: List<NewsVideoFirstFrame>) -> NewsVideoFirstFrame? {
-        if let frameData = data.first(where: { $0.width < 1000 }) {
+        let sortedData = data.sorted(by: {$0.width > $1.width})
+        let height = Double(UIScreen.main.bounds.height) * 0.7
+        if let frameData = sortedData.first(where: { $0.width < Int(height) }) {
             return frameData
         }
         return nil
     }
     
     private func getNewsPhoto(_ newsPhotoArray: List<ImageArray>) -> ImageArray? {
-        if let data = newsPhotoArray.last(where: { $0.width < 1000 }) {
-     
+        let sortedData = newsPhotoArray.sorted(by: {$0.width > $1.width})
+        if let data = sortedData.first(where: { $0.width < 1000 }) {
             return data
         }
         
@@ -241,8 +248,8 @@ extension HomeNewsTableViewController {
     }
 
     private func getPhotoNewsHistory(_ photoArray: List<NewsImage>) -> NewsImage? {
-     
-        let data = photoArray.last { $0.width < 1000 }
+        let sortedData = photoArray.sorted(by: {$0.width > $1.width})
+        let data = sortedData.first { $0.width < 1000 }
         return data ?? nil
     }
     

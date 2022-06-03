@@ -16,29 +16,29 @@ extension DetailUserTableViewController {
         let wallData = self.realmService.readData(UserWallResponse.self)?.where { $0.id == self.friendsSelected.id }.first?.items
         if let data = wallData {
             self.updateWallData(from: data)
+        }else {
+            
         }
-        
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
         InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelected.id))
         }
-        
     }
     
     //MARK: - setNotificationTokenWall
         
          func setNotificationtokenWall() {
             if let data = self.realmService.readData(UserWallResponse.self) {
-                self.notifiTokenWall = data.observe { (changes: RealmCollectionChange) in
+                self.notifiTokenWall = data.observe { [weak self] (changes: RealmCollectionChange) in
                     switch changes {
                     case .initial(_):
                         print("DetailVC userWall Signed")
                     case let .update(results, _, _, _):
                         let dataWall = results
-                            .where { $0.id == self.friendsSelected.id }
+                            .where { $0.id == self!.friendsSelected.id }
                             .first!
                             .items
-                        self.updateWallData(from: dataWall)
+                        self!.updateWallData(from: dataWall)
                     
                     case .error(_):
                         print("Asd")
@@ -72,9 +72,9 @@ extension DetailUserTableViewController {
     }
 
     
-    private func updateWallData(from data: List<UserWallItems>) {
+    private func updateWallData(from wallDatas: List<UserWallItems>) {
         var wallData: [UserDetailsTableData] = []
-           for item in data {
+           for item in wallDatas {
                var sectionData = DetailsSectionData()
                sectionData.id = item.id
                sectionData.ownerId = item.ownerId
@@ -151,25 +151,25 @@ extension DetailUserTableViewController {
                wallData.append(data)
                
        }
-        var friendData: UserDetailsTableData!
-        var photoData: UserDetailsTableData!
-        if self.dataTable != nil {
+       
+        if let data = self.dataTable {
+            self.dataTable = nil
             
-            if let friendsIndex = self.dataTable.firstIndex(where: { $0.sectionType == .Friends }) {
-                friendData = self.dataTable[friendsIndex]
+            if let photoIndex = data.firstIndex(where: { $0.sectionType == .Gallary }) {
+                let photoData = data[photoIndex]
+                wallData.insert(photoData, at: 0)
+               // self.dataTable.insert(photoData, at: 0)
+                
             }
-            if let photoIndex = self.dataTable.firstIndex(where: { $0.sectionType == .Gallary }) {
-                photoData = self.dataTable[photoIndex]
+            if let friendsIndex = data.firstIndex(where: { $0.sectionType == .Friends }) {
+                let friendData = data[friendsIndex]
+                wallData.insert(friendData, at: 0)
+                // self.dataTable.insert(friendData, at: 0)
+                
             }
         }
-        self.dataTable = wallData
-        if photoData != nil {
-            self.dataTable.insert(photoData, at: 0)
-        }
-          
-        if friendData != nil {
-            self.dataTable.insert(friendData, at: 0)
-        }
+            self.dataTable = wallData
+        self.tableView.reloadData()
     }
 }
 

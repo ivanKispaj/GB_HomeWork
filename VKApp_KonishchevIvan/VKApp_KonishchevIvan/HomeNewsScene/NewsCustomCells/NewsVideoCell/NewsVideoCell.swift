@@ -21,6 +21,7 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
     @IBOutlet weak var newsLikeCount: UILabel!
     @IBOutlet weak var newsSeenCount: UILabel!
     @IBOutlet weak var newsVideoText: UILabel!
+    @IBOutlet weak var newsVideoHeightCondtraint: NSLayoutConstraint!
     
     var player: AVPlayer! {
         didSet {
@@ -33,14 +34,14 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
     
     
     func configureCellForVideo(form data: NewsCellData) {
+        self.newsVideoText.font = UIFont.systemFont(ofSize: 12)
         self.newsVideoText.text = data.newsText
         self.newsUserName.text = data.newsUserName
         self.newsUserSeen.text = data.date.unixTimeConvertion()
         self.newsLikeCount.text = String(data.newsLikeCount)
         self.newsSeenCount.text = String(data.newsSeenCount)
-        let ratio = (data.firstFrame.width) / UIScreen.main.bounds.width
-        let height = (data.firstFrame.height) / ratio
-        self.frame.size.height = height + 110
+        let videoHeight = data.firstFrame.height * 0.7
+        self.newsVideoHeightCondtraint.constant = videoHeight
         let queue = DispatchQueue.global(qos: .userInteractive)
         
        queue.async {
@@ -49,7 +50,7 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
                 if result?.player == nil {
                     DispatchQueue.main.async {
                         self.newsVideoFrameImage.loadImageFromUrlString(data.firstFrame.url)
-                        self.videoUIView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: height)
+                        self.videoUIView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: videoHeight)
                     }
                 } else {
                 if let playerUrl = result?.player {
@@ -130,8 +131,10 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
         let videoURL = URL(string: url)
         self.player = AVPlayer(url: videoURL!)
         self.player.isMuted = true
+        
         self.playerViewController = AVPlayerViewController()
         self.playerViewController.player = self.player
+        self.playerViewController.videoGravity = .resizeAspectFill
         self.playerViewController.showsPlaybackControls = false
         self.videoUIView.addSubview(self.playerViewController.view)
         self.playerViewController.view.translatesAutoresizingMaskIntoConstraints = false

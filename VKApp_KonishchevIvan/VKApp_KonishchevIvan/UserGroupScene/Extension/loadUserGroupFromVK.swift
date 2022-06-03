@@ -15,7 +15,10 @@ extension UserGroupTableViewController {
     func loadUserGroupFromVK()  {
         let groupsData = self.realmService.readData(ItemsGroup.self)
         if let data = groupsData {
-            self.updateViewGroups(from: data)
+            self.dataGroups = data
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
         
         if let userId = NetworkSessionData.shared.userId {
@@ -28,34 +31,6 @@ extension UserGroupTableViewController {
     }
     
     
-     func updateViewGroups(from data: Results<ItemsGroup> ){
-        var group: [AllUserGroups] = []
-         guard let userId = NetworkSessionData.shared.userId else { return }
-
-         
-         
-        for items in data {
-            
-         // Запись групп и пользователя в Firebase
-            let referense = self.ref.child(String(userId)).child("userGroup").child(String(items.id)) // id group
-            let groupData = FirebaseGroupModel(groupId: items.id, groupName: items.groupName)
-            referense.setValue(groupData.toAnyObject())
-            
-            if let activity = items.activity {
-                let res = AllUserGroups(id: items.id,nameGroup: items.groupName, logoGroup: items.photoGroup, activity: activity)
-                group.append(res)
-            }else {
-                let res = AllUserGroups(id: items.id,nameGroup: items.groupName, logoGroup: items.photoGroup, activity: "")
-                    group.append(res)
-            }
-        }
-         
-             self.myActiveGroup = group
-         
-        
-    }
-    
-    
      func setNitificationGroups() {
         if let data = self.realmService.readData(ItemsGroup.self) {
             self.nitifiTokenGroups = data.observe { (changes: RealmCollectionChange) in
@@ -64,7 +39,10 @@ extension UserGroupTableViewController {
                     print("UserGroup Signed")
                 case let .update(results, deletions, insertions, _):
                     if deletions.count != 0 || insertions.count != 0 {
-                    self.updateViewGroups(from: results)
+                    self.dataGroups = results
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
                     }
                 case .error(_):
                     print("Asd")

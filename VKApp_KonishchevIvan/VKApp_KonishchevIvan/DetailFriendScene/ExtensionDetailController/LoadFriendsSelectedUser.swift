@@ -21,7 +21,6 @@ extension DetailUserTableViewController {
     
         if let data = friendsData {
             self.updateUserFromRealm(from: data)
-       
                 queueDefault.async {
                     InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id), count: "")
                 }
@@ -38,16 +37,17 @@ extension DetailUserTableViewController {
     
      func setNotificationtokenFriends() {
         if let data = self.realmService.readData(FriendsResponse.self) {
-            self.notifiTokenFriends = data.observe { (changes: RealmCollectionChange) in
+            self.notifiTokenFriends = data.observe { [weak self] (changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
                     print("DetailVC UserFriends Signed")
                 case let .update(results, _, _, _):
                     let dataFriends = results
-                        .where { $0.id == self.friendsSelected.id }
+                        .where { $0.id == self!.friendsSelected.id }
                         .first
                         if let data = dataFriends {
-                            self.updateUserFromRealm(from: data)
+                            
+                            self!.updateUserFromRealm(from: data)
 
                         }
                 case .error(_):
@@ -58,9 +58,9 @@ extension DetailUserTableViewController {
     }
  
     
-   private func updateUserFromRealm(from data: FriendsResponse) {
+   private func updateUserFromRealm(from friendsData: FriendsResponse) {
         var arrays = [Friend]()
-       let items = data.items
+       let items = friendsData.items
         for friendData in items {
             let friends = Friend()
           
@@ -94,16 +94,22 @@ extension DetailUserTableViewController {
 
             arrays.append(friends)
         }
-       let dataFriends = UserDetailsTableData(sectionType: .Friends, sectionData: DetailsSectionData( friends: arrays, friendsCount: data.countFriends))
+       let dataFriends = UserDetailsTableData(sectionType: .Friends, sectionData: DetailsSectionData( friends: arrays, friendsCount: friendsData.countFriends))
         
-        if self.dataTable == nil {
-            self.dataTable = [dataFriends]
-        }else if let index = self.dataTable.firstIndex(where: { $0.sectionType == .Friends }){
-            self.dataTable.remove(at: index)
-            self.dataTable.insert(dataFriends, at: 0)
-        }else {
-            self.dataTable.insert(dataFriends, at: 0)
-        }
+       
+       
+       if var data = self.dataTable {
+           self.dataTable = nil
+           if let index = data.firstIndex(where: { $0.sectionType == .Friends }){
+               data.remove(at: index)
+           }
+           data.insert(dataFriends, at: 0)
+           self.dataTable = data
+       }else {
+           self.dataTable = [dataFriends]
+       }
+       
+       self.tableView.reloadData()
     }
 }
 

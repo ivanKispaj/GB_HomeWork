@@ -29,18 +29,11 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     var posibleFriends: DataSection!
-    var friends: [DataSection] = [] // будущий массив по буквам
+    var friends: [DataSection] = []
     
     // Исходный массив друзей
 
-    var friendsArray: [Friend] = []{
-        didSet {
-                self.setDataSectionTable()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+    var friendsArray: [Friend] = []
     var nextViewData: DetailUserTableViewController!
     
     override func viewDidLoad() {
@@ -49,14 +42,10 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         self.setNotificationtoken()
         self.searchBar!.delegate = self
         registerCell()
-        
         tableView.register(CustomHeaderoCell.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderCell")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         self.loadMyFriends()
     }
+
     
     //MARK: - SearchBar Method
         // SearchBar FirstResponder
@@ -77,11 +66,6 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends[section].row.count
     }
-
-// установка имени секции
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return friends[section].header
-//    }
 
 // Отрисовка ячеек
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

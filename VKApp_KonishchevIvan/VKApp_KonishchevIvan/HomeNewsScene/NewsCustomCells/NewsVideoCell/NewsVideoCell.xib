@@ -57,7 +57,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0i6-fM-5ZG">
-                                <rect key="frame" x="60" y="28" width="528" height="12"/>
+                                <rect key="frame" x="60" y="28" width="26" height="12"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -72,7 +72,7 @@
                             <constraint firstItem="0i6-fM-5ZG" firstAttribute="leading" secondItem="ve2-3Y-FaV" secondAttribute="leading" constant="60" id="Utr-RF-CrU"/>
                             <constraint firstItem="NpQ-Ap-qdm" firstAttribute="leading" secondItem="ve2-3Y-FaV" secondAttribute="leading" constant="60" id="hNs-w6-tQI"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="0i6-fM-5ZG" secondAttribute="bottom" constant="5" id="heU-mf-oEA"/>
-                            <constraint firstAttribute="trailing" secondItem="0i6-fM-5ZG" secondAttribute="trailing" id="wsr-HG-u2B"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0i6-fM-5ZG" secondAttribute="trailing" id="wsr-HG-u2B"/>
                             <constraint firstAttribute="height" constant="60" id="zzc-Ym-By0"/>
                         </constraints>
                     </view>
@@ -154,7 +154,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="mTp-Fx-3xs" secondAttribute="bottom" id="0KD-pN-2aQ"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="343" id="9Cq-Iq-6Qf"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="9Cq-Iq-6Qf"/>
                             <constraint firstItem="mTp-Fx-3xs" firstAttribute="leading" secondItem="Ep3-Ib-xOi" secondAttribute="leading" id="GmF-SV-8K4"/>
                             <constraint firstItem="mTp-Fx-3xs" firstAttribute="top" secondItem="Ep3-Ib-xOi" secondAttribute="top" id="QqB-jG-1im"/>
                             <constraint firstAttribute="trailing" secondItem="mTp-Fx-3xs" secondAttribute="trailing" id="mjX-Y0-N1l"/>
@@ -191,6 +191,7 @@
                 <outlet property="newsUserName" destination="NpQ-Ap-qdm" id="LnJ-2L-7iX"/>
                 <outlet property="newsUserSeen" destination="0i6-fM-5ZG" id="Jgv-8K-n7j"/>
                 <outlet property="newsVideoFrameImage" destination="mTp-Fx-3xs" id="QjH-Xf-J0q"/>
+                <outlet property="newsVideoHeightCondtraint" destination="9Cq-Iq-6Qf" id="BvZ-SH-mub"/>
                 <outlet property="newsVideoText" destination="pri-Ij-RID" id="vvX-o9-Ocd"/>
                 <outlet property="videoUIView" destination="Ep3-Ib-xOi" id="c4C-c8-7yO"/>
             </connections>

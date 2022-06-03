@@ -29,15 +29,10 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     // переменная для следующего контроллера
     var nextViewData: [ImageAndLikeData] = []
     // данные для отображения секций таблицы
-    var dataTable: [UserDetailsTableData]! {
-        didSet {
-    // перезагружаем таблицу после получения данных
-            self.tableView.reloadData()
-            
-        }
-    }
+    var dataTable: [UserDetailsTableData]!
 
     var currentImageTap: Int!
+    
     @IBOutlet weak var detailAvatarHeader: UIImageView!
     @IBOutlet weak var detailUserNameLable: UILabel!
     @IBOutlet weak var detailUserInfoLable: UILabel!
@@ -54,20 +49,14 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         setHeaderDetailView()
         registerCells()
         tableView.register(CustomHeaderoCell.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderCell")
-        
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         self.loadDataTable()
-
     }
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         if let data = self.dataTable {
             return data.count
-            
         }
         return 0
     }
