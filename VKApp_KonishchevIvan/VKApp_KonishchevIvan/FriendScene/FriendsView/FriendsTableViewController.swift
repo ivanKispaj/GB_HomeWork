@@ -10,10 +10,20 @@
 import UIKit
 import RealmSwift
 
-class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
+class FriendsTableViewController: UITableViewController, UISearchBarDelegate, FriendsSetData {
+
+    
     
     var notifiToken: NotificationToken?
     let  realmService = RealmService()
+    
+    let queue: OperationQueue  = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 3
+        queue.name = "friendScene"
+        queue.qualityOfService = .userInteractive
+        return queue
+    }()
     
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
     @IBOutlet weak var headerTableView: UIView!
@@ -38,12 +48,24 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ // Operation....
+        let loadData = OperationLoadFriendsFromRealm(friendId: NetworkSessionData.shared.testUser)
+        let parseData = OperationParseDataFromRealm()
+        let getFriendsViewData = OperationFriendViewData(setView: self)
+        parseData.addDependency(loadData)
+        getFriendsViewData.addDependency(parseData)
+        queue.addOperation(loadData)
+        queue.addOperation(parseData)
+        OperationQueue.main.addOperation(getFriendsViewData)
+ // ......
         getActivityIndicatorLoadData()
-        self.setNotificationtoken()
+        setNotificationtoken()
+        self.activityIndicator.startAnimating()
         self.searchBar!.delegate = self
         registerCell()
+        
+        loadMyFriends()
         tableView.register(CustomHeaderoCell.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderCell")
-        self.loadMyFriends()
     }
 
     
@@ -137,6 +159,16 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.register(SimpleTableCell.self)
         tableView.register(ExtendTableUserCell.self)
     }
+    
+    
+    
+    func setData(from data: [Friend]) {
+        self.friendsArray = data
+        self.setDataSectionTable()
+        self.activityIndicator.stopAnimating()
+        self.tableView.reloadData()
+    }
+    
 }
 
 

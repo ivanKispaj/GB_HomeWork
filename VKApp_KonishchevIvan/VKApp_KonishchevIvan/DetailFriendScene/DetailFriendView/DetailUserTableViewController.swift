@@ -81,6 +81,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         case 1:
             let tap = UITapGestureRecognizer(target: self, action: #selector(photoHeaderNextTap))
             view.nameSection.text = "Фотографии"
+            view.countFriends.text = String(data.photo!.count) 
             view.action.text = ">"
             let photoSectionTap = view.action
             photoSectionTap.addGestureRecognizer(tap)
