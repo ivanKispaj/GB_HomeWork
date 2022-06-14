@@ -11,15 +11,15 @@ import UIKit
 import RealmSwift
 
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate, FriendsSetData {
-
+    
     
     
     var notifiToken: NotificationToken?
-    let  realmService = RealmService()
+    var  realmService: RealmService!
     
     let queue: OperationQueue  = {
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 3
+        queue.maxConcurrentOperationCount = 2
         queue.name = "friendScene"
         queue.qualityOfService = .userInteractive
         return queue
@@ -28,7 +28,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
     @IBOutlet weak var headerTableView: UIView!
     @IBOutlet weak var headerSubview: UIView!
-    var activityIndicator: UIActivityIndicatorView!
+    weak var activityIndicator: UIActivityIndicatorView!
+    
     struct DataSection {
         var header: String = ""
         var row: [Friend] = []
@@ -42,73 +43,74 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
     var friends: [DataSection] = []
     
     // Исходный массив друзей
-
+    
     var friendsArray: [Friend] = []
-    var nextViewData: DetailUserTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
- // Operation....
-        let loadData = OperationLoadFriendsFromRealm(friendId: NetworkSessionData.shared.testUser)
-        let parseData = OperationParseDataFromRealm()
-        let getFriendsViewData = OperationFriendViewData(setView: self)
-        parseData.addDependency(loadData)
-        getFriendsViewData.addDependency(parseData)
-        queue.addOperation(loadData)
-        queue.addOperation(parseData)
-        OperationQueue.main.addOperation(getFriendsViewData)
- // ......
+        realmService = RealmService()
         getActivityIndicatorLoadData()
         setNotificationtoken()
         self.activityIndicator.startAnimating()
         self.searchBar!.delegate = self
         registerCell()
-        
         loadMyFriends()
         tableView.register(CustomHeaderoCell.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderCell")
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Operation....
+        let loadData = OperationLoadFriendsFromRealm(friendId: NetworkSessionData.shared.testUser)
+        // let parseData = OperationParseDataFromRealm()
+        let getFriendsViewData = OperationFriendViewData(setView: self)
+        //   parseData.addDependency(loadData)
+        getFriendsViewData.addDependency(loadData)
+        queue.addOperation(loadData)
+        // queue.addOperation(parseData)
+        OperationQueue.main.addOperation(getFriendsViewData)
+        // ......
+    }
     
     //MARK: - SearchBar Method
-        // SearchBar FirstResponder
-        func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-            self.searchBar.tapInSearchBar()
-            return true
-        }
+    // SearchBar FirstResponder
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        self.searchBar.tapInSearchBar()
+        return true
+    }
     
-
+    
     // MARK: - Table view data source
     
-// количество секций с одной буквой
+    // количество секций с одной буквой
     override func numberOfSections(in tableView: UITableView) -> Int {
         return friends.count
     }
     
-// количество строк таблици в одной секции
+    // количество строк таблици в одной секции
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends[section].row.count
     }
-
-// Отрисовка ячеек
+    
+    // Отрисовка ячеек
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         let data = friends[indexPath.section].row[indexPath.row]
         let section = friends[indexPath.section].header
-      
+        
         if section == "Возможные друзья" {
             let cell: ExtendTableUserCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.setCelldata(from: data)
             return cell
-
+            
         } else {
             let cell: SimpleTableCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.setCellData(toFriendsScene: data)
-         
             return cell
         }
     }
     
-// Действия при выборе ячейки
+    // Действия при выборе ячейки
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let friendSelected = friends[indexPath.section].row[indexPath.row]
@@ -119,13 +121,14 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
             let allert = AllertWrongUserData().getAllert(title: "Сообщение", message: "Профиль пользователя скрыт!")
             present(allert, animated: true)
         }else {
-            performSegue(withIdentifier: "detailsUserSegueId", sender: nil)
-            guard let detailVC = self.nextViewData else { return }
-            detailVC.title = friendSelected.userName
-            detailVC.friendsSelected = friendSelected
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "DetailUserTableView") as? DetailUserTableViewController else { return }
+            nextVC.modalPresentationStyle = .automatic
+            nextVC.friendsSelected = friendSelected
+            navigationController?.pushViewController(nextVC, animated: true)
         }
     }
-
+    
     //кастомный Header ячеек
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -133,7 +136,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         
         let sectionsName = friends[section].header
         view.nameSection.text = sectionsName
-
+        
         if sectionsName == "Возможные друзья" {
             
             view.countFriends.text = " "
@@ -148,12 +151,6 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
             return view
         }
     } 
-    //подготовка сегуе перехода. Срабатывает перед вызовом didSelectRowAt
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let detailVC = segue.destination as? DetailUserTableViewController else { return
-        }
-        self.nextViewData = detailVC
-    }
     
     private func registerCell() {
         tableView.register(SimpleTableCell.self)

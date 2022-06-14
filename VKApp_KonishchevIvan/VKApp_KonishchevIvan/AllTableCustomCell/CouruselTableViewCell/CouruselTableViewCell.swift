@@ -51,5 +51,6 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
 
         
     }
+    
 
 }

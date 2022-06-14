@@ -23,13 +23,13 @@ final class OperationParseDataFromRealm: Operation {
             return
         }
         DispatchQueue.global().async {
-            self.paeseData(from: response)
+            self.parseData(from: response)
         }
        
     }
     
     
-   private func paeseData(from response: FriendsResponse) {
+   private func parseData(from response: FriendsResponse) {
     var arrays = [Friend]()
     let items = response.items
     for friendData in items {

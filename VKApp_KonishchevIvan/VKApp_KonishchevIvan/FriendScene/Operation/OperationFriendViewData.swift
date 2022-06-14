@@ -16,7 +16,7 @@ final class OperationFriendViewData: Operation {
     }
     
     override func main() {
-        guard let option = dependencies.first as? OperationParseDataFromRealm else {
+        guard let option = dependencies.first as? OperationLoadFriendsFromRealm else {
             print("Data not parsed")
             return
         }

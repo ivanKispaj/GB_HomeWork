@@ -221,7 +221,7 @@
         <!--My Friends-->
         <scene sceneID="MEA-QI-6hs">
             <objects>
-                <navigationController id="lRV-zo-xOK" customClass="CustomNavigationController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FriendsNavigationController" id="lRV-zo-xOK" customClass="CustomNavigationController" customModule="VKApp_KonishchevIvan" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Friends" image="rectangle.inset.filled.and.person.filled" catalog="system" id="f0L-Ej-T7I"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gKb-jT-QOC">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>

@@ -14,26 +14,29 @@ class HomeNewsTableViewController: UITableViewController {
     var playIndexPath: [IndexPath]?
  
     var newsRealmToken: NotificationToken?
-    var realmService = RealmService()
-    var nextViewData: [ImageAndLikeData?] = [nil]
+    var realmService: RealmService!
+    var nextViewData: [ImageAndLikeData]? = nil
     var newsData: [[CellType : NewsCellData]]?
 
     var currentOrientation: UIDeviceOrientation? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.realmService = RealmService()
         self.setNotificationToken()
         self.currentOrientation = UIDevice.current.orientation
         registerCells()
         self.loadNewsData()
- 
 
     }
 
-
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.tableView = nil
+    }
     // MARK: - Table view data source
 
+ 
 
     override func numberOfSections(in tableView: UITableView) -> Int {
  

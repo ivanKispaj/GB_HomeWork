@@ -29,7 +29,9 @@ extension HomeNewsTableViewController {
                     print("NewsVC Signed")
                 case let .update(_, deletions, insertions, _):
                     if deletions.count != 0 || insertions.count != 0 {
-                        self.updateNewsView()                    }
+                        self.updateNewsView()
+                        
+                    }
                     
                 case .error(_):
                     print("Asd")
@@ -207,7 +209,7 @@ extension HomeNewsTableViewController {
                         }
                        
                     }
-                    newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
+                    newsCellData.albumId = copyHistory.attachments[0].photoData?.albumId ?? 0
                     
                 }
                 

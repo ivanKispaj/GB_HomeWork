@@ -7,6 +7,7 @@
 
 import RealmSwift
 import Realm
+
 final class RealmService {
   
 // удаление объекта из базы
@@ -94,6 +95,8 @@ extension Realm: CascadeDeleting {
     }
 }
 
+
+//MARK: - каскадное удаление объектов в базе данных
 private extension Realm {
     private func cascadeDelete(_ entity: RLMObjectBase) {
         guard let entity = entity as? Object else { return }

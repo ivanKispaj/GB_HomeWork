@@ -27,7 +27,7 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         self.gallaryCollection.dataSource = self
         self.gallaryCollection.register(GallaryCollectionViewCell.self)
     }
-
+ 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if self.gallaryData != nil && self.gallaryData.count == 0 {
             return 0
