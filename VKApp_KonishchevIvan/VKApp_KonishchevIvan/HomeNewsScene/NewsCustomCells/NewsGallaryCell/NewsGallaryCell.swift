@@ -8,8 +8,8 @@
 import UIKit
 
 class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, DequeuableProtocol{
-    @IBOutlet weak var newsTextLabel: UILabel!
     
+    @IBOutlet weak var newsTextLabel: UILabel!
     @IBOutlet weak var newsGallaryCollection: UICollectionView!
     @IBOutlet weak var newsGallaryUserAvatar: UIImageView!
     @IBOutlet weak var newsGallaryUserName: UILabel!
@@ -17,7 +17,7 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var newsgallaryLikeCount: UILabel!
     @IBOutlet weak var newsGallarySeenCount: UILabel!
     var imageGallaryData: [PhotoDataNews]?
-
+    
     var countCell: Int = 0
     
     override func awakeFromNib() {
@@ -76,7 +76,7 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
                 }else if section == 2 {
                     return 2
                 }else { return 1 }
-            
+                
             default:
                 if section == 0 || section == 2 {
                     return 3
@@ -100,7 +100,7 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
         return cell
     }
     
-
+    
     func setCellData(from data: NewsCellData) {
         self.countCell = 0
         self.imageGallaryData = data.newsImage

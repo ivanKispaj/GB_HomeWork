@@ -11,7 +11,7 @@ import AVFoundation
 
 
 
-class NewsVideoCell: UITableViewCell,DequeuableProtocol {
+class NewsVideoCell: UITableViewCell, DequeuableProtocol {
 
     @IBOutlet weak var newsUserName: UILabel!
     @IBOutlet weak var newsUserAvatar: UIImageView!
@@ -21,17 +21,24 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
     @IBOutlet weak var newsLikeCount: UILabel!
     @IBOutlet weak var newsSeenCount: UILabel!
     @IBOutlet weak var newsVideoText: UILabel!
-    @IBOutlet weak var newsVideoHeightCondtraint: NSLayoutConstraint!
+    @IBOutlet weak var newsVideoHeightConstraint: NSLayoutConstraint!
     
-    var player: AVPlayer! {
-        didSet {
-            self.player.play()
-        }
-    }
     var playerViewController: AVPlayerViewController!
     
     var videoData: NewsCellData?
-    
+    var videoUrl: String? = nil {
+        didSet {
+            DispatchQueue.main.async {
+                let videoURL = URL(string: self.videoUrl!)
+                let player = AVPlayer(url: videoURL!)
+                player.isMuted = true
+                player.play()
+                
+                self.playerViewController.player = player
+            }
+
+        }
+    }
     
     func configureCellForVideo(form data: NewsCellData) {
         self.newsVideoText.font = UIFont.systemFont(ofSize: 12)
@@ -41,99 +48,20 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
         self.newsLikeCount.text = String(data.newsLikeCount)
         self.newsSeenCount.text = String(data.newsSeenCount)
         let videoHeight = data.firstFrame.height * 0.7
-        self.newsVideoHeightCondtraint.constant = videoHeight
+        self.newsVideoHeightConstraint.constant = videoHeight
+        self.setVideoPlayerController()
         let queue = DispatchQueue.global(qos: .userInteractive)
-        
-       queue.async {
-            InternetConnections(host: "api.vk.com", path: "/method/video.get").loadVideoContent(ovnerId: data.ownerId, accessKey: data.accessKey, videoId: data.videoId) { result in
-                
-                if result?.player == nil {
-                    DispatchQueue.main.async {
-                        self.newsVideoFrameImage.loadImageFromUrlString(data.firstFrame.url)
-                        self.videoUIView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: videoHeight)
-                    }
-                } else {
-                if let playerUrl = result?.player {
-                    
-                    guard let url = URL(string: playerUrl) else {
-                        print("Error: \(playerUrl) doesn't seem to be a valid URL")
-                        return
-                    }
-
-                    do {
-          
-                        let playerHtml = try String(contentsOf: url, encoding: .ascii)
-                       
-                        let htmlArray = playerHtml.split(separator: ",")
-                        if data.videoType == .video {
-            // варианты url video 480/360/320
-                            let url480 = htmlArray.first(where: { $0.contains("url480")})
-                            let url360 = htmlArray.first(where: { $0.contains("url360")})
-                            let url240 = htmlArray.first(where: { $0.contains("url240")})
-                            var urlDataExt: [Substring.SubSequence]?
-                            if let urlData = url480?.split(separator: ":") {
-                                urlDataExt = urlData
-                            }else if let urlData = url360?.split(separator: ":") {
-                                urlDataExt = urlData
-                            }else if let urlData = url240?.split(separator: ":") {
-                                urlDataExt = urlData
-                            }
-                          
-                            if let urlData = urlDataExt {
-                                if let clearUrl = self.getClearUrl(from: urlData) {
-                                    DispatchQueue.main.async {
-                                        self.initializeVideoPlayerWithVideo(with: clearUrl)
-                                    }
-                                }
-                              
-                            }
-                        }else if data.videoType == .live {
-                            let allHls = htmlArray.filter({$0.contains ("hls")})
-                            print(allHls.count)
-                            print(allHls)
-                            let urlHls = htmlArray.first(where: { $0.contains("hls")})
-                            if let hls = urlHls?.split(separator: ":") {
-                                let lastHls = hls.last
-                                if var clearHls = lastHls?.replacingOccurrences(of: "\\", with: "") {
-                                    clearHls = clearHls.replacingOccurrences(of: "\"", with: "")
-                                    clearHls = "https:" + clearHls
-                                    print(clearHls)
-                                    DispatchQueue.main.async {
-                                        self.initializeVideoPlayerWithVideo(with: clearHls)
-                                    }
-                                }
-                            }
-                        }
-                    } catch let error {
-                        print("Error: \(error)")
-                    }
-                  
-                }
-            }
-            }
+        queue.async {
+            self.getVideoUrl(from: data)
+            
         }
-        
-    
+
     }
       
-    func getClearUrl(from urlData: [Substring.SubSequence]) -> String? {
-        let url = urlData.last
-            if var clearUrl = url?.replacingOccurrences(of: "\\", with: "") {
-                clearUrl = clearUrl.replacingOccurrences(of: "\"", with: "")
-                clearUrl = "https:" + clearUrl
-             return clearUrl
-        }
-      return nil
-    }
+
     
     func initializeVideoPlayerWithVideo(with url: String) {
-    
-        let videoURL = URL(string: url)
-        self.player = AVPlayer(url: videoURL!)
-        self.player.isMuted = true
-        
         self.playerViewController = AVPlayerViewController()
-        self.playerViewController.player = self.player
         self.playerViewController.videoGravity = .resizeAspectFill
         self.playerViewController.showsPlaybackControls = false
         self.videoUIView.addSubview(self.playerViewController.view)
@@ -148,11 +76,86 @@ class NewsVideoCell: UITableViewCell,DequeuableProtocol {
           
     }
     
-    func loopVideo(videoPlayer: AVPlayer) {
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem, queue: .main) { [weak self] _ in
-            self?.player?.seek(to: CMTime.zero)
-            self?.player?.play()
+    
+    private func setVideoPlayerController() {
+        self.playerViewController = AVPlayerViewController()
+        self.playerViewController.videoGravity = .resizeAspectFill
+        self.playerViewController.showsPlaybackControls = false
+        self.videoUIView.addSubview(self.playerViewController.view)
+        self.playerViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            playerViewController.view.leadingAnchor.constraint(equalTo: self.videoUIView.leadingAnchor),
+            playerViewController.view.trailingAnchor.constraint(equalTo: self.videoUIView.trailingAnchor),
+            playerViewController.view.topAnchor.constraint(equalTo: self.videoUIView.topAnchor),
+            playerViewController.view.bottomAnchor.constraint(equalTo: self.videoUIView.bottomAnchor)
+        ])
+
+    }
+    
+    private func getVideoUrl(from data: NewsCellData) {
+        InternetConnections(host: "api.vk.com", path: "/method/video.get").loadVideoContent(ovnerId: data.ownerId, accessKey: data.accessKey, videoId: data.videoId) { [weak self] result in
+            if result?.player == nil {
+                DispatchQueue.main.async {
+                    let videoHeight = data.firstFrame.height * 0.7
+                    self?.newsVideoFrameImage.loadImageFromUrlString(data.firstFrame.url)
+                    self?.videoUIView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: videoHeight)
+                }
+            } else {
+                guard let url = URL(string: result!.player) else {
+                    print("Error: \(result!.player) doesn't seem to be a valid URL")
+                    return
+                }
+                
+                do {
+                    let html = try String(contentsOf: url, encoding: .ascii)
+                    let htmlArray = html.split(separator: ",")
+                    
+                    switch data.videoType {
+                    case .video:
+                        let url480 = htmlArray.first(where: { $0.contains("url480")})
+                        let url360 = htmlArray.first(where: { $0.contains("url360")})
+                        let url240 = htmlArray.first(where: { $0.contains("url240")})
+                        var urlDataExt: [Substring.SubSequence]?
+                        if let urlData = url480?.split(separator: ":") {
+                            urlDataExt = urlData
+                        }else if let urlData = url360?.split(separator: ":") {
+                            urlDataExt = urlData
+                        }else if let urlData = url240?.split(separator: ":") {
+                            urlDataExt = urlData
+                        }
+                        
+                        if let urlData = urlDataExt {
+                            if let clearUrl = self?.getClearUrl(from: urlData) {
+                                self?.videoUrl = clearUrl
+                            }
+                            
+                        }
+                    case .live:
+                        let urlHls = htmlArray.first(where: { $0.contains("hls")})
+                        if let hls = urlHls?.split(separator: ":") {
+                            let lastHls = hls.last
+                            if var clearHls = lastHls?.replacingOccurrences(of: "\\", with: "") {
+                                clearHls = clearHls.replacingOccurrences(of: "\"", with: "")
+                                clearHls = "https:" + clearHls
+                                self?.videoUrl = clearHls
+                            }
+                        }
+                    }
+                }catch {
+                    print("Error: \(error)")
+                }
+            }
         }
+    }
+    
+    private func getClearUrl(from urlData: [Substring.SubSequence]) -> String? {
+        let url = urlData.last
+            if var clearUrl = url?.replacingOccurrences(of: "\\", with: "") {
+                clearUrl = clearUrl.replacingOccurrences(of: "\"", with: "")
+                clearUrl = "https:" + clearUrl
+             return clearUrl
+        }
+      return nil
     }
     
 }

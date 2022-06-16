@@ -25,18 +25,14 @@ extension FriendsTableViewController {
     
      func setNotificationtoken() {
         if let data = self.realmService.readData(FriendsResponse.self) {
-            self.notifiToken = data.observe { (changes: RealmCollectionChange) in
+            self.notifiToken = data.observe { [weak self](changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
                     print("FriendsController Signed ")
                 case let .update(results, _, _, _):
                     if let response = results.where({ $0.id == NetworkSessionData.shared.testUser }).first {
-                        if response.countFriends != self.friendsArray.count {
-                            let operationParseFriend = OperationParseDataFromRealm()
-                            let operationSetViewData = OperationFriendViewData(setView: self)
-                            operationSetViewData.addDependency(operationParseFriend)
-                            self.queue.addOperation(operationParseFriend)
-                            OperationQueue.main.addOperation(operationSetViewData)
+                        if response.countFriends != self?.friendsArray.count {
+                            self?.parseData(from: response)
                         }
                     }
                     
@@ -47,6 +43,47 @@ extension FriendsTableViewController {
         }
     }
  
+    private func parseData(from response: FriendsResponse) {
+     var arrays = [Friend]()
+     let items = response.items
+     for friendData in items {
+         let friends = Friend()
+         friends.countFriends = response.countFriends
+         if friendData.online == 1 {
+             friends.online = true
+         }
+         
+         if friendData.banned != nil {
+             friends.isBanned = true
+         }
+         
+         if friendData.city != nil {
+             friends.city = friendData.city!.title
+         }else {
+             friends.city = "unknown"
+         }
+         
+         if friendData.lastSeen != nil {
+             friends.lastSeenDate = friendData.lastSeen!.time
+         }
+
+         if  let status = friendData.status {
+             friends.status = status
+         }
+         
+         let name = (friendData.fName) + " " + (friendData.lName)
+         friends.userName = name
+         friends.id = friendData.id
+         friends.photo = friendData.photo50
+         friends.isClosedProfile = friendData.isClosedProfile
+         arrays.append(friends)
+     }
+        DispatchQueue.main.async {
+            self.setData(from: arrays)
+
+        }
+     }
+    
 }
 
 

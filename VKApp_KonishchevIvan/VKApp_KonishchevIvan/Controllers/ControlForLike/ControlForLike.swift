@@ -13,11 +13,12 @@ class ControlForLike: UIControl {
     @IBOutlet weak var likeImage: UIImageView!
     @IBOutlet weak var likeLable: UILabel!
    
-    var delegate: LikeDelegate!
+    weak var delegate: LikeDelegate!
     var indexPath: IndexPath!
     var indexForGallary: Int = 0
     var isLike: Bool = false
     var counLikes: Int = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 

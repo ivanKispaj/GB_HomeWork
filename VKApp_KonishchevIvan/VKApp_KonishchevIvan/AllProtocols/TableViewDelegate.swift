@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol TableViewDelegate {
+protocol TableViewDelegate: AnyObject {
     var nextViewData: [ImageAndLikeData] {set get}
     func selectRow(nextViewData: [ImageAndLikeData], indexPath: IndexPath)
 }

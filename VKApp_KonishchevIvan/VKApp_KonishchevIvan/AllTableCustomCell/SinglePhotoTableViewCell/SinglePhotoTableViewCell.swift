@@ -26,7 +26,7 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
             self.singlCollection.reloadData()
         }
     }
-    var delegate: TableViewDelegate!
+   weak var delegate: TableViewDelegate!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,9 +61,14 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
 
 
     func setCellData(from data: DetailsSectionData, to user: Friend) {
-        
-        self.singleAvatarHeader.image = UIImage(data: user.photo)
-     
+        if user.photo == nil {
+            self.singleAvatarHeader.image = UIImage(named: "noFoto")
+
+        }else {
+            self.singleAvatarHeader.image = UIImage(data: user.photo)
+
+        }
+        self.singleLableUserName.text = user.userName
         if let seen = data.views {
             self.singlePhotoSeenCount.text = String(seen.count)
         }else {

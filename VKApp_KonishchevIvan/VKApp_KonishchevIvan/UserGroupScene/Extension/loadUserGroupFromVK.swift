@@ -7,7 +7,6 @@
 
 import UIKit
 import RealmSwift
-import FirebaseDatabase
 
 extension UserGroupTableViewController {
     
@@ -33,15 +32,15 @@ extension UserGroupTableViewController {
     
      func setNitificationGroups() {
         if let data = self.realmService.readData(ItemsGroup.self) {
-            self.nitifiTokenGroups = data.observe { (changes: RealmCollectionChange) in
+            self.nitifiTokenGroups = data.observe { [weak self ] (changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
                     print("UserGroup Signed")
                 case let .update(results, deletions, insertions, _):
                     if deletions.count != 0 || insertions.count != 0 {
-                    self.dataGroups = results
+                        self!.dataGroups = results
                         DispatchQueue.main.async {
-                            self.tableView.reloadData()
+                            self!.tableView.reloadData()
                         }
                     }
                 case .error(_):

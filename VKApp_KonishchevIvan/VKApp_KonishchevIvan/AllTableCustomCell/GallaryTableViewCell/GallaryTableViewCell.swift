@@ -10,8 +10,8 @@ import UIKit
 class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, DequeuableProtocol {
 
     @IBOutlet weak var gallaryCollection: UICollectionView!
-    var delegate: TableViewDelegate!
-    var delegateFrameImages: SetFrameImages!
+    weak var delegate: TableViewDelegate!
+    weak var delegateFrameImages: SetFrameImages!
     var gallaryData: [ImageAndLikeData]! {
         didSet {
             self.gallaryCollection.reloadData()

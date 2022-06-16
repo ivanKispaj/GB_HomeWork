@@ -66,12 +66,11 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xf6-OH-MJK" secondAttribute="trailing" constant="10" id="5kt-aW-tJA"/>
-                            <constraint firstItem="oeM-Xs-1l7" firstAttribute="top" secondItem="VnQ-qc-IMa" secondAttribute="top" constant="10" id="GTB-se-1an"/>
                             <constraint firstAttribute="height" constant="60" id="MJe-K2-Mp0"/>
-                            <constraint firstItem="pUc-0m-PzR" firstAttribute="leading" secondItem="oeM-Xs-1l7" secondAttribute="trailing" constant="10" id="Sdv-b1-rUX"/>
-                            <constraint firstAttribute="bottom" secondItem="oeM-Xs-1l7" secondAttribute="bottom" priority="999" constant="10" id="bTy-kv-xTm"/>
+                            <constraint firstItem="oeM-Xs-1l7" firstAttribute="centerY" secondItem="VnQ-qc-IMa" secondAttribute="centerY" id="O6T-hq-OJx"/>
+                            <constraint firstItem="pUc-0m-PzR" firstAttribute="leading" secondItem="VnQ-qc-IMa" secondAttribute="leading" constant="60" id="Sdv-b1-rUX"/>
                             <constraint firstItem="pUc-0m-PzR" firstAttribute="top" secondItem="VnQ-qc-IMa" secondAttribute="top" constant="10" id="cn5-9P-9fi"/>
-                            <constraint firstItem="Xf6-OH-MJK" firstAttribute="leading" secondItem="oeM-Xs-1l7" secondAttribute="trailing" constant="10" id="dBp-s4-M9Q"/>
+                            <constraint firstItem="Xf6-OH-MJK" firstAttribute="leading" secondItem="VnQ-qc-IMa" secondAttribute="leading" constant="60" id="dBp-s4-M9Q"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pUc-0m-PzR" secondAttribute="trailing" constant="10" id="frl-RU-lxZ"/>
                             <constraint firstItem="Xf6-OH-MJK" firstAttribute="top" secondItem="pUc-0m-PzR" secondAttribute="bottom" constant="3" id="gB5-u1-JND"/>
                             <constraint firstItem="oeM-Xs-1l7" firstAttribute="leading" secondItem="VnQ-qc-IMa" secondAttribute="leading" constant="10" id="iWC-49-GP9"/>

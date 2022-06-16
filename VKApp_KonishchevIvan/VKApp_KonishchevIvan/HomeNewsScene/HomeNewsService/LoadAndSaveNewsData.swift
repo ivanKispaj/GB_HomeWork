@@ -18,7 +18,7 @@ extension InternetConnections {
             URLQueryItem(name: "v", value: "5.131"),
         ]
         guard let url = self.urlComponents.url else { return }
-        self.session.dataTask(with: url) { data, _, error in
+        self.session.dataTask(with: url) { [weak self] data, _, error in
             if let error = error {
                 print(InternetError.requestError(error))
             }
@@ -30,17 +30,13 @@ extension InternetConnections {
                 let result = try decode.decode(NewsDataModel.self, from: data)
                 let queue = DispatchQueue.global(qos: .utility)
                 queue.async {
-                    let object = self.realmService.readData(NewsResponse.self)?.first
+                    let object = self?.realmService.readData(NewsResponse.self)?.first
                     if object != nil {
-                        self.realmService.deliteData(object!, cascading: true)
-
+                        self?.realmService.deliteData(object!, cascading: true)
+                        self?.realmService.updateData(result.response)
                     }
                 }
-// каскадное удаление новостей из базы данных перед обновлением!
-                queue.async {
-                    self.realmService.updateData(result.response)
-
-                }
+                
             }catch {
                 print(InternetError.parseError)
             }

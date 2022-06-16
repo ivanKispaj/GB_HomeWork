@@ -672,9 +672,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <connections>
-                                <outlet property="delegate" destination="hAC-vJ-7s5" id="URw-q7-Zoz"/>
-                            </connections>
                         </view>
                         <connections>
                             <outlet property="dataSource" destination="bOg-bZ-oQT" id="bDJ-fb-K1c"/>
@@ -689,7 +686,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchBar" destination="NMy-aR-Rrh" id="hhx-Y0-LJ7"/>
+                        <outlet property="searchBar" destination="NMy-aR-Rrh" id="z6x-Ro-JHH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0TO-DP-ex0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

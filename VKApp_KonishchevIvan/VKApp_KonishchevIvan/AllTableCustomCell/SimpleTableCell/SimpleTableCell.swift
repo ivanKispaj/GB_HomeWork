@@ -17,7 +17,11 @@ class SimpleTableCell: UITableViewCell,DequeuableProtocol {
     
     
     func setCellData(toFriendsScene data: Friend) {
-        self.imageCellAvatar.image = UIImage(data: data.photo)
+        if let dataPhoto = data.photo {
+            self.imageCellAvatar.image = UIImage(data: dataPhoto)
+        }else {
+            self.imageCellAvatar.image = UIImage(named: "noFoto")
+        }
         self.labelCityCellXib.text = data.city
         self.lableCellXib.text = data.userName
         self.profileStatus.text = ""

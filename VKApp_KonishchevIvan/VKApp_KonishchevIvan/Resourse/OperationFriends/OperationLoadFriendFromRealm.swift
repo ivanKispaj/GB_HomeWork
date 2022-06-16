@@ -19,7 +19,8 @@ import RealmSwift
         self.friendId = friendId
     }
     override func main() {
-        self.friendsResponse = self.realmService.readData(FriendsResponse.self)!.where({ $0.id == self.friendId }).first
+        guard let response = self.realmService.readData(FriendsResponse.self)?.where({ $0.id == self.friendId }).first else { return }
+        self.friendsResponse = response
         self.parseData(from: self.friendsResponse!)
     }
      

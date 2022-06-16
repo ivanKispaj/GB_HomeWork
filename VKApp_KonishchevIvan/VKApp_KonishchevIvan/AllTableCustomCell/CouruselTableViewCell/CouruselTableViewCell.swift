@@ -18,7 +18,7 @@ class CouruselTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     }
     
     
-    var delegate: TableViewDelegate!
+    weak var delegate: TableViewDelegate!
     
     override func awakeFromNib() {
         super.awakeFromNib()

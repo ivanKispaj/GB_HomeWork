@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SetFrameImages {
+protocol SetFrameImages: AnyObject {
     var frameImages: [CGRect]? {get set}
     var currentFrameImages: CGRect? {get set}
     var collectionFrame: CGRect? {get set}

@@ -23,13 +23,13 @@ extension HomeNewsTableViewController {
     
      func setNotificationToken() {
         if let data = self.realmService.readData(NewsItems.self) {
-            self.newsRealmToken = data.observe { (changes: RealmCollectionChange) in
+            self.newsRealmToken = data.observe { [weak self](changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
                     print("NewsVC Signed")
                 case let .update(_, deletions, insertions, _):
                     if deletions.count != 0 || insertions.count != 0 {
-                        self.updateNewsView()
+                        self?.updateNewsView()
                         
                     }
                     

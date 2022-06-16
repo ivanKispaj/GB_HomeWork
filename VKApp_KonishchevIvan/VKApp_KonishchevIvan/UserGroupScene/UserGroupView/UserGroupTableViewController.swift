@@ -7,11 +7,8 @@
 
 import UIKit
 import RealmSwift
-import FirebaseDatabase
 
 class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
-  
-    let ref = Database.database().reference(withPath: "registerUser")
     
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
 
@@ -31,6 +28,11 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.loadUserGroupFromVK()
+    }
+    
+    
+    deinit {
+        print("Group Deinit!")
     }
 //MARK: - SearchBar Method
     // SearchBar FirstResponder

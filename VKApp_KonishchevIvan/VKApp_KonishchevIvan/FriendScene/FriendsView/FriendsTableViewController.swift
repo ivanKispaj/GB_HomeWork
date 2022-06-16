@@ -55,6 +55,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         self.searchBar!.delegate = self
         registerCell()
         loadMyFriends()
+        
         tableView.register(CustomHeaderoCell.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderCell")
     }
     
@@ -71,7 +72,11 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         OperationQueue.main.addOperation(getFriendsViewData)
         // ......
     }
-    
+  
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.tableView = nil
+    }
     //MARK: - SearchBar Method
     // SearchBar FirstResponder
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {

@@ -58,9 +58,10 @@ class HomeNewsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell is NewsVideoCell {
             let dataCell = cell as! NewsVideoCell
-            if dataCell.player != nil {
+            guard let playerController = dataCell.playerViewController else {return}
+            if playerController.player != nil {
                 DispatchQueue.main.async {
-                    dataCell.player.pause()
+                    dataCell.playerViewController.player!.pause()
                 }
                 
             }
@@ -70,9 +71,10 @@ class HomeNewsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell is NewsVideoCell {
             let dataCell = cell as! NewsVideoCell
-            if dataCell.player != nil {
+            guard let playerController = dataCell.playerViewController else {return}
+            if playerController.player != nil {
                 DispatchQueue.main.async {
-                    dataCell.player.play()
+                    dataCell.playerViewController.player!.play()
                     
                 }
                 
@@ -120,6 +122,7 @@ class HomeNewsTableViewController: UITableViewController {
             return cell
         case .uncnown:
            print("uncnown")
+   
         }
        
         let cell: NewsPostCell = tableView.dequeueReusableCell(forIndexPath: indexPath)

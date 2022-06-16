@@ -15,10 +15,10 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     var friendsSelected: Friend!
     // var activityIndicator: UIActivityIndicatorView!
     // Realm notification and service
-    var notifiTokenPhoto: NotificationToken?
-    var notifiTokenFriends: NotificationToken?
-    var notifiTokenWall: NotificationToken?
-    var realmService: RealmService!
+    weak var notifiTokenPhoto: NotificationToken?
+    weak var notifiTokenFriends: NotificationToken?
+    weak var notifiTokenWall: NotificationToken?
+     var realmService: RealmService!
     
     
     var frameImages: [CGRect]?
@@ -57,9 +57,13 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if self.navigationController?.viewControllers.count == 1 || self.navigationController?.viewControllers.count == nil {
-            self.tableView = nil
-        }
+        self.realmService = nil
+        friendsSelected = nil
+//        if navigationController?.visibleViewController is GallaryViewController {
+//            print("GalalaryController")
+//        }else {
+//            self.tableView = nil
+//        }
     }
     
     deinit {
@@ -84,13 +88,13 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         switch section {
         case 0:
             let tap = UITapGestureRecognizer(target: self, action: #selector(FriendsHeaderNextTap))
-            
+
             view.nameSection.text = "Друзья"
             view.countFriends.text = String(data.friensCount)
             view.action.text = ">"
             let friendsTap = view.action
             friendsTap.addGestureRecognizer(tap)
-            
+
         case 1:
             let tap = UITapGestureRecognizer(target: self, action: #selector(photoHeaderNextTap))
             view.nameSection.text = "Фотографии"
@@ -99,13 +103,13 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             view.action.text = ">"
             let photoSectionTap = view.action
             photoSectionTap.addGestureRecognizer(tap)
-            
+
         default:
-            
+
             return nil
         }
-        
-        
+
+
         return view
     }
     
@@ -134,21 +138,20 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             return cell
         case .SingleFoto:
             let cell: SinglePhotoTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-            
+
             cell.delegateIndexPatch = indexPath
             cell.delegate = self
             cell.likeControll.delegate = self
             cell.likeControll.indexPath = indexPath
-            cell.singleLableUserName.text = self.friendsSelected.userName
             cell.setCellData(from: data, to: self.friendsSelected)
             return cell
-            
-            
+
+          
         case .link:
             let cell: LinkTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-            
+
             cell.setCellData(from: data, to: self.friendsSelected)
-            
+
             return cell
         case .newsText:
             let cell: DetailPlugCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
@@ -170,6 +173,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
             let cell: DetailPlugCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.testPlugText.text = "LinkPhoto"
             return cell
+
         }
     }
     

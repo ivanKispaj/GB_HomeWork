@@ -139,10 +139,10 @@ class GallaryViewController: UIViewController, LikeDelegate {
         print("Gallary deinit")
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)        
-        self.view = nil
-    }
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)        
+//        self.view = nil
+//    }
     
     
     @objc func movementImages(_ position: UIPanGestureRecognizer) {
