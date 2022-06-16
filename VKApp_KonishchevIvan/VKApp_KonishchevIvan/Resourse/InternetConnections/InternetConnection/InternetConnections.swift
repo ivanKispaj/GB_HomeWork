@@ -12,6 +12,8 @@ import RealmSwift
 enum InternetError: Error {
     case requestError(Error)
     case parseError
+    case urlError
+    case dataError
 }
 
 // MARK: - Класс для доступа в интернет по умолчанию протокол(схема) hhtps, host и path надо передавать при создании соединения

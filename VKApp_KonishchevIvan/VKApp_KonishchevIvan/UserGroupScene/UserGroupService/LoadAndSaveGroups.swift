@@ -7,42 +7,57 @@
 
 import UIKit
 import RealmSwift
+import PromiseKit
 
 //MARK: - метод для запроса групп пользователя
 extension InternetConnections {
-    func getUserGroupList(for user_id: String) {
-        guard let access_token = NetworkSessionData.shared.token else { return }
+
+    func getUrlUserGroup() -> Promise<URL> {
         self.urlComponents.queryItems = [
-            URLQueryItem(name: "user_id", value: user_id),
-            URLQueryItem(name: "access_token", value: access_token),
+            URLQueryItem(name: "user_id", value: String(NetworkSessionData.shared.userId!)),
+            URLQueryItem(name: "access_token", value: NetworkSessionData.shared.token),
             URLQueryItem(name: "extended", value: "1"),
             URLQueryItem(name: "fields", value: "activity, city, description, links, site, status "),
             URLQueryItem(name: "v", value: "5.131")
         ]
-        guard let url = self.urlComponents.url else { return }
-        
-        self.session.dataTask(with: url) { data, _, error in
-            if let error = error {
-                print(InternetError.requestError(error))
-            }
-            guard let data = data else {
+        return Promise { resolver in
+            guard let url = self.urlComponents.url else {
+                resolver.reject(InternetError.urlError)
                 return
             }
+            resolver.fulfill(url)
+            
+        }
+    }
+    
+    func getDataUserGroup(_ url: URL) -> Promise<Data> {
+        return Promise { resolver in
+            self.session.dataTask(with: url) { data, _, error in
+                guard let data = data else {
+                    resolver.reject(InternetError.dataError)
+                    return
+                }
+                resolver.fulfill(data)
+            }.resume()
+            
+
+        }
+    }
+    
+    func getParseData(_ data: Data) -> Promise<[ItemsGroup]> {
+        return Promise { resolver in
             do {
                 let decode = JSONDecoder()
                 let result = try decode.decode(UserGroupModel.self, from: data)
-                let queue = DispatchQueue.global(qos: .utility)
-                queue.async {
-                    self.realmService.updateData(result.response.items)
-                }
-                
-                
+                self.realmService.updateData(result.response.items)
+                resolver.fulfill(result.response.items)
+             
             }catch {
-                print(InternetError.parseError)
-
+                resolver.reject(InternetError.parseError)
             }
-        }.resume()
+        }
     }
+    
     
 }
 
