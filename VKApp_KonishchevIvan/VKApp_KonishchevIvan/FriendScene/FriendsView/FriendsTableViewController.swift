@@ -61,20 +61,13 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         super.viewWillAppear(animated)
         // Operation....
         let loadData = OperationLoadFriendsFromRealm(friendId: NetworkSessionData.shared.testUser)
-        // let parseData = OperationParseDataFromRealm()
         let getFriendsViewData = OperationFriendViewData(setView: self)
-        //   parseData.addDependency(loadData)
         getFriendsViewData.addDependency(loadData)
         queue.addOperation(loadData)
-        // queue.addOperation(parseData)
         OperationQueue.main.addOperation(getFriendsViewData)
         // ......
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.tableView = nil
-    }
     //MARK: - SearchBar Method
     // SearchBar FirstResponder
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {

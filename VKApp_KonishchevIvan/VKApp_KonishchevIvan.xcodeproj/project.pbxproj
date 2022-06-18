@@ -37,7 +37,6 @@
 		638E99D22813C27100367F44 /* LoadPhotoAlbumSelcetedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99D12813C27100367F44 /* LoadPhotoAlbumSelcetedUser.swift */; };
 		638E99D62813EB3500367F44 /* ActivityIndicatorLoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99D52813EB3500367F44 /* ActivityIndicatorLoadData.swift */; };
 		638E99DC2814024100367F44 /* UserGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99DB2814024100367F44 /* UserGroupModel.swift */; };
-		638E99DE2814048500367F44 /* loadUserGroupFromVK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99DD2814048500367F44 /* loadUserGroupFromVK.swift */; };
 		638E99E1281433DC00367F44 /* NewGroupSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E0281433DC00367F44 /* NewGroupSearchModel.swift */; };
 		638E99E32814345400367F44 /* getNewGroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E22814345400367F44 /* getNewGroupList.swift */; };
 		638E99E5281434F400367F44 /* loadNewGroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99E4281434F400367F44 /* loadNewGroupList.swift */; };
@@ -164,7 +163,6 @@
 		638E99D12813C27100367F44 /* LoadPhotoAlbumSelcetedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPhotoAlbumSelcetedUser.swift; sourceTree = "<group>"; };
 		638E99D52813EB3500367F44 /* ActivityIndicatorLoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorLoadData.swift; sourceTree = "<group>"; };
 		638E99DB2814024100367F44 /* UserGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupModel.swift; sourceTree = "<group>"; };
-		638E99DD2814048500367F44 /* loadUserGroupFromVK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadUserGroupFromVK.swift; sourceTree = "<group>"; };
 		638E99E0281433DC00367F44 /* NewGroupSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupSearchModel.swift; sourceTree = "<group>"; };
 		638E99E22814345400367F44 /* getNewGroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getNewGroupList.swift; sourceTree = "<group>"; };
 		638E99E4281434F400367F44 /* loadNewGroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadNewGroupList.swift; sourceTree = "<group>"; };
@@ -500,7 +498,6 @@
 		6385D222280DDD15007F6142 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				638E99DD2814048500367F44 /* loadUserGroupFromVK.swift */,
 				63984781282E7B8E008D216E /* leaveGroup.swift */,
 			);
 			path = Extension;
@@ -1243,7 +1240,6 @@
 				80F4BCCE28031BF6008E07B0 /* AnimateGallaryPop.swift in Sources */,
 				80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */,
 				80850ED627DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.swift in Sources */,
-				638E99DE2814048500367F44 /* loadUserGroupFromVK.swift in Sources */,
 				6398477E282E39B7008D216E /* joinNewGroup.swift in Sources */,
 				6380350D284A6DA100FBA7ED /* FriendsParseData.swift in Sources */,
 				80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */,

@@ -8,28 +8,37 @@
 import UIKit
 import RealmSwift
 
+
 class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
     
-    var nitifiTokenGroups: NotificationToken?
+  //  var nitifiTokenGroups: NotificationToken?
     let realmService = RealmService()
-    
-    var dataGroups: Results<ItemsGroup>?
+    let service = InternetConnections(host: "api.vk.com", path: "/method/groups.get")
+    var dataGroups: [ItemsGroup]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        self.setNitificationGroups()
+     //   self.setNitificationGroups()
         tableView.register(SimpleTableCell.self)
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.loadUserGroupFromVK()
+// Promises!!!
+        service.getUrlUserGroup()
+            .then(on: .global(qos: .userInteractive), (service.getDataUserGroup(_:)))
+            .then(service.getParseData(_:))
+            .done(on: .main) {[weak self] result in
+                self?.dataGroups = result
+                self?.tableView.reloadData()
+            }.catch { error in
+                print(error)
+            }
     }
-    
     
     deinit {
         print("Group Deinit!")

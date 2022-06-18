@@ -23,21 +23,15 @@ class HomeNewsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.realmService = RealmService()
-        self.setNotificationToken()
+        self.loadNewsData()
         self.currentOrientation = UIDevice.current.orientation
         registerCells()
-        self.loadNewsData()
         
+        self.setNotificationToken()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.tableView = nil
-    }
     // MARK: - Table view data source
-    
-    
-    
+   
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         if self.newsData == nil {
