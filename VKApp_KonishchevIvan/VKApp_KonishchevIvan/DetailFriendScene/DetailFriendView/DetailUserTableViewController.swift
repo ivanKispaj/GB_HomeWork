@@ -11,6 +11,7 @@ import RealmSwift
 
 class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     
+   
     // Данные пользователя которого выбрали на предыдущем контроллере (FriendsTableViewController)
     var friendsSelected: Friend!
     // Realm notification and service
@@ -40,7 +41,6 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     @IBOutlet weak var detailButtonCall: UIButton!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.realmService = RealmService()
         self.title = self.friendsSelected.userName
@@ -116,7 +116,7 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         case .Gallary:
             
             let cell: GallaryTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-            
+            cell.countCell = 0
             if let photo = data.photo {
                 cell.gallaryData = photo
                 cell.countCell = 0

@@ -10,10 +10,13 @@ import UIKit
 class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, DequeuableProtocol {
 
     @IBOutlet weak var gallaryCollection: UICollectionView!
+    private var photoService: PhotoCacheService?
+
     weak var delegate: TableViewDelegate!
     weak var delegateFrameImages: SetFrameImages!
     var gallaryData: [ImageAndLikeData]! {
         didSet {
+            countCell = 0
             self.gallaryCollection.reloadData()
         }
     }
@@ -26,9 +29,12 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         self.gallaryCollection.delegate = self
         self.gallaryCollection.dataSource = self
         self.gallaryCollection.register(GallaryCollectionViewCell.self)
+        self.photoService = PhotoCacheService(container: gallaryCollection)
     }
  
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+
+        
         if self.gallaryData != nil && self.gallaryData.count == 0 {
             return 0
         }else if self.gallaryData != nil && self.gallaryData.count >= 4 {
@@ -39,6 +45,8 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  
+            
         if self.gallaryData == nil {
         return 0
         }else if self.gallaryData.count < 4 {
@@ -54,7 +62,8 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 2
         cell.layer.cornerRadius = 4
-            cell.gallaryImage.loadImageFromUrlString(self.gallaryData[self.countCell].image)
+        let image = photoService?.photo(atIndexPath: indexPath, byUrl: self.gallaryData[self.countCell].image)
+        cell.gallaryImage.image = image
             self.countCell += 1
         return cell
     }

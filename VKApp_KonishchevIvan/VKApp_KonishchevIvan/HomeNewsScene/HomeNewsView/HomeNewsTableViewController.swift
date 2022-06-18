@@ -12,7 +12,7 @@ import RealmSwift
 class HomeNewsTableViewController: UITableViewController {
     
     var playIndexPath: [IndexPath]?
-    
+    var photoService: PhotoCacheService?
     var newsRealmToken: NotificationToken?
     var realmService: RealmService!
     var nextViewData: [ImageAndLikeData]? = nil
@@ -27,7 +27,7 @@ class HomeNewsTableViewController: UITableViewController {
         self.currentOrientation = UIDevice.current.orientation
         registerCells()
         self.loadNewsData()
-        
+        self.photoService = PhotoCacheService(container: self.tableView)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -94,30 +94,50 @@ class HomeNewsTableViewController: UITableViewController {
             
         case .photo:
             let cell: SinglePhotoAndTextTableViewCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.configureCellForPhoto(from: data, linkStatus: false)
+       
+            guard let photo = data.newsImage.first, let image = photoService?.photo(atIndexPath: indexPath, byUrl: photo.url) else {
+                let image = UIImage(named: "noFoto")!
+                cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
+                return cell
+            }
+           
+            cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
+           
             
             return cell
         case .link:
-            let cell: SinglePhotoAndTextTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.configureCellForPhoto(from: data, linkStatus: true)
+            let cell: SinglePhotoAndTextTableViewCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
+       
+            guard let photo = data.newsImage.first, let image = photoService?.photo(atIndexPath: indexPath, byUrl: photo.url) else {
+                let image = UIImage(named: "noFoto")!
+                cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
+                return cell
+            }
+            cell.configureCellForPhoto(from: data, linkStatus: true, image: image)
             return cell
         case .video:
-            let cell: NewsVideoCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            let cell: NewsVideoCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.videoData = data
             cell.configureCellForVideo(form: data)
             return cell
         case .post:
-            let cell: NewsPostCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            let cell: NewsPostCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.configureCellForPost(from: data)
             return cell
         case .gallary:
             print("gallary")
-            let cell: NewsGallaryCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            let cell: NewsGallaryCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.setCellData(from: data)
             return cell
         case .photoLink:
-            let cell: SinglePhotoAndTextTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.configureCellForPhoto(from: data, linkStatus: false)
+            let cell: SinglePhotoAndTextTableViewCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
+       
+            guard let photo = data.newsImage.first, let image = photoService?.photo(atIndexPath: indexPath, byUrl: photo.url) else {
+                let image = UIImage(named: "noFoto")!
+                cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
+                return cell
+            }
+            cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
             return cell
         case .uncnown:
             print("uncnown")
