@@ -10,7 +10,7 @@ import RealmSwift
 
 
 final class Friend {
-    var countFriends = 0    
+    var countFriends = 0
     var userName: String = ""
     var photo: Data!
     var id: Int = 0
@@ -21,7 +21,7 @@ final class Friend {
     var online: Bool = false
     var status: String = " "
     
-
+    
 }
 
 struct Friends: Decodable {
@@ -36,7 +36,7 @@ final class FriendsResponse: Object, Decodable {
     }
     @objc dynamic var id = 0
     @objc dynamic var countFriends = 0
-     dynamic var items = List<FriendsItems>()
+    dynamic var items = List<FriendsItems>()
     
     convenience init(from decoder: Decoder) throws {
         self.init()
@@ -65,7 +65,7 @@ final class FriendsItems: Object, Decodable {
         case isClosedProfile = "is_closed"
         case banned = "deactivated"
         case status
-    
+        
     }
     
     @objc dynamic var photo50: Data!
@@ -81,7 +81,7 @@ final class FriendsItems: Object, Decodable {
     
     convenience init(from decoder: Decoder) throws {
         self.init()
- 
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         let url = try container.decode(String.self, forKey: .photo50)
@@ -94,7 +94,7 @@ final class FriendsItems: Object, Decodable {
         online = try container.decode(Int.self, forKey: .online)
         lastSeen = try? container.decodeIfPresent(LastSeen.self, forKey: .lastSeen) ??
         nil
-
+        
         isClosedProfile = try container.decodeIfPresent(Bool.self, forKey: .isClosedProfile) ?? false
         banned = try? container.decode(String.self, forKey: .banned)
         status = try? container.decode(String.self, forKey: .status)

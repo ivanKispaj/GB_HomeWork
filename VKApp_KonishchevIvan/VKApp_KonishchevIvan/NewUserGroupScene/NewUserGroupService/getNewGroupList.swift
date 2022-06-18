@@ -16,17 +16,17 @@ extension InternetConnections {
             URLQueryItem(name: "sort", value: "6"),
             URLQueryItem(name: "type", value: "group, page, event"),
             URLQueryItem(name: "v", value: "5.131"),
-           URLQueryItem(name: "count", value: "1000")
+            URLQueryItem(name: "count", value: "1000")
         ]
         guard let url = self.urlComponents.url else { return }
         let request = URLRequest(url: url)
-    
+        
         URLSession.shared.dataTask(with: request) { data, request, error in
             guard error == nil else { return }
             guard let data = data else { return }
             let decode = JSONDecoder()
             do {
-            let result = try decode.decode(NewGroupSearchModel.self, from: data)
+                let result = try decode.decode(NewGroupSearchModel.self, from: data)
                 completion(.success(result))
             }catch {
                 completion(.failure(error))

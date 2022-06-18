@@ -39,7 +39,7 @@ extension InternetConnections {
                 
             }catch {
                 print(InternetError.parseError)
-
+                
             }
         }.resume()
     }

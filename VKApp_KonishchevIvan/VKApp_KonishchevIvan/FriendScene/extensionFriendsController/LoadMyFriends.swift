@@ -11,19 +11,28 @@ import RealmSwift
 extension FriendsTableViewController {
     
     //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
-              //   После теста заменить id пользователя на id NetworkSessionData.shared.userId!
+    //   После теста заменить id пользователя на id NetworkSessionData.shared.userId!
     
     func loadMyFriends() {
+        let queueInteractive = DispatchQueue.global(qos: .userInteractive)
         
-        let queueDefault = DispatchQueue.global(qos: .default)
-        
-        queueDefault.async {
-                InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser), count: "")
+        if let result = self.realmService.readData(FriendsResponse.self)?.where({ $0.id == NetworkSessionData.shared.testUser }).first {
+            self.parseData(from: result)
+            if result.countFriends != result.items.count {
+                let queueDefault = DispatchQueue.global(qos: .default)
+                queueDefault.async {
+                    InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser), count: "")
+                }
             }
-        
+        }else {
+            queueInteractive.async {
+                InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser))
+                
+            }
+        }
     }
     
-     func setNotificationtoken() {
+    func setNotificationtoken() {
         if let data = self.realmService.readData(FriendsResponse.self) {
             self.notifiToken = data.observe { [weak self](changes: RealmCollectionChange) in
                 switch changes {
@@ -42,47 +51,47 @@ extension FriendsTableViewController {
             }
         }
     }
- 
+    
     private func parseData(from response: FriendsResponse) {
-     var arrays = [Friend]()
-     let items = response.items
-     for friendData in items {
-         let friends = Friend()
-         friends.countFriends = response.countFriends
-         if friendData.online == 1 {
-             friends.online = true
-         }
-         
-         if friendData.banned != nil {
-             friends.isBanned = true
-         }
-         
-         if friendData.city != nil {
-             friends.city = friendData.city!.title
-         }else {
-             friends.city = "unknown"
-         }
-         
-         if friendData.lastSeen != nil {
-             friends.lastSeenDate = friendData.lastSeen!.time
-         }
-
-         if  let status = friendData.status {
-             friends.status = status
-         }
-         
-         let name = (friendData.fName) + " " + (friendData.lName)
-         friends.userName = name
-         friends.id = friendData.id
-         friends.photo = friendData.photo50
-         friends.isClosedProfile = friendData.isClosedProfile
-         arrays.append(friends)
-     }
+        var arrays = [Friend]()
+        let items = response.items
+        for friendData in items {
+            let friends = Friend()
+            friends.countFriends = response.countFriends
+            if friendData.online == 1 {
+                friends.online = true
+            }
+            
+            if friendData.banned != nil {
+                friends.isBanned = true
+            }
+            
+            if friendData.city != nil {
+                friends.city = friendData.city!.title
+            }else {
+                friends.city = "unknown"
+            }
+            
+            if friendData.lastSeen != nil {
+                friends.lastSeenDate = friendData.lastSeen!.time
+            }
+            
+            if  let status = friendData.status {
+                friends.status = status
+            }
+            
+            let name = (friendData.fName) + " " + (friendData.lName)
+            friends.userName = name
+            friends.id = friendData.id
+            friends.photo = friendData.photo50
+            friends.isClosedProfile = friendData.isClosedProfile
+            arrays.append(friends)
+        }
         DispatchQueue.main.async {
             self.setData(from: arrays)
-
+            
         }
-     }
+    }
     
 }
 

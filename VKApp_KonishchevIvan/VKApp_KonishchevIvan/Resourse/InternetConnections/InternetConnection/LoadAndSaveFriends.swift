@@ -36,11 +36,9 @@ extension InternetConnections {
                         decode.userInfo = [CodingUserInfoKey(rawValue: "ownerId")! : Int(userId)!]
                         let result = try decode.decode(Friends.self, from: data )
                 // Записываем друзей для переданного пользователя в Realm!
-                let queue = DispatchQueue.global(qos: .utility)
-                
+                let queue = DispatchQueue.global(qos: .default)
                 queue.async {
                     self.realmService.updateData(result.response)
-
                 }
                 
             }catch {

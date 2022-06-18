@@ -24,7 +24,7 @@ extension InternetConnections {
             URLQueryItem(name: "skip_hidden", value: "0")
         ]
         guard let url = self.urlComponents.url else { return }
-    
+        
         self.session.dataTask(with: url) { data, _, error in
             
             if let error = error {
@@ -41,7 +41,7 @@ extension InternetConnections {
                 queue.async {
                     self.realmService.updateData(result.response)
                 }
-            
+                
             }catch {
                 print(InternetError.parseError)
             }

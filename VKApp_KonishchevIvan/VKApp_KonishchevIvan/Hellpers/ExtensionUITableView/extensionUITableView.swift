@@ -8,7 +8,7 @@
 import UIKit
 
 extension UITableView {
-
+    
     public func customzeSwipeView(for tableView: UITableView) {
         var color: UIColor!
         for subview in self.subviews {
@@ -22,15 +22,15 @@ extension UITableView {
                 }
                 swipeContainerSubview.backgroundColor = .clear
                 for (_, view) in swipeContainerSubview.subviews.enumerated() {
-//btnView -> сама кнопка
+                    //btnView -> сама кнопка
                     if let btnView: UIButton = view as? UIButton {
-                      
+                        
                         btnView.layer.masksToBounds = true
                         btnView.layer.cornerRadius = 10
                         for (index,btnViews) in btnView.subviews.enumerated() {
                             if let btnImageView = btnViews as? UIImageView {
-                               
- // btnViews and btnImageview -> это UIImageView
+                                
+                                // btnViews and btnImageview -> это UIImageView
                                 btnViews.removeFromSuperview()
                                 let imageView = UIImageView(frame: btnImageView.frame)
                                 imageView.image = btnImageView.image
@@ -42,14 +42,14 @@ extension UITableView {
                                     label.font = UIFont.systemFont(ofSize: 10.0)
                                     btnView.addSubview(imageView)
                                     btnView.addSubview(label)
-                               
-                                
+                                    
+                                    
                                     imageView.backgroundColor = .clear
                                     
                                     if index == 0 {
                                         switch btnViews.backgroundColor! {
                                         case .red:
-                                          
+                                            
                                             color = .black
                                         case .blue:
                                             color = .white
@@ -78,21 +78,21 @@ extension UITableView {
                                 
                                 if label.text == "Выйти"  {
                                     imageView.tintColor = .red
-                                DispatchQueue.main.async {
-                                    label.layer.opacity = 0
-                                    imageView.layer.opacity = 0
-                                    label.layer.position.y += 8
-                                    UIImageView.animate(withDuration: 1,
-                                                        delay: 0,
-                                                        options: .curveLinear) {
-                                        imageView.layer.opacity = 1
-                                        label.layer.opacity = 1
-                                        label.layer.position.y -= 8
+                                    DispatchQueue.main.async {
+                                        label.layer.opacity = 0
+                                        imageView.layer.opacity = 0
+                                        label.layer.position.y += 8
+                                        UIImageView.animate(withDuration: 1,
+                                                            delay: 0,
+                                                            options: .curveLinear) {
+                                            imageView.layer.opacity = 1
+                                            label.layer.opacity = 1
+                                            label.layer.position.y -= 8
+                                        }
+                                        
                                     }
-
                                 }
-                                }
-                               
+                                
                             }
                         }
                     }else {
@@ -100,9 +100,9 @@ extension UITableView {
                         view.layer.backgroundColor = UIColor.clear.cgColor
                         view.layer.cornerRadius = 10
                     }
-
+                    
                 }
-
+                
             }
         }
     }

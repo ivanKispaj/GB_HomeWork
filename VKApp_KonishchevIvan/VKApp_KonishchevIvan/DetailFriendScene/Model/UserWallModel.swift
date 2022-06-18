@@ -13,7 +13,7 @@ struct UserWallModel: Decodable {
 }
 
 final class UserWallResponse: Object, Decodable {
-
+    
     enum CodingKeys: String, CodingKey {
         case items
     }
@@ -50,8 +50,8 @@ final class UserWallItems: Object, Decodable {
     @objc dynamic var ownerId: Int = 0
     @objc dynamic var date: Double = 0
     @objc dynamic var text: String = ""
-     dynamic var attachments = List<WallAttachments>()
-     dynamic var wallcopyHystory = List<WallCopyHistory>()
+    dynamic var attachments = List<WallAttachments>()
+    dynamic var wallcopyHystory = List<WallCopyHistory>()
     @objc dynamic var likes: WallLikes? = WallLikes()
     @objc dynamic var views: WallViews? = WallViews()
     
@@ -95,7 +95,6 @@ final class WallAttachments: Object, Decodable {
     @objc dynamic var type: String = ""
     @objc dynamic var photo: WallPhoto? = WallPhoto()
     @objc dynamic var link: WallLink? = WallLink()
-   // let video: WallVideo?
     
     convenience init(from decoder: Decoder) throws {
         self.init()
@@ -141,7 +140,7 @@ final class WallPhoto: Object, Decodable {
     @objc dynamic var date: Int = 0
     @objc dynamic var photoId: Int = 0
     @objc dynamic var ownerId: Int = 0
-     dynamic var sizes = List<WallSizes>()
+    dynamic var sizes = List<WallSizes>()
     
     convenience init(from decoder: Decoder) throws {
         self.init()

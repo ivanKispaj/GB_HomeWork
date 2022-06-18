@@ -20,7 +20,7 @@ enum SectionType {
 }
 
 struct UserDetailsTableData {
-
+    
     let sectionType: SectionType
     var sectionData: DetailsSectionData
     
@@ -52,7 +52,7 @@ struct DetailsSectionData {
         self.titleNews = titleNews
         self.captionNews = captionNews
         self.linkUrl = link
-
+        
     }
     
     init(friends: [Friend], friendsCount: Int ) {

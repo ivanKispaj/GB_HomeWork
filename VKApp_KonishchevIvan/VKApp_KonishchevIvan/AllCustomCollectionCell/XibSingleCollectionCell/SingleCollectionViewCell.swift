@@ -10,7 +10,6 @@ import UIKit
 class SingleCollectionViewCell: UICollectionViewCell,DequeuableProtocol {
 
     @IBOutlet weak var singlePhoto: UIImageView!
-   // private var animateImage = UIViewPropertyAnimator()
 
 }
 

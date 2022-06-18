@@ -19,7 +19,7 @@ extension InternetConnections {
             URLQueryItem(name: "v", value: "5.131")
         ]
         guard let url = self.urlComponents.url else { return }
-
+        
         self.session.dataTask(with: url) { data, _, error in
             if let error = error {
                 print(InternetError.requestError(error))
@@ -35,7 +35,7 @@ extension InternetConnections {
                 queue.async {
                     self.realmService.updateData(result.response)
                 }
-               
+                
             }catch {
                 print(InternetError.parseError)
             }

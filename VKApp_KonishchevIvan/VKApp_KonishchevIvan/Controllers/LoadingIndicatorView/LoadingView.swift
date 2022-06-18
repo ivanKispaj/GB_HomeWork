@@ -11,19 +11,19 @@ import UIKit
 
 
 class LoadingView: UIView {
-
+    
     @IBOutlet weak var firstCircle: UIImageView!
     @IBOutlet weak var twoCircle: UIImageView!
     @IBOutlet weak var threeCircle: UIImageView!
     
-//MARK: - Bizzer start
-
+    //MARK: - Bizzer start
+    
     // Color Declarations
     let color = UIColor(red: 0.315, green: 0.684, blue: 0.764, alpha: 1.000)
     let color2 = UIColor(red: 0.730, green: 0.902, blue: 0.950, alpha: 1.000)
     let shadowColor = UIColor(red: 0.000, green: 0.458, blue: 1.000, alpha: 1.000)
-
-
+    
+    
     //// Bezier Drawing
     let cloudBizerPath: UIBezierPath = {
         let bezierPath = UIBezierPath()
@@ -48,9 +48,9 @@ class LoadingView: UIView {
         bezierPath.addCurve(to: CGPoint(x: 32, y: 84), controlPoint1: CGPoint(x: 42, y: 87), controlPoint2: CGPoint(x: 32, y: 84))
         return bezierPath
     }()
-
     
-//MARK: - Bizzer end
+    
+    //MARK: - Bizzer end
     
     
     
@@ -58,7 +58,7 @@ class LoadingView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        
         let layer = CAShapeLayer()
         layer.path = cloudBizerPath.cgPath
         layer.lineWidth = 6
@@ -67,11 +67,11 @@ class LoadingView: UIView {
         
         layer.strokeEnd = 1
         layer.strokeStart = 0
-    
+        
         layer.frame.origin.x = -20
         self.layer.addSublayer(layer)
         let strokeEndAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeEnd))
-    
+        
         strokeEndAnimation.fromValue = 1
         strokeEndAnimation.toValue = 0.5
         strokeEndAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.98, 0.2, 0, 0.88)
@@ -96,17 +96,17 @@ class LoadingView: UIView {
         circleLayer.backgroundColor = color2.cgColor
         circleLayer.bounds = CGRect(x: 0, y: 0, width: 6 , height: 6)
         circleLayer.cornerRadius = 3
-       
+        
         self.layer.addSublayer(circleLayer)
-       
-
+        
+        
         let followanim = CAKeyframeAnimation(keyPath: #keyPath(CAScrollLayer.position))
         followanim.path = cloudBizerPath.cgPath
         followanim.calculationMode = .paced
         followanim.duration = 3
         followanim.repeatCount = .infinity
         circleLayer.add(followanim, forKey: nil)
-
+        
     }
     
 }

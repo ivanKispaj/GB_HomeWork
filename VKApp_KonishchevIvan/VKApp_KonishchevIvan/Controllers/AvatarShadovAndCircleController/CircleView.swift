@@ -8,10 +8,10 @@
 import UIKit
 
 class CircleView: UIView {
-
+    
     override func layoutSubviews() {
         self.layer.masksToBounds = true
         self.layer.cornerRadius = bounds.height/2
     }
-
+    
 }

@@ -10,14 +10,14 @@ import AVKit
 import RealmSwift
 
 class HomeNewsTableViewController: UITableViewController {
-   
+    
     var playIndexPath: [IndexPath]?
- 
+    
     var newsRealmToken: NotificationToken?
     var realmService: RealmService!
     var nextViewData: [ImageAndLikeData]? = nil
     var newsData: [[CellType : NewsCellData]]?
-
+    
     var currentOrientation: UIDeviceOrientation? = nil
     
     override func viewDidLoad() {
@@ -27,74 +27,73 @@ class HomeNewsTableViewController: UITableViewController {
         self.currentOrientation = UIDevice.current.orientation
         registerCells()
         self.loadNewsData()
-
+        
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.tableView = nil
     }
     // MARK: - Table view data source
-
- 
-
+    
+    
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
- 
+        
         if self.newsData == nil {
             return 0
         }else {
-        return 1
+            return 1
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let news = self.newsData {
             return news.count
         }
         return 0
-       
+        
     }
-
+    
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell is NewsVideoCell {
             let dataCell = cell as! NewsVideoCell
             guard let playerController = dataCell.playerViewController else {return}
             if playerController.player != nil {
-                DispatchQueue.main.async {
-                    dataCell.playerViewController.player!.pause()
-                }
+                
+                dataCell.playerViewController.player!.pause()
+                
                 
             }
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell is NewsVideoCell {
             let dataCell = cell as! NewsVideoCell
             guard let playerController = dataCell.playerViewController else {return}
             if playerController.player != nil {
-                DispatchQueue.main.async {
-                    dataCell.playerViewController.player!.play()
-                    
-                }
+                
+                dataCell.playerViewController.player!.play()
+                
                 
             }
         }
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let news = newsData?[indexPath.row].first else {
             preconditionFailure("Error cell")
         }
-     
+        
         let cellType = news.key
         let data = news.value
         switch cellType {
             
         case .photo:
-             let cell: SinglePhotoAndTextTableViewCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
+            let cell: SinglePhotoAndTextTableViewCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.configureCellForPhoto(from: data, linkStatus: false)
             
             return cell
@@ -105,7 +104,7 @@ class HomeNewsTableViewController: UITableViewController {
         case .video:
             let cell: NewsVideoCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.videoData = data
-                cell.configureCellForVideo(form: data)
+            cell.configureCellForVideo(form: data)
             return cell
         case .post:
             let cell: NewsPostCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
@@ -121,15 +120,15 @@ class HomeNewsTableViewController: UITableViewController {
             cell.configureCellForPhoto(from: data, linkStatus: false)
             return cell
         case .uncnown:
-           print("uncnown")
-   
+            print("uncnown")
+            
         }
-       
+        
         let cell: NewsPostCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.newsPostTextLabel.text = " Failure load Data!!!"
         return cell
     }
-//MARK: - Регистрация кастомных ячеек таблицы
+    //MARK: - Регистрация кастомных ячеек таблицы
     private func registerCells() {
         
         self.tableView.register(SinglePhotoAndTextTableViewCell.self)
@@ -137,7 +136,7 @@ class HomeNewsTableViewController: UITableViewController {
         self.tableView.register(NewsVideoCell.self)
         self.tableView.register(NewsGallaryCell.self)
     }
-
+    
 }
 
 

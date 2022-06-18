@@ -11,22 +11,22 @@ import RealmSwift
 //MARK: - Подгружаем фото выбранного друга
 
 extension DetailUserTableViewController {
-
+    
     func loadPhotoAlbumSelctedUser ()  {
         
         let photoData = self.realmService.readData(PhotoResponse.self)?.where { $0.id == self.friendsSelected.id }.first?.items
         if let data = photoData {
             self.updateUserPhotoData(from: data)
-        
+            
         }
         
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
-        InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelected.id))
+            InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelected.id))
         }
     }
     
-     func setNotificationTokenPhoto() {
+    func setNotificationTokenPhoto() {
         if let data = self.realmService.readData(PhotoResponse.self) {
             self.notifiTokenPhoto = data.observe { [weak self] (changes: RealmCollectionChange) in
                 switch changes {
@@ -38,7 +38,7 @@ extension DetailUserTableViewController {
                         .first!
                         .items
                     self!.updateUserPhotoData(from: dataPhoto)
-                   
+                    
                 case .error(_):
                     print("Asd")
                 }
@@ -53,24 +53,24 @@ extension DetailUserTableViewController {
 extension DetailUserTableViewController {
     
     func updateUserPhotoData(from photoData: List<PhotoItems>)  {
-    
-            var imageArray = [ImageAndLikeData]()
-            
-            for photoArray in photoData {
-                var imageArr = ImageAndLikeData(image: "", likeStatus: false, likeLabel: 0, height: 0, width: 0,seenCount: 0)
-                imageArr.likeStatus = false
-                imageArr.likeLabel = photoArray.likes!.count
-                    for photo in photoArray.photo {
-                        if photo.type == "y" {
-                            imageArr.image = photo.url
-                            imageArr.height = CGFloat(photo.height)
-                            imageArr.width = CGFloat(photo.width)
-                            imageArray.append(imageArr)
-                            break
-                        }
-                    }
+        
+        var imageArray = [ImageAndLikeData]()
+        
+        for photoArray in photoData {
+            var imageArr = ImageAndLikeData(image: "", likeStatus: false, likeLabel: 0, height: 0, width: 0,seenCount: 0)
+            imageArr.likeStatus = false
+            imageArr.likeLabel = photoArray.likes!.count
+            for photo in photoArray.photo {
+                if photo.type == "y" {
+                    imageArr.image = photo.url
+                    imageArr.height = CGFloat(photo.height)
+                    imageArr.width = CGFloat(photo.width)
+                    imageArray.append(imageArr)
+                    break
+                }
             }
-            let userDetailsTableData = UserDetailsTableData(sectionType: .Gallary, sectionData: DetailsSectionData(photo: imageArray))
+        }
+        let userDetailsTableData = UserDetailsTableData(sectionType: .Gallary, sectionData: DetailsSectionData(photo: imageArray))
         
         
         if var data = self.dataTable {

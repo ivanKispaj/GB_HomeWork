@@ -49,7 +49,7 @@ final class PhotoResponse: Object, Decodable {
 }
 
 final class PhotoItems: Object, Decodable {
-
+    
     enum CodingKeys: String, CodingKey {
         case albumId = "album_id"
         case likes
@@ -63,7 +63,7 @@ final class PhotoItems: Object, Decodable {
     @objc dynamic var albumId: Int = 0
     @objc dynamic var id: Int = 0
     @objc dynamic var likes: PhotoLikes? = PhotoLikes()
-     dynamic var photo: List<PhotoData> = List<PhotoData>()
+    dynamic var photo: List<PhotoData> = List<PhotoData>()
     
     convenience init(from decoder:  Decoder) throws {
         self.init()

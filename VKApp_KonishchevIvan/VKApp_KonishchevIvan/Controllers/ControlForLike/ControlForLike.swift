@@ -9,10 +9,10 @@ import UIKit
 
 
 class ControlForLike: UIControl {
-
+    
     @IBOutlet weak var likeImage: UIImageView!
     @IBOutlet weak var likeLable: UILabel!
-   
+    
     weak var delegate: LikeDelegate!
     var indexPath: IndexPath!
     var indexForGallary: Int = 0
@@ -21,22 +21,22 @@ class ControlForLike: UIControl {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(setLike))
         tap.numberOfTapsRequired = 2
         addGestureRecognizer(tap)
     }
     
     @objc func setLike(_ tap: UITapGestureRecognizer) {
-  
-// Получаем количество лайков по текущему индекс патч!
-    
+        
+        // Получаем количество лайков по текущему индекс патч!
+        
         let like = delegate.getCountLike(for: self.indexPath)
         for (key, value) in like {
             self.counLikes = key
             self.isLike = value
         }
-      
+        
         if self.isLike {
             
             UIImageView.animate(withDuration: 0.5) {

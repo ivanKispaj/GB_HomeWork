@@ -11,9 +11,9 @@ import UIKit
 
 extension String {
     func isUrlString() -> Bool {
-            if let url = NSURL(string: self) {
-                return UIApplication.shared.canOpenURL(url as URL)
-            }
+        if let url = NSURL(string: self) {
+            return UIApplication.shared.canOpenURL(url as URL)
+        }
         return false
     }
 }

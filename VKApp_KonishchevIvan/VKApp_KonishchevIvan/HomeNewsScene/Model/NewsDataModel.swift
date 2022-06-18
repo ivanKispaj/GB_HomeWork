@@ -31,7 +31,7 @@ final class NewsResponse: Object, Decodable {
         items = try container.decode(List<NewsItems>.self, forKey: .items)
         profiles = try container.decode(List<NewsProfiles>.self, forKey: .profiles)
         groups = try container.decode(List<NewsGroups>.self, forKey: .groups)
-       
+        
     }
     override class func primaryKey() -> String? {
         return "id"
@@ -62,7 +62,7 @@ final class NewsItems: Object, Decodable{
     @objc dynamic var views: NewsViews? = nil
     @objc dynamic var text: String? = nil
     @objc dynamic var wallPhotos: NewsWallPhotos? = nil
-
+    
     
     convenience init(from decoder: Decoder) throws {
         self.init()
@@ -78,32 +78,32 @@ final class NewsItems: Object, Decodable{
         newsCopyHistory = try container.decodeIfPresent(List<NewsCopyHistory>.self, forKey: .newsCopyHistory) ?? List<NewsCopyHistory>()
         wallPhotos = try? container.decode(NewsWallPhotos.self, forKey: .wallPhotos)
     }
-
-}
-    //MARK: -  NewsAttachments ( attachments )
-    final class NewsAttachments: Object, Decodable {
-        enum CodingKeys: String, CodingKey {
-            case type
-            case photoData = "photo"
-            case link
-            case video
-        }
-        @objc dynamic var type: String  = ""
     
-        @objc dynamic var photoData: NewsPhotosData?
-        @objc dynamic var link: NewsLink?
-        @objc dynamic var video: NewsVideo?
-        convenience init(from decoder: Decoder) throws {
-            self.init()
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            type = try container.decode(String.self, forKey: .type)
-            photoData = try? container.decode(NewsPhotosData.self, forKey: .photoData)
-            link = try? container.decode(NewsLink.self, forKey: .link)
-            video = try? container.decode(NewsVideo.self, forKey: .video)
-        }
-
+}
+//MARK: -  NewsAttachments ( attachments )
+final class NewsAttachments: Object, Decodable {
+    enum CodingKeys: String, CodingKey {
+        case type
+        case photoData = "photo"
+        case link
+        case video
     }
- 
+    @objc dynamic var type: String  = ""
+    
+    @objc dynamic var photoData: NewsPhotosData?
+    @objc dynamic var link: NewsLink?
+    @objc dynamic var video: NewsVideo?
+    convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        type = try container.decode(String.self, forKey: .type)
+        photoData = try? container.decode(NewsPhotosData.self, forKey: .photoData)
+        link = try? container.decode(NewsLink.self, forKey: .link)
+        video = try? container.decode(NewsVideo.self, forKey: .video)
+    }
+    
+}
+
 
 //MARK: - NewsCopyHistory  ( copyHistory )
 final class NewsCopyHistory: Object, Decodable {
@@ -115,7 +115,7 @@ final class NewsCopyHistory: Object, Decodable {
     @objc dynamic var ownerId: Int = 0
     @objc dynamic var date: Int = 0
     dynamic var attachments = List<NewsAttachments>()
-                 
+    
     convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -133,7 +133,7 @@ final class NewsWallPhotos: Object, Decodable {
         case items
     }
     dynamic var items = List<NewsWallPhotoData>()
-
+    
 }
 
 // MARK: - NewsWallPhotoData
@@ -173,7 +173,7 @@ final class NewsHistoryAttachments: Object, Decodable {
         case video
     }
     @objc dynamic var video: NewsHistoryVideo? = nil
-  
+    
     convenience init(from decoder: Decoder) throws {
         self.init()
         let contaioner = try decoder.container(keyedBy: CodingKeys.self)
@@ -189,13 +189,13 @@ final class NewsHistoryVideo: Object, Decodable {
         case duration
         case newsImage = "image"
         case title
-
+        
     }
     @objc dynamic var accesKey: String? = nil
     @objc dynamic var date: Int = 0
     @objc dynamic var historyDescription: String = ""
     @objc dynamic var duration: Int = 0
-     dynamic var newsImage = List<NewsImage>()
+    dynamic var newsImage = List<NewsImage>()
     @objc dynamic var title: String = ""
     
     convenience init(from decoder: Decoder) throws {
@@ -302,7 +302,7 @@ final class NewsPhotosData: Object, Decodable {
         case ownerId = "owner_id"
         case text
         case photoArray = "sizes"
-       }
+    }
     @objc dynamic var albumId: Int = 0
     @objc dynamic var date: Int = 0
     @objc dynamic var id: Int = 0
@@ -320,13 +320,13 @@ final class NewsPhotosData: Object, Decodable {
         text = try container.decodeIfPresent(String.self, forKey: .text) ?? ""
         photoArray = try container.decode(List<ImageArray>.self, forKey: .photoArray)
     }
-   
+    
 }
 
 
 //MARK: - ImageArray
 final class ImageArray: Object, Decodable {
- 
+    
     @objc dynamic var height: Int
     @objc dynamic var width: Int
     @objc dynamic var url: String
@@ -415,7 +415,7 @@ final class NewsGroups: Object, Decodable {
     @objc dynamic var screenName: String = ""
     
     @objc dynamic var photo: Data!
- 
+    
     convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)

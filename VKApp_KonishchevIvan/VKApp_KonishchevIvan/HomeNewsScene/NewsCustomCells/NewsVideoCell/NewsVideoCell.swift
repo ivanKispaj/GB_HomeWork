@@ -12,7 +12,7 @@ import AVFoundation
 
 
 class NewsVideoCell: UITableViewCell, DequeuableProtocol {
-
+    
     @IBOutlet weak var newsUserName: UILabel!
     @IBOutlet weak var newsUserAvatar: UIImageView!
     @IBOutlet weak var videoUIView: UIView!
@@ -36,7 +36,7 @@ class NewsVideoCell: UITableViewCell, DequeuableProtocol {
                 
                 self.playerViewController.player = player
             }
-
+            
         }
     }
     
@@ -55,10 +55,10 @@ class NewsVideoCell: UITableViewCell, DequeuableProtocol {
             self.getVideoUrl(from: data)
             
         }
-
+        
     }
-      
-
+    
+    
     
     func initializeVideoPlayerWithVideo(with url: String) {
         self.playerViewController = AVPlayerViewController()
@@ -72,8 +72,8 @@ class NewsVideoCell: UITableViewCell, DequeuableProtocol {
             playerViewController.view.topAnchor.constraint(equalTo: self.videoUIView.topAnchor),
             playerViewController.view.bottomAnchor.constraint(equalTo: self.videoUIView.bottomAnchor)
         ])
-
-          
+        
+        
     }
     
     
@@ -89,7 +89,7 @@ class NewsVideoCell: UITableViewCell, DequeuableProtocol {
             playerViewController.view.topAnchor.constraint(equalTo: self.videoUIView.topAnchor),
             playerViewController.view.bottomAnchor.constraint(equalTo: self.videoUIView.bottomAnchor)
         ])
-
+        
     }
     
     private func getVideoUrl(from data: NewsCellData) {
@@ -150,16 +150,16 @@ class NewsVideoCell: UITableViewCell, DequeuableProtocol {
     
     private func getClearUrl(from urlData: [Substring.SubSequence]) -> String? {
         let url = urlData.last
-            if var clearUrl = url?.replacingOccurrences(of: "\\", with: "") {
-                clearUrl = clearUrl.replacingOccurrences(of: "\"", with: "")
-                clearUrl = "https:" + clearUrl
-             return clearUrl
+        if var clearUrl = url?.replacingOccurrences(of: "\\", with: "") {
+            clearUrl = clearUrl.replacingOccurrences(of: "\"", with: "")
+            clearUrl = "https:" + clearUrl
+            return clearUrl
         }
-      return nil
+        return nil
     }
     
 }
-    
+
 
 
 

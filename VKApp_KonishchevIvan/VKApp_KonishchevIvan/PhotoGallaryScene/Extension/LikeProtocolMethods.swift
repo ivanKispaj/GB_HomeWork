@@ -10,17 +10,17 @@ import UIKit
 //MARK: - Animation delegate
 extension GallaryViewController  {
     //MARK: - ProtocolLikeDelegate methods
-        
-        func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
-            let like = [self.arrayPhoto[indexPath.row].likeLabel : self.arrayPhoto[indexPath.row].likeStatus]
-            return like
-        }
-        
-        func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
-            self.arrayPhoto[indexPath.row].likeLabel = countLike
-            self.arrayPhoto[indexPath.row].likeStatus = likeStatus
-            self.setLikeData()
-        }
+    
+    func getCountLike(for indexPath: IndexPath) -> [Int : Bool] {
+        let like = [self.arrayPhoto[indexPath.row].likeLabel : self.arrayPhoto[indexPath.row].likeStatus]
+        return like
+    }
+    
+    func setCountLike(countLike: Int, likeStatus: Bool, for indexPath: IndexPath) {
+        self.arrayPhoto[indexPath.row].likeLabel = countLike
+        self.arrayPhoto[indexPath.row].likeStatus = likeStatus
+        self.setLikeData()
+    }
     private func setLikeData() {
         if self.arrayPhoto[self.currentImage].likeStatus {
             self.heartImageView.image = UIImage(systemName: "suit.heart.fill")

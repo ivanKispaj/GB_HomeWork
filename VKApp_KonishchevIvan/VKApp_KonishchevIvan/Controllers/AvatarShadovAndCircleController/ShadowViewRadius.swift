@@ -23,34 +23,34 @@ class ShadowViewRadius: UIView {
         gesture.numberOfTapsRequired = 1
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
- 
+        
     }
     override func layoutSubviews() {
         self.layer.cornerRadius = bounds.height/2
         
     }
-
-
+    
+    
 }
 
 //MARK: - расширение добавляет анимацию при тапе на картинку!
 extension ShadowViewRadius {
     
     @objc func tapToIconAvatar( _ tap: UITapGestureRecognizer) {
-     
-            UIView.animate(withDuration: 0.2) {
-                self.avatarHeaightConstraint.constant = self.avatarHeaightConstraint.constant - 5
+        
+        UIView.animate(withDuration: 0.2) {
+            self.avatarHeaightConstraint.constant = self.avatarHeaightConstraint.constant - 5
+            self.layoutIfNeeded()
+            
+        }completion: { _ in
+            UIView.animate(withDuration: 0.3, delay: 0.0,
+                           usingSpringWithDamping: 0.2,
+                           initialSpringVelocity: 0.1,
+                           options: .curveEaseInOut) {
+                self.avatarHeaightConstraint.constant = self.avatarHeaightConstraint.constant + 5
                 self.layoutIfNeeded()
-         
-            }completion: { _ in
-                UIView.animate(withDuration: 0.3, delay: 0.0,
-                               usingSpringWithDamping: 0.2,
-                               initialSpringVelocity: 0.1,
-                               options: .curveEaseInOut) {
-                    self.avatarHeaightConstraint.constant = self.avatarHeaightConstraint.constant + 5
-                    self.layoutIfNeeded()
-                }
             }
+        }
     }
     
 }

@@ -26,6 +26,4 @@ struct  Items: Decodable {
     var id: Int
     var groupName: String
     var photoGroup: String
-  
- 
 }

@@ -19,13 +19,13 @@ extension InternetConnections {
         ]
         guard let url = self.urlComponents.url else { return }
         let request = URLRequest(url: url)
-    
+        
         URLSession.shared.dataTask(with: request) { data, request, error in
             guard error == nil else { return }
             guard let data = data else { return }
             let decode = JSONDecoder()
             do {
-            let result = try decode.decode(JoinGroupModel.self, from: data)
+                let result = try decode.decode(JoinGroupModel.self, from: data)
                 completion(.success(result))
             }catch {
                 completion(.failure(error))

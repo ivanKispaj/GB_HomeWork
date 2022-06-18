@@ -11,17 +11,17 @@ import RealmSwift
 extension HomeNewsTableViewController {
     
     func loadNewsData()  {
-//MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
-       
+        //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
+        
         self.updateNewsView()
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         queue.async {
             InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
         }
-      }
+    }
     
-     func setNotificationToken() {
+    func setNotificationToken() {
         if let data = self.realmService.readData(NewsItems.self) {
             self.newsRealmToken = data.observe { [weak self](changes: RealmCollectionChange) in
                 switch changes {
@@ -41,14 +41,14 @@ extension HomeNewsTableViewController {
     }
     
     private func updateNewsView()  {
-      
+        
         guard let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles else { return }
         guard let groupes = self.realmService.readData(NewsResponse.self)?.first?.groups else { return }
         guard let items = self.realmService.readData(NewsResponse.self)?.first?.items else { return }
         guard  items.count > 0 else { return }
         
         var newsDatasToController: [[CellType: NewsCellData]] = []
-     
+        
         for item in items {
             var newsDatas: [CellType: NewsCellData] = [ : ]
             var cellType: CellType = .uncnown
@@ -56,7 +56,7 @@ extension HomeNewsTableViewController {
             var newsCellData = NewsCellData()
             newsCellData.date = item.date
             newsCellData.ownerId = item.sourceId
-        
+            
             if let likes = item.likes {
                 newsCellData.newsLikeCount = likes.count
                 if likes.likeStatus == 1 {
@@ -78,7 +78,7 @@ extension HomeNewsTableViewController {
                 newsCellData.newsText = item.text ?? ""
                 
             }else if item.type == "post" && item.attachments.count == 1 && item.newsCopyHistory.count == 0 {
-               
+                
                 if item.attachments[0].type == "photo" {
                     cellType = .photo
                     let photoData = item.attachments[0].photoData!.photoArray
@@ -133,7 +133,7 @@ extension HomeNewsTableViewController {
                         if let data = getNewsPhoto(photoData) {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
-                       
+                        
                     }
                     newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
                     
@@ -142,12 +142,12 @@ extension HomeNewsTableViewController {
             }else if item.type == "post" && item.attachments.count == 0, let copyHistory = item.newsCopyHistory.first {
                 if copyHistory.attachments.count == 1 {
                     let attachments = copyHistory.attachments
-
+                    
                     switch attachments[0].type {
                         
                     case "photo":
                         cellType = .photo
-                       
+                        
                         let photoData = attachments[0].photoData!.photoArray
                         
                         if let data = getNewsPhoto(photoData) {
@@ -207,19 +207,16 @@ extension HomeNewsTableViewController {
                         if let data = getNewsPhoto(photoData) {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
-                       
+                        
                     }
                     newsCellData.albumId = copyHistory.attachments[0].photoData?.albumId ?? 0
                     
                 }
                 
-               
-                
-            
             }
             newsDatas = [cellType: newsCellData]
             newsDatasToController.append(newsDatas)
-         
+            
         }
         self.newsData = newsDatasToController
         
@@ -229,8 +226,8 @@ extension HomeNewsTableViewController {
         
     }
     
-
-
+    
+    
     private func getFirstFrame(from data: List<NewsVideoFirstFrame>) -> NewsVideoFirstFrame? {
         let sortedData = data.sorted(by: {$0.width > $1.width})
         let height = Double(UIScreen.main.bounds.height) * 0.7
@@ -248,7 +245,7 @@ extension HomeNewsTableViewController {
         
         return nil
     }
-
+    
     private func getPhotoNewsHistory(_ photoArray: List<NewsImage>) -> NewsImage? {
         let sortedData = photoArray.sorted(by: {$0.width > $1.width})
         let data = sortedData.first { $0.width < 1000 }
@@ -259,7 +256,7 @@ extension HomeNewsTableViewController {
         var group = sourceId
         group.negate()
         if let group = groupes.first(where: { $0.id == group }) {
-           
+            
             return NewsUserData(userLogo: group.photo, userName: group.name, isOnline: false, isBanned: false, screenName: group.screenName)
         }else if let profile = profiles.first(where: { $0.id == sourceId }) {
             let name = profile.fName + " " + profile.lName
@@ -276,7 +273,7 @@ extension HomeNewsTableViewController {
         return nil
     }
     
-
+    
     
     
 }

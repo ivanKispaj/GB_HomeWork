@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomHeaderoCell: UITableViewHeaderFooterView {
+class CustomHeaderCell: UITableViewHeaderFooterView {
 
     let nameSection = UILabel()
     let countFriends = UILabel()

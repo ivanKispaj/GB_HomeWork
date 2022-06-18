@@ -10,9 +10,9 @@ import UIKit
 extension DetailUserTableViewController {
     func loadDataTable()  {
         
-         self.loadFriendsSelectedUser()
-         self.loadPhotoAlbumSelctedUser()
-         self.loadUserWall()
-
+        self.loadFriendsSelectedUser()
+        self.loadPhotoAlbumSelctedUser()
+        self.loadUserWall()
+        
     }
 }

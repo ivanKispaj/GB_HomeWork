@@ -11,11 +11,11 @@ import UIKit
 extension GallaryViewController : UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return AnimateGallaryPop()
-    
+        
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-      
+        
         return AnimateGallaryPush()
     }
 }

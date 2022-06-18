@@ -12,8 +12,6 @@ import RealmSwift
 
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate, FriendsSetData {
     
-    
-    
     var notifiToken: NotificationToken?
     var  realmService: RealmService!
     
@@ -56,7 +54,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         registerCell()
         loadMyFriends()
         
-        tableView.register(CustomHeaderoCell.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderCell")
+        tableView.register(CustomHeaderCell.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +70,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         OperationQueue.main.addOperation(getFriendsViewData)
         // ......
     }
-  
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.tableView = nil
@@ -137,7 +135,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
     //кастомный Header ячеек
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CustomHeaderCell") as! CustomHeaderoCell
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CustomHeaderCell") as! CustomHeaderCell
         
         let sectionsName = friends[section].header
         view.nameSection.text = sectionsName
