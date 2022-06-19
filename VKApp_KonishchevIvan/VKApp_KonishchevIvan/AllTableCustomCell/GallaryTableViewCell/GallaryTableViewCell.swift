@@ -62,9 +62,11 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 2
         cell.layer.cornerRadius = 4
+        if self.gallaryData.count != self.countCell {
         let image = photoService?.photo(atIndexPath: indexPath, byUrl: self.gallaryData[self.countCell].image)
         cell.gallaryImage.image = image
             self.countCell += 1
+        }
         return cell
     }
     
