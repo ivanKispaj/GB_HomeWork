@@ -33,12 +33,13 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
   
 
     func configureCellForPhoto(from data: NewsCellData, linkStatus: Bool, image: UIImage) {
-        if let image = data.newsImage.first {
-            let ratio = (image.width) / UIScreen.main.bounds.width
-            let height = (image.height) / ratio
+        if let imageData = data.newsImage.first {
+            let ratio = (imageData.width) / UIScreen.main.bounds.width
+            let height = (imageData.height) / ratio
             self.photoViewHeightConstraint.constant = height
-            self.newsPhotoData = image
-            self.newsImage.loadImageFromUrlString(image.url)
+            self.newsPhotoData = imageData
+            self.newsImage.image = image
+          //  self.newsImage.loadImageFromUrlString(image.url)
             
         }
         
