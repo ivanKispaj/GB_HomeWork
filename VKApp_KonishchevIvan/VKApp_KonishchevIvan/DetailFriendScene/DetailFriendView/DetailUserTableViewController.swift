@@ -116,10 +116,8 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
         case .Gallary:
             
             let cell: GallaryTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.countCell = 0
             if let photo = data.photo {
                 cell.gallaryData = photo
-                cell.countCell = 0
             }
             cell.delegate = self
             cell.delegateIndexPath = indexPath

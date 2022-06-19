@@ -10,6 +10,8 @@
 import UIKit
 import RealmSwift
 
+
+
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate, FriendsSetData {
     
     var notifiToken: NotificationToken?
@@ -61,12 +63,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         super.viewWillAppear(animated)
         // Operation....
         let loadData = OperationLoadFriendsFromRealm(friendId: NetworkSessionData.shared.testUser)
-        // let parseData = OperationParseDataFromRealm()
         let getFriendsViewData = OperationFriendViewData(setView: self)
-        //   parseData.addDependency(loadData)
         getFriendsViewData.addDependency(loadData)
         queue.addOperation(loadData)
-        // queue.addOperation(parseData)
         OperationQueue.main.addOperation(getFriendsViewData)
         // ......
     }
@@ -170,6 +169,4 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
     }
     
 }
-
-
 
