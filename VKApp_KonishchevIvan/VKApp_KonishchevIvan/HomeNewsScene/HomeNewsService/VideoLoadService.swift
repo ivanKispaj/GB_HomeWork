@@ -12,7 +12,6 @@ final class VideoLoadService {
     
     private let container: DataReloadable
     private var players = [String: AVPlayer]()
-    private let cacheLifeTime: TimeInterval = 30 * 24 * 60 * 60
     private static let pathName: String = {
         let pathName = "video"
         guard let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return pathName }
@@ -27,9 +26,6 @@ final class VideoLoadService {
     
     init(container: UITableView) {
         self.container = Table(table: container)
-    }
-    init(container: UICollectionView) {
-        self.container = Collection(collection: container)
     }
     
     func video(atIndexPath indexPath: IndexPath, byData data: NewsCellData) -> AVPlayer? {
