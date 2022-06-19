@@ -9,7 +9,7 @@ import UIKit
 
 class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, DequeuableProtocol {
 
-    
+    private var photoService: PhotoCacheService?
     @IBOutlet weak var likeControll: ControlForLike!
     
     @IBOutlet weak var singlCollection: UICollectionView!
@@ -33,7 +33,7 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         self.singlCollection.delegate = self
         self.singlCollection.dataSource = self
         self.singlCollection.register(SingleCollectionViewCell.self)
-       
+        self.photoService = PhotoCacheService(container: self.singlCollection)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -49,7 +49,8 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: SingleCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.singlePhoto.loadImageFromUrlString(self.singlePhoto.image)
+        let image = photoService?.photo(atIndexPath: indexPath, byUrl: self.singlePhoto.image)
+        cell.singlePhoto.image = image
         return cell
     }
 

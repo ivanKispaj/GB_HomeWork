@@ -10,6 +10,7 @@ import WebKit
 
 class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     
+    var photoService: PhotoCacheService?
     weak var activityIndicator: UIActivityIndicatorView!
     var searhGrouptext: String? = nil {
         didSet {
@@ -43,6 +44,7 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.photoService = PhotoCacheService(container: self.tableView)
         getActivityIndicatorLoadData()
         self.searchBar.delegate = self
         self.allGroupSeacrch = self.allGroups
@@ -123,7 +125,8 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
             let groupes = firstchar[indexPath.row]
             cell.profileStatus.text = ""
             cell.lableCellXib.text = groupes.nameGroup
-            cell.imageCellAvatar.loadImageFromUrlString(groupes.imageGroup)
+            let image = photoService?.photo(atIndexPath: indexPath, byUrl: groupes.imageGroup)
+            cell.imageCellAvatar.image = image
             cell.labelCityCellXib.text = "-"
         }else {
             return cell

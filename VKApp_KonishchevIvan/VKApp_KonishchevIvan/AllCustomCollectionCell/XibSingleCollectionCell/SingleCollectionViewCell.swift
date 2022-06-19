@@ -11,5 +11,6 @@ class SingleCollectionViewCell: UICollectionViewCell,DequeuableProtocol {
 
     @IBOutlet weak var singlePhoto: UIImageView!
 
+    
 }
 

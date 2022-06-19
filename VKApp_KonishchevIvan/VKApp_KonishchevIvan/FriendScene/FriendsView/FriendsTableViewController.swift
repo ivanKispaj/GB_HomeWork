@@ -10,6 +10,8 @@
 import UIKit
 import RealmSwift
 
+
+
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate, FriendsSetData {
     
     var notifiToken: NotificationToken?
@@ -163,6 +165,4 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
     }
     
 }
-
-
 

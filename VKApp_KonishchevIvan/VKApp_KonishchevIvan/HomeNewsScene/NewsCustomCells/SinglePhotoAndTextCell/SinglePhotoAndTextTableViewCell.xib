@@ -155,32 +155,24 @@
                         </constraints>
                     </view>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SCM-Hh-idt">
-                        <rect key="frame" x="20" y="65" width="614" height="30.5"/>
+                        <rect key="frame" x="20" y="65" width="614" height="30"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="tintColor" red="0.1049160005" green="0.1240671757" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="GM1-hf-9SN"/>
                         </constraints>
-                        <attributedString key="attributedText">
-                            <fragment content="[https://vk.com/@vk-daidzhest-aprel-22?anchor=zvonki|VK Звонки]">
-                                <attributes>
-                                    <color key="NSColor" systemColor="labelColor"/>
-                                    <font key="NSFont" metaFont="cellTitle"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
+                        <attributedString key="attributedText"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     </textView>
                     <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Jxd-UP-Y0v">
-                        <rect key="frame" x="0.0" y="105.5" width="654" height="413.5"/>
+                        <rect key="frame" x="0.0" y="105" width="654" height="414"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-2p-xUD">
-                                <rect key="frame" x="0.0" y="0.0" width="654" height="413.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="654" height="414"/>
                             </imageView>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P0k-t2-Tce">
-                                <rect key="frame" x="-2" y="0.0" width="658" height="413.5"/>
+                                <rect key="frame" x="-2" y="0.0" width="658" height="414"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kv2-4g-2HK">
                                         <rect key="frame" x="35" y="127" width="588" height="160"/>
@@ -281,9 +273,6 @@
         <namedColor name="AvatarShadow">
             <color red="0.0010000000474974513" green="0.15899999439716339" blue="0.57400000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

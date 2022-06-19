@@ -16,10 +16,8 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
     @IBOutlet weak var lableOnPhoto: UILabel!
     @IBOutlet weak var lableUserNameOnPhoto: UILabel!
     @IBOutlet weak var imageParentView: UIView!
-    
     @IBOutlet weak var photoViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var likeControll: ControlForLike!
-    
     @IBOutlet weak var newsTextView: UITextView!
     @IBOutlet weak var newsUserAvatar: UIImageView!
     @IBOutlet weak var newsUserName: UILabel!
@@ -27,19 +25,14 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
     @IBOutlet weak var newsLikeImage: UIImageView!
     @IBOutlet weak var newsLikeLable: UILabel!
     @IBOutlet weak var seenViewLable: UILabel!
-    let newsCellData: NewsCellData? = nil
-   
-    var newsPhotoData: PhotoDataNews! 
   
 
-    func configureCellForPhoto(from data: NewsCellData, linkStatus: Bool) {
-        if let image = data.newsImage.first {
-            let ratio = (image.width) / UIScreen.main.bounds.width
-            let height = (image.height) / ratio
+    func configureCellForPhoto(from data: NewsCellData, linkStatus: Bool, image: UIImage) {
+        self.newsImage.image = image
+        if let imageData = data.newsImage.first {
+            let ratio = (imageData.width) / UIScreen.main.bounds.width
+            let height = (imageData.height) / ratio
             self.photoViewHeightConstraint.constant = height
-            self.newsPhotoData = image
-            self.newsImage.loadImageFromUrlString(image.url)
-            
         }
         
         self.newsTextView.text = data.newsText
