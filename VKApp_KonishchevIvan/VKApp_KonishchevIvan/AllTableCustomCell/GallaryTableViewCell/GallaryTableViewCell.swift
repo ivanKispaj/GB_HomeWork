@@ -14,9 +14,10 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
 
     weak var delegate: TableViewDelegate!
     weak var delegateFrameImages: SetFrameImages!
+    var gallaryImageSet: [ Int: [ImageAndLikeData]] = [:]
     var gallaryData: [ImageAndLikeData]! {
         didSet {
-            countCell = 0
+            self.getgallaryImageSet()
             self.gallaryCollection.reloadData()
         }
     }
@@ -33,27 +34,14 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     }
  
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-
-        
-        if self.gallaryData != nil && self.gallaryData.count == 0 {
-            return 0
-        }else if self.gallaryData != nil && self.gallaryData.count >= 4 {
-            return 2
-        }
-        return 1
+        print(self.gallaryImageSet.count)
+        return self.gallaryImageSet.count
     }
-
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-  
-            
-        if self.gallaryData == nil {
-        return 0
-        }else if self.gallaryData.count < 4 {
-            return 1
-        }
-        return 2
-   
+        
+        guard let count = self.gallaryImageSet[section]?.count else { return 0 }
+        return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -62,10 +50,11 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 2
         cell.layer.cornerRadius = 4
+        guard let value = self.gallaryImageSet[indexPath.section] else {return cell}
         if self.gallaryData.count != self.countCell {
-        let image = photoService?.photo(atIndexPath: indexPath, byUrl: self.gallaryData[self.countCell].image)
+            let image = photoService?.photo(atIndexPath: indexPath, byUrl: value[indexPath.row].image)
         cell.gallaryImage.image = image
-            self.countCell += 1
+           
         }
         return cell
     }
@@ -95,5 +84,24 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
        
     }
     
+    private func getgallaryImageSet() {
+        gallaryImageSet = [:]
+        var index = 0
+        var section = 0
+        for i in gallaryData {
+            if var set = gallaryImageSet[section] {
+                set.append(i)
+                gallaryImageSet[section] = set
+            }else {
+                gallaryImageSet[section] = [i]
+            }
+            index += 1
+            if index == 2 {
+                section += 1
+            }else if index == 4 {
+                break
+            }
+        }
+    }
 
 }
