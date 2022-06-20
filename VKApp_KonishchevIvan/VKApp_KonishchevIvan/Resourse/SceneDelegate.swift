@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import RealmSwift
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -24,6 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+//MARK: - Сохраняем в реалм id телефона и дату последнего посещения!
+        let realm = RealmService()
+        let deviceId = DeviceId()
+        deviceId.deviceId = UIDevice.current.identifierForVendor!.uuidString
+        realm.updateData(deviceId)
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {

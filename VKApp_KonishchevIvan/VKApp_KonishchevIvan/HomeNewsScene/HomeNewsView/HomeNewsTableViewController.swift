@@ -11,9 +11,10 @@ import RealmSwift
 
 class HomeNewsTableViewController: UITableViewController {
     
+    var lastDate: String?
     var playIndexPath: [IndexPath]?
-    var photoService: PhotoCacheService?
-    var vieoService: VideoLoadService?
+    private var photoService: PhotoCacheService?
+    private var vieoService: VideoLoadService?
     var newsRealmToken: NotificationToken?
     var realmService: RealmService!
     var nextViewData: [ImageAndLikeData]? = nil
@@ -24,6 +25,7 @@ class HomeNewsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.realmService = RealmService()
+        self.setupRefreshControll()
         self.setNotificationToken()
         self.currentOrientation = UIDevice.current.orientation
         registerCells()
@@ -33,7 +35,25 @@ class HomeNewsTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
+    private func setupRefreshControll() {
+        self.tableView.refreshControl = UIRefreshControl()
+        self.tableView.refreshControl?.attributedTitle = NSAttributedString("Обновляем...")
+        self.tableView.tintColor = UIColor(named: "AppButton")
+        self.tableView.refreshControl?.addTarget(self, action: #selector(refreshActions), for: .valueChanged)
+    }
     
+    @objc func refreshActions() {
+        self.tableView.refreshControl?.endRefreshing()
+        guard let date = NetworkSessionData.shared.lastSeen else {
+            let date = NSDate() // current date
+            var unixtime = date.timeIntervalSince1970 as Double
+            unixtime = (unixtime.rounded()) - (1 * 24 * 60 * 60)
+            self.getNewsFromDate(fromDate: String(unixtime))
+            return
+            
+        }
+        self.getNewsFromDate(fromDate: date)
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         if self.newsData == nil {

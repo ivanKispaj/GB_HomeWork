@@ -21,7 +21,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-     //   self.setNitificationGroups()
         tableView.register(SimpleTableCell.self)
         
     }

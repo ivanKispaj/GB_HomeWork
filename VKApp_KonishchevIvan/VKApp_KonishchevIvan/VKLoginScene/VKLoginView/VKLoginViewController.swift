@@ -15,6 +15,11 @@ import SystemConfiguration
 final class DeviceId: Object {
     @objc dynamic var id = 0
     @objc dynamic var deviceId = ""
+    @objc dynamic var lastSeen: Double = {
+        let date = NSDate() // current date
+        var unixtime = date.timeIntervalSince1970 as Double
+        return unixtime.rounded()
+    }()
     override class func primaryKey() -> String? {
         return "id"
     }
@@ -40,12 +45,10 @@ final class VKLoginViewController: UIViewController {
         
         configureWebView()
         if connectedToNetwork() {
-            let deviceId = DeviceId()
-            deviceId.deviceId = UIDevice.current.identifierForVendor!.uuidString
-            self.realm.updateData(deviceId)
             loadAuth()
         }else {
-            if (self.realm.readData(DeviceId.self)?.first?.deviceId) != nil{
+            if let data = self.realm.readData(DeviceId.self)?.first {
+                NetworkSessionData.shared.lastSeen = String(data.lastSeen)
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                    guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController else { return }
                    nextVC.modalPresentationStyle = .fullScreen

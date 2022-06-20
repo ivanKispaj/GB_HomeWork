@@ -12,12 +12,32 @@ extension HomeNewsTableViewController {
     
     func loadNewsData()  {
         //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
+        let queue = DispatchQueue.global(qos: .userInteractive)
         
-        self.updateNewsView()
-        
-        let queue = DispatchQueue.global(qos: .userInitiated)
+        if !self.updateNewsView() {
+            queue.async {
+                InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
+            }
+        }
+    }
+    
+    func getNewsFromDate(fromDate date: String) {
+        let queue = DispatchQueue.global(qos: .userInteractive)
         queue.async {
-            InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
+            InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews(fromDate: date) { [weak self] result in
+                switch result {
+                    
+                case .success(_):
+                    if let self = self, !self.updateNewsView() {
+                        self.newsData = nil
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    }
+                case .failure(_):
+                    print("Error update News")
+                }
+            }
         }
     }
     
@@ -27,12 +47,13 @@ extension HomeNewsTableViewController {
                 switch changes {
                 case .initial(_):
                     print("NewsVC Signed")
-                case let .update(_, deletions, insertions, _):
-                    if deletions.count != 0 || insertions.count != 0 {
-                        self?.updateNewsView()
-                        
+                case  .update(_ , _, _, _):
+                    if let self = self, !self.updateNewsView() {
+                        self.newsData = nil
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
                     }
-                    
                 case .error(_):
                     print("Asd")
                 }
@@ -40,12 +61,12 @@ extension HomeNewsTableViewController {
         }
     }
     
-    private func updateNewsView()  {
+    private func updateNewsView() -> Bool {
         
-        guard let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles else { return }
-        guard let groupes = self.realmService.readData(NewsResponse.self)?.first?.groups else { return }
-        guard let items = self.realmService.readData(NewsResponse.self)?.first?.items else { return }
-        guard  items.count > 0 else { return }
+        guard let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles else { return false}
+        guard let groupes = self.realmService.readData(NewsResponse.self)?.first?.groups else { return false}
+        guard let items = self.realmService.readData(NewsResponse.self)?.first?.items else { return false}
+        guard  items.count > 0 else { return false}
         
         var newsDatasToController: [[CellType: NewsCellData]] = []
         
@@ -223,7 +244,7 @@ extension HomeNewsTableViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
+        return true
     }
     
     

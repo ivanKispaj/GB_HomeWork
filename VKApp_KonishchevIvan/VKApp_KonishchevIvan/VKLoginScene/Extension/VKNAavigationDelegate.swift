@@ -33,6 +33,9 @@ extension VKLoginViewController: WKNavigationDelegate {
             NetworkSessionData.shared.userId = Int(id)
             print(token)
             print(id)
+            if let data = self.realm.readData(DeviceId.self)?.first {
+                NetworkSessionData.shared.lastSeen = String(data.lastSeen)
+            }
             decisionHandler(.cancel)
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController else { return }

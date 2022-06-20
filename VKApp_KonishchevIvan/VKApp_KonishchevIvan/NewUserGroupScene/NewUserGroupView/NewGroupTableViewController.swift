@@ -10,7 +10,7 @@ import WebKit
 
 class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     
-    var photoService: PhotoCacheService?
+    private var photoService: PhotoCacheService?
     weak var activityIndicator: UIActivityIndicatorView!
     var searhGrouptext: String? = nil {
         didSet {
