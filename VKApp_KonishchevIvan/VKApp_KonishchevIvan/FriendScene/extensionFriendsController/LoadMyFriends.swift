@@ -14,18 +14,17 @@ extension FriendsTableViewController {
     //   После теста заменить id пользователя на id NetworkSessionData.shared.userId!
     
     func loadMyFriends() {
-        let queueInteractive = DispatchQueue.global(qos: .userInteractive)
         
         if let result = self.realmService.readData(FriendsResponse.self)?.where({ $0.id == NetworkSessionData.shared.testUser }).first {
             self.parseData(from: result)
             if result.countFriends != result.items.count {
-                let queueDefault = DispatchQueue.global(qos: .default)
-                queueDefault.async {
+            
+                DispatchQueue.global(qos: .default).async {
                     InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser), count: "")
                 }
             }
-        }else {
-            queueInteractive.async {
+        } else {
+            DispatchQueue.global(qos: .userInteractive).async {
                 InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser))
                 
             }
@@ -68,7 +67,7 @@ extension FriendsTableViewController {
             
             if friendData.city != nil {
                 friends.city = friendData.city!.title
-            }else {
+            } else {
                 friends.city = "unknown"
             }
             
@@ -87,9 +86,9 @@ extension FriendsTableViewController {
             friends.isClosedProfile = friendData.isClosedProfile
             arrays.append(friends)
         }
+        
         DispatchQueue.main.async {
             self.setData(from: arrays)
-            
         }
     }
     

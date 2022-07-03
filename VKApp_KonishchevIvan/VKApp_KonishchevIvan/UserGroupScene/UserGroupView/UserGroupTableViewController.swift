@@ -13,7 +13,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
     
-  //  var nitifiTokenGroups: NotificationToken?
     let realmService = RealmService()
     let service = InternetConnections(host: "api.vk.com", path: "/method/groups.get")
     var dataGroups: [ItemsGroup]?
@@ -21,7 +20,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-     //   self.setNitificationGroups()
         tableView.register(SimpleTableCell.self)
         
     }
@@ -80,6 +78,10 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
             let id = data[indexPath.row].id
             self!.leaveGroup(to: id) { status, message in
                 if status {
+                    if let index = data.firstIndex(of: data[indexPath.row]) {
+                        self?.dataGroups?.remove(at: index)
+
+                    }
                     DispatchQueue.main.async {
                         
                         self!.realmService.deliteData(data[indexPath.row],cascading: true)

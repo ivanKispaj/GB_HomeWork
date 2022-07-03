@@ -174,13 +174,15 @@ class DetailUserTableViewController: UITableViewController, TableViewDelegate {
     
     //MARK: - TableViewDelegate method
     func selectRow(nextViewData: [ImageAndLikeData], indexPath: IndexPath) {
+        
         self.nextViewData = nextViewData
         guard let data = self.dataTable else { return }
+        
         let sectionType = data[indexPath.section].sectionType
         
         if sectionType == .Gallary {
             getViewGallary(to: indexPath)
-        }else if sectionType == .SingleFoto {
+        } else if sectionType == .SingleFoto {
             self.currentImage = 0
             let frame = self.tableView.rectForRow(at: indexPath)
             let frame1 = CGRect(x: frame.origin.x, y: 0, width: frame.width, height: frame.height)
@@ -220,13 +222,10 @@ extension DetailUserTableViewController: LikeDelegate {
         self.dataTable![indexPath.section].sectionData.likes.count = countLike
         if likeStatus {
             self.dataTable![indexPath.section].sectionData.likes.userLike = 1
-        }else {
+        } else {
             self.dataTable![indexPath.section].sectionData.likes.userLike = 0
         }
-        
     }
-    
-    
 }
 
 //MARK: - delegate SetFrameImages
@@ -234,7 +233,6 @@ extension DetailUserTableViewController: SetFrameImages {
     func setFrameImages(_ frame: [CGRect], currentFrame: CGRect) {
         self.frameImages = frame
         self.currentFrameImages = currentFrame
-        
     }
     
     func setCurrentImage(_ currentImage: Int) {
@@ -252,6 +250,7 @@ extension DetailUserTableViewController: SetFrameImages {
         //MARK: - Custom push imageGallary
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "GallaryVievController") as? GallaryViewController else { return }
+        
         nextVC.modalPresentationStyle = .fullScreen
         nextVC.transitioningDelegate = nextVC
         nextVC.collectionViewFrame = self.collectionFrame

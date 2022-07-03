@@ -25,7 +25,7 @@ extension GallaryViewController  {
         if self.arrayPhoto[self.currentImage].likeStatus {
             self.heartImageView.image = UIImage(systemName: "suit.heart.fill")
             self.heartImageView.tintColor = UIColor.red
-        }else {
+        } else {
             self.heartImageView.image = UIImage(systemName: "suit.heart")
             self.heartImageView.tintColor = UIColor.systemGray2
         }

@@ -155,17 +155,17 @@ class GallaryViewController: UIViewController, LikeDelegate {
             var yDirection:CGFloat =  0
             if positionX < 0 && positionY > 0 {
                 yDirection = 0 - positionY
-            }else if positionX > 0 && positionY > 0 {
+            } else if positionX > 0 && positionY > 0 {
                 yDirection = positionY
             }
             
             if  positionX < 0 && positionX < yDirection{
                 self.directionOf = .left
                 
-            }else if positionX > 0 && positionX > yDirection{
+            } else if positionX > 0 && positionX > yDirection{
                 self.directionOf = .right
                 
-            }else {
+            } else {
                 if positionY < 0  { // `&&positionX == 0
                     self.directionOf = .top
                 }else if positionY > 0  { // &&positionX == 0
@@ -174,12 +174,12 @@ class GallaryViewController: UIViewController, LikeDelegate {
             }
             if self.directionOf == .top {
                 
-            }else if self.directionOf == .bottom {
+            } else if self.directionOf == .bottom {
                 
                 self.dismiss(animated: true, completion: nil)
                 
                 
-            }else {
+            } else {
                 if self.directionOf == .left {
                     self.setViewImagesFrame(false)
                     // Делаем nextImageView поверх currentImageView
@@ -207,7 +207,7 @@ class GallaryViewController: UIViewController, LikeDelegate {
                                 self.turnOffAnumations()
                             }
                         }
-                    }else {
+                    } else {
                         // если направление свайпа влево и это последнее фото то меняем анимацию
                         self.animateImage = UIViewPropertyAnimator(duration: 0.7, curve: .easeOut , animations: {
                             self.currentImageView.transform = CGAffineTransform(translationX: self.view.frame.minX - self.view.frame.maxX, y: self.yPos - self.yPos)
@@ -215,7 +215,7 @@ class GallaryViewController: UIViewController, LikeDelegate {
                         
                     }
                     
-                }else if self.directionOf == .right && self.currentImage != 0 {
+                } else if self.directionOf == .right && self.currentImage != 0 {
                     
                     // если направление свайпа вправо и это не первое изображение
                     let x = self.currentImageView.frame.maxX
@@ -253,7 +253,7 @@ class GallaryViewController: UIViewController, LikeDelegate {
                         }
                     }
                     
-                }else if self.directionOf == .right && self.currentImage == 0 {
+                } else if self.directionOf == .right && self.currentImage == 0 {
                     // если направление свайпа вправо и это первое изображение то анимация эта!
                     let x = self.currentImageView.frame.maxX
                     self.animateImage = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut , animations: {
@@ -286,19 +286,19 @@ class GallaryViewController: UIViewController, LikeDelegate {
                         self.currentImage -= 1
                         self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor:  0)
                         self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-                    }else if self.nextImage == 0 {
+                    } else if self.nextImage == 0 {
                         self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor:  0)
                         self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
                         self.currentImage -= 1
                         self.nextImage = 1
-                    }else {
+                    } else {
                         self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor:  0)
                         self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
                         self.currentImage -= 1
                         self.nextImage -= 1
                     }
                     
-                }else if animateImage.fractionComplete < 0.4 {
+                } else if animateImage.fractionComplete < 0.4 {
                     
                     if self.nextAnimateImage != nil {
                         self.nextAnimateImage!.isReversed = true
@@ -307,7 +307,7 @@ class GallaryViewController: UIViewController, LikeDelegate {
                     self.animateImage.isReversed = true
                     self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor: 0)
                     
-                }else {
+                } else {
                     
                     self.animateImage.isReversed = true
                     self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor: 0)
@@ -339,7 +339,7 @@ class GallaryViewController: UIViewController, LikeDelegate {
                         self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor: 0)
                         self.nextAnimateImage!.continueAnimation(withTimingParameters: nil, durationFactor: 0)
                         self.lastImage = true
-                    }else {
+                    } else {
                         self.animateImage.isReversed = true
                         self.animateImage.continueAnimation(withTimingParameters: nil, durationFactor: 0)
                         
@@ -380,6 +380,7 @@ private extension GallaryViewController {
     
     private func setConstraintViewImage() {
         self.viewImage.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             self.viewImage.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
             self.viewImage.bottomAnchor.constraint(equalTo: self.bottomViewLike.topAnchor, constant: 0),
@@ -406,7 +407,7 @@ private extension GallaryViewController {
         let nextImageUrl = self.arrayPhoto[self.nextImage].image
         if  endAnimation {
             self.currentImageView.image = self.nextImageView.image
-        }else {
+        } else {
             self.currentImageView.loadImageFromUrlString(imgUrl)
             
         }
@@ -435,7 +436,7 @@ private extension GallaryViewController {
         if self.arrayPhoto[self.currentImage].likeStatus {
             self.heartImageView.image = UIImage(systemName: "suit.heart.fill")
             self.heartImageView.tintColor = UIColor.red
-        }else {
+        } else {
             self.heartImageView.image = UIImage(systemName: "suit.heart")
             self.heartImageView.tintColor = UIColor.systemGray2
         }

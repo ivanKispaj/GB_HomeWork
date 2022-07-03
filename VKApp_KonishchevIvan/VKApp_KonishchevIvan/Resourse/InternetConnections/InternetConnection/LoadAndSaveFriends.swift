@@ -11,7 +11,9 @@ import RealmSwift
 //MARK: - Загрузка друзей!
 extension InternetConnections {
     func loadFriends(for userId: String, count: String = "20")  {
+        
         guard let access_token = NetworkSessionData.shared.token else { return }
+        
         self.urlComponents.queryItems = [
             URLQueryItem(name: "user_id", value: userId),
             URLQueryItem(name: "access_token", value: access_token),
@@ -21,6 +23,7 @@ extension InternetConnections {
             URLQueryItem(name: "v", value: "5.131")
             
         ]
+        
         guard let url = self.urlComponents.url else { return }
     
         self.session.dataTask(with: url) { data, _, error in
@@ -36,8 +39,7 @@ extension InternetConnections {
                         decode.userInfo = [CodingUserInfoKey(rawValue: "ownerId")! : Int(userId)!]
                         let result = try decode.decode(Friends.self, from: data )
                 // Записываем друзей для переданного пользователя в Realm!
-                let queue = DispatchQueue.global(qos: .default)
-                queue.async {
+                DispatchQueue.global(qos: .default).async {
                     self.realmService.updateData(result.response)
                 }
                 

@@ -15,7 +15,7 @@ extension NewGroupTableViewController {
         InternetConnections(host: "api.vk.com", path: "/method/groups.join").joinInToGroup(for: groupId) { response in
             switch response {
                 
-            case .success(let result): //let result
+            case .success(let result):
                 success = result.response
                 
                 if let error = result.error {

@@ -19,7 +19,7 @@ extension UIImageView {
             DispatchQueue.main.async {
                 if let imageData = content {
                     self.image = UIImage(data: imageData)
-                }else {
+                } else {
                     self.image = UIImage(named: "noFoto")
                 }
             }

@@ -20,8 +20,7 @@ extension DetailUserTableViewController {
             
         }
         
-        let queue = DispatchQueue.global(qos: .utility)
-        queue.async {
+        DispatchQueue.global(qos: .utility).async {
             InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelected.id))
         }
     }
@@ -81,11 +80,11 @@ extension DetailUserTableViewController {
             }
             if data.count >= 1 {
                 data.insert(userDetailsTableData, at: 1)
-            }else {
+            } else {
                 data.append(userDetailsTableData)
             }
             self.dataTable = data
-        }else {
+        } else {
             self.dataTable = [userDetailsTableData]
         }
         self.tableView.reloadData()

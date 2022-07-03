@@ -88,13 +88,13 @@ class GallaryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
             if var set = gallaryImageSet[section] {
                 set.append(i)
                 gallaryImageSet[section] = set
-            }else {
+            } else {
                 gallaryImageSet[section] = [i]
             }
             index += 1
             if index == 2 {
                 section += 1
-            }else if index == 4 {
+            } else if index == 4 {
                 break
             }
         }

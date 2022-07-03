@@ -12,12 +12,30 @@ extension HomeNewsTableViewController {
     
     func loadNewsData()  {
         //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
+        if !self.updateNewsView() {
+            DispatchQueue.global(qos: .userInteractive).async {
+                InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
+            }
+        }
+    }
+    
+    func getNewsFromDate(fromDate date: String) {
         
-        self.updateNewsView()
-        
-        let queue = DispatchQueue.global(qos: .userInitiated)
-        queue.async {
-            InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
+        DispatchQueue.global(qos: .userInteractive).async {
+            InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews(fromDate: date) { [weak self] result in
+                switch result {
+                    
+                case .success(_):
+                    if let self = self, !self.updateNewsView() {
+                        self.newsData = nil
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    }
+                case .failure(_):
+                    print("Error update News")
+                }
+            }
         }
     }
     
@@ -27,12 +45,13 @@ extension HomeNewsTableViewController {
                 switch changes {
                 case .initial(_):
                     print("NewsVC Signed")
-                case let .update(_, deletions, insertions, _):
-                    if deletions.count != 0 || insertions.count != 0 {
-                        self?.updateNewsView()
-                        
+                case  .update(_ , _, _, _):
+                    if let self = self, !self.updateNewsView() {
+                        self.newsData = nil
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
                     }
-                    
                 case .error(_):
                     print("Asd")
                 }
@@ -40,12 +59,13 @@ extension HomeNewsTableViewController {
         }
     }
     
-    private func updateNewsView()  {
+    private func updateNewsView() -> Bool {
         
-        guard let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles else { return }
-        guard let groupes = self.realmService.readData(NewsResponse.self)?.first?.groups else { return }
-        guard let items = self.realmService.readData(NewsResponse.self)?.first?.items else { return }
-        guard  items.count > 0 else { return }
+        guard let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles,
+              let groupes = self.realmService.readData(NewsResponse.self)?.first?.groups ,
+              let items = self.realmService.readData(NewsResponse.self)?.first?.items,
+              items.count > 0
+        else { return false}
         
         var newsDatasToController: [[CellType: NewsCellData]] = []
         
@@ -77,7 +97,7 @@ extension HomeNewsTableViewController {
                 cellType = .post
                 newsCellData.newsText = item.text ?? ""
                 
-            }else if item.type == "post" && item.attachments.count == 1 && item.newsCopyHistory.count == 0 {
+            } else if item.type == "post" && item.attachments.count == 1 && item.newsCopyHistory.count == 0 {
                 
                 if item.attachments[0].type == "photo" {
                     cellType = .photo
@@ -87,7 +107,7 @@ extension HomeNewsTableViewController {
                     }
                     newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
                     
-                }else if item.attachments[0].type == "link" {
+                } else if item.attachments[0].type == "link" {
                     cellType = .link
                     if let link = item.attachments[0].link {
                         newsCellData.lableOnPhoto = link.title
@@ -96,7 +116,7 @@ extension HomeNewsTableViewController {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
                     }
-                }else if item.attachments[0].type == "video" {
+                } else if item.attachments[0].type == "video" {
                     cellType = .video
                     if let video = item.attachments[0].video {
                         newsCellData.accessKey = video.accessKey!
@@ -124,22 +144,26 @@ extension HomeNewsTableViewController {
                     newsCellData.newsLink = item.attachments[1].link?.url ?? ""
                     
                 }
-            }else if item.type == "post" && item.attachments.count > 2 && item.newsCopyHistory.count == 0 {
-                let photo = item.attachments.filter({ $0.type == "photo" })
-                if photo.count == item.attachments.count {
-                    cellType = .gallary
-                    for attach in item.attachments {
+            } else if item.type == "post" && item.attachments.count > 2 && item.newsCopyHistory.count == 0 {
+                
+                cellType = .gallary
+                for attach in item.attachments {
+                    if attach.type == "photo" {
                         let photoData = attach.photoData!.photoArray
                         if let data = getNewsPhoto(photoData) {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
                         
+                    } else if attach.type == "video" {
+                        let photoData = attach.video!.firstFrame
+                        if let data = getFirstFrame(from: photoData) {
+                            newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
+                        }
                     }
-                    newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
-                    
-                    
                 }
-            }else if item.type == "post" && item.attachments.count == 0, let copyHistory = item.newsCopyHistory.first {
+                newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
+                
+            } else if item.type == "post" && item.attachments.count == 0, let copyHistory = item.newsCopyHistory.first {
                 if copyHistory.attachments.count == 1 {
                     let attachments = copyHistory.attachments
                     
@@ -184,7 +208,7 @@ extension HomeNewsTableViewController {
                         cellType = .uncnown
                     }
                     
-                }else if copyHistory.attachments.count == 2 {
+                } else if copyHistory.attachments.count == 2 {
                     let attachments = copyHistory.attachments
                     if attachments[0].type == "photo" && attachments[1].type == "link" {
                         cellType = .photoLink
@@ -197,7 +221,7 @@ extension HomeNewsTableViewController {
                         newsCellData.newsLink = attachments[1].link?.url ?? ""
                     }
                     
-                }else if copyHistory.attachments.count > 2 {
+                } else if copyHistory.attachments.count > 2 {
                     let photo = copyHistory.attachments.filter({ $0.type == "photo" })
                     if photo.count == copyHistory.attachments.count {
                         cellType = .gallary
@@ -223,7 +247,7 @@ extension HomeNewsTableViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
+        return true
     }
     
     
@@ -258,7 +282,7 @@ extension HomeNewsTableViewController {
         if let group = groupes.first(where: { $0.id == group }) {
             
             return NewsUserData(userLogo: group.photo, userName: group.name, isOnline: false, isBanned: false, screenName: group.screenName)
-        }else if let profile = profiles.first(where: { $0.id == sourceId }) {
+        } else if let profile = profiles.first(where: { $0.id == sourceId }) {
             let name = profile.fName + " " + profile.lName
             var isOnline = false
             var isBanned = false
@@ -272,10 +296,6 @@ extension HomeNewsTableViewController {
         }
         return nil
     }
-    
-    
-    
-    
 }
 
 

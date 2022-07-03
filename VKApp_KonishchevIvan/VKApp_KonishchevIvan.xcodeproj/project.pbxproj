@@ -24,7 +24,6 @@
 		63803504284A63DF00FBA7ED /* OperationLoadFriendFromRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63803503284A63DF00FBA7ED /* OperationLoadFriendFromRealm.swift */; };
 		63803507284A67BA00FBA7ED /* OperationFriendViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63803506284A67BA00FBA7ED /* OperationFriendViewData.swift */; };
 		63803509284A691300FBA7ED /* FriendsSetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63803508284A691300FBA7ED /* FriendsSetData.swift */; };
-		6380350D284A6DA100FBA7ED /* FriendsParseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6380350C284A6DA100FBA7ED /* FriendsParseData.swift */; };
 		638E99AB28125CF600367F44 /* DelegateLikeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99AA28125CF600367F44 /* DelegateLikeExtension.swift */; };
 		638E99B128125D9D00367F44 /* VKNAavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99B028125D9D00367F44 /* VKNAavigationDelegate.swift */; };
 		638E99BA281260C800367F44 /* AnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E99B9281260C800367F44 /* AnimationDelegate.swift */; };
@@ -59,6 +58,8 @@
 		63B477692829160E0072CE24 /* LoadAndSavePhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B477682829160E0072CE24 /* LoadAndSavePhotoData.swift */; };
 		63B4776B2829181F0072CE24 /* LoadAndSaveUserWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4776A2829181F0072CE24 /* LoadAndSaveUserWall.swift */; };
 		63B4776D28295A420072CE24 /* LoadAndSaveNewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4776C28295A420072CE24 /* LoadAndSaveNewsData.swift */; };
+		63DE1170287168D500D5396D /* ExtensionUILable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DE116F287168D500D5396D /* ExtensionUILable.swift */; };
+		63DE11722871722000D5396D /* UpdateCellDatal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DE11712871722000D5396D /* UpdateCellDatal.swift */; };
 		63E8973D2841F1D800BAACE1 /* LoadVideoNewsContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8973C2841F1D800BAACE1 /* LoadVideoNewsContent.swift */; };
 		63E8973F2841F31A00BAACE1 /* NewsCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8973E2841F31A00BAACE1 /* NewsCellData.swift */; };
 		63E897412841F39700BAACE1 /* NewsVideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E897402841F39700BAACE1 /* NewsVideoModel.swift */; };
@@ -152,7 +153,6 @@
 		63803503284A63DF00FBA7ED /* OperationLoadFriendFromRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationLoadFriendFromRealm.swift; sourceTree = "<group>"; };
 		63803506284A67BA00FBA7ED /* OperationFriendViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFriendViewData.swift; sourceTree = "<group>"; };
 		63803508284A691300FBA7ED /* FriendsSetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsSetData.swift; sourceTree = "<group>"; };
-		6380350C284A6DA100FBA7ED /* FriendsParseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsParseData.swift; sourceTree = "<group>"; };
 		638E99AA28125CF600367F44 /* DelegateLikeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateLikeExtension.swift; sourceTree = "<group>"; };
 		638E99B028125D9D00367F44 /* VKNAavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNAavigationDelegate.swift; sourceTree = "<group>"; };
 		638E99B9281260C800367F44 /* AnimationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +187,8 @@
 		63B477682829160E0072CE24 /* LoadAndSavePhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSavePhotoData.swift; sourceTree = "<group>"; };
 		63B4776A2829181F0072CE24 /* LoadAndSaveUserWall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSaveUserWall.swift; sourceTree = "<group>"; };
 		63B4776C28295A420072CE24 /* LoadAndSaveNewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSaveNewsData.swift; sourceTree = "<group>"; };
+		63DE116F287168D500D5396D /* ExtensionUILable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUILable.swift; sourceTree = "<group>"; };
+		63DE11712871722000D5396D /* UpdateCellDatal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCellDatal.swift; sourceTree = "<group>"; };
 		63E8973C2841F1D800BAACE1 /* LoadVideoNewsContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadVideoNewsContent.swift; sourceTree = "<group>"; };
 		63E8973E2841F31A00BAACE1 /* NewsCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellData.swift; sourceTree = "<group>"; };
 		63E897402841F39700BAACE1 /* NewsVideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsVideoModel.swift; sourceTree = "<group>"; };
@@ -401,7 +403,6 @@
 			children = (
 				63803506284A67BA00FBA7ED /* OperationFriendViewData.swift */,
 				63803508284A691300FBA7ED /* FriendsSetData.swift */,
-				6380350C284A6DA100FBA7ED /* FriendsParseData.swift */,
 			);
 			path = Operation;
 			sourceTree = "<group>";
@@ -693,6 +694,7 @@
 		639B4260280D2D030097D53F /* Hellpers */ = {
 			isa = PBXGroup;
 			children = (
+				63DE116E287168B600D5396D /* ExtensionUILable */,
 				639D2731285E61C7003282DE /* CachesService */,
 				63E897852843B1D300BAACE1 /* ExtensionCollectionView */,
 				630DF7A2283C9AAD002F831A /* ExtensionUITableView */,
@@ -808,6 +810,14 @@
 				63B47766282915CB0072CE24 /* LoadAndSaveFriends.swift */,
 			);
 			path = InternetConnection;
+			sourceTree = "<group>";
+		};
+		63DE116E287168B600D5396D /* ExtensionUILable */ = {
+			isa = PBXGroup;
+			children = (
+				63DE116F287168D500D5396D /* ExtensionUILable.swift */,
+			);
+			path = ExtensionUILable;
 			sourceTree = "<group>";
 		};
 		63E897852843B1D300BAACE1 /* ExtensionCollectionView */ = {
@@ -1045,6 +1055,7 @@
 				80EAC04F27F6D453006DDB9A /* TableViewDelegate.swift */,
 				80F4BCC82802E0A2008E07B0 /* SetFrameImages.swift */,
 				63E8974628427FBF00BAACE1 /* DequeuableProtocol.swift */,
+				63DE11712871722000D5396D /* UpdateCellDatal.swift */,
 			);
 			path = AllProtocols;
 			sourceTree = "<group>";
@@ -1249,13 +1260,13 @@
 				80D1315C27FEA85E009EA04D /* CustomNavigationController.swift in Sources */,
 				638E99C5281267EC00367F44 /* CustomSingleCollectionLayout.swift in Sources */,
 				80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */,
+				63DE11722871722000D5396D /* UpdateCellDatal.swift in Sources */,
 				63803509284A691300FBA7ED /* FriendsSetData.swift in Sources */,
 				638E99E32814345400367F44 /* getNewGroupList.swift in Sources */,
 				80F4BCCE28031BF6008E07B0 /* AnimateGallaryPop.swift in Sources */,
 				80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */,
 				80850ED627DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.swift in Sources */,
 				6398477E282E39B7008D216E /* joinNewGroup.swift in Sources */,
-				6380350D284A6DA100FBA7ED /* FriendsParseData.swift in Sources */,
 				80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */,
 				63E8973D2841F1D800BAACE1 /* LoadVideoNewsContent.swift in Sources */,
 				8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */,
@@ -1293,6 +1304,7 @@
 				80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */,
 				80F4BCC527FFEC1F008E07B0 /* AnimationPopNavigationController.swift in Sources */,
 				638E99E1281433DC00367F44 /* NewGroupSearchModel.swift in Sources */,
+				63DE1170287168D500D5396D /* ExtensionUILable.swift in Sources */,
 				638E99C3281267B200367F44 /* CustomCollectionLayout.swift in Sources */,
 				638E99ED2815548300367F44 /* UserWallModel.swift in Sources */,
 				80C19AD427D76FDE009C34CB /* CouruselCollectionViewCell.swift in Sources */,

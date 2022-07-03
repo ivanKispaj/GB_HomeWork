@@ -19,16 +19,19 @@ class SimpleTableCell: UITableViewCell,DequeuableProtocol {
     func setCellData(toFriendsScene data: Friend) {
         if let dataPhoto = data.photo {
             self.imageCellAvatar.image = UIImage(data: dataPhoto)
-        }else {
+        } else {
             self.imageCellAvatar.image = UIImage(named: "noFoto")
         }
+        
         self.labelCityCellXib.text = data.city
         self.lableCellXib.text = data.userName
         self.profileStatus.text = ""
+        
         if data.isBanned {
             self.profileStatus.text = "Banned!"
             self.profileStatus.tintColor = UIColor.red
         }
+        
         if data.isClosedProfile {
             self.profileStatus.text = "Private"
             self.profileStatus.tintColor = UIColor.blue
