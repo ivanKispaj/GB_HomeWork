@@ -12,6 +12,7 @@ import PromiseKit
 extension InternetConnections {
     
     func getUrlUserGroup() -> Promise<URL> {
+        
         self.urlComponents.queryItems = [
             URLQueryItem(name: "user_id", value: String(NetworkSessionData.shared.userId!)),
             URLQueryItem(name: "access_token", value: NetworkSessionData.shared.token),
@@ -19,11 +20,13 @@ extension InternetConnections {
             URLQueryItem(name: "fields", value: "activity, city, description, links, site, status "),
             URLQueryItem(name: "v", value: "5.131")
         ]
+        
         return Promise { resolver in
             guard let url = self.urlComponents.url else {
                 resolver.reject(InternetError.urlError)
                 return
             }
+            
             resolver.fulfill(url)
             
         }

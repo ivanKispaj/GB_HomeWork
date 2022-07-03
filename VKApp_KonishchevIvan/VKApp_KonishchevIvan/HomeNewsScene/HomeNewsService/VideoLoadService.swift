@@ -29,16 +29,19 @@ final class VideoLoadService {
     }
     
     func video(atIndexPath indexPath: IndexPath, byData data: NewsCellData) -> AVPlayer? {
+        
         var player: AVPlayer?
+        
         if let video = players[data.firstFrame.url] {
             player = video
-        }else {
+        } else {
             getVideoPlayer(atIndexPath: indexPath, byData: data)
         }
         return player
     }
     
     private func getVideoPlayer(atIndexPath indexPath: IndexPath, byData data: NewsCellData) {
+        
         InternetConnections(host: "api.vk.com", path: "/method/video.get").loadVideoContent(ovnerId: data.ownerId, accessKey: data.accessKey, videoId: data.videoId) { [weak self] result in
             if result?.player != nil {
                 guard let url = URL(string: result!.player) else {
@@ -58,9 +61,9 @@ final class VideoLoadService {
                         var urlDataExt: [Substring.SubSequence]?
                         if let urlData = url480?.split(separator: ":") {
                             urlDataExt = urlData
-                        }else if let urlData = url360?.split(separator: ":") {
+                        } else if let urlData = url360?.split(separator: ":") {
                             urlDataExt = urlData
-                        }else if let urlData = url240?.split(separator: ":") {
+                        } else if let urlData = url240?.split(separator: ":") {
                             urlDataExt = urlData
                         }
                         
@@ -130,19 +133,27 @@ fileprivate protocol DataReloadable {
 
 extension VideoLoadService {
     
-    private class Table: DataReloadable { let table: UITableView
+    private class Table: DataReloadable {
+        
+        let table: UITableView
+        
         init(table: UITableView) {
             self.table = table
         }
+        
         func reloadRow(atIndexpath indexPath: IndexPath) {
             table.reloadRows(at: [indexPath], with: .none)
         }
         
     }
     
-    private class Collection: DataReloadable { let collection: UICollectionView
+    private class Collection: DataReloadable {
+        
+        let collection: UICollectionView
+        
         init(collection: UICollectionView) { self.collection = collection
         }
+        
         func reloadRow(atIndexpath indexPath: IndexPath) {
             collection.reloadItems(at: [indexPath])
         }

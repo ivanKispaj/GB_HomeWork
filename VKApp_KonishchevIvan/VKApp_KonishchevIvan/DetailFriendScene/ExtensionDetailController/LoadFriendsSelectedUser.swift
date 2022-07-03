@@ -11,21 +11,17 @@ import RealmSwift
 // MARK: - Подгружаем друзей друга и сохраняем результат в hisFriends
 extension DetailUserTableViewController {
     
-    
-    
-    
     func loadFriendsSelectedUser()  {
-        let queueInteractive = DispatchQueue.global(qos: .userInteractive)
+        
         if let result = self.realmService.readData(FriendsResponse.self)?.where({ $0.id == self.friendsSelected.id }).first {
             self.updateUserFromRealm(from: result)
             if result.countFriends != result.items.count {
-                let queueDefault = DispatchQueue.global(qos: .default)
-                queueDefault.async {
+                DispatchQueue.global(qos: .default).async {
                     InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id), count: "")
                 }
             }
         }else {
-            queueInteractive.async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id))
                 
             }

@@ -19,8 +19,7 @@ extension DetailUserTableViewController {
         }else {
             
         }
-        let queue = DispatchQueue.global(qos: .utility)
-        queue.async {
+        DispatchQueue.global(qos: .utility).async {
             InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelected.id))
         }
     }

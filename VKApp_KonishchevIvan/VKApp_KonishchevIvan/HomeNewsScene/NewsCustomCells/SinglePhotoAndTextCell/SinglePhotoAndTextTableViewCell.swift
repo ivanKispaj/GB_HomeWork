@@ -12,7 +12,7 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
  
     weak var control: UpdateCellData!
     var indexPath: IndexPath!
-    var togle = false
+    var toggle = false
     var textHeight: CGFloat = 100
     @IBOutlet weak var parentViewImage: UIView!
     @IBOutlet weak var newsImage: UIImageView!
@@ -52,7 +52,7 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
         }else {
             self.detailsLable.isHidden = true
         }
-        if togle {
+        if toggle {
             self.detailsLable.text = "Скрыть"
         }else {
             self.detailsLable.text = "Подробнее"
@@ -75,19 +75,17 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
     }
  
     @objc func showMoreDetails() {
-        if !togle {
+        if !toggle {
             guard let height = self.newsTextView.resizeIfNeeded() else {return}
             self.textHeight = height
-            togle = true
       
         }else {
             self.layoutIfNeeded()
             self.textHeight = 100
-            togle = false
         }
         
-
-        self.control.updateCellData(with: indexPath, textHeight: self.textHeight, togle: togle)
+        self.toggle.toggle()
+        self.control.updateCellData(with: indexPath, textHeight: self.textHeight, togle: toggle)
        
     }
 

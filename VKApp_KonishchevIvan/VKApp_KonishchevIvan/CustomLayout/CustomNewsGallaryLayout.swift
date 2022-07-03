@@ -14,7 +14,7 @@ class CustomNewsGallaryLayout: UICollectionViewLayout {
     // Хранит атрибуты для заданных индексов
     var columnsCount = 0 // Количество столбцов
     var cellWidth: CGFloat = UIScreen.main.bounds.width
-    let cellHeight: CGFloat = 250 // Высота ячейки
+    var cellHeight: CGFloat = 250 // Высота ячейки
     var lastY: CGFloat = 0
     private var totalCellsHeight: CGFloat = 0 // Хранит суммарную высоту всех ячеек
     
@@ -50,22 +50,19 @@ class CustomNewsGallaryLayout: UICollectionViewLayout {
         let lastY: CGFloat = self.lastY
         var lastX: CGFloat = 0
         self.cellWidth = self.cellWidth / CGFloat(rowCountInSection)
-        var height = self.cellHeight
+        self.cellHeight = self.cellHeight / CGFloat(rowCountInSection)
 
-        if rowCountInSection != 1 {
-            height = self.cellHeight / 2
-        }
         for index in 0..<rowCountInSection {
          
             let indexPath = IndexPath(item: index, section: section)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-            attributes.frame = CGRect(x: lastX, y: lastY, width: self.cellWidth, height: height)
+            attributes.frame = CGRect(x: lastX, y: lastY, width: self.cellWidth, height: self.cellHeight)
             lastX = lastX + self.cellWidth
             cacheAttributes[indexPath] = attributes
         }
-        self.lastY = lastY + height
+        self.lastY = lastY + self.cellHeight
         self.cellWidth = UIScreen.main.bounds.width
-       
+        self.cellHeight = 250
     }
     
 

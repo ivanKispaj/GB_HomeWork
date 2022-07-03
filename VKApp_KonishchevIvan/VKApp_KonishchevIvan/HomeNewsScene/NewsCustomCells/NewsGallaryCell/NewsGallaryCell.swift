@@ -24,7 +24,7 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
     
     weak var control: UpdateCellData!
     var indexPath: IndexPath!
-    var togle = false
+    var toggle = false
     var textHeight: CGFloat = 100
     
     override func awakeFromNib() {
@@ -127,7 +127,7 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
         }else {
             self.showMoreLable.isHidden = true
         }
-        if togle {
+        if toggle {
             self.showMoreLable.text = "Скрыть"
         }else {
             self.showMoreLable.text = "Подробнее"
@@ -136,23 +136,20 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(showMoreDetails))
         self.showMoreLable.addGestureRecognizer(tap)
-        
+        self.newsGallaryCollection.reloadData()
     }
     
     @objc func showMoreDetails() {
-        if !togle {
+        if !toggle {
             guard let height = self.newsTextLabel.resizeIfNeeded() else {return}
             self.textHeight = height
-            togle = true
       
         }else {
             self.layoutIfNeeded()
             self.textHeight = 100
-            togle = false
         }
-        
-
-        self.control.updateCellData(with: indexPath, textHeight: self.textHeight, togle: togle)
+        self.toggle.toggle()
+        self.control.updateCellData(with: indexPath, textHeight: self.textHeight, togle: toggle)
        
     }
 }

@@ -11,7 +11,7 @@ import RealmSwift
 
 class HomeNewsTableViewController: UITableViewController, UpdateCellData {
     
-    var togle = false
+    var toggle = false
     var newsTextheight: CGFloat = 100
     var lastDate: String?
     var playIndexPath: [IndexPath]?
@@ -49,7 +49,7 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
         guard let date = NetworkSessionData.shared.lastSeen else {
             let date = NSDate() // current date
             var unixtime = date.timeIntervalSince1970 as Double
-            unixtime = (unixtime.rounded()) - (1 * 24 * 60 * 60)
+            unixtime = (unixtime.rounded()) - (1 * 24 * 60 * 60) // минус 1 сутки в секундах
             self.getNewsFromDate(fromDate: String(unixtime))
             return
             
@@ -121,7 +121,7 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             cell.indexPath = indexPath
             cell.control = self
             cell.textHeight = self.newsTextheight
-            cell.togle = self.togle
+            cell.toggle = self.toggle
             cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
             
             
@@ -157,7 +157,7 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             cell.indexPath = indexPath
             cell.control = self
             cell.textHeight = self.newsTextheight
-            cell.togle = self.togle
+            cell.toggle = self.toggle
             cell.setCellData(from: data)
             return cell
         case .photoLink:
@@ -175,9 +175,9 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             
         }
         
-        let cells: NewsPostCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cells.newsPostTextLabel.text = " Failure load Data!!!"
-        return cells
+        let errorCell: NewsPostCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        errorCell.newsPostTextLabel.text = " Failure load Data!!!"
+        return errorCell
     }
     
     //MARK: - Регистрация кастомных ячеек таблицы
@@ -191,9 +191,9 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
     
     func updateCellData(with indexPath: IndexPath, textHeight: CGFloat, togle: Bool) {
         self.newsTextheight = textHeight
-        self.togle = togle
+        self.toggle = togle
         DispatchQueue.main.async {
-            self.tableView.reloadRows(at: [indexPath], with: .none)
+            self.tableView.reloadRows(at: self.tableView.indexPathsForVisibleRows!, with: .none)
         }
     }
 }

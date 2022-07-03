@@ -12,18 +12,16 @@ extension HomeNewsTableViewController {
     
     func loadNewsData()  {
         //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
-        let queue = DispatchQueue.global(qos: .userInteractive)
-        
         if !self.updateNewsView() {
-            queue.async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
             }
         }
     }
     
     func getNewsFromDate(fromDate date: String) {
-        let queue = DispatchQueue.global(qos: .userInteractive)
-        queue.async {
+        
+        DispatchQueue.global(qos: .userInteractive).async {
             InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews(fromDate: date) { [weak self] result in
                 switch result {
                     
@@ -63,10 +61,11 @@ extension HomeNewsTableViewController {
     
     private func updateNewsView() -> Bool {
         
-        guard let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles else { return false}
-        guard let groupes = self.realmService.readData(NewsResponse.self)?.first?.groups else { return false}
-        guard let items = self.realmService.readData(NewsResponse.self)?.first?.items else { return false}
-        guard  items.count > 0 else { return false}
+        guard let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles,
+              let groupes = self.realmService.readData(NewsResponse.self)?.first?.groups ,
+              let items = self.realmService.readData(NewsResponse.self)?.first?.items,
+              items.count > 0
+        else { return false}
         
         var newsDatasToController: [[CellType: NewsCellData]] = []
         
@@ -146,24 +145,24 @@ extension HomeNewsTableViewController {
                     
                 }
             }else if item.type == "post" && item.attachments.count > 2 && item.newsCopyHistory.count == 0 {
-    
-                    cellType = .gallary
-                    for attach in item.attachments {
-                        if attach.type == "photo" {
+                
+                cellType = .gallary
+                for attach in item.attachments {
+                    if attach.type == "photo" {
                         let photoData = attach.photoData!.photoArray
                         if let data = getNewsPhoto(photoData) {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
                         
-                        }else if attach.type == "video" {
-                            let photoData = attach.video!.firstFrame
-                            if let data = getFirstFrame(from: photoData) {
-                                newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
-                            }
+                    }else if attach.type == "video" {
+                        let photoData = attach.video!.firstFrame
+                        if let data = getFirstFrame(from: photoData) {
+                            newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
                     }
-                    newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
-                    
+                }
+                newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
+                
             }else if item.type == "post" && item.attachments.count == 0, let copyHistory = item.newsCopyHistory.first {
                 if copyHistory.attachments.count == 1 {
                     let attachments = copyHistory.attachments

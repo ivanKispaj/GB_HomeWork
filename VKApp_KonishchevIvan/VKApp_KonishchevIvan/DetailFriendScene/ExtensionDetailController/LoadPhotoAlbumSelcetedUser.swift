@@ -20,8 +20,7 @@ extension DetailUserTableViewController {
             
         }
         
-        let queue = DispatchQueue.global(qos: .utility)
-        queue.async {
+        DispatchQueue.global(qos: .utility).async {
             InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelected.id))
         }
     }
