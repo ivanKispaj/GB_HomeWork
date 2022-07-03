@@ -27,6 +27,7 @@ extension UITableView {
                         
                         btnView.layer.masksToBounds = true
                         btnView.layer.cornerRadius = 10
+                        
                         for (index,btnViews) in btnView.subviews.enumerated() {
                             if let btnImageView = btnViews as? UIImageView {
                                 
@@ -65,6 +66,7 @@ extension UITableView {
                                     label.translatesAutoresizingMaskIntoConstraints = false
                                     btnViews.translatesAutoresizingMaskIntoConstraints = false
                                     imageView.translatesAutoresizingMaskIntoConstraints = false
+                                    
                                     NSLayoutConstraint.activate([
                                         imageView.centerXAnchor.constraint(equalTo: btnView.centerXAnchor),
                                         imageView.heightAnchor.constraint(equalToConstant: 20),
@@ -95,7 +97,7 @@ extension UITableView {
                                 
                             }
                         }
-                    }else {
+                    } else {
                         view.layer.masksToBounds = true
                         view.layer.backgroundColor = UIColor.clear.cgColor
                         view.layer.cornerRadius = 10

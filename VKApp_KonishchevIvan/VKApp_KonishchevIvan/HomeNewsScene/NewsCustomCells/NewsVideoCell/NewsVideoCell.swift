@@ -42,6 +42,7 @@ class NewsVideoCell: UITableViewCell, DequeuableProtocol {
         self.playerViewController.showsPlaybackControls = false
         self.videoUIView.addSubview(self.playerViewController.view)
         self.playerViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             playerViewController.view.leadingAnchor.constraint(equalTo: self.videoUIView.leadingAnchor),
             playerViewController.view.trailingAnchor.constraint(equalTo: self.videoUIView.trailingAnchor),

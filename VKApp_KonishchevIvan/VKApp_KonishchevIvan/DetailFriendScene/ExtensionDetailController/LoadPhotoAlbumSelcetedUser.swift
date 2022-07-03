@@ -80,11 +80,11 @@ extension DetailUserTableViewController {
             }
             if data.count >= 1 {
                 data.insert(userDetailsTableData, at: 1)
-            }else {
+            } else {
                 data.append(userDetailsTableData)
             }
             self.dataTable = data
-        }else {
+        } else {
             self.dataTable = [userDetailsTableData]
         }
         self.tableView.reloadData()

@@ -12,7 +12,7 @@ import RealmSwift
 class HomeNewsTableViewController: UITableViewController, UpdateCellData {
     
     var toggle = false
-    var newsTextheight: CGFloat = 100
+    var textHeight: CGFloat = 100
     var lastDate: String?
     var playIndexPath: [IndexPath]?
     private var photoService: PhotoCacheService?
@@ -79,10 +79,7 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             let dataCell = cell as! NewsVideoCell
             guard let playerController = dataCell.playerViewController else {return}
             if playerController.player != nil {
-                
                 dataCell.playerViewController.player!.pause()
-                
-                
             }
         }
     }
@@ -92,14 +89,10 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             let dataCell = cell as! NewsVideoCell
             guard let playerController = dataCell.playerViewController else {return}
             if playerController.player != nil {
-                
                 dataCell.playerViewController.player!.play()
-                
-                
             }
         }
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let news = newsData?[indexPath.row].first else {
@@ -115,30 +108,27 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             
             guard let photo = data.newsImage.first, let image = photoService?.photo(atIndexPath: indexPath, byUrl: photo.url) else {
                 let image = UIImage(named: "noFoto")!
-                cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
+                cell.configureCellForPhoto(from: data, linkStatus: false, image: image, indexPath: indexPath,textHeight: self.textHeight, toggle: self.toggle)
                 return cell
             }
-            cell.indexPath = indexPath
+            
             cell.control = self
-            cell.textHeight = self.newsTextheight
-            cell.toggle = self.toggle
-            cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
-            
-            
+            cell.configureCellForPhoto(from: data, linkStatus: false, image: image, indexPath: indexPath,textHeight: self.textHeight, toggle: self.toggle)
             return cell
+            
         case .link:
             let cell: SinglePhotoAndTextTableViewCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             
             guard let photo = data.newsImage.first, let image = photoService?.photo(atIndexPath: indexPath, byUrl: photo.url) else {
                 let image = UIImage(named: "noFoto")!
-                cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
+                cell.configureCellForPhoto(from: data, linkStatus: false, image: image, indexPath: indexPath,textHeight: self.textHeight, toggle: self.toggle)
                 return cell
             }
-            cell.indexPath = indexPath
             cell.control = self
             
-            cell.configureCellForPhoto(from: data, linkStatus: true, image: image)
+            cell.configureCellForPhoto(from: data, linkStatus: true, image: image, indexPath: indexPath,textHeight: self.textHeight, toggle: self.toggle)
             return cell
+            
         case .video:
             let cell: NewsVideoCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.videoData = data
@@ -148,27 +138,27 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
                 cell.playerViewController.player?.play()
             }
             return cell
+            
         case .post:
             let cell: NewsPostCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.configureCellForPost(from: data)
             return cell
+            
         case .gallary:
             let cell: NewsGallaryCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.indexPath = indexPath
             cell.control = self
-            cell.textHeight = self.newsTextheight
-            cell.toggle = self.toggle
-            cell.setCellData(from: data)
+            cell.setCellData(from: data, indexPath: indexPath,textHeight: self.textHeight, toggle: self.toggle)
             return cell
         case .photoLink:
             let cell: SinglePhotoAndTextTableViewCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             
             guard let photo = data.newsImage.first, let image = photoService?.photo(atIndexPath: indexPath, byUrl: photo.url) else {
                 let image = UIImage(named: "noFoto")!
-                cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
+                cell.configureCellForPhoto(from: data, linkStatus: false, image: image, indexPath: indexPath,textHeight: self.textHeight, toggle: self.toggle)
                 return cell
             }
-            cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
+            cell.configureCellForPhoto(from: data, linkStatus: false, image: image, indexPath: indexPath,textHeight: self.textHeight, toggle: self.toggle)
             return cell
         case .uncnown:
             print("uncnown")
@@ -190,10 +180,12 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
     }
     
     func updateCellData(with indexPath: IndexPath, textHeight: CGFloat, togle: Bool) {
-        self.newsTextheight = textHeight
+        self.textHeight = textHeight
         self.toggle = togle
         DispatchQueue.main.async {
-            self.tableView.reloadRows(at: self.tableView.indexPathsForVisibleRows!, with: .none)
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+            self.textHeight = 100
+            self.toggle = false
         }
     }
 }

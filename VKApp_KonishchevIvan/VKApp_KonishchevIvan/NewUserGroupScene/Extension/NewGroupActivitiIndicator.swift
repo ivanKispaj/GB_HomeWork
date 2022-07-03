@@ -18,6 +18,7 @@ extension NewGroupTableViewController {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         self.activityIndicator = activityIndicator
+        
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)

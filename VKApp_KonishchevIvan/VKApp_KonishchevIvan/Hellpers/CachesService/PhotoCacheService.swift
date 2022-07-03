@@ -11,7 +11,7 @@ final class PhotoCacheService {
     
     private let container: DataReloadable
     private var images = [String: UIImage]()
-    private let cacheLifeTime: TimeInterval = 30 * 24 * 60 * 60
+    private let cacheLifeTime: TimeInterval = 30 * 24 * 60 * 60 // месяц в секундах
     private static let pathName: String = {
         let pathName = "images"
         guard let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return pathName }
@@ -36,15 +36,16 @@ final class PhotoCacheService {
         var image: UIImage?
         if let photo = images[url] {
             image = photo
-        }else if let photo = getImageFromCache(url: url) {
+        } else if let photo = getImageFromCache(url: url) {
             image = photo
-        }else {
+        } else {
             loadPhoto(atIndexpath: indexPath, byUrl: url)
         }
         return image
     }
     
     private func getImageFromCache(url: String) -> UIImage? {
+        
         guard let fileName = getFilePath(url: url), let info = try? FileManager.default.attributesOfItem(atPath: fileName), let modificationDate = info[FileAttributeKey.modificationDate] as? Date else { return nil }
         
         let lifeTime = Date().timeIntervalSince(modificationDate)

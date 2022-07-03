@@ -23,7 +23,7 @@ extension FriendsTableViewController {
                     InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser), count: "")
                 }
             }
-        }else {
+        } else {
             DispatchQueue.global(qos: .userInteractive).async {
                 InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser))
                 
@@ -67,7 +67,7 @@ extension FriendsTableViewController {
             
             if friendData.city != nil {
                 friends.city = friendData.city!.title
-            }else {
+            } else {
                 friends.city = "unknown"
             }
             
@@ -86,9 +86,9 @@ extension FriendsTableViewController {
             friends.isClosedProfile = friendData.isClosedProfile
             arrays.append(friends)
         }
+        
         DispatchQueue.main.async {
             self.setData(from: arrays)
-            
         }
     }
     

@@ -55,7 +55,7 @@ class ControlForLike: UIControl {
                 self.likeImage.tintColor = UIColor.systemGray2
             }
             self.counLikes -= 1
-        }else {
+        } else {
             UIImageView.animate(withDuration: 0.5) {
                 self.likeImage.layer.position.y -= 5
                 self.likeImage.layer.opacity = 0

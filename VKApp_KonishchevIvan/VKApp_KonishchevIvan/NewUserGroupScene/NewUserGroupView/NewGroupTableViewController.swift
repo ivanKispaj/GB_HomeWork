@@ -128,7 +128,7 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
             let image = photoService?.photo(atIndexPath: indexPath, byUrl: groupes.imageGroup)
             cell.imageCellAvatar.image = image
             cell.labelCityCellXib.text = "-"
-        }else {
+        } else {
             return cell
         }
         return cell
@@ -177,7 +177,7 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
                             let indexSet = IndexSet(arrayLiteral: indexPath.section)
                             self.tableView.deleteSections(indexSet, with: .fade)
                         }
-                    }else {
+                    } else {
                         let newArrayGroups = arrayGroups.filter{ $0.id != selectedGroup.id }
                         self.allGroupDictionary[self.chars[indexPath.section]] = newArrayGroups
                         DispatchQueue.main.async {
@@ -186,7 +186,7 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
                     }
                     
                     
-                }else {
+                } else {
                     print(message)
                 }
             }
@@ -228,7 +228,7 @@ extension NewGroupTableViewController {
             if var thisCharGroup = groupDictionary[String(chars)] {
                 thisCharGroup.append(grupes)
                 groupDictionary[chars] = thisCharGroup
-            }else {
+            } else {
                 groupDictionary[chars] = [grupes]
                 
                 self.chars.append(String(chars))

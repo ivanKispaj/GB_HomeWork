@@ -16,8 +16,6 @@ extension DetailUserTableViewController {
         let wallData = self.realmService.readData(UserWallResponse.self)?.where { $0.id == self.friendsSelected.id }.first?.items
         if let data = wallData {
             self.updateWallData(from: data)
-        }else {
-            
         }
         DispatchQueue.global(qos: .utility).async {
             InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelected.id))
@@ -51,13 +49,13 @@ extension DetailUserTableViewController {
             return photoData
         } else if let photoData = photoArr.first (where: { $0.type == "x" }) {
             return photoData
-        }else if let photoData = photoArr.first (where: { $0.type == "k" }) {
+        } else if let photoData = photoArr.first (where: { $0.type == "k" }) {
             return photoData
         } else if let photoData = photoArr.first(where: { $0.type == "q"}) {
             return photoData
-        }else if let photoData = photoArr.first(where: { $0.width > 200}) {
+        } else if let photoData = photoArr.first(where: { $0.width > 200}) {
             return photoData
-        }else if let photoData = photoArr.first(where: { $0.width > 130}) {
+        } else if let photoData = photoArr.first(where: { $0.width > 130}) {
             return photoData
         }
         let photoData = photoArr.first(where: { $0.width > 90})
@@ -103,7 +101,7 @@ extension DetailUserTableViewController {
                     sectionData.photo = [photos]
                     sectionData.urlNewsImage = size.url
                     
-                }else if let link = attachments.link {
+                } else if let link = attachments.link {
                     if let photo = link.photo {
                         typeSection = .linkPhoto
                         
@@ -117,7 +115,8 @@ extension DetailUserTableViewController {
                     sectionData.titleNews = link.title
                     
                 }
-            }else if let attachments = item.wallcopyHystory.first?.attachments {
+            } else if let attachments = item.wallcopyHystory.first?.attachments {
+                
                 for attachData in attachments {
                     if let photo = attachData.photo {
                         typeSection = .SingleFoto
@@ -130,7 +129,7 @@ extension DetailUserTableViewController {
                         let photos = ImageAndLikeData(image: size.url, likeStatus: likeStatus, height:CGFloat(size.height), width: CGFloat(size.width), seenCount: sectionData.views?.count ?? 0)
                         sectionData.photo = [photos]
                         
-                    }else if let link = attachData.link {
+                    } else if let link = attachData.link {
                         if let photo = link.photo {
                             typeSection = .linkPhoto
                             sectionData.urlNewsImage = getPhotoUrl(photo.sizes).url

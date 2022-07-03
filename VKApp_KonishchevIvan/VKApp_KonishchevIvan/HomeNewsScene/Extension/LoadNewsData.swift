@@ -97,7 +97,7 @@ extension HomeNewsTableViewController {
                 cellType = .post
                 newsCellData.newsText = item.text ?? ""
                 
-            }else if item.type == "post" && item.attachments.count == 1 && item.newsCopyHistory.count == 0 {
+            } else if item.type == "post" && item.attachments.count == 1 && item.newsCopyHistory.count == 0 {
                 
                 if item.attachments[0].type == "photo" {
                     cellType = .photo
@@ -107,7 +107,7 @@ extension HomeNewsTableViewController {
                     }
                     newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
                     
-                }else if item.attachments[0].type == "link" {
+                } else if item.attachments[0].type == "link" {
                     cellType = .link
                     if let link = item.attachments[0].link {
                         newsCellData.lableOnPhoto = link.title
@@ -116,7 +116,7 @@ extension HomeNewsTableViewController {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
                     }
-                }else if item.attachments[0].type == "video" {
+                } else if item.attachments[0].type == "video" {
                     cellType = .video
                     if let video = item.attachments[0].video {
                         newsCellData.accessKey = video.accessKey!
@@ -144,7 +144,7 @@ extension HomeNewsTableViewController {
                     newsCellData.newsLink = item.attachments[1].link?.url ?? ""
                     
                 }
-            }else if item.type == "post" && item.attachments.count > 2 && item.newsCopyHistory.count == 0 {
+            } else if item.type == "post" && item.attachments.count > 2 && item.newsCopyHistory.count == 0 {
                 
                 cellType = .gallary
                 for attach in item.attachments {
@@ -154,7 +154,7 @@ extension HomeNewsTableViewController {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
                         
-                    }else if attach.type == "video" {
+                    } else if attach.type == "video" {
                         let photoData = attach.video!.firstFrame
                         if let data = getFirstFrame(from: photoData) {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
@@ -163,7 +163,7 @@ extension HomeNewsTableViewController {
                 }
                 newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
                 
-            }else if item.type == "post" && item.attachments.count == 0, let copyHistory = item.newsCopyHistory.first {
+            } else if item.type == "post" && item.attachments.count == 0, let copyHistory = item.newsCopyHistory.first {
                 if copyHistory.attachments.count == 1 {
                     let attachments = copyHistory.attachments
                     
@@ -208,7 +208,7 @@ extension HomeNewsTableViewController {
                         cellType = .uncnown
                     }
                     
-                }else if copyHistory.attachments.count == 2 {
+                } else if copyHistory.attachments.count == 2 {
                     let attachments = copyHistory.attachments
                     if attachments[0].type == "photo" && attachments[1].type == "link" {
                         cellType = .photoLink
@@ -221,7 +221,7 @@ extension HomeNewsTableViewController {
                         newsCellData.newsLink = attachments[1].link?.url ?? ""
                     }
                     
-                }else if copyHistory.attachments.count > 2 {
+                } else if copyHistory.attachments.count > 2 {
                     let photo = copyHistory.attachments.filter({ $0.type == "photo" })
                     if photo.count == copyHistory.attachments.count {
                         cellType = .gallary
@@ -282,7 +282,7 @@ extension HomeNewsTableViewController {
         if let group = groupes.first(where: { $0.id == group }) {
             
             return NewsUserData(userLogo: group.photo, userName: group.name, isOnline: false, isBanned: false, screenName: group.screenName)
-        }else if let profile = profiles.first(where: { $0.id == sourceId }) {
+        } else if let profile = profiles.first(where: { $0.id == sourceId }) {
             let name = profile.fName + " " + profile.lName
             var isOnline = false
             var isBanned = false
@@ -296,10 +296,6 @@ extension HomeNewsTableViewController {
         }
         return nil
     }
-    
-    
-    
-    
 }
 
 

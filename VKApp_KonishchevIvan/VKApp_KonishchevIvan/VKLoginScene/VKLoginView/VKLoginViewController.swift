@@ -81,7 +81,9 @@ private extension VKLoginViewController {
     }
 
     func loadAuth() {
+        
         var urlComponents = URLComponents()
+        
         urlComponents.scheme = "https"
         urlComponents.host = "oauth.vk.com"
         urlComponents.path = "/authorize"
@@ -93,7 +95,9 @@ private extension VKLoginViewController {
             URLQueryItem(name: "response_type", value: "token"),
             URLQueryItem(name: "revoke", value: "0")
         ]
+        
         guard let url = urlComponents.url else { return }
+        
         let request = URLRequest(url: url)
         self.webView.load(request)
     }

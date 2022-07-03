@@ -115,11 +115,12 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         if  friendSelected.isBanned  {
             let allert = AllertWrongUserData().getAllert(title: "Сообщение", message: "Пользователь забанен")
             present(allert, animated: true)
-        }else if friendSelected.isClosedProfile {
+        } else if friendSelected.isClosedProfile {
             let allert = AllertWrongUserData().getAllert(title: "Сообщение", message: "Профиль пользователя скрыт!")
             present(allert, animated: true)
-        }else {
+        } else {
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            
             guard let nextVC = storyBoard.instantiateViewController(withIdentifier: "DetailUserTableView") as? DetailUserTableViewController else { return }
             nextVC.modalPresentationStyle = .automatic
             nextVC.friendsSelected = friendSelected
@@ -142,7 +143,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
             
             
             return view
-        }else {
+        } else {
             let friendCount = self.friendsArray.first?.countFriends ?? 0
             view.countFriends.text = String(friendCount) 
             view.action.text = "Списки"

@@ -8,6 +8,7 @@
 import UIKit
 
 protocol UpdateCellData: AnyObject {
+
     func updateCellData(with indexPath: IndexPath, textHeight: CGFloat, togle: Bool)
 }
-
+ 

@@ -37,7 +37,7 @@ extension InternetConnections {
                 let result = try decode.decode(NewsVideoModel.self, from: data)
                 if let items = result.response.items.first {
                     completion(items)
-                }else {
+                } else {
                     completion(nil)
                 }
             }catch {

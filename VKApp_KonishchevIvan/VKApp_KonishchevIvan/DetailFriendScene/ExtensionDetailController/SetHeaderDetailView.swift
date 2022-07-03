@@ -18,7 +18,7 @@ extension DetailUserTableViewController {
         }
         if self.friendsSelected.photo != nil {
             self.detailAvatarHeader.image = UIImage(data: self.friendsSelected.photo)
-        }else {
+        } else {
             self.detailAvatarHeader.image = UIImage(named: "noFoto")
         }
         let time = self.friendsSelected.lastSeenDate.unixTimeConvertion()
@@ -26,7 +26,7 @@ extension DetailUserTableViewController {
             self.detailUserAccountLable.textColor = UIColor.red
             self.detailUserAccountLable.text = "online"
             
-        }else {
+        } else {
             DispatchQueue.main.async {
                 self.detailUserAccountLable.textColor = UIColor.systemGray2
                 self.detailUserAccountLable.text = "был(а) : \(time)"

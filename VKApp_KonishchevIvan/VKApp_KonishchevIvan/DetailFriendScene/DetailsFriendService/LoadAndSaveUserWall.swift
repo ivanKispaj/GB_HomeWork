@@ -12,12 +12,14 @@ import RealmSwift
 extension InternetConnections {
     func getUserWall(for ownerId: String) {
         guard let access_token = NetworkSessionData.shared.token else { return }
+        
         self.urlComponents.queryItems = [
             URLQueryItem(name: "access_token", value: access_token),
             URLQueryItem(name: "owner_id", value: ownerId),
             URLQueryItem(name: "filter", value: "owner"),
             URLQueryItem(name: "v", value: "5.131")
         ]
+        
         guard let url = self.urlComponents.url else { return }
         
         self.session.dataTask(with: url) { data, _, error in
@@ -31,8 +33,8 @@ extension InternetConnections {
                 let decode = JSONDecoder()
                 decode.userInfo = [CodingUserInfoKey(rawValue: "ownerId")! : Int(ownerId)!]
                 let result = try decode.decode(UserWallModel.self, from: data)
-                let queue = DispatchQueue.global(qos: .utility)
-                queue.async {
+           
+                DispatchQueue.global(qos: .utility).async {
                     self.realmService.updateData(result.response)
                 }
                 

@@ -18,6 +18,8 @@ import RealmSwift
         self.realmService = RealmService()
         self.friendId = friendId
     }
+     
+     
     override func main() {
         guard let response = self.realmService.readData(FriendsResponse.self)?.where({ $0.id == self.friendId }).first else { return }
         self.friendsResponse = response
@@ -41,7 +43,7 @@ import RealmSwift
           
           if friendData.city != nil {
               friends.city = friendData.city!.title
-          }else {
+          } else {
               friends.city = "unknown"
           }
           

@@ -13,7 +13,6 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
     
-  //  var nitifiTokenGroups: NotificationToken?
     let realmService = RealmService()
     let service = InternetConnections(host: "api.vk.com", path: "/method/groups.get")
     var dataGroups: [ItemsGroup]?

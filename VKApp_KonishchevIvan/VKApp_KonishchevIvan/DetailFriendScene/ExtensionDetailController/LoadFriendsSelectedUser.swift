@@ -20,7 +20,7 @@ extension DetailUserTableViewController {
                     InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id), count: "")
                 }
             }
-        }else {
+        } else {
             DispatchQueue.global(qos: .userInteractive).async {
                 InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id))
                 
@@ -98,7 +98,7 @@ extension DetailUserTableViewController {
             }
             data.insert(dataFriends, at: 0)
             self.dataTable = data
-        }else {
+        } else {
             self.dataTable = [dataFriends]
         }
         

@@ -108,7 +108,10 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
     }
     
     
-    func setCellData(from data: NewsCellData) {
+    func setCellData(from data: NewsCellData, indexPath: IndexPath, textHeight: CGFloat, toggle: Bool) {
+        self.textHeight = textHeight
+        self.toggle = toggle
+        self.indexPath = indexPath
         self.countCell = 0
         self.imageGallaryData = data.newsImage
         self.newsgallaryLikeCount.text = String(data.newsLikeCount)
@@ -124,12 +127,12 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
         
         if newsTextLabel.isTruncated() {
             self.showMoreLable.isHidden = false
-        }else {
+        } else {
             self.showMoreLable.isHidden = true
         }
         if toggle {
             self.showMoreLable.text = "Скрыть"
-        }else {
+        } else {
             self.showMoreLable.text = "Подробнее"
         
         }
@@ -143,13 +146,12 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
         if !toggle {
             guard let height = self.newsTextLabel.resizeIfNeeded() else {return}
             self.textHeight = height
-      
-        }else {
-            self.layoutIfNeeded()
+        } else {
             self.textHeight = 100
         }
+        
         self.toggle.toggle()
         self.control.updateCellData(with: indexPath, textHeight: self.textHeight, togle: toggle)
-       
+        
     }
 }

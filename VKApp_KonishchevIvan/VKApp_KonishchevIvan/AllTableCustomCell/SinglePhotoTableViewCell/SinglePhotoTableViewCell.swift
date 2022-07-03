@@ -65,14 +65,14 @@ class SinglePhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         if user.photo == nil {
             self.singleAvatarHeader.image = UIImage(named: "noFoto")
 
-        }else {
+        } else {
             self.singleAvatarHeader.image = UIImage(data: user.photo)
 
         }
         self.singleLableUserName.text = user.userName
         if let seen = data.views {
             self.singlePhotoSeenCount.text = String(seen.count)
-        }else {
+        } else {
             self.singlePhotoSeenCount.text = "0"
         }
         var photo =  data.photo![self.delegateIndexPatch.row]
