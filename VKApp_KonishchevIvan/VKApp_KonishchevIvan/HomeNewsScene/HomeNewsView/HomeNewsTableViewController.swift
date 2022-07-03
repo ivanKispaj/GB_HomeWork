@@ -9,8 +9,19 @@ import UIKit
 import AVKit
 import RealmSwift
 
-class HomeNewsTableViewController: UITableViewController {
-    
+class HomeNewsTableViewController: UITableViewController, UpdateCellData {
+    func updateCellData(with indexPath: IndexPath, textHeight: CGFloat, togle: Bool) {
+        self.newsTextheight = textHeight
+        self.togle = togle
+        DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+
+        }
+        
+        
+    }
+    var togle = false
+    var newsTextheight: CGFloat = 100
     var lastDate: String?
     var playIndexPath: [IndexPath]?
     private var photoService: PhotoCacheService?
@@ -54,6 +65,7 @@ class HomeNewsTableViewController: UITableViewController {
         }
         self.getNewsFromDate(fromDate: date)
     }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         if self.newsData == nil {
@@ -99,7 +111,6 @@ class HomeNewsTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let news = newsData?[indexPath.row].first else {
             preconditionFailure("Error cell")
         }
@@ -116,7 +127,10 @@ class HomeNewsTableViewController: UITableViewController {
                 cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
                 return cell
             }
-            
+            cell.indexPath = indexPath
+            cell.control = self
+            cell.textHeight = self.newsTextheight
+            cell.togle = self.togle
             cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
             
             
@@ -129,6 +143,9 @@ class HomeNewsTableViewController: UITableViewController {
                 cell.configureCellForPhoto(from: data, linkStatus: false, image: image)
                 return cell
             }
+            cell.indexPath = indexPath
+            cell.control = self
+            
             cell.configureCellForPhoto(from: data, linkStatus: true, image: image)
             return cell
         case .video:
@@ -145,7 +162,6 @@ class HomeNewsTableViewController: UITableViewController {
             cell.configureCellForPost(from: data)
             return cell
         case .gallary:
-            print("gallary")
             let cell: NewsGallaryCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.setCellData(from: data)
             return cell
@@ -164,10 +180,11 @@ class HomeNewsTableViewController: UITableViewController {
             
         }
         
-        let cell: NewsPostCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.newsPostTextLabel.text = " Failure load Data!!!"
-        return cell
+        let cells: NewsPostCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        cells.newsPostTextLabel.text = " Failure load Data!!!"
+        return cells
     }
+    
     //MARK: - Регистрация кастомных ячеек таблицы
     private func registerCells() {
         

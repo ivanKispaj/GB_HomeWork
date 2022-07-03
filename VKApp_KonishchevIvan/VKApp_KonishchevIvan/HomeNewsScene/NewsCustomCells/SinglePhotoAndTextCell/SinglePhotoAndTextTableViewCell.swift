@@ -10,7 +10,10 @@ import AVKit
 
 class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
  
-    
+    weak var control: UpdateCellData!
+    var indexPath: IndexPath!
+    var togle = false
+    var textHeight: CGFloat = 100
     @IBOutlet weak var parentViewImage: UIView!
     @IBOutlet weak var newsImage: UIImageView!
     @IBOutlet weak var lableOnPhoto: UILabel!
@@ -18,24 +21,43 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
     @IBOutlet weak var imageParentView: UIView!
     @IBOutlet weak var photoViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var likeControll: ControlForLike!
-    @IBOutlet weak var newsTextView: UITextView!
+    @IBOutlet weak var newsTextView: UILabel!
     @IBOutlet weak var newsUserAvatar: UIImageView!
     @IBOutlet weak var newsUserName: UILabel!
     @IBOutlet weak var newsUserApdateTime: UILabel!
     @IBOutlet weak var newsLikeImage: UIImageView!
     @IBOutlet weak var newsLikeLable: UILabel!
     @IBOutlet weak var seenViewLable: UILabel!
-  
-
+    @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var detailsLable: UILabel!
+    
     func configureCellForPhoto(from data: NewsCellData, linkStatus: Bool, image: UIImage) {
+        self.contentView.layoutIfNeeded()
+        self.textHeightConstraint.constant = self.textHeight
+        self.contentView.frame.size.height = self.contentView.frame.size.height + self.textHeight
+    
         self.newsImage.image = image
         if let imageData = data.newsImage.first {
             let ratio = (imageData.width) / UIScreen.main.bounds.width
             let height = (imageData.height) / ratio
             self.photoViewHeightConstraint.constant = height
         }
-        
         self.newsTextView.text = data.newsText
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showMoreDetails))
+        self.detailsLable.addGestureRecognizer(tap)
+        
+        if newsTextView.isTruncated() {
+            self.detailsLable.isHidden = false
+        }else {
+            self.detailsLable.isHidden = true
+        }
+        if togle {
+            self.detailsLable.text = "Скрыть"
+        }else {
+            self.detailsLable.text = "Подробнее"
+        }
+       
         self.newsUserName.text = data.newsUserName
         self.newsLikeLable.text = String(data.newsLikeCount)
         self.newsUserAvatar.image = UIImage(data: data.newsUserLogo)
@@ -52,6 +74,23 @@ class SinglePhotoAndTextTableViewCell: UITableViewCell, DequeuableProtocol {
         }
     }
  
+    @objc func showMoreDetails() {
+        if !togle {
+            guard let height = self.newsTextView.resizeIfNeeded() else {return}
+            self.textHeight = height
+            togle = true
+      
+        }else {
+            self.layoutIfNeeded()
+            self.textHeight = 100
+            togle = false
+        }
+        
 
+        self.control.updateCellData(with: indexPath, textHeight: self.textHeight, togle: togle)
+       
+    }
+
+    
 }
 

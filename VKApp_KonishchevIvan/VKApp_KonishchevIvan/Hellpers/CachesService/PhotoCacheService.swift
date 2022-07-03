@@ -96,7 +96,8 @@ fileprivate protocol DataReloadable {
 
 extension PhotoCacheService {
     
-    private class Table: DataReloadable { let table: UITableView
+    private class Table: DataReloadable {
+        let table: UITableView
         init(table: UITableView) {
             self.table = table
         }
@@ -106,7 +107,8 @@ extension PhotoCacheService {
         
     }
     
-    private class Collection: DataReloadable { let collection: UICollectionView
+    private class Collection: DataReloadable {
+        let collection: UICollectionView
         init(collection: UICollectionView) { self.collection = collection
         }
         func reloadRow(atIndexpath indexPath: IndexPath) {

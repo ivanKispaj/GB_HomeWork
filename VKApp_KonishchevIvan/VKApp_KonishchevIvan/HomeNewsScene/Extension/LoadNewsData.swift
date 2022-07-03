@@ -146,20 +146,24 @@ extension HomeNewsTableViewController {
                     
                 }
             }else if item.type == "post" && item.attachments.count > 2 && item.newsCopyHistory.count == 0 {
-                let photo = item.attachments.filter({ $0.type == "photo" })
-                if photo.count == item.attachments.count {
+    
                     cellType = .gallary
                     for attach in item.attachments {
+                        if attach.type == "photo" {
                         let photoData = attach.photoData!.photoArray
                         if let data = getNewsPhoto(photoData) {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
                         }
                         
+                        }else if attach.type == "video" {
+                            let photoData = attach.video!.firstFrame
+                            if let data = getFirstFrame(from: photoData) {
+                                newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
+                            }
+                        }
                     }
                     newsCellData.albumId = item.attachments[0].photoData?.albumId ?? 0
                     
-                    
-                }
             }else if item.type == "post" && item.attachments.count == 0, let copyHistory = item.newsCopyHistory.first {
                 if copyHistory.attachments.count == 1 {
                     let attachments = copyHistory.attachments

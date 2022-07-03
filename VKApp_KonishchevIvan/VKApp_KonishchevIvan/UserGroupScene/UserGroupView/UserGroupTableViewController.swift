@@ -79,6 +79,10 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
             let id = data[indexPath.row].id
             self!.leaveGroup(to: id) { status, message in
                 if status {
+                    if let index = data.firstIndex(of: data[indexPath.row]) {
+                        self?.dataGroups?.remove(at: index)
+
+                    }
                     DispatchQueue.main.async {
                         
                         self!.realmService.deliteData(data[indexPath.row],cascading: true)

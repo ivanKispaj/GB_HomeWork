@@ -87,7 +87,7 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
         return 1
     }
     
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         

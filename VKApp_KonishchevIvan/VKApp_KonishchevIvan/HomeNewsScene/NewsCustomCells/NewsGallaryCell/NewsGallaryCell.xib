@@ -12,10 +12,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="726" id="KGk-i7-Jjw" customClass="NewsGallaryCell" customModule="VKApp_KonishchevIvan" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="663" height="726"/>
+            <rect key="frame" x="0.0" y="0.0" width="663" height="1000"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="663" height="726"/>
+                <rect key="frame" x="0.0" y="0.0" width="663" height="1000"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TtV-UK-ax9">
@@ -67,12 +67,12 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4u-sK-Peu">
-                        <rect key="frame" x="0.0" y="65" width="663" height="100"/>
+                        <rect key="frame" x="0.0" y="65" width="663" height="14.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBa-iY-zHv">
-                                <rect key="frame" x="0.0" y="43" width="663" height="14.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBa-iY-zHv">
+                                <rect key="frame" x="0.0" y="0.0" width="663" height="14.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="tVR-yZ-se3"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="tVR-yZ-se3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
@@ -81,17 +81,18 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="100" id="7mS-Eg-qAJ"/>
-                            <constraint firstItem="mBa-iY-zHv" firstAttribute="centerY" secondItem="r4u-sK-Peu" secondAttribute="centerY" id="aJt-U2-HNo"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="7mS-Eg-qAJ"/>
+                            <constraint firstItem="mBa-iY-zHv" firstAttribute="top" secondItem="r4u-sK-Peu" secondAttribute="top" id="eMY-ki-phY"/>
                             <constraint firstItem="mBa-iY-zHv" firstAttribute="leading" secondItem="r4u-sK-Peu" secondAttribute="leading" id="gg8-4j-QzO"/>
                             <constraint firstAttribute="trailing" secondItem="mBa-iY-zHv" secondAttribute="trailing" id="tmO-AX-E8m"/>
+                            <constraint firstAttribute="bottom" secondItem="mBa-iY-zHv" secondAttribute="bottom" id="zHM-ea-EW1"/>
                         </constraints>
                     </view>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EOb-zm-fZb">
-                        <rect key="frame" x="0.0" y="170" width="663" height="511"/>
+                        <rect key="frame" x="0.0" y="84.5" width="663" height="870.5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="iCv-zI-50E"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="500" id="iCv-zI-50E"/>
                         </constraints>
                         <collectionViewLayout key="collectionViewLayout" id="LN4-UL-nyH" customClass="CustomNewsGallaryLayout" customModule="VKApp_KonishchevIvan" customModuleProvider="target"/>
                         <connections>
@@ -100,7 +101,7 @@
                         </connections>
                     </collectionView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YIK-t7-NHe">
-                        <rect key="frame" x="0.0" y="686" width="663" height="40"/>
+                        <rect key="frame" x="0.0" y="960" width="663" height="40"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gE-j0-0Xa">
                                 <rect key="frame" x="10" y="0.0" width="60" height="40"/>
