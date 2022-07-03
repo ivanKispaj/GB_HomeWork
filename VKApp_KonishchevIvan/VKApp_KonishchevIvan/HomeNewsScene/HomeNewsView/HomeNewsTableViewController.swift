@@ -10,16 +10,7 @@ import AVKit
 import RealmSwift
 
 class HomeNewsTableViewController: UITableViewController, UpdateCellData {
-    func updateCellData(with indexPath: IndexPath, textHeight: CGFloat, togle: Bool) {
-        self.newsTextheight = textHeight
-        self.togle = togle
-        DispatchQueue.main.async {
-            self.tableView.reloadRows(at: [indexPath], with: .none)
-
-        }
-        
-        
-    }
+    
     var togle = false
     var newsTextheight: CGFloat = 100
     var lastDate: String?
@@ -65,7 +56,7 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
         }
         self.getNewsFromDate(fromDate: date)
     }
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         if self.newsData == nil {
@@ -163,6 +154,10 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             return cell
         case .gallary:
             let cell: NewsGallaryCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.indexPath = indexPath
+            cell.control = self
+            cell.textHeight = self.newsTextheight
+            cell.togle = self.togle
             cell.setCellData(from: data)
             return cell
         case .photoLink:
@@ -194,6 +189,13 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
         self.tableView.register(NewsGallaryCell.self)
     }
     
+    func updateCellData(with indexPath: IndexPath, textHeight: CGFloat, togle: Bool) {
+        self.newsTextheight = textHeight
+        self.togle = togle
+        DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
+    }
 }
 
 

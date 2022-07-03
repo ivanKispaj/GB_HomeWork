@@ -8,26 +8,22 @@
 import UIKit
 
 extension UILabel {
-
-public func resizeIfNeeded() -> CGFloat? {
-    guard let text = text, !text.isEmpty else { return nil }
-
-    if isTruncated() {
-        numberOfLines = 0
-        sizeToFit()
-        return frame.height
+    
+    public func resizeIfNeeded() -> CGFloat? {
+        guard let text = text, !text.isEmpty else { return nil }
+        if isTruncated() {
+            numberOfLines = 0
+            sizeToFit()
+            return frame.height
+        }
+        return nil
     }
-    return nil
-}
-
-func isTruncated() -> Bool {
-  
-    guard let text = text, !text.isEmpty else { return false }
-
-    let size: CGSize = text.size(withAttributes: [NSAttributedString.Key.font: font as Any])
-    print(size.width)
-    print(self.bounds.size.width)
-    return size.width > self.bounds.size.width
+    
+    func isTruncated() -> Bool {
+        guard let text = text, !text.isEmpty else { return false }
+        
+        let size: CGSize = text.size(withAttributes: [NSAttributedString.Key.font: font as Any])
+        return size.width > self.bounds.size.width
     }
 }
 

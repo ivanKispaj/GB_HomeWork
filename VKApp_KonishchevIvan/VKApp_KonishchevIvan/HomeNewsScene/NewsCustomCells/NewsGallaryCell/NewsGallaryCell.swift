@@ -9,6 +9,8 @@ import UIKit
 
 class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, DequeuableProtocol{
     
+    @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var showMoreLable: UILabel!
     @IBOutlet weak var newsTextLabel: UILabel!
     @IBOutlet weak var newsGallaryCollection: UICollectionView!
     @IBOutlet weak var newsGallaryUserAvatar: UIImageView!
@@ -19,6 +21,11 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
     var imageGallaryData: [PhotoDataNews]?
     
     var countCell: Int = 0
+    
+    weak var control: UpdateCellData!
+    var indexPath: IndexPath!
+    var togle = false
+    var textHeight: CGFloat = 100
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -110,8 +117,42 @@ class NewsGallaryCell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
         self.newsTextLabel.text = data.newsText
         self.newsGallaryUserAvatar.image = UIImage(data: data.newsUserLogo)
         self.newsGallaryUserSeen.text = data.date.unixTimeConvertion()
-        self.newsGallaryCollection.reloadData()
+        
+        
+        self.textHeightConstraint.constant = self.textHeight
+        self.contentView.frame.size.height = self.contentView.frame.size.height + self.textHeight
+        
+        if newsTextLabel.isTruncated() {
+            self.showMoreLable.isHidden = false
+        }else {
+            self.showMoreLable.isHidden = true
+        }
+        if togle {
+            self.showMoreLable.text = "Скрыть"
+        }else {
+            self.showMoreLable.text = "Подробнее"
+        
+        }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showMoreDetails))
+        self.showMoreLable.addGestureRecognizer(tap)
         
     }
     
+    @objc func showMoreDetails() {
+        if !togle {
+            guard let height = self.newsTextLabel.resizeIfNeeded() else {return}
+            self.textHeight = height
+            togle = true
+      
+        }else {
+            self.layoutIfNeeded()
+            self.textHeight = 100
+            togle = false
+        }
+        
+
+        self.control.updateCellData(with: indexPath, textHeight: self.textHeight, togle: togle)
+       
+    }
 }
