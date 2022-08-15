@@ -40,7 +40,7 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
     private func setupRefreshControll() {
         self.tableView.refreshControl = UIRefreshControl()
         self.tableView.refreshControl?.attributedTitle = NSAttributedString("Обновляем...")
-        self.tableView.tintColor = UIColor(named: "AppButton")
+        self.tableView.tintColor = UIColor.appColor(.appBlackWite)// UIColor(named: "AppButton")
         self.tableView.refreshControl?.addTarget(self, action: #selector(refreshActions), for: .valueChanged)
     }
     

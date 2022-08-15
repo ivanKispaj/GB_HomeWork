@@ -142,7 +142,7 @@ class NewGroupTableViewController: UITableViewController, UISearchBarDelegate {
     
     //  Установка бокового буквенного поиска
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        tableView.sectionIndexColor = UIColor(named: "AppBW")
+        tableView.sectionIndexColor = UIColor.appColor(.appBlackWite)//UIColor(named: "AppBW")
         return self.chars
     }
     

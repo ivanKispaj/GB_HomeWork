@@ -27,13 +27,13 @@ class CustomHeaderCell: UITableViewHeaderFooterView {
         nameSection.translatesAutoresizingMaskIntoConstraints = false
         countFriends.translatesAutoresizingMaskIntoConstraints = false
         action.translatesAutoresizingMaskIntoConstraints = false
-        action.textColor = UIColor(named: "AppButton")
+        action.textColor = UIColor.appColor(.appButton)//UIColor(named: "AppButton")
         countFriends.textColor = .systemGray5
-        nameSection.textColor = UIColor(named: "AppBW")
+        nameSection.textColor = UIColor.appColor(.appBlackWite)// UIColor(named: "AppBW")
         action.font = UIFont.boldSystemFont(ofSize: 12)
         nameSection.font = UIFont.boldSystemFont(ofSize: 14)
         countFriends.font = UIFont.systemFont(ofSize: 10)
-        countFriends.textColor = UIColor(named: "AppBW")
+        countFriends.textColor = UIColor.appColor(.appBlackWite)//UIColor(named: "AppBW")
         contentView.addSubview(nameSection)
         contentView.addSubview(countFriends)
         contentView.addSubview(action)

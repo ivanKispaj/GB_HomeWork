@@ -10,7 +10,7 @@ import UIKit
 class ShadowViewRadius: UIView {
     
     @IBOutlet weak var avatarHeaightConstraint: NSLayoutConstraint!
-    var shadowColor: CGColor = UIColor(named: "AvatarShadow")!.cgColor
+    var shadowColor: CGColor = UIColor.appColor(.avatarShadow).cgColor//UIColor(named: "AvatarShadow")!.cgColor
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -16,6 +16,7 @@
 		63244632282AB97E00AB1C72 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63244631282AB97E00AB1C72 /* RealmService.swift */; };
 		63244636282AD72500AB1C72 /* DetailPlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63244634282AD72500AB1C72 /* DetailPlugCell.swift */; };
 		63244637282AD72500AB1C72 /* DetailPlugCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63244635282AD72500AB1C72 /* DetailPlugCell.xib */; };
+		6343D33A28A9FEDA00A6A52D /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343D33928A9FEDA00A6A52D /* ExtensionUIColor.swift */; };
 		6348F4D8282FE56100D69134 /* NewGroupActivitiIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6348F4D7282FE56100D69134 /* NewGroupActivitiIndicator.swift */; };
 		637CA727281A593100058708 /* LinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637CA725281A593100058708 /* LinkTableViewCell.swift */; };
 		637CA728281A593100058708 /* LinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637CA726281A593100058708 /* LinkTableViewCell.xib */; };
@@ -118,7 +119,6 @@
 		80D1315827FE00BD009EA04D /* ReversAnimateLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1315727FE00BD009EA04D /* ReversAnimateLogin.swift */; };
 		80D1315C27FEA85E009EA04D /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1315B27FEA85E009EA04D /* CustomNavigationController.swift */; };
 		80D1F9D927B6475200EA4E0C /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D1F9D827B6475200EA4E0C /* Validators.swift */; };
-		80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94827F0B5B200428C67 /* LoadingView.swift */; };
 		80DAF95027F377AD00428C67 /* CustomCodeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DAF94F27F377AD00428C67 /* CustomCodeSearchBar.swift */; };
 		80DD23A727D3332000F78417 /* SimpleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DD23A527D3332000F78417 /* SimpleTableCell.swift */; };
 		80DD23A827D3332000F78417 /* SimpleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80DD23A627D3332000F78417 /* SimpleTableCell.xib */; };
@@ -145,6 +145,7 @@
 		63244631282AB97E00AB1C72 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		63244634282AD72500AB1C72 /* DetailPlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlugCell.swift; sourceTree = "<group>"; };
 		63244635282AD72500AB1C72 /* DetailPlugCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailPlugCell.xib; sourceTree = "<group>"; };
+		6343D33928A9FEDA00A6A52D /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		6348F4D7282FE56100D69134 /* NewGroupActivitiIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupActivitiIndicator.swift; sourceTree = "<group>"; };
 		637CA725281A593100058708 /* LinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTableViewCell.swift; sourceTree = "<group>"; };
 		637CA726281A593100058708 /* LinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkTableViewCell.xib; sourceTree = "<group>"; };
@@ -250,7 +251,6 @@
 		80D1315727FE00BD009EA04D /* ReversAnimateLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversAnimateLogin.swift; sourceTree = "<group>"; };
 		80D1315B27FEA85E009EA04D /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		80D1F9D827B6475200EA4E0C /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
-		80DAF94827F0B5B200428C67 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		80DAF94F27F377AD00428C67 /* CustomCodeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCodeSearchBar.swift; sourceTree = "<group>"; };
 		80DD23A527D3332000F78417 /* SimpleTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableCell.swift; sourceTree = "<group>"; };
 		80DD23A627D3332000F78417 /* SimpleTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleTableCell.xib; sourceTree = "<group>"; };
@@ -371,6 +371,14 @@
 				63244635282AD72500AB1C72 /* DetailPlugCell.xib */,
 			);
 			path = DetailFriendsPlugCell;
+			sourceTree = "<group>";
+		};
+		6343D33828A9FEBA00A6A52D /* ExtensionUIColor */ = {
+			isa = PBXGroup;
+			children = (
+				6343D33928A9FEDA00A6A52D /* ExtensionUIColor.swift */,
+			);
+			path = ExtensionUIColor;
 			sourceTree = "<group>";
 		};
 		637CA724281A590000058708 /* LinkTableViewCell */ = {
@@ -694,6 +702,7 @@
 		639B4260280D2D030097D53F /* Hellpers */ = {
 			isa = PBXGroup;
 			children = (
+				6343D33828A9FEBA00A6A52D /* ExtensionUIColor */,
 				63DE116E287168B600D5396D /* ExtensionUILable */,
 				639D2731285E61C7003282DE /* CachesService */,
 				63E897852843B1D300BAACE1 /* ExtensionCollectionView */,
@@ -874,7 +883,6 @@
 		80233AB227BF5A870040D702 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				80DAF94727F0B57400428C67 /* LoadingIndicatorView */,
 				80DAF94127EF57AC00428C67 /* ControlForLike */,
 				80601F7627DF0A5200490809 /* AvatarShadovAndCircleController */,
 			);
@@ -1037,14 +1045,6 @@
 				80850ECC27DE20350078039E /* ControlForLike.swift */,
 			);
 			path = ControlForLike;
-			sourceTree = "<group>";
-		};
-		80DAF94727F0B57400428C67 /* LoadingIndicatorView */ = {
-			isa = PBXGroup;
-			children = (
-				80DAF94827F0B5B200428C67 /* LoadingView.swift */,
-			);
-			path = LoadingIndicatorView;
 			sourceTree = "<group>";
 		};
 		80EAC04A27F6D326006DDB9A /* AllProtocols */ = {
@@ -1264,7 +1264,6 @@
 				63803509284A691300FBA7ED /* FriendsSetData.swift in Sources */,
 				638E99E32814345400367F44 /* getNewGroupList.swift in Sources */,
 				80F4BCCE28031BF6008E07B0 /* AnimateGallaryPop.swift in Sources */,
-				80DAF94927F0B5B200428C67 /* LoadingView.swift in Sources */,
 				80850ED627DE3CAC0078039E /* SinglePhotoAndTextTableViewCell.swift in Sources */,
 				6398477E282E39B7008D216E /* joinNewGroup.swift in Sources */,
 				80C19AC127D761DC009C34CB /* DetailUserTableViewController.swift in Sources */,
@@ -1279,6 +1278,7 @@
 				8025114727BFF5C9007E87C4 /* NewGroupTableViewController.swift in Sources */,
 				63E897492842805000BAACE1 /* extensionUITableViewCellRegister.swift in Sources */,
 				630DF7A4283C9AF7002F831A /* extensionUITableView.swift in Sources */,
+				6343D33A28A9FEDA00A6A52D /* ExtensionUIColor.swift in Sources */,
 				80C19AEA27D7C6BA009C34CB /* SetHeaderDetailView.swift in Sources */,
 				638E99D22813C27100367F44 /* LoadPhotoAlbumSelcetedUser.swift in Sources */,
 				63984775282E2EF3008D216E /* AllNewUserGroups.swift in Sources */,
