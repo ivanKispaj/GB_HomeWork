@@ -59,7 +59,14 @@ final class RealmService {
         }
     }
     
-    
+    func printConfiguration() {
+        do {
+            let realm = try Realm()
+            print(realm.configuration.fileURL!)
+        }catch {
+            print("error print configuration")
+        }
+    }
  // чтение данных из базы
     func readData<T: Object>(_ object: T.Type) -> Results<T>? {
         do {

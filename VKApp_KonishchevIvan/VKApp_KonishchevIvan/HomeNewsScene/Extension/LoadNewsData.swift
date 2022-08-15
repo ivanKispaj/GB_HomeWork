@@ -40,7 +40,9 @@ extension HomeNewsTableViewController {
     }
     
     func setNotificationToken() {
+        self.realmService.printConfiguration()
         if let data = self.realmService.readData(NewsItems.self) {
+            
             self.newsRealmToken = data.observe { [weak self](changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
@@ -60,7 +62,7 @@ extension HomeNewsTableViewController {
     }
     
     private func updateNewsView() -> Bool {
-        
+
         guard let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles,
               let groupes = self.realmService.readData(NewsResponse.self)?.first?.groups ,
               let items = self.realmService.readData(NewsResponse.self)?.first?.items,

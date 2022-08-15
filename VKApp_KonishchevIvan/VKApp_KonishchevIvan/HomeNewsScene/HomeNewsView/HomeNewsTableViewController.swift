@@ -158,6 +158,7 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
                 cell.configureCellForPhoto(from: data, linkStatus: false, image: image, indexPath: indexPath,textHeight: self.textHeight, toggle: self.toggle)
                 return cell
             }
+            cell.control = self
             cell.configureCellForPhoto(from: data, linkStatus: false, image: image, indexPath: indexPath,textHeight: self.textHeight, toggle: self.toggle)
             return cell
         case .uncnown:

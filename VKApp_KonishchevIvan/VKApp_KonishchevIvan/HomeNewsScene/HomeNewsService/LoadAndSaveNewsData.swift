@@ -16,7 +16,7 @@ extension InternetConnections {
         self.urlComponents.queryItems = [
             URLQueryItem(name: "access_token", value: access_token),
             URLQueryItem(name: "filters", value: "post, photo, video"),
-            URLQueryItem(name: "count", value: "15"),
+            URLQueryItem(name: "count", value: "20"),
             URLQueryItem(name: "v", value: "5.131"),
         ]
         
@@ -32,7 +32,6 @@ extension InternetConnections {
             do {
                 let decode = JSONDecoder()
                 let result = try decode.decode(NewsDataModel.self, from: data)
-                print(result.response.items.count)
                 DispatchQueue.global(qos: .utility).async {
                     self.realmService.updateData(result.response)
                 }
@@ -51,7 +50,7 @@ extension InternetConnections {
         self.urlComponents.queryItems = [
             URLQueryItem(name: "access_token", value: access_token),
             URLQueryItem(name: "filters", value: "post, photo, video"),
-            URLQueryItem(name: "count", value: "15"),
+            URLQueryItem(name: "count", value: "20"),
             URLQueryItem(name: "start_time", value: fromDate),
             URLQueryItem(name: "v", value: "5.131"),
         ]
