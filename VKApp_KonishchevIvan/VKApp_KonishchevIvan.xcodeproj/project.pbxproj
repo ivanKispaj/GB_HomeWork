@@ -17,6 +17,7 @@
 		63244636282AD72500AB1C72 /* DetailPlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63244634282AD72500AB1C72 /* DetailPlugCell.swift */; };
 		63244637282AD72500AB1C72 /* DetailPlugCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63244635282AD72500AB1C72 /* DetailPlugCell.xib */; };
 		6343D33A28A9FEDA00A6A52D /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343D33928A9FEDA00A6A52D /* ExtensionUIColor.swift */; };
+		6343D33D28AACBAB00A6A52D /* HomeSceneNewsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343D33C28AACBAB00A6A52D /* HomeSceneNewsAdapter.swift */; };
 		6348F4D8282FE56100D69134 /* NewGroupActivitiIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6348F4D7282FE56100D69134 /* NewGroupActivitiIndicator.swift */; };
 		637CA727281A593100058708 /* LinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637CA725281A593100058708 /* LinkTableViewCell.swift */; };
 		637CA728281A593100058708 /* LinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637CA726281A593100058708 /* LinkTableViewCell.xib */; };
@@ -146,6 +147,7 @@
 		63244634282AD72500AB1C72 /* DetailPlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlugCell.swift; sourceTree = "<group>"; };
 		63244635282AD72500AB1C72 /* DetailPlugCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailPlugCell.xib; sourceTree = "<group>"; };
 		6343D33928A9FEDA00A6A52D /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
+		6343D33C28AACBAB00A6A52D /* HomeSceneNewsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneNewsAdapter.swift; sourceTree = "<group>"; };
 		6348F4D7282FE56100D69134 /* NewGroupActivitiIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupActivitiIndicator.swift; sourceTree = "<group>"; };
 		637CA725281A593100058708 /* LinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTableViewCell.swift; sourceTree = "<group>"; };
 		637CA726281A593100058708 /* LinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkTableViewCell.xib; sourceTree = "<group>"; };
@@ -381,6 +383,14 @@
 			path = ExtensionUIColor;
 			sourceTree = "<group>";
 		};
+		6343D33B28AACB8A00A6A52D /* HomeSceneNewsAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				6343D33C28AACBAB00A6A52D /* HomeSceneNewsAdapter.swift */,
+			);
+			path = HomeSceneNewsAdapter;
+			sourceTree = "<group>";
+		};
 		637CA724281A590000058708 /* LinkTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +428,7 @@
 		6385D218280DCCA7007F6142 /* HomeNewsScene */ = {
 			isa = PBXGroup;
 			children = (
+				6343D33B28AACB8A00A6A52D /* HomeSceneNewsAdapter */,
 				630DF7A5283FBCCA002F831A /* NewsCustomCells */,
 				6385D21B280DCD2C007F6142 /* Model */,
 				6385D21A280DCD11007F6142 /* HomeNewsView */,
@@ -1248,6 +1259,7 @@
 				80601F7127DEF62100490809 /* CircleView.swift in Sources */,
 				80D1315627FDE4D2009EA04D /* TabBarController.swift in Sources */,
 				63984784282E7C2F008D216E /* LeaveGroupModel.swift in Sources */,
+				6343D33D28AACBAB00A6A52D /* HomeSceneNewsAdapter.swift in Sources */,
 				80F4BCD728052F2D008E07B0 /* VKLoginViewController.swift in Sources */,
 				80F4BCCC28031BD5008E07B0 /* AnimateGallaryPush.swift in Sources */,
 				80601F7527DF095C00490809 /* ShadowViewRadius.swift in Sources */,

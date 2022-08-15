@@ -16,24 +16,23 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
     var lastDate: String?
     var playIndexPath: [IndexPath]?
     private var photoService: PhotoCacheService?
-    private var vieoService: VideoLoadService?
-    var newsRealmToken: NotificationToken?
-    var realmService: RealmService!
+    private var videoService: VideoLoadService?
     var nextViewData: [ImageAndLikeData]? = nil
     var newsData: [[CellType : NewsCellData]]?
-    
+    var newsAdapter: HomeSceneNewsAdapter = HomeSceneNewsAdapter()
     var currentOrientation: UIDeviceOrientation? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.realmService = RealmService()
         self.setupRefreshControll()
-        self.setNotificationToken()
         self.currentOrientation = UIDevice.current.orientation
         registerCells()
-        self.loadNewsData()
+        newsAdapter.getLastNews(from: nil) { news in
+            self.newsData = news
+            self.tableView.reloadData()
+        }
         self.photoService = PhotoCacheService(container: self.tableView)
-        self.vieoService = VideoLoadService(container: self.tableView)
+        self.videoService = VideoLoadService(container: self.tableView)
     }
     
     // MARK: - Table view data source
@@ -50,11 +49,22 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             let date = NSDate() // current date
             var unixtime = date.timeIntervalSince1970 as Double
             unixtime = (unixtime.rounded()) - (1 * 24 * 60 * 60) // минус 1 сутки в секундах
-            self.getNewsFromDate(fromDate: String(unixtime))
+            self.newsAdapter.getLastNews(from: String(unixtime)) { news in
+                self.newsData = news
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    
+                }            }
             return
             
         }
-        self.getNewsFromDate(fromDate: date)
+        self.newsAdapter.getLastNews(from: date) { news in
+            self.newsData = news
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -133,7 +143,7 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             let cell: NewsVideoCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.videoData = data
             cell.configureCellForVideo(form: data)
-            if let player = vieoService?.video(atIndexPath: indexPath, byData: data) {
+            if let player = videoService?.video(atIndexPath: indexPath, byData: data) {
                 cell.playerViewController.player = player
                 cell.playerViewController.player?.play()
             }
