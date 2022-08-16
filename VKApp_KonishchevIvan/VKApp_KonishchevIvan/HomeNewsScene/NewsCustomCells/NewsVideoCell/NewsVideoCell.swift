@@ -22,26 +22,29 @@ class NewsVideoCell: UITableViewCell, DequeuableProtocol {
     @IBOutlet weak var newsVideoHeightConstraint: NSLayoutConstraint!
     
     var playerViewController: AVPlayerViewController!
-    var videoData: NewsCellData?
+    var videoData: newsVideoViewModel? {
+        didSet {
+            self.configureCellForVideo()
+        }
+    }
     
-    func configureCellForVideo(form data: NewsCellData) {
+    private func configureCellForVideo() {
+        guard let data = self.videoData else { return }
         self.newsVideoText.font = UIFont.systemFont(ofSize: 12)
-        self.newsVideoText.text = data.newsText
+        self.newsVideoText.text = data.newsVideoText
         self.newsUserName.text = data.newsUserName
-        self.newsUserSeen.text = data.date.unixTimeConvertion()
-        self.newsLikeCount.text = String(data.newsLikeCount)
-        self.newsSeenCount.text = String(data.newsSeenCount)
-        let videoHeight = data.firstFrame.height * 0.7
+        self.newsUserSeen.text = data.newsUserSeen
+        self.newsLikeCount.text = data.newsLikeCount
+        self.newsSeenCount.text = data.newsSeenCount
+        let videoHeight = data.videoHeight
         self.newsVideoHeightConstraint.constant = videoHeight
+        self.playerViewController = data.player
         self.setVideoPlayerController()
     }
     
     private func setVideoPlayerController() {
-        self.playerViewController = AVPlayerViewController()
-        self.playerViewController.videoGravity = .resizeAspectFill
-        self.playerViewController.showsPlaybackControls = false
+        
         self.videoUIView.addSubview(self.playerViewController.view)
-        self.playerViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             playerViewController.view.leadingAnchor.constraint(equalTo: self.videoUIView.leadingAnchor),

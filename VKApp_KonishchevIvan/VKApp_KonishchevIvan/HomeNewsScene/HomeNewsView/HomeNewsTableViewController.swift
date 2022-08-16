@@ -11,13 +11,13 @@ import RealmSwift
 
 class HomeNewsTableViewController: UITableViewController, UpdateCellData {
     
+// Cell Factory
+    var newsFactory: NewsVideoFactory = NewsVideoFactory()
+
     var toggle = false
     var textHeight: CGFloat = 100
-    var lastDate: String?
-    var playIndexPath: [IndexPath]?
     private var photoService: PhotoCacheService?
     private var videoService: VideoLoadService?
-    var nextViewData: [ImageAndLikeData]? = nil
     var newsData: [[CellType : NewsCellData]]?
     var newsAdapter: HomeSceneNewsAdapter = HomeSceneNewsAdapter()
     var currentOrientation: UIDeviceOrientation? = nil
@@ -141,8 +141,7 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             
         case .video:
             let cell: NewsVideoCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.videoData = data
-            cell.configureCellForVideo(form: data)
+            cell.videoData = newsFactory.videoMdel(with: data)
             if let player = videoService?.video(atIndexPath: indexPath, byData: data) {
                 cell.playerViewController.player = player
                 cell.playerViewController.player?.play()
