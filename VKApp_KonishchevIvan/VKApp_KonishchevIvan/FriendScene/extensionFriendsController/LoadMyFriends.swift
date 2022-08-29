@@ -14,18 +14,18 @@ extension FriendsTableViewController {
     //   После теста заменить id пользователя на id NetworkSessionData.shared.userId!
     
     func loadMyFriends() {
-        
+        let internetConnection = InternetConnectionProxy(internetConnection:  InternetConnections(host: "api.vk.com", path: UrlPath.getFriends))
         if let result = self.realmService.readData(FriendsResponse.self)?.where({ $0.id == NetworkSessionData.shared.testUser }).first {
             self.parseData(from: result)
             if result.countFriends != result.items.count {
             
                 DispatchQueue.global(qos: .default).async {
-                    InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser), count: "")
+                    internetConnection.loadFriends(for: String(NetworkSessionData.shared.testUser), count: "")
                 }
             }
         } else {
             DispatchQueue.global(qos: .userInteractive).async {
-                InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(NetworkSessionData.shared.testUser))
+                internetConnection.loadFriends(for: String(NetworkSessionData.shared.testUser))
                 
             }
         }

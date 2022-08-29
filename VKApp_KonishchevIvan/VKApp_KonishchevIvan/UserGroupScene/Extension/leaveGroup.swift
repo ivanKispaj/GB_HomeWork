@@ -11,11 +11,11 @@ extension UserGroupTableViewController {
     func leaveGroup(to groupId: Int, completion: @escaping(Bool, [String]) -> ()) {
         var success: Bool!
         var message: [String] = []
-    
-            InternetConnections(host: "api.vk.com", path: "/method/groups.leave").leaveGroupService(for: groupId) { response in
+        let internetConnection = InternetConnectionProxy(internetConnection:   InternetConnections(host: "api.vk.com", path: UrlPath.leaveGroup))
+            internetConnection.leaveGroupService(for: groupId) { response in
                 switch response {
                 
-                case .success(let result): //let result
+                case .success(let result):
                     success = result.response
                     
                     if let error = result.error {

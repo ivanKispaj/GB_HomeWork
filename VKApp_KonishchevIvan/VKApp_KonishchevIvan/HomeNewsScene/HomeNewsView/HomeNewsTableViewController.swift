@@ -141,7 +141,7 @@ class HomeNewsTableViewController: UITableViewController, UpdateCellData {
             
         case .video:
             let cell: NewsVideoCell = self.tableView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.videoData = newsFactory.videoMdel(with: data)
+            cell.videoData = newsFactory.videoModel(with: data)
             if let player = videoService?.video(atIndexPath: indexPath, byData: data) {
                 cell.playerViewController.player = player
                 cell.playerViewController.player?.play()

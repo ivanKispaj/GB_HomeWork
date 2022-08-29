@@ -9,10 +9,11 @@ import Foundation
 
 extension NewGroupTableViewController {
     func joinNewGroup(to groupId: Int, completion: @escaping(Bool, [String]) -> ()) {
+        let internetConnection = InternetConnectionProxy(internetConnection: InternetConnections(host: "api.vk.com", path: UrlPath.joinGroups))
         var success: Bool!
         var message: [String] = []
         
-        InternetConnections(host: "api.vk.com", path: "/method/groups.join").joinInToGroup(for: groupId) { response in
+        internetConnection.joinInToGroup(for: groupId) { response in
             switch response {
                 
             case .success(let result):

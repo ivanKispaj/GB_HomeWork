@@ -79,6 +79,7 @@
 		63E897842843AE3400BAACE1 /* NewsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E897822843AE3400BAACE1 /* NewsCollectionViewCell.xib */; };
 		63E897872843B1F400BAACE1 /* extensionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E897862843B1F400BAACE1 /* extensionCollectionView.swift */; };
 		63F3E79928BD025E0034D6ED /* Coffee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3E79828BD025E0034D6ED /* Coffee.swift */; };
+		63F3E79B28BD1FDD0034D6ED /* InternetConnectionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3E79A28BD1FDD0034D6ED /* InternetConnectionProxy.swift */; };
 		8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */; };
 		8003DA2827D5E1E00048B191 /* ExtendTableUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */; };
 		8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */; };
@@ -214,6 +215,7 @@
 		63E897822843AE3400BAACE1 /* NewsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCollectionViewCell.xib; sourceTree = "<group>"; };
 		63E897862843B1F400BAACE1 /* extensionCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionCollectionView.swift; sourceTree = "<group>"; };
 		63F3E79828BD025E0034D6ED /* Coffee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coffee.swift; sourceTree = "<group>"; };
+		63F3E79A28BD1FDD0034D6ED /* InternetConnectionProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionProxy.swift; sourceTree = "<group>"; };
 		796DC62054F81A4D3A7CB7BA /* Pods-VKApp_KonishchevIvan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp_KonishchevIvan.release.xcconfig"; path = "Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan.release.xcconfig"; sourceTree = "<group>"; };
 		8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendTableUserCell.swift; sourceTree = "<group>"; };
 		8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendTableUserCell.xib; sourceTree = "<group>"; };
@@ -858,6 +860,7 @@
 			children = (
 				639B4258280C0AFE0097D53F /* InternetConnections.swift */,
 				63B47766282915CB0072CE24 /* LoadAndSaveFriends.swift */,
+				63F3E79A28BD1FDD0034D6ED /* InternetConnectionProxy.swift */,
 			);
 			path = InternetConnection;
 			sourceTree = "<group>";
@@ -1345,6 +1348,7 @@
 				63984777282E3651008D216E /* joinInToGroup.swift in Sources */,
 				638E99D02813BE3B00367F44 /* LoadImageFromUrlString.swift in Sources */,
 				638E99BA281260C800367F44 /* AnimationDelegate.swift in Sources */,
+				63F3E79B28BD1FDD0034D6ED /* InternetConnectionProxy.swift in Sources */,
 				63984779282E3715008D216E /* JoinGroupModel.swift in Sources */,
 				63244632282AB97E00AB1C72 /* RealmService.swift in Sources */,
 				639D2733285E61FC003282DE /* PhotoCacheService.swift in Sources */,

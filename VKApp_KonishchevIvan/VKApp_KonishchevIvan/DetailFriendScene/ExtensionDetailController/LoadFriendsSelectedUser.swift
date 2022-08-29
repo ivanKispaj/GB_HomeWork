@@ -12,17 +12,17 @@ import RealmSwift
 extension DetailUserTableViewController {
     
     func loadFriendsSelectedUser()  {
-        
+        let internetConnection = InternetConnectionProxy(internetConnection: InternetConnections(host: "api.vk.com", path: UrlPath.getFriends))
         if let result = self.realmService.readData(FriendsResponse.self)?.where({ $0.id == self.friendsSelected.id }).first {
             self.updateUserFromRealm(from: result)
             if result.countFriends != result.items.count {
                 DispatchQueue.global(qos: .default).async {
-                    InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id), count: "")
+                    internetConnection.loadFriends(for: String(self.friendsSelected.id), count: "")
                 }
             }
         } else {
             DispatchQueue.global(qos: .userInteractive).async {
-                InternetConnections(host: "api.vk.com", path: "/method/friends.get").loadFriends(for: String(self.friendsSelected.id))
+                internetConnection.loadFriends(for: String(self.friendsSelected.id))
                 
             }
         }

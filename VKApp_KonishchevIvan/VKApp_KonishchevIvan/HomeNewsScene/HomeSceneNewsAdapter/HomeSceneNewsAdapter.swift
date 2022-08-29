@@ -10,7 +10,7 @@ import RealmSwift
 
 final class HomeSceneNewsAdapter {
     var realmService: RealmService = RealmService()
-    private(set) var internetConnection = InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get")
+    private(set) var internetConnection = InternetConnectionProxy(internetConnection: InternetConnections(host: "api.vk.com", path: UrlPath.getNews)) 
     private var realmNotificationToken: NotificationToken = NotificationToken()
     
     func getLastNews(from date: String?, completion: @escaping ([[CellType : NewsCellData]]) -> Void) {
@@ -208,9 +208,12 @@ final class HomeSceneNewsAdapter {
                         cellType = .gallary
                     }
                     for attach in copyHistory.attachments {
-                        let photoData = attach.photoData!.photoArray
+                        if let photoData = attach.photoData?.photoArray {
+                            
+                        
                         if let data = getNewsPhoto(photoData) {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
+                        }
                         }
                         
                     }

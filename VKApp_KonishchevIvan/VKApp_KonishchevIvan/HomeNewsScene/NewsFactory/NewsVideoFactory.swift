@@ -11,7 +11,7 @@ final class NewsVideoFactory {
 
 
     
-     func videoMdel(with videoData: NewsCellData) -> newsVideoViewModel {
+     func videoModel(with videoData: NewsCellData) -> newsVideoViewModel {
         let newsUserName = videoData.newsUserName
         let newsUserAvatar: UIImage? =  UIImage(data: videoData.newsUserLogo)
         let newsVideoFrameImage: UIImage? = videoData.firstFrame.url.loadImageFromUrlString()
