@@ -78,6 +78,7 @@
 		63E897832843AE3400BAACE1 /* NewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E897812843AE3400BAACE1 /* NewsCollectionViewCell.swift */; };
 		63E897842843AE3400BAACE1 /* NewsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E897822843AE3400BAACE1 /* NewsCollectionViewCell.xib */; };
 		63E897872843B1F400BAACE1 /* extensionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E897862843B1F400BAACE1 /* extensionCollectionView.swift */; };
+		63F3E79928BD025E0034D6ED /* Coffee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3E79828BD025E0034D6ED /* Coffee.swift */; };
 		8003DA2727D5E1E00048B191 /* ExtendTableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */; };
 		8003DA2827D5E1E00048B191 /* ExtendTableUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */; };
 		8025114527BFF5A1007E87C4 /* UserGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025114427BFF5A1007E87C4 /* UserGroupTableViewController.swift */; };
@@ -212,6 +213,7 @@
 		63E897812843AE3400BAACE1 /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		63E897822843AE3400BAACE1 /* NewsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCollectionViewCell.xib; sourceTree = "<group>"; };
 		63E897862843B1F400BAACE1 /* extensionCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionCollectionView.swift; sourceTree = "<group>"; };
+		63F3E79828BD025E0034D6ED /* Coffee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coffee.swift; sourceTree = "<group>"; };
 		796DC62054F81A4D3A7CB7BA /* Pods-VKApp_KonishchevIvan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp_KonishchevIvan.release.xcconfig"; path = "Target Support Files/Pods-VKApp_KonishchevIvan/Pods-VKApp_KonishchevIvan.release.xcconfig"; sourceTree = "<group>"; };
 		8003DA2527D5E1E00048B191 /* ExtendTableUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendTableUserCell.swift; sourceTree = "<group>"; };
 		8003DA2627D5E1E00048B191 /* ExtendTableUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendTableUserCell.xib; sourceTree = "<group>"; };
@@ -876,6 +878,14 @@
 			path = ExtensionCollectionView;
 			sourceTree = "<group>";
 		};
+		63F3E79728BD02430034D6ED /* HomeWorkLesson6Coffee */ = {
+			isa = PBXGroup;
+			children = (
+				63F3E79828BD025E0034D6ED /* Coffee.swift */,
+			);
+			path = HomeWorkLesson6Coffee;
+			sourceTree = "<group>";
+		};
 		7CFE21C9457B13484B5FD2C5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -949,6 +959,7 @@
 		804154ED27B62FE900160418 /* VKApp_KonishchevIvan */ = {
 			isa = PBXGroup;
 			children = (
+				63F3E79728BD02430034D6ED /* HomeWorkLesson6Coffee */,
 				638E99C92812694C00367F44 /* CustomSearshbarControllers */,
 				638E99C82812693600367F44 /* CustomNavigationControllers */,
 				638E99C72812692600367F44 /* CustomTabBarControllers */,
@@ -1300,6 +1311,7 @@
 				638E99AB28125CF600367F44 /* DelegateLikeExtension.swift in Sources */,
 				808E9D9A27BE94C00089E4A4 /* FriendsTableViewController.swift in Sources */,
 				80D1315C27FEA85E009EA04D /* CustomNavigationController.swift in Sources */,
+				63F3E79928BD025E0034D6ED /* Coffee.swift in Sources */,
 				6343D34628AB471800A6A52D /* NewsSinglePhotoViewModel.swift in Sources */,
 				638E99C5281267EC00367F44 /* CustomSingleCollectionLayout.swift in Sources */,
 				80C19ACD27D76C6E009C34CB /* CouruselTableViewCell.swift in Sources */,
