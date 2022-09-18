@@ -4,7 +4,7 @@
 //
 //  Created by Ivan Konishchev on 17.01.2022.
 //
-//Test
+//Tests
 import Foundation
 
 enum OpenClose {
