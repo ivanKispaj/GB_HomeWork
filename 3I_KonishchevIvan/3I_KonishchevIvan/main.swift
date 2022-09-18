@@ -4,7 +4,6 @@
 //
 //  Created by Ivan Konishchev on 17.01.2022.
 //
-// test webhook
 import Foundation
 
 enum OpenClose {
