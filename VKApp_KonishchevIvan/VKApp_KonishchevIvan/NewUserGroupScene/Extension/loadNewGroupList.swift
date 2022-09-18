@@ -8,10 +8,10 @@
 import UIKit
 extension NewGroupTableViewController {
     func LoadNewGroupList(searchText text: String) {
-        let queue = DispatchQueue.global(qos: .userInteractive)
-        queue.async {
+        let internetConnectiopn = InternetConnectionProxy(internetConnection: InternetConnections(host: "api.vk.com", path: UrlPath.searchGroup))
+        DispatchQueue.global(qos: .userInteractive).async {
             
-            InternetConnections(host: "api.vk.com", path: "/method/groups.search").getNewGroupList(for: text) { [weak self] response in
+            internetConnectiopn.getNewGroupList(for: text) { [weak self] response in
                 switch response {
                     
                 case .success(let result):

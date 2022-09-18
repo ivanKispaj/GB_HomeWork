@@ -13,7 +13,7 @@ import RealmSwift
 extension DetailUserTableViewController {
     
     func loadPhotoAlbumSelctedUser ()  {
-        
+        let internetConnection = InternetConnectionProxy(internetConnection: InternetConnections(host: "api.vk.com", path: UrlPath.getAllPhoto))
         let photoData = self.realmService.readData(PhotoResponse.self)?.where { $0.id == self.friendsSelected.id }.first?.items
         if let data = photoData {
             self.updateUserPhotoData(from: data)
@@ -21,7 +21,7 @@ extension DetailUserTableViewController {
         }
         
         DispatchQueue.global(qos: .utility).async {
-            InternetConnections(host: "api.vk.com", path: "/method/photos.getAll").LoadPhotoUser(for: String(self.friendsSelected.id))
+            internetConnection.LoadPhotoUser(for: String(self.friendsSelected.id))
         }
     }
     

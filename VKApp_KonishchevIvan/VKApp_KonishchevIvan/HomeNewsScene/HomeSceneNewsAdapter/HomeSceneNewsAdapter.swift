@@ -1,73 +1,52 @@
 //
-//  LoadNewsData.swift
+//  HomeSceneNewsAdapter.swift
 //  VKApp_KonishchevIvan
 //
-//  Created by Ivan Konishchev on 23.04.2022.
+//  Created by Ivan Konishchev on 15.08.2022.
 //
 
 import UIKit
 import RealmSwift
 
-extension HomeNewsTableViewController {
+final class HomeSceneNewsAdapter {
+    var realmService: RealmService = RealmService()
+    private(set) var internetConnection = InternetConnectionProxy(internetConnection: InternetConnections(host: "api.vk.com", path: UrlPath.getNews)) 
+    private var realmNotificationToken: NotificationToken = NotificationToken()
     
-    func loadNewsData()  {
-        //MARK: - Запрос друзей через API VK (для теста использую другого человека, т.к у меня мало друзей для вывода)
-        if !self.updateNewsView() {
-            DispatchQueue.global(qos: .userInteractive).async {
-                InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews()
-            }
+    func getLastNews(from date: String?, completion: @escaping ([[CellType : NewsCellData]]) -> Void) {
+        if let fromDate = date {
+            internetConnection.getUserNews(fromDate: fromDate)
+        } else {
+            internetConnection.getUserNews()
+
         }
-    }
-    
-    func getNewsFromDate(fromDate date: String) {
-        
-        DispatchQueue.global(qos: .userInteractive).async {
-            InternetConnections(host: "api.vk.com", path: "/method/newsfeed.get").getUserNews(fromDate: date) { [weak self] result in
-                switch result {
-                    
-                case .success(_):
-                    if let self = self, !self.updateNewsView() {
-                        self.newsData = nil
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                    }
-                case .failure(_):
-                    print("Error update News")
-                }
-            }
-        }
-    }
-    
-    func setNotificationToken() {
-        self.realmService.printConfiguration()
         if let data = self.realmService.readData(NewsItems.self) {
             
-            self.newsRealmToken = data.observe { [weak self](changes: RealmCollectionChange) in
+            self.realmNotificationToken = data.observe { [weak self](changes: RealmCollectionChange) in
                 switch changes {
                 case .initial(_):
                     print("NewsVC Signed")
                 case  .update(_ , _, _, _):
-                    if let self = self, !self.updateNewsView() {
-                        self.newsData = nil
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
+                    if let self = self {
+                        guard let news = self.updateNewsView() else { return }
+                        completion(news)
                     }
                 case .error(_):
                     print("Asd")
                 }
             }
         }
+        
     }
     
-    private func updateNewsView() -> Bool {
+    
+    private func updateNewsView() -> [[CellType : NewsCellData]]? {
 
         guard let profiles = self.realmService.readData(NewsResponse.self)?.first?.profiles,
               let groupes = self.realmService.readData(NewsResponse.self)?.first?.groups ,
               let items = self.realmService.readData(NewsResponse.self)?.first?.items,
               items.count > 0
-        else { return false}
+        else { return nil}
         
         var newsDatasToController: [[CellType: NewsCellData]] = []
         
@@ -229,9 +208,12 @@ extension HomeNewsTableViewController {
                         cellType = .gallary
                     }
                     for attach in copyHistory.attachments {
-                        let photoData = attach.photoData!.photoArray
+                        if let photoData = attach.photoData?.photoArray {
+                            
+                        
                         if let data = getNewsPhoto(photoData) {
                             newsCellData.newsImage.append(PhotoDataNews(url: data.url, height: CGFloat(data.height), width: CGFloat(data.width)))
+                        }
                         }
                         
                     }
@@ -244,12 +226,7 @@ extension HomeNewsTableViewController {
             newsDatasToController.append(newsDatas)
             
         }
-        self.newsData = newsDatasToController
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-        return true
+        return newsDatasToController
     }
     
     
@@ -299,8 +276,3 @@ extension HomeNewsTableViewController {
         return nil
     }
 }
-
-
-
-
-

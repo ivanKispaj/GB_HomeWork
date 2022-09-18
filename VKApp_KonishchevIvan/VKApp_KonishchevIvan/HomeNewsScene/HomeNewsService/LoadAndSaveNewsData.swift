@@ -43,7 +43,7 @@ extension InternetConnections {
     }
     
     
-    func getUserNews(fromDate: String, completion: @escaping (Result<NewsResponse,Error>)->()) {
+    func getUserNews(fromDate: String) {
         
         guard let access_token = NetworkSessionData.shared.token else { return }
         
@@ -75,10 +75,8 @@ extension InternetConnections {
                     }
                     self.realmService.updateData(result.response)
                 }
-                completion(.success(result.response))
                 
             }catch {
-                completion(.failure(error))
                 print(InternetError.parseError)
             }
         }.resume()

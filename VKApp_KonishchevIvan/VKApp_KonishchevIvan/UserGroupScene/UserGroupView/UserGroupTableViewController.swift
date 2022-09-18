@@ -14,7 +14,7 @@ class UserGroupTableViewController: UITableViewController, UISearchBarDelegate{
     @IBOutlet weak var searchBar: CustomCodeSearchBar!
     
     let realmService = RealmService()
-    let service = InternetConnections(host: "api.vk.com", path: "/method/groups.get")
+    let service = InternetConnectionProxy(internetConnection:  InternetConnections(host: "api.vk.com", path: UrlPath.getGroups))
     var dataGroups: [ItemsGroup]?
     
     override func viewDidLoad() {

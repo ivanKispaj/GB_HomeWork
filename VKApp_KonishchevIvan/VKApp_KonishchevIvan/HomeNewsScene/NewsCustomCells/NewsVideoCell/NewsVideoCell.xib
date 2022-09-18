@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -160,14 +161,14 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pri-Ij-RID">
-                        <rect key="frame" x="26" y="65" width="536" height="20.5"/>
+                        <rect key="frame" x="30" y="65" width="528" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="HcF-6c-G09" secondAttribute="bottom" id="B27-wI-KRa"/>
+                    <constraint firstAttribute="bottom" secondItem="HcF-6c-G09" secondAttribute="bottom" priority="999" id="B27-wI-KRa"/>
                     <constraint firstItem="HcF-6c-G09" firstAttribute="top" secondItem="Ep3-Ib-xOi" secondAttribute="bottom" constant="5" id="DSh-o0-bkh"/>
                     <constraint firstAttribute="trailing" secondItem="ve2-3Y-FaV" secondAttribute="trailing" id="M6j-2k-cTP"/>
                     <constraint firstItem="Ep3-Ib-xOi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="RXP-kr-zpE"/>

@@ -42,7 +42,8 @@ final class VideoLoadService {
     
     private func getVideoPlayer(atIndexPath indexPath: IndexPath, byData data: NewsCellData) {
         
-        InternetConnections(host: "api.vk.com", path: "/method/video.get").loadVideoContent(ovnerId: data.ownerId, accessKey: data.accessKey, videoId: data.videoId) { [weak self] result in
+        let internetConnection = InternetConnectionProxy(internetConnection: InternetConnections(host: "api.vk.com", path: UrlPath.getVideo))
+        internetConnection.loadVideoContent(ovnerId: data.ownerId, accessKey: data.accessKey, videoId: data.videoId) { [weak self] result in
             if result?.player != nil {
                 guard let url = URL(string: result!.player) else {
                     print("Error: \(result!.player) doesn't seem to be a valid URL")

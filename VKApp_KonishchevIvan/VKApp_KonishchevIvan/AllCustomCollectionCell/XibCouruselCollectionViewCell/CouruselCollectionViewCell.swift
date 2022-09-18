@@ -17,7 +17,7 @@ class CouruselCollectionViewCell: UICollectionViewCell, DequeuableProtocol {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentCollectionCell.layer.backgroundColor = UIColor.systemGray6.cgColor
-        lableForDetailsCorusel.textColor = UIColor(named: "AppBW")
+        lableForDetailsCorusel.textColor = UIColor.appColor(.appBlackWite)// UIColor(named: "AppBW")
 
     }
 }

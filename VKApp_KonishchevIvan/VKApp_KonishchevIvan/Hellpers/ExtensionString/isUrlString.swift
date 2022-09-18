@@ -17,3 +17,19 @@ extension String {
         return false
     }
 }
+
+extension String {
+    
+    func loadImageFromUrlString() -> UIImage? {
+        guard self != "" else { return nil}
+        let url = URL(string: self)!
+            let content = try? Data(contentsOf: url)
+                if let imageData = content {
+                    return  UIImage(data: imageData)
+                } else {
+                    return  UIImage(named: "noFoto")
+                }
+
+
+    }
+}

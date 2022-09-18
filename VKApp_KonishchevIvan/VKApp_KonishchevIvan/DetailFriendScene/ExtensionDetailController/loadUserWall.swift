@@ -12,13 +12,14 @@ import RealmSwift
 extension DetailUserTableViewController {
     
     func loadUserWall () {
-        
+        let internetConnection = InternetConnectionProxy(internetConnection: InternetConnections(host: "api.vk.com", path: UrlPath.getWall))
+
         let wallData = self.realmService.readData(UserWallResponse.self)?.where { $0.id == self.friendsSelected.id }.first?.items
         if let data = wallData {
             self.updateWallData(from: data)
         }
         DispatchQueue.global(qos: .utility).async {
-            InternetConnections(host: "api.vk.com", path: "/method/wall.get").getUserWall(for: String(self.friendsSelected.id))
+            internetConnection.getUserWall(for: String(self.friendsSelected.id))
         }
     }
     
